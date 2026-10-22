@@ -64,6 +64,18 @@ let corriendo = false
 let generacion = 0
 let tamano = ''
 let idioma: Idioma = 'es'
+let version = ''
+
+// la version sale del plugin.json instalado, para saber que copia esta corriendo
+async function leerVersion($: EngineInterface) {
+  if (version) return version
+  try {
+    version = String(JSON.parse(await $.fs.read(`${$.plugin.root}/.claude-plugin/plugin.json`)).version ?? '?')
+  } catch {
+    version = '?'
+  }
+  return version
+}
 
 function detener() {
   corriendo = false
@@ -182,6 +194,7 @@ export const register: Register = (on, options) => {
     if (palabras.includes('en')) idioma = 'en'
     if (palabras.includes('es')) idioma = 'es'
     const T = TXT[idioma]
+    const v = await leerVersion($)
     const r = await rutas($)
     if (!(await $.fs.exists(r.python))) return { text: T.needSetup }
 
@@ -279,7 +292,7 @@ export const register: Register = (on, options) => {
     })()
 
     const aviso = (!apiKey && !palabras.includes('claude') ? `\n${T.noKey}` : '') + `\n${T.log}: ${logJuego}`
-    return { text: (piloto === 'jev' ? T.okJev : T.okClaude) + aviso }
+    return { text: `v${v} | ` + (piloto === 'jev' ? T.okJev : T.okClaude) + aviso }
   })
 
   on('ui.render', { component: 'Pane', requestId: PANE }, async ($, e) => {
@@ -301,7 +314,7 @@ export const register: Register = (on, options) => {
     return (
       <Box flexDirection="column">
         <Text bold wrap="truncate">
-          DOOM | {T.pilot}: {piloto} | {T.narrates}: Claude | {T.mode}: {f?.modo ?? '-'}
+          DOOM v{version || '?'} | {f?.mapa ?? '-'} | {T.pilot}: {piloto} | {T.narrates}: Claude | {T.mode}: {f?.modo ?? '-'}
           {vivo ? '' : ` | ${T.stopped}`}
         </Text>
         {f?.jev && (

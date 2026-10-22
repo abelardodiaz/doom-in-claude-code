@@ -5,6 +5,13 @@ How this went from a forum joke to a playable mod, one step at a time.
 The challenge: someone in a forum listed the AI fads (personal finance apps, reverse engineering,
 TV launchers) and asked what was missing. "Running Doom in Claude." Challenge accepted.
 
+## [0.2.1] - 2026-10-21
+
+### Added
+- The version shows in the pane header (`DOOM v0.2.1 | MAP01 | ...`) and in the start message,
+  read from the installed `plugin.json`. After `claude plugin update`, a session keeps running the
+  old copy until `/reload-plugins` or a restart; now you can tell at a glance.
+
 ## [0.2.0] - 2026-10-21 - Stage 1-2: it finishes MAP01
 
 ### Added

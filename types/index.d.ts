@@ -17,6 +17,8 @@ export type Frame = {
   orden: string
   estado: string
   piloto: 'jev' | 'claude'
+  mapa?: string
+  niveles?: number
   jev: InfoJev | null
 }
 
