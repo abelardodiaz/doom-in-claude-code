@@ -32,7 +32,9 @@ OBJETOS = {
     "RocketLauncher": "lanzacohetes", "RocketAmmo": "cohete", "Soulsphere": "esfera de alma",
     "Backpack": "mochila", "Berserk": "berserk",
 }
-MODOS = ("atacar", "explorar", "retirada", "recoger")
+MODOS = ("atacar", "explorar", "retirada", "recoger", "avanzar")
+# tactica de Jev -> modo del cerebro (None = Jev dudo: decide el script)
+TACTICA_A_MODO = {"pelear": "atacar", "esquivar": "retirada", "avanzar": "avanzar", None: "explorar"}
 
 # Indices de botones
 B = ["MOVE_FORWARD", "MOVE_BACKWARD", "TURN_LEFT", "TURN_RIGHT",
@@ -225,10 +227,17 @@ class Cerebro:
             a = apuntar(obj, ["MOVE_FORWARD"])
             return (a or accion("MOVE_FORWARD")), atorado
 
-        # explorar: con mapa, el navegador decide; sin mapa, reflejos a ciegas
+        # explorar / avanzar: con mapa, el navegador decide; sin mapa, reflejos a ciegas
         if self.navegador:
-            return self.navegador.decidir(x, y, vars_[6], st.sectors, accion, st.objects,
-                                          salud=vars_[0], municion=vars_[2]), atorado
+            a = self.navegador.decidir(x, y, vars_[6], st.sectors, accion, st.objects,
+                                       salud=vars_[0], municion=vars_[2])
+            # avanzar ignora a los enemigos, pero si uno queda justo enfrente se le dispara al pasar
+            if modo == "avanzar" and enemigos:
+                obj = max(enemigos, key=lambda l: l.width * l.height)
+                cx = obj.x + obj.width / 2
+                if abs(math.degrees(math.atan((cx - ancho / 2) / (ancho / 2)))) < 5:
+                    a[IDX["ATTACK"]] = 1
+            return a, atorado
         if atorado:
             self.dir_giro = random.choice(["TURN_LEFT", "TURN_RIGHT"])
             self.giro_forzado = random.randint(4, 10)
@@ -259,6 +268,17 @@ def describir(st, vars_, atorado, muertes, ancho, cerebro=None):
     return (f"Salud {int(vars_[0])}, armadura {int(vars_[1])}, municion {int(vars_[2])}, "
             f"kills {int(vars_[3])}, muertes {muertes}. Enemigos visibles: {e_txt}. "
             f"Objetos visibles: {o_txt}. Atorado: {'si' if atorado else 'no'}.")
+
+
+def leer_plan(ruta):
+    """Lista de ids de metas que escribio el planificador, o None si no hay plan nuevo."""
+    try:
+        with open(ruta, encoding="utf-8") as f:
+            d = json.load(f)
+        p = d.get("plan")
+        return [str(x) for x in p][:5] if isinstance(p, list) else None
+    except (OSError, ValueError):
+        return None
 
 
 def leer_orden(ruta, actual):
@@ -299,14 +319,15 @@ class HiloJev:
         self.piloto = PilotoJev(con_imagen=True)
         self.lock = threading.Lock()
         self.entrada = None
-        self.modo = "explorar"
-        self.info = {"ms": 0, "probs": {}, "peligro": 0.0, "llamadas": 0, "errores": 0, "ultimo_error": ""}
+        self.modo = "explorar"   # tactica traducida a modo del cerebro
+        self.meta = None         # id de meta que Jev pidio con confianza (None = dudo)
+        self.info = {"ms": 0, "probs": {}, "probs_meta": {}, "meta": None, "peligro": 0.0,
+                     "llamadas": 0, "dudas": 0, "errores": 0, "ultimo_error": ""}
         threading.Thread(target=self._bucle, daemon=True).start()
 
-    def ofrecer(self, frame, estado, modo, n=0):
-        self.n_frame = n
+    def ofrecer(self, frame, estado, metas, n=0):
         with self.lock:
-            self.entrada = (frame.copy(), estado, modo, self.n_frame)
+            self.entrada = (frame.copy(), estado, list(metas), n)
 
     def _bucle(self):
         while True:
@@ -316,24 +337,31 @@ class HiloJev:
                 time.sleep(0.05)
                 continue
             try:
-                modo, probs, peligro, ms = self.piloto.decidir(*e[:3])
-                self.log("jev", frame=e[3], estado=e[1], modo_previo=e[2], decide=modo,
-                         probs=probs, peligro=round(peligro, 2), ms=ms)
+                d = self.piloto.decidir(e[0], e[1], e[2])
+                self.log("jev", frame=e[3], estado=e[1], tactica=d["tactica"], cruda=d["tactica_cruda"],
+                         brecha=d["brecha_tactica"], probs=d["probs"], meta=d["meta"],
+                         brecha_meta=d["brecha_meta"], probs_meta=d["probs_meta"],
+                         peligro=round(d["peligro"], 2), ms=d["ms"])
                 with self.lock:
-                    self.modo = modo
-                    self.info.update(ms=ms, probs=probs, peligro=round(peligro, 2),
-                                     llamadas=self.info["llamadas"] + 1)
+                    self.modo = TACTICA_A_MODO[d["tactica"]]
+                    self.meta = d["meta"]
+                    self.info.update(ms=d["ms"], probs=d["probs"], probs_meta=d["probs_meta"] or {},
+                                     meta=d["meta"], peligro=round(d["peligro"], 2),
+                                     llamadas=self.info["llamadas"] + 1,
+                                     dudas=self.info["dudas"] + (d["tactica"] is None))
             except Exception as ex:
+                # 403/429/499 son fallas, no decisiones: el script decide mientras tanto
                 self.log("jev_error", error=str(ex)[:200])
                 with self.lock:
+                    self.modo, self.meta = "explorar", None
                     self.info["errores"] += 1
                     self.info["ultimo_error"] = str(ex)[:120]
-                time.sleep(1)
+                time.sleep(2 if "429" in str(ex) else 1)
             time.sleep(0.25)
 
     def leer(self):
         with self.lock:
-            return self.modo, dict(self.info)
+            return self.modo, self.meta, dict(self.info)
 
 
 def main():
@@ -384,18 +412,20 @@ def main():
             g.new_episode()
             cerebro = Cerebro(navegacion.Navegador(navegacion.cargar(mapa)))
             previo["kills"] = 0
+        # plan de Haiku (lo escribe el mod en el archivo de ordenes); vale con o sin Jev
+        try:
+            mt = os.path.getmtime(a.ordenes)
+            if mt != ultimo_mtime:
+                ultimo_mtime = mt
+                plan = leer_plan(a.ordenes)
+                if plan is not None:
+                    cerebro.navegador.plan = plan
+                    log("plan_claude", frame=n, plan=plan)
+        except OSError:
+            pass
         info_jev = None
         if jev:
-            orden, info_jev = jev.leer()
-        else:
-            try:
-                mt = os.path.getmtime(a.ordenes)
-                if mt != ultimo_mtime:
-                    ultimo_mtime = mt
-                    orden = leer_orden(a.ordenes, orden)
-                    log("orden_claude", frame=n, orden=orden)
-            except OSError:
-                pass
+            orden, cerebro.navegador.pedido_jev, info_jev = jev.leer()
         if a.pantalla:
             try:
                 mt = os.path.getmtime(a.pantalla)
@@ -422,7 +452,8 @@ def main():
         if cerebro.evento:
             log("cerebro", frame=n, que=list(cerebro.evento), orden=orden, pos=[round(vars_[4]), round(vars_[5])])
         if jev:
-            jev.ofrecer(st.screen_buffer, estado, cerebro.modo, n)
+            metas = [(c["id"], f"{c['desc']}, a {c['dist']} unidades") for c in nav.cands][:8]
+            jev.ofrecer(st.screen_buffer, estado, metas, n)
         pos = [round(vars_[4]), round(vars_[5])]
         if cerebro.modo != previo["modo"]:
             log("modo", frame=n, de=previo["modo"], a=cerebro.modo, orden=orden, pos=pos, estado=estado)
@@ -444,7 +475,12 @@ def main():
             "estado": estado,
             "piloto": a.piloto,
             "jev": info_jev,
+            "meta": nav.meta["id"] if nav.meta else None,
+            "plan": nav.plan,
         }
+        # el rompecabezas del nivel para el planificador (Haiku), cada ~5 s
+        if n % 45 == 0 and nav.cands:
+            linea["resumen_mapa"] = nav.resumen_mapa(vars_[4], vars_[5])
         sys.stdout.write(json.dumps(linea, separators=(",", ":")) + "\n")
         sys.stdout.flush()
         g.make_action(act, tics)
