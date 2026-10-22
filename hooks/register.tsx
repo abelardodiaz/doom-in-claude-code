@@ -4,6 +4,8 @@ import type { EngineInterface, Register } from 'claude-code'
 import type { Corrida, Frame } from '../types'
 
 const PANE = 'doom'
+// tope por partida: Jev y Haiku cuestan tokens, que no se quede prendido si nadie mira
+const MAX_MS = 10 * 60 * 1000
 
 const frame = atom({ plugin: 'doom-pane', key: 'frame' } as const, null)
 const bitacora = atom({ plugin: 'doom-pane', key: 'bitacora' } as const, [])
@@ -31,6 +33,8 @@ const TXT = {
     noKey: 'Sin TypeSafe API key: pilota Claude. Ponla en /config para que pilote Jev.',
     needSetup: 'Primero corre /doom-setup (instala ViZDoom en un entorno de Python).',
     crashed: 'Doom se cayo',
+    timeout: 'Doom se apago solo a los 10 minutos para no gastar tokens.',
+    log: 'Bitacora de decisiones',
   },
   en: {
     language: 'in English',
@@ -51,6 +55,8 @@ const TXT = {
     noKey: 'No TypeSafe API key: Claude pilots. Set it in /config to let Jev pilot.',
     needSetup: 'Run /doom-setup first (installs ViZDoom in a Python environment).',
     crashed: 'Doom crashed',
+    timeout: 'Doom stopped itself after 10 minutes to save tokens.',
+    log: 'Decision log',
   },
 } as const
 
@@ -58,6 +64,11 @@ let corriendo = false
 let generacion = 0
 let tamano = ''
 let idioma: Idioma = 'es'
+
+function detener() {
+  corriendo = false
+  generacion++
+}
 
 // Doom es 4:3 y cada celda trae dos pixeles en vertical: filas = cols * 3 / 8
 function medir(columnas: number, renglones: number) {
@@ -106,6 +117,7 @@ async function rutas($: EngineInterface) {
     puente: `${$.plugin.root}/bridge/doom_bridge.py`,
     requisitos: `${$.plugin.root}/bridge/requirements.txt`,
     ordenes: `${datos}/orders.json`,
+    logs: `${datos}/logs`,
     pantalla: `${datos}/screen.json`,
   }
 }
@@ -149,9 +161,17 @@ export const register: Register = (on, options) => {
     return { text: `Ready. ViZDoom installed in ${r.venv}. Now run /doom` }
   })
 
+  // cerrar el panel (X o Esc) tambien detiene el juego: si no, Jev y Haiku siguen gastando
+  on('ui.close', async ($, e, next) => {
+    if (e.id === PANE && corriendo) {
+      detener()
+      await update($, activo, () => false)
+    }
+    return next(e)
+  })
+
   on('command.run', { command: 'doom-stop' }, async $ => {
-    corriendo = false
-    generacion++
+    detener()
     await update($, activo, () => false)
     await $.ui.close({ id: PANE })
     return { text: TXT[idioma].stoppedMsg }
@@ -170,6 +190,11 @@ export const register: Register = (on, options) => {
     const piloto = palabras.includes('claude') || !apiKey ? 'claude' : 'jev'
     corriendo = true
     const mia = ++generacion
+    const inicio = await $.clock.now()
+    const sello = new Date(inicio).toISOString().replace(/[-:]/g, '').replace('T', '-').slice(0, 15)
+    const logJuego = `${r.logs}/match-${sello}.jsonl`
+    const logClaude = `${r.logs}/match-${sello}-claude.json`
+    const dichos: { t: number; piloto: string; frame: number; estado: string; respuesta: string }[] = []
     const prompts = {
       pilot: (await $.fs.read(`${$.plugin.root}/prompts/pilot.md`)).replaceAll('{LANGUAGE}', T.language),
       narrator: (await $.fs.read(`${$.plugin.root}/prompts/narrator.md`)).replaceAll('{LANGUAGE}', T.language),
@@ -185,7 +210,7 @@ export const register: Register = (on, options) => {
       let pintando = false
       try {
         const juego = $.process.spawn({
-          argv: [r.python, '-u', r.puente, '--ordenes', r.ordenes, '--pantalla', r.pantalla, '--piloto', piloto],
+          argv: [r.python, '-u', r.puente, '--ordenes', r.ordenes, '--pantalla', r.pantalla, '--piloto', piloto, '--log', logJuego],
           cwd: r.datos,
           env: piloto === 'jev' ? { TYPESAFE_API_KEY: apiKey } : {},
         })
@@ -220,6 +245,13 @@ export const register: Register = (on, options) => {
     void (async () => {
       while (corriendo && mia === generacion) {
         await $.clock.sleep(piloto === 'jev' ? 4000 : 2500)
+        const ahora = await $.clock.now()
+        if (ahora - inicio > MAX_MS) {
+          detener()
+          await update($, activo, () => false)
+          $.ui.toast(T.timeout, { timeoutMs: 8000 })
+          break
+        }
         const f = await read($, frame)
         if (!f || !corriendo || mia !== generacion) continue
         const jev = f.jev ? ` Jev chose "${f.orden}" (${probsTexto(f.jev.probs)}), danger ${f.jev.peligro}.` : ''
@@ -231,6 +263,8 @@ export const register: Register = (on, options) => {
           effort: 'low',
         })
         if (!resp.isAnswered) continue
+        dichos.push({ t: Math.round((ahora - inicio) / 100) / 10, piloto, frame: f.n, estado: f.estado, respuesta: resp.text })
+        await $.fs.write(logClaude, JSON.stringify(dichos, null, 1))
         const m = resp.text.match(/\{[\s\S]*\}/)
         if (!m) continue
         try {
@@ -244,7 +278,7 @@ export const register: Register = (on, options) => {
       }
     })()
 
-    const aviso = !apiKey && !palabras.includes('claude') ? `\n${T.noKey}` : ''
+    const aviso = (!apiKey && !palabras.includes('claude') ? `\n${T.noKey}` : '') + `\n${T.log}: ${logJuego}`
     return { text: (piloto === 'jev' ? T.okJev : T.okClaude) + aviso }
   })
 
