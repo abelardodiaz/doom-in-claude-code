@@ -27,8 +27,12 @@ Every step gets measured with `bridge/bench_reparto.py` and written up in the [c
 
 ## Later (when it finishes levels consistently)
 
-5. **Voice narration with Deepgram.** Parked on purpose: no point narrating a bot that does not finish.
-   Notes so nobody rediscovers them:
+5. **Voice narration.** Parked on purpose: no point narrating a bot that does not finish.
+   - Free option first: the system voice, no key, no network. On Windows, PowerShell with
+     `System.Speech` (`SpeechSynthesizer.Speak`), already used by one of the author's projects to
+     speak Claude Code notifications; on macOS, `say` (or the mod's `$.audio.speak`). Speak only in
+     specific moments (key picked, level finished, death, boss in sight), not every line.
+   - Nicer option later: Deepgram TTS. Notes so nobody rediscovers them:
    - The mod API can play base64 audio (`$.audio.play`), but its docs say a Windows or Linux
      terminal plays nothing (no player); only macOS. So the Python bridge plays it: Deepgram TTS as
      WAV, `winsound` on Windows (built in), `afplay` on macOS, `aplay` on Linux, in its own thread,
