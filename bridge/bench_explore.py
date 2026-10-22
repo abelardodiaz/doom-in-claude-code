@@ -12,7 +12,7 @@ import navegacion as nv
 CELDA = 128
 
 
-def correr(frames, semilla, con_mapa, mapa="MAP01"):
+def correr(frames, semilla, con_mapa, mapa="MAP01", orden="explorar"):
     random.seed(semilla)
     g = db.crear_juego(mapa)
     g.set_seed(semilla)
@@ -34,7 +34,7 @@ def correr(frames, semilla, con_mapa, mapa="MAP01"):
             continue
         v = st.game_variables
         celdas.add((int(v[4] // CELDA), int(v[5] // CELDA)))
-        act, _ = cerebro.decidir(st, v, "explorar")
+        act, _ = cerebro.decidir(st, v, orden)
         g.make_action(act, 4)
     kills = int(g.get_game_variable(db.vzd.GameVariable.KILLCOUNT))
     g.close()
@@ -46,11 +46,13 @@ if __name__ == "__main__":
     ap.add_argument("--frames", type=int, default=1500)
     ap.add_argument("--semillas", type=int, default=3)
     ap.add_argument("--mapa", default="MAP01")
+    ap.add_argument("--orden", default="explorar", choices=["explorar", "atacar", "retirada", "recoger"],
+                    help="estrategia fija; 'recoger' simula a un piloto terco que va por todo objeto")
     ap.add_argument("--sin-mapa", action="store_true", help="reflejos a ciegas (linea base)")
     a = ap.parse_args()
     tot = 0
     for s in range(a.semillas):
-        c, k, m, fin = correr(a.frames, s + 1, not a.sin_mapa, a.mapa.upper())
+        c, k, m, fin = correr(a.frames, s + 1, not a.sin_mapa, a.mapa.upper(), a.orden)
         tot += c
         nivel = f"NIVEL TERMINADO en frame {fin}" if fin is not None else "no termino"
         print(f"semilla {s + 1}: celdas {c}, kills {k}, muertes {m}, {nivel}", flush=True)
