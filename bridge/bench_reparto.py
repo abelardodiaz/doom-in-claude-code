@@ -22,7 +22,8 @@ import doom_bridge as db
 import navegacion as nv
 
 CELDA = 128
-JEV_CADA = 9
+JEV_CADA = 9          # sin enemigos a la vista: ~1 decision por segundo de juego
+JEV_CADA_COMBATE = 4  # con enemigos: ~2 por segundo, en combate todo pasa en segundos
 HAIKU_CADA = 900
 HAIKU_MIN = 150
 ESTANCADO = 540  # ~60 s de juego sin llave ni interruptor nuevo: replantear (Sonnet si hay escalamiento)
@@ -73,6 +74,8 @@ def correr(mapa, semilla, modo, frames, log):
     pendiente_haiku = "inicio" if planea else None
     ult_progreso = 0
     ultima_llamada = 0.0
+    ult_jev = -JEV_CADA
+    modo_prev = None
     for n in range(frames):
         if g.is_episode_finished() and not g.is_player_dead():
             terminado = n
@@ -92,7 +95,8 @@ def correr(mapa, semilla, modo, frames, log):
         celdas.add((int(v[4] // CELDA), int(v[5] // CELDA)))
         # lo ultimo que se vio vivo, para saber que lo mato
         cerca = sorted(((round(math.hypot(o.position_x - v[4], o.position_y - v[5])), o.name)
-                        for o in st.objects if o.name in db.MONSTRUOS or o.name in db.PROYECTILES))
+                        for o in st.objects if o.name in db.MONSTRUOS or o.name in db.PROYECTILES
+                        or o.name == "ExplosiveBarrel"))
         ultimo = {"pos": [round(v[4]), round(v[5])], "salud": int(v[0]), "municion": int(v[2]),
                   "arma": int(v[12]), "modo": cerebro.modo, "cerca": cerca[:6]}
         if n % 200 == 0:
@@ -118,7 +122,9 @@ def correr(mapa, semilla, modo, frames, log):
             ult_haiku, pendiente_haiku = n, None
 
         # Jev: tactica y meta, cada JEV_CADA frames
-        if piloto and n % JEV_CADA == 0:
+        en_combate = any(l.object_name in db.MONSTRUOS for l in st.labels)
+        if piloto and n - ult_jev >= (JEV_CADA_COMBATE if en_combate else JEV_CADA):
+            ult_jev = n
             espera = 0.7 - (time.time() - ultima_llamada)
             if espera > 0:
                 time.sleep(espera)
@@ -142,6 +148,13 @@ def correr(mapa, semilla, modo, frames, log):
                 log({"ev": "jev_error", "frame": n, "error": str(ex)[:150]})
 
         act, _ = cerebro.decidir(st, v, orden)
+        # eventos de combate, para saber a que regla se debe cada cambio en muertes
+        if cerebro.evento:
+            log({"ev": "combate", "frame": n, "que": [str(x) for x in cerebro.evento],
+                 "salud": int(v[0])})
+        if cerebro.modo != modo_prev and cerebro.modo in ("curarse", "retirada"):
+            log({"ev": "combate", "frame": n, "que": [cerebro.modo], "salud": int(v[0])})
+        modo_prev = cerebro.modo
         if nav.evento:
             log({"ev": "nav", "frame": n, "que": [str(x) for x in nav.evento]})
             if nav.evento[0] in ("llave_recogida", "interruptor"):
