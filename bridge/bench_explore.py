@@ -28,6 +28,8 @@ def correr(frames, semilla, con_mapa, mapa="MAP01", orden="explorar"):
         if g.is_player_dead():
             muertes += 1
             g.new_episode()
+            # al reaparecer se pierden llaves e interruptores: navegador nuevo, como en el juego real
+            cerebro = db.Cerebro(nv.Navegador(nv.cargar(mapa)) if con_mapa else None)
         st = g.get_state()
         if st is None:
             g.advance_action(1)
