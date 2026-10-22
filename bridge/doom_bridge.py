@@ -38,7 +38,9 @@ TACTICA_A_MODO = {"pelear": "atacar", "esquivar": "retirada", "avanzar": "avanza
 
 # Indices de botones
 B = ["MOVE_FORWARD", "MOVE_BACKWARD", "TURN_LEFT", "TURN_RIGHT",
-     "MOVE_LEFT", "MOVE_RIGHT", "ATTACK", "USE", "TURN_LEFT_RIGHT_DELTA"]
+     "MOVE_LEFT", "MOVE_RIGHT", "ATTACK", "USE",
+     "SELECT_WEAPON2", "SELECT_WEAPON3", "SELECT_WEAPON4",
+     "TURN_LEFT_RIGHT_DELTA"]  # el giro fino va al final: es el unico boton con valor
 IDX = {n: i for i, n in enumerate(B)}
 TICS = 4  # tics por accion (35 tics = 1 s); main lo ajusta segun los fps
 
@@ -85,6 +87,10 @@ def crear_juego(mapa="MAP01"):
         vzd.GameVariable.SELECTED_WEAPON_AMMO, vzd.GameVariable.KILLCOUNT,
         vzd.GameVariable.POSITION_X, vzd.GameVariable.POSITION_Y,
         vzd.GameVariable.ANGLE,
+        # armas que trae, por casillero (3 escopetas, 4 ametralladora, 5 cohetes, 6 plasma, 7 BFG)
+        vzd.GameVariable.WEAPON3, vzd.GameVariable.WEAPON4, vzd.GameVariable.WEAPON5,
+        vzd.GameVariable.WEAPON6, vzd.GameVariable.WEAPON7,
+        vzd.GameVariable.SELECTED_WEAPON,
     ])
     g.set_mode(vzd.Mode.PLAYER)
     g.init()
@@ -125,6 +131,65 @@ def lado(cx, ancho):
     return "al frente"
 
 
+# proyectiles de monstruos que se pueden esquivar (los disparos de zombis y escopeteros son
+# instantaneos: a esos no se les esquiva, se les mata primero)
+PROYECTILES = {"DoomImpBall", "CacodemonBall", "BaronBall", "RevenantTracer", "FatShot",
+               "ArachnotronPlasma", "Rocket", "BFGBall", "PlasmaBall"}
+# a quien dispararle primero: arch-vile siempre; luego los de disparo instantaneo
+PRIORIDAD = {"Archvile": 100, "ChaingunGuy": 60, "ShotgunGuy": 50, "WolfensteinSS": 40,
+             "Zombieman": 30, "Revenant": 25, "DoomImp": 20}
+
+
+def esquivar(objetos, x, y, angulo):
+    """MOVE_LEFT/MOVE_RIGHT si un proyectil va a pasar a menos de 48 unidades en el proximo
+    segundo; None si no hay peligro. Se mueve hacia el lado contrario al punto de paso."""
+    a = math.radians(angulo)
+    derecha = (math.sin(a), -math.cos(a))  # en Doom el angulo 0 mira al este y crece a la izquierda
+    for o in objetos:
+        if o.name not in PROYECTILES:
+            continue
+        px, py = o.position_x - x, o.position_y - y
+        vx, vy = o.velocity_x, o.velocity_y
+        v2 = vx * vx + vy * vy
+        if v2 < 1:
+            continue
+        t = -(px * vx + py * vy) / v2  # tics hasta el punto mas cercano
+        if not 0 < t < 35:
+            continue
+        cx, cy = px + vx * t, py + vy * t
+        if math.hypot(cx, cy) < 48:
+            # alejarse del punto por donde pasara
+            lado = -(cx * derecha[0] + cy * derecha[1])
+            return "MOVE_RIGHT" if lado > 0 else "MOVE_LEFT"
+    return None
+
+
+def elegir_objetivo(enemigos, x, y):
+    def puntaje(l):
+        d = math.hypot(l.object_position_x - x, l.object_position_y - y)
+        return PRIORIDAD.get(l.object_name, 10) * 1000 - d
+    return max(enemigos, key=puntaje)
+
+
+def elegir_arma(obj, x, y, vars_):
+    """Boton SELECT_WEAPONn a mandar, o None si el arma de ahora ya sirve.
+
+    vars_[7:12] = casilleros 3..7 que trae, vars_[12] = arma seleccionada.
+    Escopeta de cerca, ametralladora a media y larga distancia, pistola si no hay otra.
+    """
+    if len(vars_) < 13:
+        return None
+    tiene = {k for k, v in zip((3, 4, 5, 6, 7), vars_[7:12]) if v > 0}
+    d = math.hypot(obj.object_position_x - x, obj.object_position_y - y)
+    if 3 in tiene and (d < 450 or 4 not in tiene):
+        quiero = 3
+    elif 4 in tiene:
+        quiero = 4
+    else:
+        quiero = 2
+    return None if int(vars_[12]) == quiero else f"SELECT_WEAPON{quiero}"
+
+
 class Cerebro:
     """Reflejos: apuntar y disparar, esquivar paredes, abrir puertas, salir de atorones."""
 
@@ -150,6 +215,9 @@ class Cerebro:
     def decidir(self, st, vars_, orden):
         self.paso += 1
         self.evento = None
+        if self.navegador:
+            # si este frame pelea, el navegador no corre: que no se reporte su evento viejo otra vez
+            self.navegador.evento = None
         ancho = st.screen_buffer.shape[1]
         x, y = vars_[4], vars_[5]
         enemigos = [l for l in st.labels if l.object_name in MONSTRUOS]
@@ -205,15 +273,23 @@ class Cerebro:
                 return None
             return accion(*extra, giro=-grados)
 
+        # reflejo de supervivencia, en cualquier modo: esquivar un proyectil que viene directo
+        esquive = esquivar(st.objects, x, y, vars_[6])
+
         if modo == "atacar":
-            obj = max(enemigos, key=lambda l: l.width * l.height)
+            obj = elegir_objetivo(enemigos, x, y)
             cx = obj.x + obj.width / 2
             grados = math.degrees(math.atan((cx - ancho / 2) / (ancho / 2)))
-            lateral = "MOVE_LEFT" if (self.paso // 10) % 2 else "MOVE_RIGHT"
+            lateral = esquive or ("MOVE_LEFT" if (self.paso // 10) % 2 else "MOVE_RIGHT")
+            arma = elegir_arma(obj, x, y, vars_)
+            extra = [arma] if arma else []
             # gira justo lo que falta y dispara en el mismo paso si ya casi esta centrado
             if abs(grados) < 8:
-                return accion("ATTACK", lateral, giro=-grados), atorado
-            return accion(lateral, giro=-grados), atorado
+                return accion("ATTACK", lateral, *extra, giro=-grados), atorado
+            return accion(lateral, *extra, giro=-grados), atorado
+        if esquive and enemigos:
+            # fuera de pelea pero con un proyectil encima: hacerse a un lado sin perder el rumbo
+            return accion(esquive, "MOVE_FORWARD"), atorado
 
         if modo == "retirada":
             if enemigos:
@@ -230,7 +306,8 @@ class Cerebro:
         # explorar / avanzar: con mapa, el navegador decide; sin mapa, reflejos a ciegas
         if self.navegador:
             a = self.navegador.decidir(x, y, vars_[6], st.sectors, accion, st.objects,
-                                       salud=vars_[0], municion=vars_[2])
+                                       salud=vars_[0], municion=vars_[2],
+                                       armas={k for k, val in zip((3, 4, 5, 6, 7), vars_[7:12]) if val > 0})
             # avanzar ignora a los enemigos, pero si uno queda justo enfrente se le dispara al pasar
             if modo == "avanzar" and enemigos:
                 obj = max(enemigos, key=lambda l: l.width * l.height)
