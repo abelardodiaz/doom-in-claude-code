@@ -5,6 +5,45 @@ How this went from a forum joke to a playable mod, one step at a time.
 The challenge: someone in a forum listed the AI fads (personal finance apps, reverse engineering,
 TV launchers) and asked what was missing. "Running Doom in Claude." Challenge accepted.
 
+## [0.4.1] - 2026-10-22 - MAP03 and MAP05 open up; the pane speaks English too
+
+### Navigation
+- **Walk-over triggers** (Doom's W1/WR lines): lines that open a door, lower or raise a floor when
+  you cross them. MAP03 has a door that only opens this way (action 109). They are a new goal type
+  ("walk over line N"), reachable from either side of the line, and the sectors they move count as
+  closed until they really open.
+- **Ammo for every weapon you carry**, not only the one in hand: with the pistol in hand it only
+  looked for bullets, so the shotgun ran dry and it fought imps with the pistol (MAP02: 3 deaths).
+- **Supplies it cannot take** (ammo at max, item on a ledge): reaching one counts as done. MAP03
+  circled a box of bullets it could not pick up for 13,000 frames.
+- **Switches pressed from closer** (walks up to ~24 units while pressing) and **three tries** before
+  giving up on one. MAP03's switch 12 failed twice from ~40 units and was dropped, which blocked the
+  rest of the map; MAP05's switch 14 retried forever before the cap.
+- Combat log line: a snapshot every 200 frames (position, health, ammo, goal), so a stall without
+  events shows up.
+
+### Measured (code only, 1 seed each)
+| Map | 0.4.0 | 0.4.1 |
+| --- | --- | --- |
+| MAP01 | finished | finished (479-884 frames) |
+| MAP02 | finished 2/2, 0 deaths | finished in 1 of 2 runs (1 death); the other died 4 times |
+| MAP03 | two keys, then stuck | **all three keys and 8+ switches**; died ~100 steps from the exit |
+| MAP05 | 49 cells, stuck on one switch | **197 cells**, blue key, ~8 switches |
+
+The puzzle side of MAP02 and MAP03 is solved. Whether a run finishes now depends on surviving: each
+death resets keys and switches, and the bot fights to the death instead of retreating or healing.
+That is the next stage, and where Jev should earn its place.
+
+### The pane in English
+- With `/doom en` (or the English option) everything in the pane is in English, not only the
+  narration: the status line (health, ammo, levels done, enemies, items, keys), the mode, Jev's
+  tactics, the goal and Claude's plan (`red key > switch 3 > exit`). Jev still gets its state in
+  Spanish, the language its questions were tested in.
+
+### Docs
+- README in English (`README.md`) and Spanish (`README.es.md`), rewritten for 0.4: what each piece
+  does, where each map stands, tools, logs, cost and limits.
+
 ## [0.4.0] - 2026-10-22 - MAP02 finished: keys, switches, lifts, teleporter, and staying alive
 
 First level with keys solved end to end, by code alone: **MAP02 finished 2/2, 0 deaths, 43 kills**

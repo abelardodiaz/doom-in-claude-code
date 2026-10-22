@@ -5,7 +5,8 @@ Every step gets measured with `bridge/bench_reparto.py` and written up in the [c
 
 ## Now
 
-1. ~~MAP02 with code only~~ **done in 0.4.0: 2/2, 0 deaths.** Next maps: MAP03-MAP05.
+1. ~~MAP02 with code only~~ **done in 0.4.0.** MAP03's puzzle solved in 0.4.1 (all keys, dies
+   near the exit); MAP05 partly. Next: staying alive (see 3).
 2. **Re-run the columns on the new navigator:** code / + Jev (question v1 and v2) / + Jev + Haiku /
    + Jev + Haiku with Sonnet escalation (start of map, key or switch, death, ~60 s without progress).
    More seeds per column so the Jev numbers mean something.
@@ -43,3 +44,6 @@ Every step gets measured with `bridge/bench_reparto.py` and written up in the [c
 9. **"Pure" mode without the WAD:** Jev and Claude navigate from the screen and the depth buffer
    only. The hard version of the challenge. Reference: Claude cleared E1M1 1/5 from the screen and
    4/5 with an automap (lucas-moont/doom-player).
+10. **Another game with the same recipe:** the Mario AI Benchmark ("Infinite Mario"), an open Mario
+    clone built for AI agents (2009-2012 competitions). Code moves, Jev decides fast, Claude plans.
+    After Doom.
