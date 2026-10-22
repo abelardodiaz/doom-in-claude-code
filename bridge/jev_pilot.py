@@ -30,6 +30,7 @@ TACTICAS = {
     "pelear": "Hay un enemigo a la vista y conviene pelear con el",
     "esquivar": "Hay peligro cerca (salud baja o varios enemigos): retroceder disparando",
     "avanzar": "No vale la pena pelear ahora: seguir hacia la meta",
+    "curarse": "La salud esta baja y hay un botiquin con ruta: dejar la pelea e ir por el",
 }
 
 

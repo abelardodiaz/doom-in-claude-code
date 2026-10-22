@@ -32,9 +32,11 @@ OBJETOS = {
     "RocketLauncher": "lanzacohetes", "RocketAmmo": "cohete", "Soulsphere": "esfera de alma",
     "Backpack": "mochila", "Berserk": "berserk",
 }
-MODOS = ("atacar", "explorar", "retirada", "recoger", "avanzar")
+MODOS = ("atacar", "explorar", "retirada", "recoger", "avanzar", "curarse")
 # tactica de Jev -> modo del cerebro (None = Jev dudo: decide el script)
-TACTICA_A_MODO = {"pelear": "atacar", "esquivar": "retirada", "avanzar": "avanzar", None: "explorar"}
+TACTICA_A_MODO = {"pelear": "atacar", "esquivar": "retirada", "avanzar": "avanzar", "curarse": "curarse",
+                  None: "explorar"}
+SALUD_CRITICA = 30  # regla de supervivencia del script: debajo de esto deja de pelear
 
 # Indices de botones
 B = ["MOVE_FORWARD", "MOVE_BACKWARD", "TURN_LEFT", "TURN_RIGHT",
@@ -164,6 +166,30 @@ def esquivar(objetos, x, y, angulo):
     return None
 
 
+def peligro_barril(objetos, x, y, angulo, grados_objetivo):
+    """(no_disparar, alejarse): MAP04 mataba al bot con salud 52 cada vida en el mismo punto,
+    a 56 unidades de un barril al que le daba disparando a los enemigos de al lado.
+
+    no_disparar: hay un barril a menos de 250 unidades cerca de la linea de tiro.
+    alejarse: 'MOVE_LEFT'/'MOVE_RIGHT'/'MOVE_BACKWARD' si hay uno a menos de 100.
+    """
+    no_disparar, alejarse = False, None
+    for o in objetos:
+        if o.name != "ExplosiveBarrel":
+            continue
+        dx, dy = o.position_x - x, o.position_y - y
+        d = math.hypot(dx, dy)
+        if d > 250:
+            continue
+        # angulo del barril respecto a la mira (positivo = a la izquierda)
+        rel = (math.degrees(math.atan2(dy, dx)) - angulo + 180) % 360 - 180
+        if abs(rel - (-grados_objetivo)) < 12:
+            no_disparar = True
+        if d < 100:
+            alejarse = "MOVE_BACKWARD" if abs(rel) < 45 else ("MOVE_RIGHT" if rel > 0 else "MOVE_LEFT")
+    return no_disparar, alejarse
+
+
 def elegir_objetivo(enemigos, x, y):
     def puntaje(l):
         d = math.hypot(l.object_position_x - x, l.object_position_y - y)
@@ -203,6 +229,8 @@ class Cerebro:
         # objetos a los que no se pudo llegar: clave de posicion -> paso hasta el que se ignoran
         self.ignorados = {}
         self.cesion = 0  # pasos en que el navegador manda aunque la orden diga otra cosa
+        self.salud_prev = 100
+        self.voltear = 0  # pasos girando hacia quien le pega sin que se vea en pantalla
 
     @staticmethod
     def clave(l):
@@ -245,6 +273,19 @@ class Cerebro:
             modo = "atacar" if enemigos else "explorar"
         if modo == "atacar" and not enemigos:
             modo = "explorar"
+        # regla de supervivencia del script (cuando decide el script: orden "explorar" o Jev dudo).
+        # Antes peleaba hasta morir con salud 1-7 (MAP02-04): con poca salud, ir por un botiquin
+        # si hay uno con ruta; si no lo hay y lo rodean, retroceder disparando.
+        if orden == "explorar" and vars_[0] < SALUD_CRITICA and self.navegador:
+            # ir a curarse dandole la espalda a los enemigos mataba (18 muertes en "curarse"):
+            # solo si no hay enemigos a la vista o el botiquin esta a menos de 300
+            cerca_salud = self.navegador.distancia_salud()
+            if cerca_salud is not None and (not enemigos or cerca_salud < 300):
+                modo = "curarse"
+            elif len(enemigos) >= 2:
+                modo = "retirada"
+        if modo == "curarse" and not (self.navegador and self.navegador.hay_salud()):
+            modo = "atacar" if enemigos else "explorar"
         # atorado yendo por un objeto o retrocediendo: el objeto queda ignorado ~30 s y el
         # navegador toma el control un rato (si no, Jev lo sigue viendo y lo vuelve a elegir)
         if atorado and modo in ("recoger", "retirada") and self.navegador:
@@ -276,6 +317,26 @@ class Cerebro:
         # reflejo de supervivencia, en cualquier modo: esquivar un proyectil que viene directo
         esquive = esquivar(st.objects, x, y, vars_[6])
 
+        # le pegan sin que se vea a nadie: voltear hacia el monstruo mas cercano (puede estar
+        # detras). MAP04: 33 de 48 muertes en "explorar" con imps a 30-110 unidades, fuera de cuadro
+        perdio_salud = vars_[0] < self.salud_prev
+        self.salud_prev = vars_[0]
+        if perdio_salud and not enemigos:
+            self.voltear = 6
+        if self.voltear > 0 and not enemigos:
+            self.voltear -= 1
+            cercanos = [o for o in st.objects if o.name in MONSTRUOS
+                        and math.hypot(o.position_x - x, o.position_y - y) < 500]
+            if cercanos:
+                o = min(cercanos, key=lambda o: math.hypot(o.position_x - x, o.position_y - y))
+                dif = (math.degrees(math.atan2(o.position_y - y, o.position_x - x)) - vars_[6] + 180) % 360 - 180
+                if self.voltear == 5:  # un evento por reflejo, no uno por cada paso del giro
+                    self.evento = ("voltear", o.name, round(dif))
+                return accion(esquive, giro=max(-45, min(45, dif))) if esquive else \
+                    accion(giro=max(-45, min(45, dif))), atorado
+        elif enemigos:
+            self.voltear = 0
+
         if modo == "atacar":
             obj = elegir_objetivo(enemigos, x, y)
             cx = obj.x + obj.width / 2
@@ -283,8 +344,11 @@ class Cerebro:
             lateral = esquive or ("MOVE_LEFT" if (self.paso // 10) % 2 else "MOVE_RIGHT")
             arma = elegir_arma(obj, x, y, vars_)
             extra = [arma] if arma else []
+            no_disparar, alejarse = peligro_barril(st.objects, x, y, vars_[6], grados)
+            if alejarse:
+                lateral = alejarse
             # gira justo lo que falta y dispara en el mismo paso si ya casi esta centrado
-            if abs(grados) < 8:
+            if abs(grados) < 8 and not no_disparar:
                 return accion("ATTACK", lateral, *extra, giro=-grados), atorado
             return accion(lateral, *extra, giro=-grados), atorado
         if esquive and enemigos:
@@ -303,8 +367,9 @@ class Cerebro:
             a = apuntar(obj, ["MOVE_FORWARD"])
             return (a or accion("MOVE_FORWARD")), atorado
 
-        # explorar / avanzar: con mapa, el navegador decide; sin mapa, reflejos a ciegas
+        # explorar / avanzar / curarse: con mapa, el navegador decide; sin mapa, reflejos a ciegas
         if self.navegador:
+            self.navegador.forzar = "salud" if modo == "curarse" else None
             a = self.navegador.decidir(x, y, vars_[6], st.sectors, accion, st.objects,
                                        salud=vars_[0], municion=vars_[2],
                                        armas={k for k, val in zip((3, 4, 5, 6, 7), vars_[7:12]) if val > 0},
