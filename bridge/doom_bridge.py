@@ -226,11 +226,31 @@ def leer_orden(ruta, actual):
         return actual
 
 
+class Bitacora:
+    """Una linea JSON por evento en el archivo de la partida, para depurar decisiones."""
+
+    def __init__(self, ruta):
+        if ruta:
+            os.makedirs(os.path.dirname(os.path.abspath(ruta)), exist_ok=True)
+        self.f = open(ruta, "a", encoding="utf-8") if ruta else None
+        self.lock = threading.Lock()
+        self.t0 = time.time()
+
+    def __call__(self, evento, **datos):
+        if not self.f:
+            return
+        datos = {"t": round(time.time() - self.t0, 2), "ev": evento, **datos}
+        with self.lock:
+            self.f.write(json.dumps(datos, ensure_ascii=False) + "\n")
+            self.f.flush()
+
+
 class HiloJev:
     """Consulta a Jev en segundo plano con el frame mas reciente; el juego nunca lo espera."""
 
-    def __init__(self):
+    def __init__(self, log):
         from jev_pilot import PilotoJev
+        self.log = log
         self.piloto = PilotoJev(con_imagen=True)
         self.lock = threading.Lock()
         self.entrada = None
@@ -238,9 +258,10 @@ class HiloJev:
         self.info = {"ms": 0, "probs": {}, "peligro": 0.0, "llamadas": 0, "errores": 0, "ultimo_error": ""}
         threading.Thread(target=self._bucle, daemon=True).start()
 
-    def ofrecer(self, frame, estado, modo):
+    def ofrecer(self, frame, estado, modo, n=0):
+        self.n_frame = n
         with self.lock:
-            self.entrada = (frame.copy(), estado, modo)
+            self.entrada = (frame.copy(), estado, modo, self.n_frame)
 
     def _bucle(self):
         while True:
@@ -250,12 +271,15 @@ class HiloJev:
                 time.sleep(0.05)
                 continue
             try:
-                modo, probs, peligro, ms = self.piloto.decidir(*e)
+                modo, probs, peligro, ms = self.piloto.decidir(*e[:3])
+                self.log("jev", frame=e[3], estado=e[1], modo_previo=e[2], decide=modo,
+                         probs=probs, peligro=round(peligro, 2), ms=ms)
                 with self.lock:
                     self.modo = modo
                     self.info.update(ms=ms, probs=probs, peligro=round(peligro, 2),
                                      llamadas=self.info["llamadas"] + 1)
             except Exception as ex:
+                self.log("jev_error", error=str(ex)[:200])
                 with self.lock:
                     self.info["errores"] += 1
                     self.info["ultimo_error"] = str(ex)[:120]
@@ -274,12 +298,16 @@ def main():
     ap.add_argument("--filas", type=int, default=25)
     ap.add_argument("--fps", type=float, default=9)
     ap.add_argument("--frames", type=int, default=0, help="0 = sin limite")
+    ap.add_argument("--log", default="", help="archivo .jsonl con las decisiones de la partida")
     ap.add_argument("--piloto", choices=["jev", "claude"], default="jev")
     ap.add_argument("--pantalla", default="", help="json {cols, filas} que el panel actualiza al redimensionar")
     a = ap.parse_args()
 
     g = crear_juego()
-    jev = HiloJev() if a.piloto == "jev" else None
+    log = Bitacora(a.log)
+    log("inicio", piloto=a.piloto, mapa="MAP01", cols=a.cols, filas=a.filas)
+    jev = HiloJev(log) if a.piloto == "jev" else None
+    previo = {"modo": None, "orden": None, "kills": 0, "atorado": False}
     cerebro = Cerebro()
     orden = "explorar"
     muertes = 0
@@ -292,6 +320,7 @@ def main():
         if g.is_episode_finished() or g.is_player_dead():
             if g.is_player_dead():
                 muertes += 1
+                log("muerte", frame=n, muertes=muertes)
             g.new_episode()
         info_jev = None
         if jev:
@@ -302,6 +331,7 @@ def main():
                 if mt != ultimo_mtime:
                     ultimo_mtime = mt
                     orden = leer_orden(a.ordenes, orden)
+                    log("orden_claude", frame=n, orden=orden)
             except OSError:
                 pass
         if a.pantalla:
@@ -323,7 +353,17 @@ def main():
         act, atorado = cerebro.decidir(st, vars_, orden)
         estado = describir(st, vars_, atorado, muertes, st.screen_buffer.shape[1])
         if jev:
-            jev.ofrecer(st.screen_buffer, estado, cerebro.modo)
+            jev.ofrecer(st.screen_buffer, estado, cerebro.modo, n)
+        pos = [round(vars_[4]), round(vars_[5])]
+        if cerebro.modo != previo["modo"]:
+            log("modo", frame=n, de=previo["modo"], a=cerebro.modo, orden=orden, pos=pos, estado=estado)
+        if int(vars_[3]) > previo["kills"]:
+            log("kill", frame=n, kills=int(vars_[3]), pos=pos)
+        if atorado and not previo["atorado"]:
+            log("atorado", frame=n, pos=pos, angulo=round(vars_[6]))
+        previo.update(modo=cerebro.modo, kills=int(vars_[3]), atorado=atorado)
+        if n % 35 == 0:
+            log("pos", frame=n, pos=pos, angulo=round(vars_[6]), salud=int(vars_[0]))
         linea = {
             "t": "f",
             "n": n,
