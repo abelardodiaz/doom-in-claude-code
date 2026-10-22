@@ -25,6 +25,10 @@ export type Frame = {
   niveles?: number
   meta?: string | null
   plan?: string[]
+  /** Lo mismo que estado, meta y plan, pero en el idioma de la partida para el panel. */
+  estado_ui?: string
+  meta_ui?: string | null
+  plan_ui?: string[]
   resumen_mapa?: string
 }
 

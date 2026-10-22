@@ -22,6 +22,7 @@ const TXT = {
     narrates: 'narra',
     mode: 'modo',
     goal: 'meta',
+    plan: 'plan de Claude',
     danger: 'peligro',
     decisions: 'decisiones',
     errors: 'errores',
@@ -45,6 +46,7 @@ const TXT = {
     narrates: 'narrator',
     mode: 'mode',
     goal: 'goal',
+    plan: 'Claude plan',
     danger: 'danger',
     decisions: 'decisions',
     errors: 'errors',
@@ -109,10 +111,40 @@ function recortar(fila: Corrida[], ancho: number) {
   return out
 }
 
+// lo que el bridge nombra en espanol (modos, tacticas, metas), en el idioma del panel
+const PALABRA_EN: Record<string, string> = {
+  atacar: 'attack', explorar: 'explore', retirada: 'retreat', recoger: 'pick up', avanzar: 'advance',
+  pelear: 'fight', esquivar: 'dodge',
+}
+const COLOR_EN: Record<string, string> = { roja: 'red', azul: 'blue', amarilla: 'yellow' }
+
+function palabra(w: string | null | undefined) {
+  if (!w) return '-'
+  return idioma === 'en' ? (PALABRA_EN[w] ?? w) : w
+}
+
+// id interno de meta (llave_roja, interruptor_3...) -> texto corto
+function nombreMeta(id: string | null | undefined) {
+  if (!id) return '-'
+  const [base, resto = ''] = id.split('_')
+  if (idioma === 'en') {
+    const en: Record<string, string> = {
+      llave: `${COLOR_EN[resto] ?? resto} key`, interruptor: `switch ${resto}`, pisar: `walk-over line ${resto}`,
+      municion: 'ammo', salud: 'health', arma: 'weapon', frontera: 'unexplored area', salida: 'exit',
+    }
+    return en[base] ?? id
+  }
+  const es: Record<string, string> = {
+    llave: `llave ${resto}`, interruptor: `interruptor ${resto}`, pisar: `linea ${resto} al pisar`,
+    municion: 'municion', salud: 'salud', arma: 'arma', frontera: 'zona sin explorar', salida: 'salida',
+  }
+  return es[base] ?? id
+}
+
 function probsTexto(probs: Record<string, number>) {
   return Object.entries(probs)
     .sort((a, b) => b[1] - a[1])
-    .map(([k, v]) => `${k} ${v.toFixed(2)}`)
+    .map(([k, v]) => `${palabra(k)} ${v.toFixed(2)}`)
     .join(' ')
 }
 
@@ -209,7 +241,7 @@ export const register: Register = (on, options) => {
     const sello = new Date(inicio).toISOString().replace(/[-:]/g, '').replace('T', '-').slice(0, 15)
     const logJuego = `${r.logs}/match-${sello}.jsonl`
     const logClaude = `${r.logs}/match-${sello}-claude.json`
-    const dichos: { t: number; piloto: string; frame: number; estado: string; respuesta: string }[] = []
+    const dichos: { t: number; piloto: string; modelo: string; frame: number; estado: string; respuesta: string }[] = []
     const planner = (await $.fs.read(`${$.plugin.root}/prompts/planner.md`)).replaceAll('{LANGUAGE}', T.language)
     // el rompecabezas del nivel llega en algunas lineas (cada ~5 s); se guarda el ultimo
     let resumen = ''
@@ -224,7 +256,8 @@ export const register: Register = (on, options) => {
       let pintando = false
       try {
         const juego = $.process.spawn({
-          argv: [r.python, '-u', r.puente, '--ordenes', r.ordenes, '--pantalla', r.pantalla, '--piloto', piloto, '--log', logJuego],
+          argv: [r.python, '-u', r.puente, '--ordenes', r.ordenes, '--pantalla', r.pantalla, '--piloto', piloto,
+            '--log', logJuego, '--idioma', idioma],
           cwd: r.datos,
           env: piloto === 'jev' ? { TYPESAFE_API_KEY: apiKey } : {},
         })
@@ -264,7 +297,11 @@ export const register: Register = (on, options) => {
       }
     })()
 
-    // Haiku: planea el rompecabezas del nivel (orden de metas) y narra, cada ~6 s
+    // Haiku: planea el rompecabezas del nivel (orden de metas) y narra, cada ~6 s.
+    // Escala a Sonnet en los momentos dificiles: cambio en el rompecabezas (mapa, llave,
+    // interruptor, muerte) o 60 s sin avances. Lo demas es revision de rutina con Haiku.
+    let huella = ''
+    let ultimoAvance = inicio
     void (async () => {
       while (corriendo && mia === generacion) {
         await $.clock.sleep(6000)
@@ -280,15 +317,30 @@ export const register: Register = (on, options) => {
         const jev = f.jev
           ? `\nJev (fast pilot) right now: tactic ${probsTexto(f.jev.probs)}, goal ${f.jev.meta ?? 'unsure'}, danger ${f.jev.peligro}.`
           : ''
+        const nueva = [
+          f.mapa ?? '',
+          f.estado.match(/Llaves: ([^.]*)/)?.[1] ?? '',
+          f.estado.match(/Interruptores usados: (\d+)/)?.[1] ?? '',
+          f.estado.match(/muertes (\d+)/)?.[1] ?? '',
+        ].join('|')
+        let modelo = 'haiku'
+        if (nueva !== huella) {
+          modelo = 'sonnet'
+          huella = nueva
+          ultimoAvance = ahora
+        } else if (ahora - ultimoAvance > 60000) {
+          modelo = 'sonnet'
+          ultimoAvance = ahora
+        }
         const resp = await $.model.complete({
-          model: 'haiku',
+          model: modelo,
           system: planner,
           prompt: `--- Level state ---\n${resumen || f.estado}\nCurrent goal: ${f.meta ?? 'none'}. Current plan: ${(f.plan ?? []).join(', ') || 'none'}.\n${f.estado}${jev}`,
           maxTokens: 200,
           effort: 'low',
         })
         if (!resp.isAnswered) continue
-        dichos.push({ t: Math.round((ahora - inicio) / 100) / 10, piloto, frame: f.n, estado: f.estado, respuesta: resp.text })
+        dichos.push({ t: Math.round((ahora - inicio) / 100) / 10, piloto, modelo, frame: f.n, estado: f.estado, respuesta: resp.text })
         await $.fs.write(logClaude, JSON.stringify(dichos, null, 1))
         const m = resp.text.match(/\{[\s\S]*\}/)
         if (!m) continue
@@ -325,17 +377,17 @@ export const register: Register = (on, options) => {
     return (
       <Box flexDirection="column">
         <Text bold wrap="truncate">
-          DOOM v{version || '?'} | {f?.mapa ?? '-'} | {T.pilot}: {piloto} | {T.narrates}: Claude | {T.mode}: {f?.modo ?? '-'}
+          DOOM v{version || '?'} | {f?.mapa ?? '-'} | {T.pilot}: {piloto} | {T.narrates}: Claude | {T.mode}: {palabra(f?.modo)}
           {vivo ? '' : ` | ${T.stopped}`}
         </Text>
         {f?.jev && (
           <Text color="cyan" wrap="truncate">
-            Jev {f.jev.ms} ms | {probsTexto(f.jev.probs)} | meta {f.jev.meta ?? '?'} | {T.danger} {f.jev.peligro} | {f.jev.llamadas} {T.decisions}
+            Jev {f.jev.ms} ms | {probsTexto(f.jev.probs)} | {T.goal} {nombreMeta(f.jev.meta)} | {T.danger} {f.jev.peligro} | {f.jev.llamadas} {T.decisions}
             {f.jev.errores ? ` | ${f.jev.errores} ${T.errors}: ${f.jev.ultimo_error}` : ''}
           </Text>
         )}
         <Text color="magenta" wrap="truncate">
-          {T.goal}: {f?.meta ?? '-'} | plan Claude: {(f?.plan ?? []).join(' > ') || '-'}
+          {T.goal}: {f?.meta_ui ?? nombreMeta(f?.meta)} | {T.plan}: {(f?.plan_ui ?? (f?.plan ?? []).map(nombreMeta)).join(' > ') || '-'}
         </Text>
         {f ? (
           f.filas.map(fila => (
@@ -351,7 +403,7 @@ export const register: Register = (on, options) => {
           <Text dimColor>{T.loading}</Text>
         )}
         <Text dimColor wrap="truncate">
-          {f?.estado ?? ''}
+          {f?.estado_ui ?? f?.estado ?? ''}
         </Text>
         {b.map(l => (
           <Text color="yellow">{l}</Text>
