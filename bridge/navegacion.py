@@ -38,10 +38,13 @@ SALIDAS = {11, 52, 197}
 # elevadores (bajan, esperan y suben): por interruptor/USE o al pisar una linea
 ELEVADORES_USE = {21, 62, 122, 123}
 ELEVADORES_PISAR = {10, 88, 120, 121}
-TELEPORTES = {39, 97, 125, 126}
+TELEPORTES = {39, 97}  # los del jugador; 125 y 126 solo mueven monstruos y se pueden cruzar
+DESTINO_TELEPORT = 14  # tipo de cosa que marca a donde llega un teletransporte
 
 # abastecimiento: nombres de objetos de ViZDoom por necesidad
 ARMAS = {"Shotgun", "SuperShotgun", "Chaingun", "RocketLauncher", "PlasmaRifle", "BFG9000"}
+# casillero de cada arma (la doble comparte el 3 con la escopeta, pero es mejora: no se mapea)
+CASILLERO = {"Shotgun": 3, "Chaingun": 4, "RocketLauncher": 5, "PlasmaRifle": 6, "BFG9000": 7}
 SALUD = {"Stimpack", "Medikit", "Soulsphere", "Megasphere"}
 MUNICION = {"Clip", "ClipBox", "Shell", "ShellBox", "RocketAmmo", "RocketBox", "Cell", "CellPack", "Backpack"}
 DESVIO_MAX = 90  # celdas de ruta (~1400 unidades) que vale la pena desviarse por provisiones
@@ -115,11 +118,10 @@ class Mapa:
         for (x1, y1, x2, y2, fr, bk, act, tag, flags) in lineas:
             if act in LLAVE_DE_ACCION:
                 color = LLAVE_DE_ACCION[act]
-                if tag:
-                    for s, sec in enumerate(m.sectors):
-                        if sec.tag == tag:
-                            self.sector_llave[s] = color
-                elif bk >= 0:
+                # con tag es un interruptor de llave (99, 133-137): su puerta no se abre con USE
+                # sobre ella sino con el interruptor; la maneja sector_remoto, no esta tabla.
+                # (MAP02: la puerta roja 122 se abre con el interruptor rojo en (720,504).)
+                if not tag and bk >= 0:
                     self.sector_llave[bk] = color
         # elevadores: sectores con el tag de una linea de elevador. Las lineas de USE sin tag
         # (estilo "presiona el costado del elevador") apuntan a su propio sector de atras.
@@ -165,6 +167,42 @@ class Mapa:
                     cx, cy = self.centro(int(is_.mean()), int(js.mean()))
                     self.tags.setdefault(sec.tag, []).append((s, round(cx), round(cy)))
         self.presionados = set()
+        # puertas remotas: sectores con tag que un interruptor mueve (abrir puerta, bajar piso).
+        # Se planea a traves de ellos solo despues de usar su interruptor.
+        self.sector_remoto = {}  # sector -> indices de metas_uso que lo mueven
+        for idx, t in enumerate(self.metas_uso):
+            if t[6] and not t[5]:
+                for s, sec in enumerate(m.sectors):
+                    if sec.tag == t[6] and s not in self.sector_elevador:
+                        self.sector_remoto.setdefault(s, []).append(idx)
+
+        # teletransportes como atajos: celdas de entrada frente a la linea -> celda del destino.
+        # La linea es pared (cruzarla sin querer rompe la ruta); el A* la "salta" a proposito.
+        self.saltos = {}  # celda de entrada -> (celda destino, punto para cruzar la linea)
+        destinos = {}
+        for t in m.things:
+            if t.type == DESTINO_TELEPORT:
+                i, j = self.celda(t.x, t.y)
+                s = self.sector[j, i] if 0 <= j < self.H and 0 <= i < self.W else -1
+                if s >= 0 and m.sectors[s].tag:
+                    destinos.setdefault(m.sectors[s].tag, (t.x, t.y))
+        for (x1, y1, x2, y2, fr, bk, act, tag, flags) in lineas:
+            if act not in TELEPORTES or tag not in destinos:
+                continue
+            dest = self.celda_libre_cerca(*destinos[tag], radio=4)
+            if not dest:
+                continue
+            nx, ny = (y2 - y1), -(x2 - x1)  # se activa al cruzar desde el lado de enfrente
+            n = math.hypot(nx, ny) or 1
+            mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+            cruce = (mx - nx / n * 12, my - ny / n * 12)  # un poco pasando la linea
+            for k in range(5):
+                t = (k + 0.5) / 5
+                px = x1 + (x2 - x1) * t + nx / n * 40
+                py = y1 + (y2 - y1) * t + ny / n * 40
+                c = self.celda(px, py)
+                if self.transitable(*c):
+                    self.saltos[c] = (dest, cruce)
 
     def _marcar_pared(self, x1, y1, x2, y2, disco):
         largo = math.hypot(x2 - x1, y2 - y1)
@@ -200,6 +238,11 @@ class Mapa:
             return True
         # cerrada: se puede pasar si se abre con USE y, si pide llave, ya se trae
         if s in self.sector_llave and self.sector_llave[s] not in self.llaves:
+            return False
+        # una puerta remota cerrada no se cruza aunque su interruptor "se haya usado": si el USE no
+        # le pego, seguiria cerrada (MAP02: empujaba la puerta azul 124 el resto de la partida).
+        # Cuando abre de verdad, la altura en vivo la deja pasar arriba de esta funcion.
+        if s in self.sector_remoto:
             return False
         return s in self.sector_puerta or s in self.sector_llave
 
@@ -240,6 +283,8 @@ class Mapa:
                 if dx and dy and not (self.transitable(i + dx, j) and self.transitable(i, j + dy)):
                     continue
                 yield n, costo
+        if c in self.saltos:
+            yield self.saltos[c][0], 3
 
     def ruta(self, inicio, metas, castigo=None, limite=60000):
         """A* (o Dijkstra si hay varias metas) de la celda inicio a la meta mas cercana."""
@@ -315,6 +360,8 @@ class Navegador:
         self.pedido_jev = None    # id que pidio Jev con confianza
         self.cambio_meta = 0
         self.espera_elevador = 0
+        self.uso_puerta = {}      # sector -> paso del ultimo USE (para no volver a presionarla)
+        self.por_verificar = {}   # interruptor -> (paso, alturas de sus sectores al presionarlo)
 
     # ---------- metas posibles ----------
 
@@ -381,6 +428,8 @@ class Navegador:
             mejor = None
             for o in self.objetos:
                 if o.name in nombres:
+                    if clase == "arma" and CASILLERO.get(o.name) in self.armas:
+                        continue  # ya trae un arma de ese casillero: no vale el desvio
                     c = m.celda_libre_cerca(o.position_x, o.position_y, 2)
                     if c in dist and (mejor is None or dist[c] < dist[mejor[1]]):
                         mejor = (o, c)
@@ -437,12 +486,13 @@ class Navegador:
 
     # ---------- caminar ----------
 
-    def decidir(self, x, y, angulo, sectores, accion, objetos=None, salud=100, municion=50):
+    def decidir(self, x, y, angulo, sectores, accion, objetos=None, salud=100, municion=50, armas=None):
         """accion(*botones) arma el vector de botones del juego."""
         m = self.mapa
         self.paso += 1
         self.evento = None
         self.salud, self.municion = salud, municion
+        self.armas = armas or set()  # casilleros de arma que ya trae
         self.objetos = objetos or []
         if sectores is not None:
             m.actualizar_alturas(sectores)
@@ -454,6 +504,14 @@ class Navegador:
                 self.camino = []
                 self.castigo = {}
                 self.descartados = {}
+        # interruptores presionados hace ~8 s sin que se moviera nada: el USE no le pego
+        for idx, (paso, antes) in list(self.por_verificar.items()):
+            if any((m.piso[s], m.techo[s]) != alt for s, alt in antes.items()):
+                del self.por_verificar[idx]
+            elif self.paso - paso > 70:
+                del self.por_verificar[idx]
+                m.presionados.discard(idx)
+                self.evento = ("interruptor_sin_efecto", idx)
         self.marcar_visto(x, y)
         aqui = m.celda(x, y)
 
@@ -518,7 +576,17 @@ class Navegador:
                 return accion("USE", giro=30) if self.paso % 2 else accion(giro=30)
 
         # avanzar el indice de la ruta
+        # ya cruzo: aparecio junto al destino del teletransporte, la entrada queda atras
+        if len(self.camino) > 1 and self.camino[0] in m.saltos and m.saltos[self.camino[0]][0] == self.camino[1] \
+                and math.hypot(*(np.subtract(m.centro(*self.camino[1]), (x, y)))) < 64:
+            self.camino.pop(0)
+            self.evento = ("teletransportado", self.camino[0])
         while len(self.camino) > 1 and math.hypot(*(np.subtract(m.centro(*self.camino[0]), (x, y)))) < 24:
+            # una entrada de teletransporte no se da por pasada hasta cruzar la linea: si se quita,
+            # lo siguiente es el destino (lejos) y el bot se da la vuelta (MAP02: 300 frames asi)
+            a = self.camino[0]
+            if a in m.saltos and m.saltos[a][0] == self.camino[1]:
+                break
             self.camino.pop(0)
 
         # elevador en la ruta: llamarlo si esta arriba, esperar encima mientras sube
@@ -540,15 +608,22 @@ class Navegador:
                 break
         self.espera_elevador = 0
 
-        # puerta cerrada en los proximos pasos: mirarla y presionar USE
+        # puerta cerrada en los proximos pasos: mirarla y presionar USE UNA vez. Un segundo USE
+        # sobre una puerta que va abriendo la regresa (MAP02: tres pulsos la abrian y la cerraban).
+        # Mientras se mueve, se sigue caminando hacia ella y se espera.
         for c in self.camino[:6]:
-            s = m.sector[c[1], c[0]]
+            s = int(m.sector[c[1], c[0]])
             if m.puerta_cerrada(s):
                 cx, cy = m.centro(*c)
-                if math.hypot(cx - x, cy - y) < 72:
-                    self.mirar = (cx, cy)
-                    self.uso = 6
-                    self.evento = ("puerta", int(s))
+                quieta = m.techo[s] - m.piso[s] < 4
+                if math.hypot(cx - x, cy - y) < 72 and quieta and \
+                        self.paso - self.uso_puerta.get(s, -999) > 45:
+                    dif = self._dif(x, y, angulo, cx, cy)
+                    if abs(dif) > 8:
+                        return accion(giro=max(-45, min(45, dif)))
+                    self.uso_puerta[s] = self.paso
+                    self.evento = ("puerta", s)
+                    self.ultimo_avance = (self.paso, (x, y))  # esperar la puerta no es atorarse
                     return accion("USE")
                 break
 
@@ -560,14 +635,25 @@ class Navegador:
                 self.uso = 8
                 idx = m.metas_uso.index(t)
                 m.presionados.add(idx)
+                # verificar despues que algo se movio; si no, se desmarca y se reintenta
+                sectores = [s for s, _cx, _cy in m.tags.get(t[6], [])] if t[6] else []
+                if sectores:
+                    self.por_verificar[idx] = (self.paso, {s: (m.piso[s], m.techo[s]) for s in sectores})
                 self.evento = (self.meta["tipo"], idx)
                 self.camino = []
                 self.meta = None
                 return accion("USE")
 
-        # seguir la ruta: apuntar a un punto ~3 celdas adelante
+        # seguir la ruta: apuntar a un punto ~3 celdas adelante; si en ese tramo hay un salto de
+        # teletransporte, apuntar a cruzar su linea (al aparecer en el destino se replantea solo)
         k = min(3, len(self.camino) - 1)
         tx, ty = m.centro(*self.camino[k])
+        for a, b in zip(self.camino[:4], self.camino[1:5]):
+            if a in m.saltos and m.saltos[a][0] == b:
+                tx, ty = m.saltos[a][1]
+                if self.evento is None:
+                    self.evento = ("teletransporte", a)
+                break
         dif = self._dif(x, y, angulo, tx, ty)
         if abs(dif) > 45:
             return accion(giro=max(-45, min(45, dif)))
