@@ -132,13 +132,25 @@ class Cerebro:
         self.giro_forzado = 0
         self.dir_giro = "TURN_LEFT"
         self.paso = 0
+        # objetos a los que no se pudo llegar: clave de posicion -> paso hasta el que se ignoran
+        self.ignorados = {}
+        self.cesion = 0  # pasos en que el navegador manda aunque la orden diga otra cosa
+
+    @staticmethod
+    def clave(l):
+        return (round(l.object_position_x / 32), round(l.object_position_y / 32))
+
+    def alcanzables(self, labels):
+        return [l for l in labels if l.object_name in OBJETOS
+                and self.ignorados.get(self.clave(l), 0) < self.paso]
 
     def decidir(self, st, vars_, orden):
         self.paso += 1
+        self.evento = None
         ancho = st.screen_buffer.shape[1]
         x, y = vars_[4], vars_[5]
         enemigos = [l for l in st.labels if l.object_name in MONSTRUOS]
-        objetos = [l for l in st.labels if l.object_name in OBJETOS]
+        objetos = self.alcanzables(st.labels)
         prof = st.depth_buffer
         hcen = prof.shape[0] // 2
         franja = prof[hcen - 20:hcen + 20]
@@ -162,6 +174,20 @@ class Cerebro:
             modo = "atacar" if enemigos else "explorar"
         if modo == "atacar" and not enemigos:
             modo = "explorar"
+        # atorado yendo por un objeto o retrocediendo: el objeto queda ignorado ~30 s y el
+        # navegador toma el control un rato (si no, Jev lo sigue viendo y lo vuelve a elegir)
+        if atorado and modo in ("recoger", "retirada") and self.navegador:
+            if modo == "recoger" and objetos:
+                obj = max(objetos, key=lambda l: l.width * l.height)
+                self.ignorados[self.clave(obj)] = self.paso + 270
+                self.evento = ("inalcanzable", obj.object_name,
+                               [round(obj.object_position_x), round(obj.object_position_y)])
+            self.cesion = 45
+            self.historial.clear()
+        if self.cesion > 0:
+            self.cesion -= 1
+            if modo in ("recoger", "retirada"):
+                modo = "explorar"
         self.modo = modo
 
         if self.giro_forzado > 0:
@@ -215,9 +241,10 @@ class Cerebro:
         return accion("MOVE_FORWARD", "USE") if self.paso % 8 == 0 else accion("MOVE_FORWARD"), atorado
 
 
-def describir(st, vars_, atorado, muertes, ancho):
+def describir(st, vars_, atorado, muertes, ancho, cerebro=None):
     enemigos = [l for l in st.labels if l.object_name in MONSTRUOS]
-    objetos = [l for l in st.labels if l.object_name in OBJETOS]
+    # sin los objetos ya marcados como inalcanzables, para que Jev no los vuelva a elegir
+    objetos = cerebro.alcanzables(st.labels) if cerebro else [l for l in st.labels if l.object_name in OBJETOS]
     px, py = vars_[4], vars_[5]
 
     def dist(l):
@@ -386,10 +413,12 @@ def main():
         act, atorado = cerebro.decidir(st, vars_, orden)
         nav = cerebro.navegador
         estado = (f"Mapa {mapa}, niveles terminados {niveles}. "
-                  + describir(st, vars_, atorado, muertes, st.screen_buffer.shape[1])
+                  + describir(st, vars_, atorado, muertes, st.screen_buffer.shape[1], cerebro)
                   + " " + nav.resumen())
         if nav.evento:
             log("nav", frame=n, que=list(nav.evento), pos=[round(vars_[4]), round(vars_[5])])
+        if cerebro.evento:
+            log("cerebro", frame=n, que=list(cerebro.evento), orden=orden, pos=[round(vars_[4]), round(vars_[5])])
         if jev:
             jev.ofrecer(st.screen_buffer, estado, cerebro.modo, n)
         pos = [round(vars_[4]), round(vars_[5])]
