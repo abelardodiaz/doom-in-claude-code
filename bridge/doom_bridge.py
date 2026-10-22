@@ -307,7 +307,8 @@ class Cerebro:
         if self.navegador:
             a = self.navegador.decidir(x, y, vars_[6], st.sectors, accion, st.objects,
                                        salud=vars_[0], municion=vars_[2],
-                                       armas={k for k, val in zip((3, 4, 5, 6, 7), vars_[7:12]) if val > 0})
+                                       armas={k for k, val in zip((3, 4, 5, 6, 7), vars_[7:12]) if val > 0},
+                                       arma_actual=int(vars_[12]) if len(vars_) > 12 else None)
             # avanzar ignora a los enemigos, pero si uno queda justo enfrente se le dispara al pasar
             if modo == "avanzar" and enemigos:
                 obj = max(enemigos, key=lambda l: l.width * l.height)
@@ -345,6 +346,63 @@ def describir(st, vars_, atorado, muertes, ancho, cerebro=None):
     return (f"Salud {int(vars_[0])}, armadura {int(vars_[1])}, municion {int(vars_[2])}, "
             f"kills {int(vars_[3])}, muertes {muertes}. Enemigos visibles: {e_txt}. "
             f"Objetos visibles: {o_txt}. Atorado: {'si' if atorado else 'no'}.")
+
+
+OBJETOS_EN = {
+    "Medikit": "medikit", "Stimpack": "stimpack", "HealthBonus": "health bonus",
+    "ArmorBonus": "armor bonus", "GreenArmor": "green armor", "BlueArmor": "blue armor",
+    "Clip": "clip", "ClipBox": "box of bullets", "Shell": "shells", "ShellBox": "box of shells",
+    "Shotgun": "shotgun", "SuperShotgun": "super shotgun", "Chaingun": "chaingun",
+    "RocketLauncher": "rocket launcher", "RocketAmmo": "rocket", "Soulsphere": "soulsphere",
+    "Backpack": "backpack", "Berserk": "berserk",
+}
+COLOR_EN = {"roja": "red", "azul": "blue", "amarilla": "yellow"}
+
+
+def nombre_meta(id_, idioma="es"):
+    """Id interno de meta -> texto corto para el panel (llave_roja -> 'llave roja' / 'red key')."""
+    if not id_:
+        return "-"
+    base = id_.split("_")[0]
+    resto = id_.split("_")[1] if "_" in id_ else ""
+    if idioma == "en":
+        return {"llave": f"{COLOR_EN.get(resto, resto)} key", "interruptor": f"switch {resto}",
+                "pisar": f"walk-over line {resto}", "municion": "ammo", "salud": "health",
+                "arma": "weapon", "frontera": "unexplored area", "salida": "exit"}.get(base, id_)
+    return {"llave": f"llave {resto}", "interruptor": f"interruptor {resto}",
+            "pisar": f"linea {resto} al pisar", "municion": "municion", "salud": "salud",
+            "arma": "arma", "frontera": "zona sin explorar", "salida": "salida"}.get(base, id_)
+
+
+def estado_panel(st, vars_, muertes, ancho, cerebro, mapa, niveles, idioma):
+    """Linea de estado que se ve en el panel, en el idioma de la partida.
+
+    Jev sigue recibiendo la version en espanol de describir(): sus preguntas estan probadas asi.
+    """
+    nav = cerebro.navegador
+    if idioma != "en":
+        return (f"Mapa {mapa}, niveles terminados {niveles}. "
+                + describir(st, vars_, False, muertes, ancho, cerebro) + " " + nav.resumen())
+    enemigos = [l for l in st.labels if l.object_name in MONSTRUOS]
+    objetos = cerebro.alcanzables(st.labels)
+    px, py = vars_[4], vars_[5]
+
+    def dist(l):
+        return int(math.hypot(l.object_position_x - px, l.object_position_y - py))
+
+    def donde(l):
+        rel = (l.x + l.width / 2 - ancho / 2) / (ancho / 2)
+        return "left" if rel < -0.35 else ("right" if rel > 0.35 else "ahead")
+
+    e_txt = "; ".join(f"{l.object_name} {dist(l)} {donde(l)}" for l in sorted(enemigos, key=dist)[:5]) or "none"
+    o_txt = "; ".join(f"{OBJETOS_EN.get(l.object_name, l.object_name)} {dist(l)} {donde(l)}"
+                      for l in sorted(objetos, key=dist)[:5]) or "none"
+    llaves = ", ".join(COLOR_EN.get(c, c) for c in sorted(nav.mapa.llaves)) or "none"
+    meta = nombre_meta(nav.meta["id"], "en") if nav.meta else "none"
+    return (f"Map {mapa}, levels done {niveles}. Health {int(vars_[0])}, armor {int(vars_[1])}, "
+            f"ammo {int(vars_[2])}, kills {int(vars_[3])}, deaths {muertes}. Enemies: {e_txt}. "
+            f"Items: {o_txt}. Goal: {meta}, {len(nav.camino)} steps. "
+            f"Switches used: {len(nav.mapa.presionados)}. Keys: {llaves}.")
 
 
 def leer_plan(ruta):
@@ -452,6 +510,7 @@ def main():
     ap.add_argument("--piloto", choices=["jev", "claude"], default="jev")
     ap.add_argument("--pantalla", default="", help="json {cols, filas} que el panel actualiza al redimensionar")
     ap.add_argument("--mapa", default="MAP01")
+    ap.add_argument("--idioma", choices=["es", "en"], default="es", help="idioma de lo que se ve en el panel")
     a = ap.parse_args()
 
     import navegacion
@@ -550,6 +609,10 @@ def main():
             "mapa": mapa,
             "niveles": niveles,
             "estado": estado,
+            "estado_ui": estado_panel(st, vars_, muertes, st.screen_buffer.shape[1], cerebro, mapa,
+                                      niveles, a.idioma),
+            "meta_ui": nombre_meta(nav.meta["id"], a.idioma) if nav.meta else None,
+            "plan_ui": [nombre_meta(p, a.idioma) for p in nav.plan],
             "piloto": a.piloto,
             "jev": info_jev,
             "meta": nav.meta["id"] if nav.meta else None,

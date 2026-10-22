@@ -95,6 +95,9 @@ def correr(mapa, semilla, modo, frames, log):
                         for o in st.objects if o.name in db.MONSTRUOS or o.name in db.PROYECTILES))
         ultimo = {"pos": [round(v[4]), round(v[5])], "salud": int(v[0]), "municion": int(v[2]),
                   "arma": int(v[12]), "modo": cerebro.modo, "cerca": cerca[:6]}
+        if n % 200 == 0:
+            # foto periodica: si se traba sin eventos (peleando con algo inalcanzable), aqui se ve
+            log({"ev": "foto", "frame": n, **ultimo, "meta": nav.meta["id"] if nav.meta else None})
 
         # Haiku: plan al inicio, cada tanto y tras eventos que cambian el rompecabezas
         if planea and not pendiente_haiku and n - ult_progreso >= ESTANCADO:
