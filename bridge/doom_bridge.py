@@ -72,6 +72,7 @@ def crear_juego(mapa="MAP01"):
     g.set_labels_buffer_enabled(True)
     g.set_depth_buffer_enabled(True)
     g.set_sectors_info_enabled(True)
+    g.set_objects_info_enabled(True)  # para saber que llaves siguen en el mapa
     g.set_render_hud(True)
     g.set_render_weapon(True)
     g.set_render_messages(False)
@@ -226,7 +227,8 @@ class Cerebro:
 
         # explorar: con mapa, el navegador decide; sin mapa, reflejos a ciegas
         if self.navegador:
-            return self.navegador.decidir(x, y, vars_[6], st.sectors, accion), atorado
+            return self.navegador.decidir(x, y, vars_[6], st.sectors, accion, st.objects,
+                                          salud=vars_[0], municion=vars_[2]), atorado
         if atorado:
             self.dir_giro = random.choice(["TURN_LEFT", "TURN_RIGHT"])
             self.giro_forzado = random.randint(4, 10)

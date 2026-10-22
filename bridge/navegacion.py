@@ -23,10 +23,27 @@ PASO_MAX = 24     # escalon mas alto que se puede subir
 ALTO_MIN = 56     # hueco minimo entre piso y techo
 
 PUERTAS_USE = {1, 26, 27, 28, 31, 32, 33, 34, 117, 118}
+# puertas con llave: accion -> color (las de USE directo y las de interruptor con llave)
+LLAVE_DE_ACCION = {26: "azul", 32: "azul", 99: "azul", 133: "azul",
+                   27: "amarilla", 34: "amarilla", 136: "amarilla", 137: "amarilla",
+                   28: "roja", 33: "roja", 134: "roja", 135: "roja"}
+# cosas del WAD que son llaves: tipo -> (color, nombre en ViZDoom)
+LLAVES = {5: ("azul", "BlueCard"), 40: ("azul", "BlueSkull"),
+          6: ("amarilla", "YellowCard"), 39: ("amarilla", "YellowSkull"),
+          13: ("roja", "RedCard"), 38: ("roja", "RedSkull")}
 INTERRUPTORES = {7, 9, 11, 14, 15, 18, 20, 21, 23, 29, 41, 49, 50, 51, 55, 60, 61, 62, 63, 64, 65,
                  66, 67, 68, 69, 70, 71, 99, 101, 102, 103, 111, 112, 113, 114, 115, 116, 122, 123,
                  127, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140}
 SALIDAS = {11, 52, 197}
+# elevadores (bajan, esperan y suben): por interruptor/USE o al pisar una linea
+ELEVADORES_USE = {21, 62, 122, 123}
+ELEVADORES_PISAR = {10, 88, 120, 121}
+
+# abastecimiento: nombres de objetos de ViZDoom por necesidad
+ARMAS = {"Shotgun", "SuperShotgun", "Chaingun", "RocketLauncher", "PlasmaRifle", "BFG9000"}
+SALUD = {"Stimpack", "Medikit", "Soulsphere", "Megasphere"}
+MUNICION = {"Clip", "ClipBox", "Shell", "ShellBox", "RocketAmmo", "RocketBox", "Cell", "CellPack", "Backpack"}
+DESVIO_MAX = 90  # celdas de ruta (~1400 unidades) que vale la pena desviarse por provisiones
 
 
 class Mapa:
@@ -91,6 +108,30 @@ class Mapa:
         for (x1, y1, x2, y2, fr, bk, act, tag, flags) in lineas:
             if act in PUERTAS_USE and bk >= 0:
                 self.sector_puerta.add(bk)
+        # sectores que necesitan llave: el de atras (puerta directa) o los del tag (interruptor)
+        self.sector_llave = {}
+        for (x1, y1, x2, y2, fr, bk, act, tag, flags) in lineas:
+            if act in LLAVE_DE_ACCION:
+                color = LLAVE_DE_ACCION[act]
+                if tag:
+                    for s, sec in enumerate(m.sectors):
+                        if sec.tag == tag:
+                            self.sector_llave[s] = color
+                elif bk >= 0:
+                    self.sector_llave[bk] = color
+        # elevadores: sectores con el tag de una linea de elevador. Las lineas de USE sin tag
+        # (estilo "presiona el costado del elevador") apuntan a su propio sector de atras.
+        self.sector_elevador = set()
+        for (x1, y1, x2, y2, fr, bk, act, tag, flags) in lineas:
+            if act in ELEVADORES_USE or act in ELEVADORES_PISAR:
+                if tag:
+                    self.sector_elevador |= {s for s, sec in enumerate(m.sectors) if sec.tag == tag}
+                elif bk >= 0:
+                    self.sector_elevador.add(bk)
+        # llaves tiradas en el mapa (se omiten las que solo salen en multijugador)
+        self.llaves_mapa = [(LLAVES[t.type][0], LLAVES[t.type][1], t.x, t.y)
+                            for t in m.things if t.type in LLAVES and not (t.flags & 16)]
+        self.llaves = set()  # colores que ya trae el jugador
 
         # interruptores y salidas: punto de llegada del lado de enfrente, a 32 unidades de la linea
         self.metas_uso = []   # (x, y, mira_x, mira_y, accion, es_salida)
@@ -117,7 +158,7 @@ class Mapa:
                 self.techo[s.id] = s.ceiling_height
 
     def puerta_cerrada(self, s):
-        return s in self.sector_puerta and self.techo[s] - self.piso[s] < ALTO_MIN
+        return (s in self.sector_puerta or s in self.sector_llave) and self.techo[s] - self.piso[s] < ALTO_MIN
 
     def transitable(self, i, j):
         if not (0 <= i < self.W and 0 <= j < self.H) or self.pared[j, i]:
@@ -125,11 +166,40 @@ class Mapa:
         s = self.sector[j, i]
         if s < 0:
             return False
-        return self.techo[s] - self.piso[s] >= ALTO_MIN or s in self.sector_puerta
+        if self.techo[s] - self.piso[s] >= ALTO_MIN:
+            return True
+        # cerrada: se puede pasar si se abre con USE y, si pide llave, ya se trae
+        if s in self.sector_llave and self.sector_llave[s] not in self.llaves:
+            return False
+        return s in self.sector_puerta or s in self.sector_llave
+
+    def actualizar_llaves(self, objetos):
+        """Una llave que ya no esta en el mundo es una llave que el jugador recogio."""
+        en_mundo = {o.name for o in objetos}
+        nuevas = set()
+        for color, nombre, _x, _y in self.llaves_mapa:
+            if nombre not in en_mundo and color not in self.llaves:
+                nuevas.add(color)
+        self.llaves |= nuevas
+        return nuevas
 
     def paso_ok(self, a, b):
         sa, sb = self.sector[a[1], a[0]], self.sector[b[1], b[0]]
-        return self.piso[sb] - self.piso[sa] <= PASO_MAX
+        if self.piso[sb] - self.piso[sa] <= PASO_MAX:
+            return True
+        # un elevador baja hasta el piso de al lado: se puede subir a el, y desde el (arriba) salir
+        return sb in self.sector_elevador or sa in self.sector_elevador
+
+    def bloqueo_elevador(self, a, b):
+        """Si el paso a->b necesita un elevador que ahora no esta a la altura, devuelve su sector."""
+        sa, sb = self.sector[a[1], a[0]], self.sector[b[1], b[0]]
+        if self.piso[sb] - self.piso[sa] <= PASO_MAX:
+            return None
+        if sb in self.sector_elevador:
+            return ("llamar", sb)   # el elevador esta arriba: activarlo para que baje
+        if sa in self.sector_elevador:
+            return ("esperar", sa)  # vamos encima: esperar a que suba
+        return None
 
     def vecinos(self, c):
         i, j = c
@@ -201,21 +271,57 @@ class Navegador:
         self.mirar = None
         self.paso = 0
         self.evento = None        # ultimo evento para la bitacora
+        self.salud, self.municion, self.objetos = 100, 50, []
+        self.descartados = set()  # provisiones a las que no se pudo llegar
+        self.objetivo_provision = None
 
     def marcar_visto(self, x, y):
         i, j = self.mapa.celda(x, y)
         r = 6  # ~96 unidades
         self.visitado[max(0, j - r):j + r + 1, max(0, i - r):i + r + 1] = True
 
+    def provision(self, inicio):
+        """Arma nueva cercana siempre; salud o municion solo si hacen falta."""
+        quiero = set(ARMAS)
+        if self.salud < 50:
+            quiero |= SALUD
+        if self.municion < 20:
+            quiero |= MUNICION
+        cand = []
+        for o in self.objetos:
+            if o.name in quiero and (round(o.position_x), round(o.position_y)) not in self.descartados:
+                c = self.mapa.celda_libre_cerca(o.position_x, o.position_y, 2)
+                if c and abs(c[0] - inicio[0]) + abs(c[1] - inicio[1]) < DESVIO_MAX:
+                    cand.append((o, c))
+        if not cand:
+            return None, []
+        camino = self.mapa.ruta(inicio, [c for _, c in cand], self.castigo, limite=20000)
+        if camino and len(camino) <= DESVIO_MAX:
+            o = next(o for o, c in cand if c == camino[-1])
+            self.objetivo_provision = (round(o.position_x), round(o.position_y))
+            return ("provision", o.name), camino
+        return None, []
+
     def elegir_meta(self, inicio):
         m = self.mapa
-        salidas = [(t, m.celda_libre_cerca(t[0], t[1])) for t in m.metas_uso if t[5]]
+        meta, camino = self.provision(inicio)
+        if camino:
+            return meta, camino
+        salidas =[(t, m.celda_libre_cerca(t[0], t[1])) for t in m.metas_uso if t[5]]
         for t, c in salidas:
             if c:
                 camino = m.ruta(inicio, [c], self.castigo)
                 if camino:
                     return ("salida", t), camino
-        pend = [(t, m.celda_libre_cerca(t[0], t[1])) for i, t in enumerate(m.metas_uso)
+        # sin ruta a la salida: ir por una llave que falte (abren las puertas de color)
+        faltan = [(k, m.celda_libre_cerca(k[2], k[3])) for k in m.llaves_mapa if k[0] not in m.llaves]
+        faltan = [(k, c) for k, c in faltan if c]
+        if faltan:
+            camino = m.ruta(inicio, [c for _, c in faltan], self.castigo, limite=60000)
+            if camino:
+                k = next(k for k, c in faltan if c == camino[-1])
+                return ("llave", k), camino
+        pend =[(t, m.celda_libre_cerca(t[0], t[1])) for i, t in enumerate(m.metas_uso)
                 if not t[5] and i not in m.presionados]
         pend = [(t, c) for t, c in pend if c]
         if pend:
@@ -235,13 +341,22 @@ class Navegador:
                 return ("frontera", camino[-1]), camino
         return None, []
 
-    def decidir(self, x, y, angulo, sectores, accion):
+    def decidir(self, x, y, angulo, sectores, accion, objetos=None, salud=100, municion=50):
         """accion(*botones) arma el vector de botones del juego."""
         m = self.mapa
         self.paso += 1
         self.evento = None
+        self.salud, self.municion = salud, municion
+        self.objetos = objetos or []
         if sectores is not None:
             m.actualizar_alturas(sectores)
+        if objetos is not None:
+            nuevas = m.actualizar_llaves(objetos)
+            if nuevas:
+                # con llave nueva cambian las rutas posibles: replanear ya
+                self.evento = ("llave_recogida", sorted(nuevas))
+                self.camino = []
+                self.castigo = {}
         self.marcar_visto(x, y)
         aqui = m.celda(x, y)
 
@@ -259,6 +374,8 @@ class Navegador:
             self.ultimo_avance = (self.paso, (x, y))
         elif self.paso - self.ultimo_avance[0] > 18:
             self.evento = ("atorado", aqui)
+            if self.meta and self.meta[0] == "provision" and self.objetivo_provision:
+                self.descartados.add(self.objetivo_provision)
             for dx in range(-2, 3):
                 for dy in range(-2, 3):
                     if self.camino:
@@ -276,7 +393,7 @@ class Navegador:
             inicio = aqui if m.transitable(*aqui) else (m.celda_libre_cerca(x, y, 3) or aqui)
             self.meta, self.camino = self.elegir_meta(inicio)
             self.replan = self.paso + 27
-            self.evento = ("meta", self.meta[0] if self.meta else None, len(self.camino))
+            self.evento = self.evento or ("meta", self.meta[0] if self.meta else None, len(self.camino))
             if not self.camino:
                 return accion("USE", giro=30) if self.paso % 2 else accion(giro=30)
 
@@ -328,7 +445,11 @@ class Navegador:
         if not self.meta:
             return "Sin meta de navegacion."
         tipo = self.meta[0]
-        return f"Navegacion: meta {tipo}, {len(self.camino)} pasos de ruta, {len(self.mapa.presionados)} interruptores usados."
+        if tipo == "llave":
+            tipo = f"llave {self.meta[1][0]}"
+        llaves = ", ".join(sorted(self.mapa.llaves)) or "ninguna"
+        return (f"Navegacion: meta {tipo}, {len(self.camino)} pasos de ruta, "
+                f"{len(self.mapa.presionados)} interruptores usados, llaves: {llaves}.")
 
 
 def cargar(nombre="MAP01"):
