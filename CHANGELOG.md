@@ -5,6 +5,22 @@ How this went from a forum joke to a playable mod, one step at a time.
 The challenge: someone in a forum listed the AI fads (personal finance apps, reverse engineering,
 TV launchers) and asked what was missing. "Running Doom in Claude." Challenge accepted.
 
+## [0.2.2] - 2026-10-21
+
+### Fixed
+- Stuck forever chasing an item it could not reach. Seen live: Jev saw an ammo clip 104 units
+  ahead (behind a ledge), chose "pick up" with 0.65, the bot walked into the wall, and since the
+  pick-up mode had no stuck detection nor navigator it stayed there. Jev kept seeing the clip and
+  kept choosing it. Haiku noticed before the code did: "ni asi suelta el cargador de 104, que
+  terquedad".
+- Now, stuck while picking up or retreating marks that item as unreachable for ~30 s, hides it
+  from the state Jev reads, and hands control to the navigator for ~5 s. Logged as a `cerebro`
+  event with the item and its position.
+
+### Measured
+- New benchmark mode `--orden recoger` (a stubborn pilot that always wants items): MAP01 finished
+  3/3 (523, 683, 1194 frames). Normal mode unchanged: 3/3, ~700 frames.
+
 ## [0.2.1] - 2026-10-21
 
 ### Added
