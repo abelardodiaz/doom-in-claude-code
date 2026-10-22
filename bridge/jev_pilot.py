@@ -54,8 +54,19 @@ def _decision(ans):
     return orden[0][0], round(brecha, 2), probs
 
 
+# v1 empujaba a explorar (MAP01: "frontera" 152 de 223, "salida" 7). v2 dice para que sirve cada meta.
+PREGUNTA_META = {
+    "v1": "Hacia cual meta conviene ir ahora para avanzar en el nivel sin morir?",
+    "v2": ("El objetivo es TERMINAR el nivel llegando a la salida. La salida lo termina; una llave abre "
+           "las puertas de su color; un interruptor abre puertas lejanas o baja elevadores; armas, salud "
+           "y municion solo si hacen falta; explorar zonas nuevas solo cuando no hay otra forma de avanzar. "
+           "Cual de estas metas acerca mas a terminar el nivel?"),
+}
+
+
 class PilotoJev:
-    def __init__(self, con_imagen=True):
+    def __init__(self, con_imagen=True, pregunta="v2"):
+        self.pregunta = pregunta
         self.con_imagen = con_imagen
         self.s = requests.Session()
         self.s.headers.update({"Authorization": f"Bearer {_key()}", "Content-Type": "application/json"})
@@ -73,7 +84,7 @@ class PilotoJev:
         if len(metas) >= 2:
             preguntas["meta"] = {
                 "type": "choice",
-                "instructions": "Hacia cual meta conviene ir ahora para avanzar en el nivel sin morir?",
+                "instructions": PREGUNTA_META[self.pregunta],
                 "criteria": _barajar({i: d for i, d in metas}),
             }
         cuerpo = {"model": MODELO, "questions": preguntas}
