@@ -5,6 +5,44 @@ How this went from a forum joke to a playable mod, one step at a time.
 The challenge: someone in a forum listed the AI fads (personal finance apps, reverse engineering,
 TV launchers) and asked what was missing. "Running Doom in Claude." Challenge accepted.
 
+## [0.2.0] - 2026-10-21 - Stage 1-2: it finishes MAP01
+
+### Added
+- `bridge/navegacion.py`: the bot now reads the real map from the WAD (omgifol): walls, steps,
+  low ceilings, doors that open with USE, switches and the exit. It rasterizes the map into
+  16x16 cells and runs A* to a goal: the exit if there is a path, else the closest unpressed
+  switch, else the closest unexplored area. Floor and ceiling heights come live from ViZDoom, so
+  it sees doors and lifts move. Closed doors on the path get faced and opened with USE pulses.
+- Level progression: finishing a map loads the next one with its own navigator.
+- Navigation events (goal, door, switch, stuck) go to the decision log; the state that Jev and
+  Haiku read now includes the map, levels finished and the current navigation goal.
+
+### Fixed
+- Aiming oscillated left-right forever: a 4-tic turn overshoots by ~14 degrees, so it never
+  centered and never shot. Turning now uses `TURN_LEFT_RIGHT_DELTA` with the exact angle
+  (degrees per tic, positive = right).
+
+### Measured (`bench_explore.py`, no Jev, fixed "explore" strategy)
+| Map | Before (blind reflexes) | Now |
+| --- | --- | --- |
+| MAP01 | 10.3 cells, never finished | **finished 3/3**, ~700 frames (~80 s), 8 kills, 0 deaths |
+| MAP02 | - | 21.5 cells, not finished |
+| MAP03 | - | 22 cells, not finished |
+| MAP04 | - | 73 cells, 5-9 deaths, not finished |
+| MAP05 | - | 23 cells, not finished |
+
+With Jev piloting: MAP01 finished in 89 s and it moved on to MAP02 (245 Jev decisions, 12 kills).
+
+### Learned
+- Others hit the same wall. In a 2026 ViZDoom project, Claude finished E1M1 1/5 times from the
+  screen only and 4/5 with an automap (https://github.com/lucas-moont/doom-player). The fix is the
+  same idea: give the agent a map, let code navigate and the AI choose goals.
+- ViZDoom map coordinates and sector ids match the WAD exactly, so the WAD can be used as-is.
+
+### Next (stage 3)
+- Keys and locked doors, lifts, switches that open remote doors; MAP02-MAP05 as the benchmark.
+- Jev chooses between navigation goals (exit now vs. clear the room vs. go for health).
+
 ## [0.1.1] - 2026-10-21
 
 ### Fixed

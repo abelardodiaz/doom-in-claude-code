@@ -4,7 +4,7 @@ Doom running inside a Claude Code pane, and nobody holding the controls:
 
 - **Jev** ([TypeSafe](https://typesafe.ai)) looks at the actual game screen and picks the strategy about 2.5 times per second (~140 ms per decision).
 - **Claude** (Haiku) narrates the match live, like a streamer, in Spanish or English.
-- **Python reflexes** aim, shoot, dodge walls, open doors and get unstuck.
+- **Python reflexes** aim and shoot, and a **navigator** reads the real map from the WAD (doors, switches, exit) and finds the path with A*. It finishes MAP01 by itself; later maps are the next stage (see the [changelog](CHANGELOG.md)).
 
 No TypeSafe key? Claude pilots instead (one decision every 2.5 s).
 
@@ -37,7 +37,7 @@ Then, one time:
 /doom-setup
 ```
 
-It finds Python 3.9+ and installs ViZDoom, numpy, pillow and requests into `~/.doom-pane/venv`. Nothing is installed globally.
+It finds Python 3.9+ and installs ViZDoom, numpy, pillow, requests and omgifol into `~/.doom-pane/venv`. Nothing is installed globally.
 
 ## Play (well, watch)
 
@@ -66,6 +66,8 @@ The picture follows the pane size and keeps Doom's 4:3 ratio. Use a terminal wit
 ```
 
 - `bridge/doom_bridge.py`: runs the game, the reflexes and the frame encoding. Strategy comes from Jev (thread) or from `orders.json` (Claude).
+- `bridge/navegacion.py`: map from the WAD, 16x16 grid, A* to exit / switches / unexplored areas, door opening.
+- `bridge/bench_explore.py`: `--mapa MAP02` measures cells explored and whether the level gets finished.
 - `bridge/jev_pilot.py`: one Jev call with the frame (JPEG 448x336; smaller sizes are rejected with "Invalid image dimensions") plus the state as text. Two typed questions: a `choice` among `atacar / explorar / retirada / recoger`, and a `noul` for "in immediate danger".
 - `prompts/pilot.md` and `prompts/narrator.md`: Claude's prompts. Edit them to change the personality.
 - `hooks/register.tsx`: the Claude Code mod (pane, commands, Haiku loop).
@@ -78,7 +80,7 @@ Jev with an image is ~700 input tokens per decision, ~2.5 decisions per second: 
 
 ## Known limits
 
-- The reflexes are simple. It gets stuck, it misses, it dies. That is part of the show.
+- Only MAP01 is finished reliably. Keys, lifts and remote switches (MAP02 onward) are the next stage.
 - Big panes mean more color cells per frame. If it stutters, make the pane smaller.
 - Tested on Windows 11 with Python 3.14. Linux and macOS should work (ViZDoom has wheels), but are not tested yet.
 
@@ -94,7 +96,7 @@ Doom corriendo dentro de un panel de Claude Code, sin nadie en los controles:
 
 - **Jev** ([TypeSafe](https://typesafe.ai)) ve la pantalla real del juego y decide la estrategia unas 2.5 veces por segundo (~140 ms por decisión).
 - **Claude** (Haiku) narra la partida en vivo, como streamer, en español o inglés.
-- **Reflejos en Python** apuntan, disparan, esquivan paredes, abren puertas y se desatoran.
+- **Reflejos en Python** apuntan y disparan, y un **navegador** lee el mapa real del WAD (puertas, interruptores, salida) y calcula la ruta con A*. Ya termina MAP01 solo; los siguientes mapas son la próxima etapa.
 
 ¿Sin key de TypeSafe? Pilota Claude (una decisión cada 2.5 s).
 
