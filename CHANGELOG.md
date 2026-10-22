@@ -5,6 +5,56 @@ How this went from a forum joke to a playable mod, one step at a time.
 The challenge: someone in a forum listed the AI fads (personal finance apps, reverse engineering,
 TV launchers) and asked what was missing. "Running Doom in Claude." Challenge accepted.
 
+## [0.4.0] - 2026-10-22 - MAP02 finished: keys, switches, lifts, teleporter, and staying alive
+
+First level with keys solved end to end, by code alone: **MAP02 finished 2/2, 0 deaths, 43 kills**
+(4073 and 4942 frames). The full chain, both seeds: blue key -> switches 5, 1, 3 -> red key ->
+switches 4, 2 -> yellow key -> teleporter -> exit. MAP01 still 2/2 and faster (952 and 672 frames).
+
+| MAP02, code only | Result |
+| --- | --- |
+| 0.3.0 | not finished, 129-151 cells |
+| + teleporters, remote doors | all three keys once, stuck crossing the teleporter back |
+| + single-press doors, owned weapons | stuck 36 steps from the yellow key (switch "used" but not hit) |
+| + switch verification | puzzle fine, but 5 deaths: each one resets keys and switches |
+| **+ combat reflexes** | **finished 2/2, 0 deaths** |
+
+### Navigation
+- **Teleporters as shortcuts:** entry cells in front of the line jump to the destination thing
+  (type 14) in the tagged sector. The entry cell is not dropped from the route until the line is
+  crossed (dropping it made the bot turn toward the far-away destination and loop for 300 frames).
+- **Remote doors:** sectors moved by a switch tag. They only count as passable when they are really
+  open (live height); "the switch was pressed" is not enough.
+- **Key switches (99, 133-137) open remote doors, not the door you face:** MAP02's red door opens
+  from a red switch elsewhere. They are handled as remote doors, offered only with the key.
+- **Switch verification:** ~8 s after pressing a switch, if none of its sectors moved, it is
+  unmarked and retried (`interruptor_sin_efecto` in the log). A USE that misses no longer leaves
+  the planner believing a door is open.
+- **Doors get one USE:** a second USE on an opening door sends it back down. The old three pulses
+  opened and closed it, which is why the bot got stuck at MAP02's yellow door in the first live run.
+- **No detours for weapons it already has** (ViZDoom reports owned weapon slots).
+- Thin impassable sectors, lifts called and waited for, teleporter lines as walls (from 0.3.0).
+
+### Combat reflexes (code)
+- **Dodge projectiles:** ViZDoom gives position and velocity of every object; if a fireball will pass
+  within 48 units in the next second, strafe away from that point.
+- **Target priority:** arch-vile first, then hitscanners (chaingunners, shotgun guys, zombiemen; their
+  shots cannot be dodged), then the closest.
+- **Weapon by distance:** shotgun close, chaingun mid/long, pistol if nothing else.
+
+### Tools
+- `bridge/escena.py`: drops the bot anywhere on a map with chosen keys and switches (console cheats:
+  give, god, warp) and traces each step. Found the door and teleporter bugs in minutes instead of
+  waiting 10,000 frames per try.
+- Deaths are logged with position, health, ammo, weapon and the monsters/projectiles nearby.
+- `bench_reparto.py`: `--pregunta v1|v2` for Jev's goal question, and `jev_haiku_sonnet` mode
+  (Sonnet on map start, key or switch, death, ~60 s without progress; Haiku for routine checks).
+
+### Next
+- MAP03-MAP05 with code only, then the Jev / Haiku / Sonnet columns again on this navigator, with
+  more seeds. With code finishing MAP01-02, the question for Jev and Claude becomes: do they finish
+  faster, die less, or finish maps code alone cannot?
+
 ## [0.3.0] - 2026-10-22 - Who does what: code moves, Jev chooses, Claude plans
 
 The question that started this release: "if the code solves everything, what is Jev for?" Fair:

@@ -5,9 +5,7 @@ Every step gets measured with `bridge/bench_reparto.py` and written up in the [c
 
 ## Now
 
-1. **MAP02 with code only.** The navigator already collects all three keys and uses all five
-   switches in the right order (blue -> switches 5, 1, 3 -> red -> switches 4, 2 -> yellow). Last
-   blocker: crossing the teleporter back toward the exit (fixed, being measured).
+1. ~~MAP02 with code only~~ **done in 0.4.0: 2/2, 0 deaths.** Next maps: MAP03-MAP05.
 2. **Re-run the columns on the new navigator:** code / + Jev (question v1 and v2) / + Jev + Haiku /
    + Jev + Haiku with Sonnet escalation (start of map, key or switch, death, ~60 s without progress).
    More seeds per column so the Jev numbers mean something.
@@ -28,10 +26,9 @@ Every step gets measured with `bridge/bench_reparto.py` and written up in the [c
 ## Later (when it finishes levels consistently)
 
 5. **Voice narration.** Parked on purpose: no point narrating a bot that does not finish.
-   - Free option first: the system voice, no key, no network. On Windows, PowerShell with
-     `System.Speech` (`SpeechSynthesizer.Speak`), already used by one of the author's projects to
-     speak Claude Code notifications; on macOS, `say` (or the mod's `$.audio.speak`). Speak only in
-     specific moments (key picked, level finished, death, boss in sight), not every line.
+   - The system voice is for short event alerts only (key picked, level finished, death, boss in
+     sight), not narration: on Windows, PowerShell with `System.Speech` (`SpeechSynthesizer.Speak`),
+     already used by one of the author's projects for Claude Code notifications; on macOS, `say`.
    - Nicer option later: Deepgram TTS. Notes so nobody rediscovers them:
    - The mod API can play base64 audio (`$.audio.play`), but its docs say a Windows or Linux
      terminal plays nothing (no player); only macOS. So the Python bridge plays it: Deepgram TTS as
