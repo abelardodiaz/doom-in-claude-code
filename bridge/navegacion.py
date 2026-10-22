@@ -19,6 +19,10 @@ from omg.mapedit import MapEditor
 
 CEL = 16          # lado de la celda, en unidades del mapa
 RADIO = 20        # holgura contra paredes (el jugador mide 16 de radio)
+# holgura de ultimo recurso, cuando ya no queda ninguna meta con ruta: con 20 la cuadricula cierra
+# en las esquinas pasillos de 60 unidades (MAP04, jaula de la llave roja), pero usar 14 siempre
+# rozaba paredes y se atoraba (MAP02: de 3/3 a 1/3 terminados)
+RADIO_FINO = 14
 PASO_MAX = 24     # escalon mas alto que se puede subir
 ALTO_MIN = 56     # hueco minimo entre piso y techo
 
@@ -102,21 +106,21 @@ class Mapa:
             self.sector[paridad[s]] = s
 
         # paredes macizas: lineas de un solo lado o marcadas como bloqueantes, con holgura
-        self.pared = np.zeros((self.H, self.W), dtype=bool)
-        r = int(math.ceil(RADIO / CEL))
-        disco = [(dx, dy) for dx in range(-r, r + 1) for dy in range(-r, r + 1)
-                 if (dx * CEL) ** 2 + (dy * CEL) ** 2 <= (RADIO + CEL / 2) ** 2]
+        def hacer_disco(radio):
+            r = int(math.ceil(radio / CEL))
+            return [(dx, dy) for dx in range(-r, r + 1) for dy in range(-r, r + 1)
+                    if (dx * CEL) ** 2 + (dy * CEL) ** 2 <= (radio + CEL / 2) ** 2]
+        disco, disco_fino = hacer_disco(RADIO), hacer_disco(RADIO_FINO)
+        self.pared_gruesa = np.zeros((self.H, self.W), dtype=bool)
+        self.pared_fina = np.zeros((self.H, self.W), dtype=bool)
+        self.pared = self.pared_gruesa
+        self.fino = False
         for (x1, y1, x2, y2, fr, bk, act, tag, flags) in lineas:
             # los teletransportes cuentan como pared: pisarlos te manda a otro lado y rompe la ruta
             if bk >= 0 and not (flags & 1) and act not in TELEPORTES:
                 continue
-            largo = math.hypot(x2 - x1, y2 - y1)
-            for k in range(int(largo // 6) + 1):
-                t = k * 6 / largo if largo else 0
-                i, j = self.celda(x1 + (x2 - x1) * t, y1 + (y2 - y1) * t)
-                for dx, dy in disco:
-                    if 0 <= j + dy < self.H and 0 <= i + dx < self.W:
-                        self.pared[j + dy, i + dx] = True
+            self._marcar_pared(x1, y1, x2, y2, disco)
+            self._marcar_pared(x1, y1, x2, y2, disco_fino, self.pared_fina)
 
         # puertas que se abren con USE: el sector de atras de la linea
         self.sector_puerta = set()
@@ -157,6 +161,27 @@ class Mapa:
         for (x1, y1, x2, y2, fr, bk, act, tag, flags) in lineas:
             if bk >= 0 and (fr in solidos or bk in solidos):
                 self._marcar_pared(x1, y1, x2, y2, disco)
+                self._marcar_pared(x1, y1, x2, y2, disco_fino, self.pared_fina)
+        # lo mismo para los delgados que si se mueven (pilares que baja un interruptor), pero como
+        # pared condicional: solo mientras sigan cerrados en vivo. Las puertas de USE no, porque
+        # hay que llegar hasta ellas. (MAP04: la llave roja esta en una jaula de pilares con huecos
+        # de 18 unidades; la cuadricula los veia pasables y empujaba ahi 4000 frames.)
+        self.pared_movil = np.full((self.H, self.W), -1, dtype=np.int32)
+        # disco chico: basta para tapar huecos menores al jugador sin comerse el pasillo de 60
+        # unidades que rodea la jaula (con el disco normal quedaba cortado en las esquinas)
+        disco_chico = [(0, 0), (1, 0), (-1, 0), (0, 1), (0, -1)]
+        cerrados = {s for s in moviles - self.sector_puerta - set(self.sector_llave) - self.sector_elevador
+                    if self.techo[s] - self.piso[s] < ALTO_MIN}
+        for (x1, y1, x2, y2, fr, bk, act, tag, flags) in lineas:
+            s = fr if fr in cerrados else bk if bk in cerrados else None
+            if bk >= 0 and s is not None:
+                largo = math.hypot(x2 - x1, y2 - y1)
+                for k in range(int(largo // 6) + 1):
+                    t = k * 6 / largo if largo else 0
+                    i, j = self.celda(x1 + (x2 - x1) * t, y1 + (y2 - y1) * t)
+                    for dx, dy in disco_chico:
+                        if 0 <= j + dy < self.H and 0 <= i + dx < self.W:
+                            self.pared_movil[j + dy, i + dx] = s
 
         # interruptores y salidas: punto de llegada del lado de enfrente, a 32 unidades de la linea
         self.metas_uso = []   # (x, y, mira_x, mira_y, accion, es_salida)
@@ -222,14 +247,23 @@ class Mapa:
                 if self.transitable(*c):
                     self.saltos[c] = (dest, cruce)
 
-    def _marcar_pared(self, x1, y1, x2, y2, disco):
+    def _marcar_pared(self, x1, y1, x2, y2, disco, capa=None):
+        capa = self.pared_gruesa if capa is None else capa
         largo = math.hypot(x2 - x1, y2 - y1)
         for k in range(int(largo // 6) + 1):
             t = k * 6 / largo if largo else 0
             i, j = self.celda(x1 + (x2 - x1) * t, y1 + (y2 - y1) * t)
             for dx, dy in disco:
                 if 0 <= j + dy < self.H and 0 <= i + dx < self.W:
-                    self.pared[j + dy, i + dx] = True
+                    capa[j + dy, i + dx] = True
+
+    def usar_holgura_fina(self):
+        """Ultimo recurso: pasillos estrechos que la holgura normal cierra. No tiene vuelta atras."""
+        if self.fino:
+            return False
+        self.fino = True
+        self.pared = self.pared_fina
+        return True
 
     def celda(self, x, y):
         return int((x - self.x0) // CEL), int((y - self.y0) // CEL)
@@ -248,6 +282,9 @@ class Mapa:
 
     def transitable(self, i, j):
         if not (0 <= i < self.W and 0 <= j < self.H) or self.pared[j, i]:
+            return False
+        pm = self.pared_movil[j, i]
+        if pm >= 0 and self.techo[pm] - self.piso[pm] < ALTO_MIN:
             return False
         s = self.sector[j, i]
         if s < 0:
@@ -382,6 +419,7 @@ class Navegador:
         self.uso_puerta = {}      # sector -> paso del ultimo USE (para no volver a presionarla)
         self.por_verificar = {}   # interruptor -> (paso, alturas de sus sectores al presionarlo)
         self.sin_efecto = {}      # interruptor -> veces que se presiono sin que se moviera nada
+        self.forzar = None        # "salud": ir por un botiquin antes que cualquier otra meta
 
     # ---------- metas posibles ----------
 
@@ -434,7 +472,9 @@ class Navegador:
                 agregar("salida", "salida", "la salida del nivel", m.celda_libre_cerca(t[0], t[1]), t)
         for color, _n, x, y in m.llaves_mapa:
             if color not in m.llaves:
-                agregar(f"llave_{color}", "llave", f"la llave {color}", m.celda_libre_cerca(x, y))
+                # radio 2 (~32 unidades, lo que alcanza para recogerla): con 4 una celda afuera de
+                # la jaula de MAP04 contaba como "llegar a la llave"
+                agregar(f"llave_{color}", "llave", f"la llave {color}", m.celda_libre_cerca(x, y, 2))
         for i, t in enumerate(m.metas_uso):
             if not t[5] and i not in m.presionados:
                 if LLAVE_DE_ACCION.get(t[4]) and LLAVE_DE_ACCION[t[4]] not in m.llaves:
@@ -516,8 +556,22 @@ class Navegador:
                 return min(grupo, key=lambda c: c["dist"])
         return None
 
+    def hay_salud(self):
+        """Hay un botiquin (o similar) con ruta en el ultimo replanteo."""
+        return any(c["tipo"] == "provision" and c["datos"] == "salud" for c in self.cands)
+
+    def distancia_salud(self):
+        """Distancia por ruta al botiquin mas cercano, o None si no hay."""
+        d = [c["dist"] for c in self.cands if c["tipo"] == "provision" and c["datos"] == "salud"]
+        return min(d) if d else None
+
     def elegir(self, cands):
         por_id = {c["id"]: c for c in cands}
+        # curarse (lo pide Jev o la regla de supervivencia): el botiquin mas cercano, antes que nada
+        if self.forzar == "salud":
+            salud = [c for c in cands if c["tipo"] == "provision" and c["datos"] == "salud"]
+            if salud:
+                return min(salud, key=lambda c: c["dist"]), "curarse"
         # plan de Haiku: el primer paso del plan que hoy tenga ruta
         objetivo = next((por_id[i] for i in self.plan if i in por_id), None)
         if self.pedido_jev in por_id:
@@ -614,10 +668,22 @@ class Navegador:
         pide_otra = (self.paso - self.cambio_meta > 18 and self.meta is not None
                      and ((self.pedido_jev and self.pedido_jev != self.meta["id"])
                           or (self.plan and self.plan[0] != self.meta["id"])))
+        # curarse no espera: si se pide y la meta no es salud, replantear ya
+        if self.forzar == "salud" and self.hay_salud() and \
+                not (self.meta and self.meta["tipo"] == "provision" and self.meta["datos"] == "salud"):
+            pide_otra = True
         if not self.camino or self.paso >= self.replan or not self._cerca_de_ruta(aqui) or pide_otra:
             inicio = aqui if m.transitable(*aqui) else (m.celda_libre_cerca(x, y, 3) or aqui)
             cands = self.candidatos(inicio)
             elegido, quien = self.elegir(cands) if cands else (None, None)
+            # nada que elegir (a lo mas provisiones que no hacen falta), ni zonas sin visitar:
+            # probar los pasillos estrechos, una sola vez (MAP04 s2: solo quedaba municion de sobra)
+            if elegido is None and m.usar_holgura_fina():
+                self.evento = ("holgura_fina",)
+                self.castigo, self.descartados = {}, {}
+                inicio = aqui if m.transitable(*aqui) else (m.celda_libre_cerca(x, y, 3) or aqui)
+                cands = self.candidatos(inicio)
+                elegido, quien = self.elegir(cands) if cands else (None, None)
             if elegido is None or self.meta is None or elegido["id"] != self.meta["id"]:
                 self.cambio_meta = self.paso
                 self.evento = self.evento or ("meta", elegido["id"] if elegido else None, quien,
