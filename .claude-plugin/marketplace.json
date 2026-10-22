@@ -1,0 +1,6 @@
+{
+  "name": "doom-in-claude-code",
+  "description": "Doom running inside a Claude Code pane, played by AI",
+  "owner": { "name": "Abelardo Diaz" },
+  "plugins": [{ "name": "doom-pane", "source": "./" }]
+}

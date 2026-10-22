@@ -1,0 +1,26 @@
+{
+  "name": "doom-pane",
+  "version": "0.1.0",
+  "description": "Doom running inside a Claude Code pane, played by AI: Jev pilots, Claude narrates",
+  "author": { "name": "Abelardo Diaz", "url": "https://github.com/abelardodiaz" },
+  "homepage": "https://github.com/abelardodiaz/doom-in-claude-code",
+  "license": "MIT",
+  "keywords": ["doom", "vizdoom", "game", "jev", "typesafe", "mod"],
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "typesafe_api_key": {
+      "type": "string",
+      "title": "TypeSafe API key (Jev pilot)",
+      "description": "Optional. With a key, Jev pilots by looking at the screen. Without one, Claude (Haiku) pilots.",
+      "sensitive": true,
+      "required": false
+    },
+    "language": {
+      "type": "string",
+      "title": "Narration language",
+      "description": "Language of Claude's live commentary",
+      "options": ["es", "en"],
+      "default": "es"
+    }
+  }
+}
