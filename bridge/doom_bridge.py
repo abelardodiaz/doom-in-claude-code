@@ -36,22 +36,34 @@ MODOS = ("atacar", "explorar", "retirada", "recoger")
 
 # Indices de botones
 B = ["MOVE_FORWARD", "MOVE_BACKWARD", "TURN_LEFT", "TURN_RIGHT",
-     "MOVE_LEFT", "MOVE_RIGHT", "ATTACK", "USE"]
+     "MOVE_LEFT", "MOVE_RIGHT", "ATTACK", "USE", "TURN_LEFT_RIGHT_DELTA"]
 IDX = {n: i for i, n in enumerate(B)}
+TICS = 4  # tics por accion (35 tics = 1 s); main lo ajusta segun los fps
 
 
-def accion(*nombres):
-    a = [0] * len(B)
+def accion(*nombres, giro=0.0):
+    """Botones del juego. giro: grados a girar en esta accion (positivo = izquierda).
+
+    TURN_LEFT_RIGHT_DELTA gira esos grados POR TIC y positivo es a la derecha, de ahi el -giro/TICS.
+    """
+    a = [0.0] * len(B)
     for n in nombres:
         a[IDX[n]] = 1
+    if giro:
+        a[IDX["TURN_LEFT_RIGHT_DELTA"]] = -giro / TICS
     return a
 
 
-def crear_juego():
+def siguiente_mapa(mapa):
+    n = int(mapa[3:]) + 1
+    return f"MAP{n:02d}" if n <= 32 else "MAP01"
+
+
+def crear_juego(mapa="MAP01"):
     g = vzd.DoomGame()
     base = os.path.dirname(vzd.__file__)
     g.set_doom_scenario_path(os.path.join(base, "freedoom2.wad"))
-    g.set_doom_map("MAP01")
+    g.set_doom_map(mapa)
     g.set_doom_skill(2)
     g.set_screen_resolution(vzd.ScreenResolution.RES_320X240)
     g.set_screen_format(vzd.ScreenFormat.RGB24)
@@ -59,6 +71,7 @@ def crear_juego():
     g.set_sound_enabled(False)
     g.set_labels_buffer_enabled(True)
     g.set_depth_buffer_enabled(True)
+    g.set_sectors_info_enabled(True)
     g.set_render_hud(True)
     g.set_render_weapon(True)
     g.set_render_messages(False)
@@ -112,7 +125,8 @@ def lado(cx, ancho):
 class Cerebro:
     """Reflejos: apuntar y disparar, esquivar paredes, abrir puertas, salir de atorones."""
 
-    def __init__(self):
+    def __init__(self, navegador=None):
+        self.navegador = navegador
         self.modo = "explorar"
         self.historial = []
         self.giro_forzado = 0
@@ -155,22 +169,22 @@ class Cerebro:
             return accion(self.dir_giro, "USE"), atorado
 
         def apuntar(l, extra):
+            # FOV horizontal de 90 grados: el borde de la pantalla esta a 45
             cx = l.x + l.width / 2
-            err = cx - ancho / 2
-            tol = max(6, l.width / 4)
-            if err < -tol:
-                return accion("TURN_LEFT", *extra)
-            if err > tol:
-                return accion("TURN_RIGHT", *extra)
-            return None
+            grados = math.degrees(math.atan((cx - ancho / 2) / (ancho / 2)))
+            if abs(grados) < 3:
+                return None
+            return accion(*extra, giro=-grados)
 
         if modo == "atacar":
             obj = max(enemigos, key=lambda l: l.width * l.height)
-            a = apuntar(obj, [])
-            if a is None:
-                lateral = "MOVE_LEFT" if (self.paso // 10) % 2 else "MOVE_RIGHT"
-                return accion("ATTACK", lateral), atorado
-            return a, atorado
+            cx = obj.x + obj.width / 2
+            grados = math.degrees(math.atan((cx - ancho / 2) / (ancho / 2)))
+            lateral = "MOVE_LEFT" if (self.paso // 10) % 2 else "MOVE_RIGHT"
+            # gira justo lo que falta y dispara en el mismo paso si ya casi esta centrado
+            if abs(grados) < 8:
+                return accion("ATTACK", lateral, giro=-grados), atorado
+            return accion(lateral, giro=-grados), atorado
 
         if modo == "retirada":
             if enemigos:
@@ -184,7 +198,9 @@ class Cerebro:
             a = apuntar(obj, ["MOVE_FORWARD"])
             return (a or accion("MOVE_FORWARD")), atorado
 
-        # explorar
+        # explorar: con mapa, el navegador decide; sin mapa, reflejos a ciegas
+        if self.navegador:
+            return self.navegador.decidir(x, y, vars_[6], st.sectors, accion), atorado
         if atorado:
             self.dir_giro = random.choice(["TURN_LEFT", "TURN_RIGHT"])
             self.giro_forzado = random.randint(4, 10)
@@ -301,27 +317,44 @@ def main():
     ap.add_argument("--log", default="", help="archivo .jsonl con las decisiones de la partida")
     ap.add_argument("--piloto", choices=["jev", "claude"], default="jev")
     ap.add_argument("--pantalla", default="", help="json {cols, filas} que el panel actualiza al redimensionar")
+    ap.add_argument("--mapa", default="MAP01")
     a = ap.parse_args()
 
-    g = crear_juego()
+    import navegacion
+    mapa = a.mapa.upper()
+    g = crear_juego(mapa)
     log = Bitacora(a.log)
-    log("inicio", piloto=a.piloto, mapa="MAP01", cols=a.cols, filas=a.filas)
+    log("inicio", piloto=a.piloto, mapa=mapa, cols=a.cols, filas=a.filas)
     jev = HiloJev(log) if a.piloto == "jev" else None
     previo = {"modo": None, "orden": None, "kills": 0, "atorado": False}
-    cerebro = Cerebro()
+    cerebro = Cerebro(navegacion.Navegador(navegacion.cargar(mapa)))
+    niveles = 0
     orden = "explorar"
     muertes = 0
     tics = max(1, round(35 / a.fps))
+    global TICS
+    TICS = tics
     n = 0
     ultimo_mtime = 0
     mtime_pantalla = 0
     while a.frames == 0 or n < a.frames:
         t0 = time.time()
-        if g.is_episode_finished() or g.is_player_dead():
-            if g.is_player_dead():
-                muertes += 1
-                log("muerte", frame=n, muertes=muertes)
+        if g.is_episode_finished() and not g.is_player_dead():
+            # nivel terminado: al siguiente mapa, con su propio navegador
+            niveles += 1
+            log("nivel_terminado", frame=n, mapa=mapa, niveles=niveles)
+            mapa = siguiente_mapa(mapa)
+            g.set_doom_map(mapa)
             g.new_episode()
+            cerebro = Cerebro(navegacion.Navegador(navegacion.cargar(mapa)))
+            previo["kills"] = 0
+            log("mapa", frame=n, mapa=mapa)
+        elif g.is_player_dead():
+            muertes += 1
+            log("muerte", frame=n, muertes=muertes, mapa=mapa)
+            g.new_episode()
+            cerebro = Cerebro(navegacion.Navegador(navegacion.cargar(mapa)))
+            previo["kills"] = 0
         info_jev = None
         if jev:
             orden, info_jev = jev.leer()
@@ -351,7 +384,12 @@ def main():
             continue
         vars_ = st.game_variables
         act, atorado = cerebro.decidir(st, vars_, orden)
-        estado = describir(st, vars_, atorado, muertes, st.screen_buffer.shape[1])
+        nav = cerebro.navegador
+        estado = (f"Mapa {mapa}, niveles terminados {niveles}. "
+                  + describir(st, vars_, atorado, muertes, st.screen_buffer.shape[1])
+                  + " " + nav.resumen())
+        if nav.evento:
+            log("nav", frame=n, que=list(nav.evento), pos=[round(vars_[4]), round(vars_[5])])
         if jev:
             jev.ofrecer(st.screen_buffer, estado, cerebro.modo, n)
         pos = [round(vars_[4]), round(vars_[5])]
@@ -370,6 +408,8 @@ def main():
             "filas": a_celdas(st.screen_buffer, a.cols, a.filas),
             "modo": cerebro.modo,
             "orden": orden,
+            "mapa": mapa,
+            "niveles": niveles,
             "estado": estado,
             "piloto": a.piloto,
             "jev": info_jev,
