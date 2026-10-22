@@ -39,6 +39,12 @@ SALIDAS = {11, 52, 197}
 ELEVADORES_USE = {21, 62, 122, 123}
 ELEVADORES_PISAR = {10, 88, 120, 121}
 TELEPORTES = {39, 97}  # los del jugador; 125 y 126 solo mueven monstruos y se pueden cruzar
+# disparadores al pisar (lineas W1/WR de Doom) que mueven sectores con tag: puertas que abren,
+# pisos que bajan o suben. MAP03 tiene la puerta de un tramo detras de uno (accion 109).
+# Fuera: teletransportes, salidas, elevadores (ya modelados) y los de solo monstruos.
+PISAR = {2, 3, 4, 5, 6, 8, 16, 19, 22, 25, 30, 36, 37, 38, 40, 44, 53, 54, 56, 57, 58, 59, 72, 73,
+         74, 75, 76, 77, 79, 80, 81, 82, 83, 84, 86, 87, 89, 90, 91, 92, 93, 94, 95, 96, 98, 100, 104,
+         105, 106, 107, 108, 109, 110, 119, 128, 129, 130, 141}
 DESTINO_TELEPORT = 14  # tipo de cosa que marca a donde llega un teletransporte
 
 # abastecimiento: nombres de objetos de ViZDoom por necesidad
@@ -47,6 +53,10 @@ ARMAS = {"Shotgun", "SuperShotgun", "Chaingun", "RocketLauncher", "PlasmaRifle",
 CASILLERO = {"Shotgun": 3, "Chaingun": 4, "RocketLauncher": 5, "PlasmaRifle": 6, "BFG9000": 7}
 SALUD = {"Stimpack", "Medikit", "Soulsphere", "Megasphere"}
 MUNICION = {"Clip", "ClipBox", "Shell", "ShellBox", "RocketAmmo", "RocketBox", "Cell", "CellPack", "Backpack"}
+# municion que sirve para el arma en mano (casillero). La mochila sirve para todas.
+# MAP03: con 5 cartuchos iba por un cargador de balas que no podia recoger (balas al maximo)
+MUNICION_DE = {1: set(), 2: {"Clip", "ClipBox"}, 4: {"Clip", "ClipBox"}, 3: {"Shell", "ShellBox"},
+               5: {"RocketAmmo", "RocketBox"}, 6: {"Cell", "CellPack"}, 7: {"Cell", "CellPack"}}
 DESVIO_MAX = 90  # celdas de ruta (~1400 unidades) que vale la pena desviarse por provisiones
 
 
@@ -168,13 +178,21 @@ class Mapa:
                     self.tags.setdefault(sec.tag, []).append((s, round(cx), round(cy)))
         self.presionados = set()
         # puertas remotas: sectores con tag que un interruptor mueve (abrir puerta, bajar piso).
-        # Se planea a traves de ellos solo despues de usar su interruptor.
+        # Se planea a traves de ellos solo cuando de verdad estan abiertos (altura en vivo).
         self.sector_remoto = {}  # sector -> indices de metas_uso que lo mueven
         for idx, t in enumerate(self.metas_uso):
             if t[6] and not t[5]:
                 for s, sec in enumerate(m.sectors):
                     if sec.tag == t[6] and s not in self.sector_elevador:
                         self.sector_remoto.setdefault(s, []).append(idx)
+        # disparadores al pisar: (x1, y1, x2, y2, accion, tag); sus sectores cuentan como remotos
+        self.disparadores = [(x1, y1, x2, y2, act, tag) for (x1, y1, x2, y2, fr, bk, act, tag, flags)
+                             in lineas if act in PISAR and tag]
+        for k, (_x1, _y1, _x2, _y2, _act, tag) in enumerate(self.disparadores):
+            for s, sec in enumerate(m.sectors):
+                if sec.tag == tag and s not in self.sector_elevador:
+                    self.sector_remoto.setdefault(s, []).append(("pisar", k))
+        self.pisados = set()
 
         # teletransportes como atajos: celdas de entrada frente a la linea -> celda del destino.
         # La linea es pared (cruzarla sin querer rompe la ruta); el A* la "salta" a proposito.
@@ -354,6 +372,7 @@ class Navegador:
         self.paso = 0
         self.evento = None        # ultimo evento para la bitacora
         self.salud, self.municion, self.objetos = 100, 50, []
+        self.armas, self.arma_actual = set(), None
         self.descartados = {}  # id -> paso hasta el que se ignora (no se pudo llegar)
         self.fallos = {}          # id -> veces que se atoro yendo ahi
         self.plan = []            # ids en orden, de Haiku
@@ -362,6 +381,7 @@ class Navegador:
         self.espera_elevador = 0
         self.uso_puerta = {}      # sector -> paso del ultimo USE (para no volver a presionarla)
         self.por_verificar = {}   # interruptor -> (paso, alturas de sus sectores al presionarlo)
+        self.sin_efecto = {}      # interruptor -> veces que se presiono sin que se moviera nada
 
     # ---------- metas posibles ----------
 
@@ -421,9 +441,28 @@ class Navegador:
                     continue  # interruptor de llave sin la llave: no hace nada
                 agregar(f"interruptor_{i}", "interruptor", self._desc_interruptor(i, t),
                         m.celda_libre_cerca(t[0], t[1]), t)
+        # disparadores al pisar que aun no se activan (cerrar puertas, accion 3, no sirve de nada)
+        for k, (x1, y1, x2, y2, act, tag) in enumerate(m.disparadores):
+            if k in m.pisados or act == 3:
+                continue
+            # el punto medio puede caer dentro de la puerta que abre (cerrada = pared): se prueba
+            # tambien a 24 unidades de cada lado de la linea y se usa el que tenga ruta
+            mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+            nx, ny = (y2 - y1), -(x2 - x1)
+            n = math.hypot(nx, ny) or 1
+            opciones = [m.celda_libre_cerca(mx, my, 2),
+                        m.celda_libre_cerca(mx + nx / n * 24, my + ny / n * 24, 2),
+                        m.celda_libre_cerca(mx - nx / n * 24, my - ny / n * 24, 2)]
+            celda = next((c for c in opciones if c in dist), None)
+            agregar(f"pisar_{k}", "pisar", self._desc_disparador(k), celda, k)
         # provisiones: la mas cercana de cada clase
+        # municion de cualquier arma que trae (pistola siempre), no solo la de la mano: con la pistola
+        # en mano solo buscaba balas y la escopeta se quedaba sin cartuchos (MAP02: 3 muertes)
+        utiles = {"Backpack"}
+        for casillero in {2} | self.armas:
+            utiles |= MUNICION_DE.get(casillero, set())
         clases = (("arma", ARMAS, "un arma nueva"), ("salud", SALUD, "salud"),
-                  ("municion", MUNICION, "municion"))
+                  ("municion", utiles, "municion para el arma en mano"))
         for clase, nombres, texto in clases:
             mejor = None
             for o in self.objetos:
@@ -457,6 +496,12 @@ class Navegador:
             return f"el interruptor {i} en ({round(t[2])},{round(t[3])}), mueve el sector cerca de ({cx},{cy}){extra}"
         return f"el interruptor {i} en ({round(t[2])},{round(t[3])}){extra}"
 
+    def _desc_disparador(self, k):
+        x1, y1, x2, y2, act, tag = self.mapa.disparadores[k]
+        sectores = self.mapa.tags.get(tag, [])
+        donde = f", mueve el sector cerca de ({sectores[0][1]},{sectores[0][2]})" if sectores else ""
+        return f"la linea {k} que se activa al pisarla en ({round((x1 + x2) / 2)},{round((y1 + y2) / 2)}){donde}"
+
     def prioridad_fija(self, cands):
         """La regla del modo 'codigo' y el respaldo cuando Jev duda."""
         por_tipo = {}
@@ -466,7 +511,7 @@ class Navegador:
                 if c["datos"] == "arma" or (c["datos"] == "salud" and self.salud < 50)
                 or (c["datos"] == "municion" and self.municion < 10 and c["dist"] < 800)]
         for grupo in (prov, por_tipo.get("salida", []), por_tipo.get("llave", []),
-                      por_tipo.get("interruptor", []), por_tipo.get("frontera", [])):
+                      por_tipo.get("interruptor", []), por_tipo.get("pisar", []), por_tipo.get("frontera", [])):
             if grupo:
                 return min(grupo, key=lambda c: c["dist"])
         return None
@@ -486,13 +531,15 @@ class Navegador:
 
     # ---------- caminar ----------
 
-    def decidir(self, x, y, angulo, sectores, accion, objetos=None, salud=100, municion=50, armas=None):
+    def decidir(self, x, y, angulo, sectores, accion, objetos=None, salud=100, municion=50, armas=None,
+                arma_actual=None):
         """accion(*botones) arma el vector de botones del juego."""
         m = self.mapa
         self.paso += 1
         self.evento = None
         self.salud, self.municion = salud, municion
         self.armas = armas or set()  # casilleros de arma que ya trae
+        self.arma_actual = arma_actual
         self.objetos = objetos or []
         if sectores is not None:
             m.actualizar_alturas(sectores)
@@ -510,8 +557,13 @@ class Navegador:
                 del self.por_verificar[idx]
             elif self.paso - paso > 70:
                 del self.por_verificar[idx]
-                m.presionados.discard(idx)
-                self.evento = ("interruptor_sin_efecto", idx)
+                self.sin_efecto[idx] = self.sin_efecto.get(idx, 0) + 1
+                if self.sin_efecto[idx] < 3:
+                    m.presionados.discard(idx)  # se reintenta hasta tres veces en total
+                    self.evento = ("interruptor_sin_efecto", idx)
+                else:
+                    # tres veces sin mover nada: se da por inutil (MAP05: el 14 se reintentaba sin fin)
+                    self.evento = ("interruptor_inutil", idx)
         self.marcar_visto(x, y)
         aqui = m.celda(x, y)
 
@@ -523,8 +575,9 @@ class Navegador:
                 dif = self._dif(x, y, angulo, *self.mirar)
                 if abs(dif) > 6:
                     return accion(giro=max(-45, min(45, dif)))
-                # USE alcanza 64 unidades: si aun estamos lejos, acercarse mientras se presiona
-                if math.hypot(self.mirar[0] - x, self.mirar[1] - y) > 40:
+                # USE alcanza 64 unidades pero falla de lado o en huecos: acercarse hasta pegarse
+                # (MAP03: el interruptor 12 fallo dos veces desde ~40 y se dio por inutil)
+                if math.hypot(self.mirar[0] - x, self.mirar[1] - y) > 24:
                     extra = ["MOVE_FORWARD"]
             return accion("USE", *extra) if self.uso % 2 else accion(*extra)
 
@@ -627,6 +680,28 @@ class Navegador:
                     return accion("USE")
                 break
 
+        # llego junto a una provision: se da por cumplida aunque no se la haya podido llevar
+        # (municion al maximo, objeto en una repisa): si no, la rondaria para siempre
+        if self.meta and self.meta["tipo"] == "provision" and len(self.camino) <= 2:
+            cx, cy = m.centro(*self.meta["celda"])
+            if math.hypot(cx - x, cy - y) < 40:
+                self.descartados[self.meta["id"]] = self.paso + 600
+                self.evento = ("provision_alcanzada", self.meta["id"])
+                self.meta, self.camino = None, []
+                return accion("MOVE_FORWARD")  # un paso encima del objeto; replantea el siguiente frame
+
+        # disparador al pisar: al llegar a la linea se da por activado y se sigue de frente para cruzarla
+        if self.meta and self.meta["tipo"] == "pisar" and len(self.camino) <= 2:
+            x1, y1, x2, y2, _act, _tag = m.disparadores[self.meta["datos"]]
+            mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+            if math.hypot(mx - x, my - y) < 24:
+                m.pisados.add(self.meta["datos"])
+                self.evento = ("pisado", self.meta["datos"])
+                self.meta, self.camino = None, []
+                return accion("MOVE_FORWARD")
+            # la meta quedo a un lado de la linea: caminar derecho hasta pisarla
+            return accion("MOVE_FORWARD", giro=max(-45, min(45, self._dif(x, y, angulo, mx, my))))
+
         # al final de la ruta: presionar el interruptor o la salida
         if len(self.camino) <= 2 and self.meta and self.meta["tipo"] in ("salida", "interruptor"):
             t = self.meta["datos"]
@@ -697,6 +772,10 @@ class Navegador:
                 lineas.append(f"- Salida (interruptor o linea) en ({round(t[2])},{round(t[3])}).")
             else:
                 lineas.append(f"- {self._desc_interruptor(i, t)}, {estado}.")
+        for k in range(len(m.disparadores)):
+            if m.disparadores[k][4] != 3:
+                estado = "ya pisada" if k in m.pisados else "sin pisar"
+                lineas.append(f"- {self._desc_disparador(k)}, {estado}.")
         if m.sector_elevador:
             pos = []
             for s in sorted(m.sector_elevador):
