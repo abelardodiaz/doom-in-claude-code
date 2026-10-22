@@ -1,10 +1,21 @@
-"""Piloto Jev: mira el frame y el estado del juego y devuelve probabilidades por modo.
+"""Piloto Jev: mira el frame y el estado y elige entre las opciones que arma el codigo.
+
+Dos preguntas por llamada (casi no cuesta mas que una):
+- tactica: pelear, esquivar o avanzar hacia la meta;
+- meta: cual de las metas con ruta perseguir (salida, llave, interruptor, provision, frontera).
+
+Reglas aprendidas de otros builders (sesion jev-117, 2026-10-21):
+- version fija (la calibracion cambio de 1.13 a 1.14);
+- decidir por argmax de probabilities, no por el campo choice;
+- confianza = brecha entre las dos mas altas; por debajo de 0.2 decide el script;
+- choice favorece la primera opcion: el orden se baraja en cada llamada.
 
 La key se lee de la variable de entorno TYPESAFE_API_KEY (el mod la pasa desde su configuracion).
 """
 import base64
 import io
 import os
+import random
 import time
 import uuid
 
@@ -12,12 +23,13 @@ import requests
 from PIL import Image
 
 URL = "https://api.typesafe.ai/v1/systemone"
+MODELO = "jev-1.14.0"
+BRECHA_MIN = 0.2
 
-MODOS = {
-    "atacar": "Hay un enemigo a la vista y conviene pelear con el",
-    "explorar": "No hay peligro inmediato: avanzar por el mapa buscando puertas, salida y enemigos",
-    "retirada": "Hay enemigos cerca y la salud esta baja: retroceder disparando",
-    "recoger": "Hay un objeto util a la vista (botiquin, municion, armadura, arma) y conviene ir por el",
+TACTICAS = {
+    "pelear": "Hay un enemigo a la vista y conviene pelear con el",
+    "esquivar": "Hay peligro cerca (salud baja o varios enemigos): retroceder disparando",
+    "avanzar": "No vale la pena pelear ahora: seguir hacia la meta",
 }
 
 
@@ -28,35 +40,47 @@ def _key():
     return k
 
 
+def _barajar(d):
+    items = list(d.items())
+    random.shuffle(items)
+    return dict(items)
+
+
+def _decision(ans):
+    """(opcion, brecha, probabilidades) usando argmax, no el campo choice."""
+    probs = ans["probabilities"]
+    orden = sorted(probs.items(), key=lambda kv: kv[1], reverse=True)
+    brecha = orden[0][1] - (orden[1][1] if len(orden) > 1 else 0.0)
+    return orden[0][0], round(brecha, 2), probs
+
+
 class PilotoJev:
     def __init__(self, con_imagen=True):
         self.con_imagen = con_imagen
-        self.modelo = "jev-preview" if con_imagen else "jev-latest"
         self.s = requests.Session()
         self.s.headers.update({"Authorization": f"Bearer {_key()}", "Content-Type": "application/json"})
         if con_imagen:
             self.s.headers["TypeSafe-Danger-Zone-Images"] = "true"
 
-    def decidir(self, frame_rgb, estado, modo_actual):
-        """Devuelve (modo, probabilidades, peligro, ms) o lanza excepcion."""
-        texto = f"Juego Doom, vista en primera persona. Modo actual: {modo_actual}. {estado}"
-        cuerpo = {
-            "model": self.modelo,
-            "questions": {
-                "modo": {
-                    "type": "choice",
-                    "instructions": "Que estrategia le conviene ahora al jugador?",
-                    "criteria": MODOS,
-                },
-                "peligro": {
-                    "type": "noul",
-                    "instructions": "El jugador esta en peligro inmediato de morir?",
-                },
-            },
+    def decidir(self, frame_rgb, estado, metas):
+        """metas: lista de (id, descripcion). Devuelve un dict con la decision y sus numeros."""
+        texto = f"Juego Doom, vista en primera persona. {estado}"
+        preguntas = {
+            "tactica": {"type": "choice", "instructions": "Que debe hacer el jugador en este momento?",
+                        "criteria": _barajar(TACTICAS)},
+            "peligro": {"type": "noul", "instructions": "El jugador esta en peligro inmediato de morir?"},
         }
+        if len(metas) >= 2:
+            preguntas["meta"] = {
+                "type": "choice",
+                "instructions": "Hacia cual meta conviene ir ahora para avanzar en el nivel sin morir?",
+                "criteria": _barajar({i: d for i, d in metas}),
+            }
+        cuerpo = {"model": MODELO, "questions": preguntas}
         if self.con_imagen and frame_rgb is not None:
             ph = "img-" + uuid.uuid4().hex
             buf = io.BytesIO()
+            # lado minimo de 280 px (1.14); 448x336 pasa
             Image.fromarray(frame_rgb).resize((448, 336)).save(buf, format="JPEG", quality=70)
             cuerpo["state"] = {"pantalla": ph, "datos": texto}
             cuerpo["assets"] = {ph: {"type": "image", "format": "jpeg",
@@ -67,26 +91,17 @@ class PilotoJev:
         r = self.s.post(URL, json=cuerpo, timeout=10)
         ms = int((time.time() - t0) * 1000)
         if r.status_code != 200:
+            # 403/429/499 son fallas, no decisiones: quien llama usa su respaldo
             raise RuntimeError(f"HTTP {r.status_code}: {r.text[:200]}")
         ans = r.json()["answers"]
-        return ans["modo"]["choice"], ans["modo"]["probabilities"], ans["peligro"]["noul"], ms
-
-
-if __name__ == "__main__":
-    # Prueba: un frame real de MAP01, con y sin imagen
-    import vizdoom as vzd
-    from doom_bridge import crear_juego, describir, accion
-    g = crear_juego()
-    for _ in range(15):
-        g.make_action(accion("MOVE_FORWARD"), 4)
-    st = g.get_state()
-    est = describir(st, st.game_variables, False, 0, st.screen_buffer.shape[1])
-    print("estado:", est)
-    for img in (False, True):
-        p = PilotoJev(con_imagen=img)
-        for i in range(3):
-            try:
-                print(p.modelo, p.decidir(st.screen_buffer, est, "explorar"))
-            except Exception as ex:
-                print(p.modelo, "ERROR", ex)
-    g.close()
+        tactica, brecha_t, probs_t = _decision(ans["tactica"])
+        out = {"tactica": tactica if brecha_t >= BRECHA_MIN else None, "tactica_cruda": tactica,
+               "brecha_tactica": brecha_t, "probs": probs_t, "peligro": ans["peligro"]["noul"], "ms": ms,
+               "meta": None, "brecha_meta": None, "probs_meta": None}
+        if len(metas) == 1:
+            out["meta"] = metas[0][0]
+        elif "meta" in ans:
+            meta, brecha_m, probs_m = _decision(ans["meta"])
+            out.update(meta=meta if brecha_m >= BRECHA_MIN else None, meta_cruda=meta,
+                       brecha_meta=brecha_m, probs_meta=probs_m)
+        return out
