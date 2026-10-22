@@ -69,7 +69,8 @@ The picture follows the pane size and keeps Doom's 4:3 ratio. Use a terminal wit
 - `bridge/navegacion.py`: map from the WAD, 16x16 grid, A* to exit / switches / unexplored areas, door opening.
 - `bridge/bench_explore.py`: `--mapa MAP02` measures cells explored and whether the level gets finished.
 - `bridge/jev_pilot.py`: one Jev call with the frame (JPEG 448x336; smaller sizes are rejected with "Invalid image dimensions") plus the state as text. Two typed questions: a `choice` among `atacar / explorar / retirada / recoger`, and a `noul` for "in immediate danger".
-- `prompts/pilot.md` and `prompts/narrator.md`: Claude's prompts. Edit them to change the personality.
+- `prompts/planner.md`: Claude's prompt as planner and narrator. Edit it to change the plan logic or the personality.
+- `bridge/bench_reparto.py`: the three-column benchmark (code only / + Jev / + Jev + Haiku). Results in `bench-resultados/`.
 - `hooks/register.tsx`: the Claude Code mod (pane, commands, Haiku loop).
 
 Haiku runs through your own Claude Code session, so it needs no extra API key.

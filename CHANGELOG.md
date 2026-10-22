@@ -5,6 +5,66 @@ How this went from a forum joke to a playable mod, one step at a time.
 The challenge: someone in a forum listed the AI fads (personal finance apps, reverse engineering,
 TV launchers) and asked what was missing. "Running Doom in Claude." Challenge accepted.
 
+## [0.3.0] - 2026-10-22 - Who does what: code moves, Jev chooses, Claude plans
+
+The question that started this release: "if the code solves everything, what is Jev for?" Fair:
+in 0.2.x the navigator did almost everything and Jev answered "explore 0.99" most of the time.
+So the work was split the way the Jev game agents that work do it (Minecraft: Astra plans, Jev
+controls; Pokemon LeafGreen: Haiku plans, Jev fights):
+
+| Piece | Job |
+| --- | --- |
+| Code | builds the list of goals that have a route right now (exit, each key, each switch, weapons, health, ammo, unexplored area), walks routes, aims, opens doors, calls lifts |
+| Jev (~1-2.5/s, image + state) | picks the tactic (fight / dodge / advance) and which goal to chase |
+| Claude Haiku (every few s) | reads a summary of the level puzzle (keys, key doors, what each switch moves, lifts) and returns the plan: an ordered list of goal ids. Also narrates |
+
+Jev calls follow what other builders learned (relayed by our jev-117 session): pinned model
+`jev-1.14.0` (calibration changed from 1.13), decide by argmax of probabilities instead of the
+`choice` field, confidence = gap between the top two (under 0.2 the script decides), and options
+shuffled every call because `choice` favors the first one.
+
+### Three-column benchmark (`bench_reparto.py`, synchronous: the game waits for each call)
+
+| | MAP01 | MAP02 |
+| --- | --- | --- |
+| Code only (3 seeds / 2 seeds) | **finished 3/3** (1170-1628 frames) | not finished, 129-151 cells, 1 death |
+| + Jev (1 seed) | **not finished**, 80 cells | not finished, 138 cells, 2 deaths |
+| + Jev + Haiku (1 seed) | **finished at frame 631, the fastest** | not finished, 143 cells, **10 deaths** |
+
+What it says (with one seed for the Jev columns, so read it as a first signal, not a verdict):
+- **Jev alone wanders.** On MAP01 it asked for "frontera" (nearest unexplored area) 152 times out
+  of 223 and for "salida" 7 times, even with a route to the exit. It has no notion of "finish the
+  level"; the question ("which goal helps you advance without dying?") and the frontier listed at
+  "0 units" push it to explore.
+- **Haiku fixes that.** On MAP01 one call ("plan: salida") was enough, and it finished faster than
+  code alone because Jev skipped detours. On MAP02 Haiku worked out most of the puzzle by itself:
+  "switch 3 first, then switch 4 lowers the lift for the red key, then the exit".
+- **But MAP02 still fails, and dies more.** The red key area is reached through a teleporter the
+  navigator does not model yet; Haiku kept sending it to the blue key (52 goal picks) and Jev doubted
+  a lot (273 goal doubts out of 667). 10 deaths vs 1-2: chasing the plan through enemies with
+  "advance" (ignore enemies) is dangerous.
+- Cost: 667 Jev calls ~150 ms each, 0 errors. 16 Haiku calls ~12 s each through `claude -p`.
+
+### Navigator fixes found by the benchmark
+- Thin sectors with no room to pass (bars, windows, 16 units wide) were invisible to the 16x16
+  grid; their edges are walls now.
+- Doors were pressed from ~70 units (USE reaches 64): it now walks up while pressing.
+- The exit could be dropped for good after 3 failures; exit and keys are never dropped now, other
+  goals only for ~30 s, and the penalty on the blocked route grows.
+- Ammo detours only under 10 rounds and close by (shells were always "low").
+- Key switches (133-137) are not offered without the key.
+- Teleporter lines are walls for now (stepping on one sends you elsewhere and breaks the route).
+
+### In the pane
+- Haiku is planner + narrator in one call every ~6 s; the plan goes to the bridge, which follows it.
+- New line: current goal and Claude's plan (`meta: llave_azul | plan Claude: llave_azul > interruptor_5 > salida`).
+- Jev line shows the goal Jev asks for.
+
+### Next
+- Model teleporters as edges (needed for the MAP02 red key).
+- Jev question v2 ("which goal gets you closer to finishing the level?") as a fourth column.
+- Why more deaths with the plan: when to fight vs. advance.
+
 ## [0.2.2] - 2026-10-21
 
 ### Fixed
