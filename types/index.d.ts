@@ -4,8 +4,11 @@ export type Corrida = [number, string, string]
 export type InfoJev = {
   ms: number
   probs: Record<string, number>
+  probs_meta: Record<string, number>
+  meta: string | null
   peligro: number
   llamadas: number
+  dudas: number
   errores: number
   ultimo_error: string
 }
@@ -17,9 +20,12 @@ export type Frame = {
   orden: string
   estado: string
   piloto: 'jev' | 'claude'
+  jev: InfoJev | null
   mapa?: string
   niveles?: number
-  jev: InfoJev | null
+  meta?: string | null
+  plan?: string[]
+  resumen_mapa?: string
 }
 
 declare module 'claude-code' {

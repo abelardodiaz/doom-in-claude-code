@@ -21,6 +21,7 @@ const TXT = {
     pilot: 'piloto',
     narrates: 'narra',
     mode: 'modo',
+    goal: 'meta',
     danger: 'peligro',
     decisions: 'decisiones',
     errors: 'errores',
@@ -43,6 +44,7 @@ const TXT = {
     pilot: 'pilot',
     narrates: 'narrator',
     mode: 'mode',
+    goal: 'goal',
     danger: 'danger',
     decisions: 'decisions',
     errors: 'errors',
@@ -208,11 +210,10 @@ export const register: Register = (on, options) => {
     const logJuego = `${r.logs}/match-${sello}.jsonl`
     const logClaude = `${r.logs}/match-${sello}-claude.json`
     const dichos: { t: number; piloto: string; frame: number; estado: string; respuesta: string }[] = []
-    const prompts = {
-      pilot: (await $.fs.read(`${$.plugin.root}/prompts/pilot.md`)).replaceAll('{LANGUAGE}', T.language),
-      narrator: (await $.fs.read(`${$.plugin.root}/prompts/narrator.md`)).replaceAll('{LANGUAGE}', T.language),
-    }
-    await $.fs.write(r.ordenes, JSON.stringify({ modo: 'explorar' }))
+    const planner = (await $.fs.read(`${$.plugin.root}/prompts/planner.md`)).replaceAll('{LANGUAGE}', T.language)
+    // el rompecabezas del nivel llega en algunas lineas (cada ~5 s); se guarda el ultimo
+    let resumen = ''
+    await $.fs.write(r.ordenes, JSON.stringify({ plan: [] }))
     await update($, bitacora, () => [piloto === 'jev' ? T.startJev : T.startClaude])
     await update($, frame, () => null)
     await update($, activo, () => true)
@@ -233,6 +234,15 @@ export const register: Register = (on, options) => {
           resto += text
           const partes = resto.split('\n')
           resto = partes.pop() ?? ''
+          for (const p of partes) {
+            if (p.includes('"resumen_mapa"')) {
+              try {
+                resumen = (JSON.parse(p) as Frame).resumen_mapa ?? resumen
+              } catch {
+                // linea cortada: se espera la siguiente
+              }
+            }
+          }
           const ultima = partes.filter(p => p.startsWith('{')).pop()
           if (!ultima || pintando) continue
           pintando = true
@@ -254,10 +264,10 @@ export const register: Register = (on, options) => {
       }
     })()
 
-    // Haiku: piloto cada 2.5 s, o narrador cada 4 s cuando pilota Jev
+    // Haiku: planea el rompecabezas del nivel (orden de metas) y narra, cada ~6 s
     void (async () => {
       while (corriendo && mia === generacion) {
-        await $.clock.sleep(piloto === 'jev' ? 4000 : 2500)
+        await $.clock.sleep(6000)
         const ahora = await $.clock.now()
         if (ahora - inicio > MAX_MS) {
           detener()
@@ -267,12 +277,14 @@ export const register: Register = (on, options) => {
         }
         const f = await read($, frame)
         if (!f || !corriendo || mia !== generacion) continue
-        const jev = f.jev ? ` Jev chose "${f.orden}" (${probsTexto(f.jev.probs)}), danger ${f.jev.peligro}.` : ''
+        const jev = f.jev
+          ? `\nJev (fast pilot) right now: tactic ${probsTexto(f.jev.probs)}, goal ${f.jev.meta ?? 'unsure'}, danger ${f.jev.peligro}.`
+          : ''
         const resp = await $.model.complete({
           model: 'haiku',
-          system: piloto === 'jev' ? prompts.narrator : prompts.pilot,
-          prompt: `Current mode: ${f.modo}. ${f.estado}${jev}`,
-          maxTokens: 120,
+          system: planner,
+          prompt: `--- Level state ---\n${resumen || f.estado}\nCurrent goal: ${f.meta ?? 'none'}. Current plan: ${(f.plan ?? []).join(', ') || 'none'}.\n${f.estado}${jev}`,
+          maxTokens: 200,
           effort: 'low',
         })
         if (!resp.isAnswered) continue
@@ -281,10 +293,9 @@ export const register: Register = (on, options) => {
         const m = resp.text.match(/\{[\s\S]*\}/)
         if (!m) continue
         try {
-          const d = JSON.parse(m[0]) as { modo?: string; comentario?: string }
-          if (piloto === 'claude' && d.modo) await $.fs.write(r.ordenes, JSON.stringify({ modo: d.modo }))
-          const etiqueta = piloto === 'claude' ? `[${d.modo ?? '?'}] ` : ''
-          await update($, bitacora, b => [...b, `${etiqueta}${d.comentario ?? ''}`].slice(-4))
+          const d = JSON.parse(m[0]) as { plan?: string[]; comentario?: string }
+          if (Array.isArray(d.plan)) await $.fs.write(r.ordenes, JSON.stringify({ plan: d.plan.slice(0, 5) }))
+          await update($, bitacora, b => [...b, d.comentario ?? ''].slice(-4))
         } catch {
           // respuesta que no es JSON: se ignora
         }
@@ -319,10 +330,13 @@ export const register: Register = (on, options) => {
         </Text>
         {f?.jev && (
           <Text color="cyan" wrap="truncate">
-            Jev {f.jev.ms} ms | {probsTexto(f.jev.probs)} | {T.danger} {f.jev.peligro} | {f.jev.llamadas} {T.decisions}
+            Jev {f.jev.ms} ms | {probsTexto(f.jev.probs)} | meta {f.jev.meta ?? '?'} | {T.danger} {f.jev.peligro} | {f.jev.llamadas} {T.decisions}
             {f.jev.errores ? ` | ${f.jev.errores} ${T.errors}: ${f.jev.ultimo_error}` : ''}
           </Text>
         )}
+        <Text color="magenta" wrap="truncate">
+          {T.goal}: {f?.meta ?? '-'} | plan Claude: {(f?.plan ?? []).join(' > ') || '-'}
+        </Text>
         {f ? (
           f.filas.map(fila => (
             <Text wrap="truncate">
