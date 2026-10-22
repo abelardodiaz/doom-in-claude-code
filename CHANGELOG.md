@@ -5,6 +5,28 @@ How this went from a forum joke to a playable mod, one step at a time.
 The challenge: someone in a forum listed the AI fads (personal finance apps, reverse engineering,
 TV launchers) and asked what was missing. "Running Doom in Claude." Challenge accepted.
 
+## [0.1.1] - 2026-10-21
+
+### Fixed
+- Closing the pane with its X or `Esc` only hid it: the game, Jev and Haiku kept running and
+  spending tokens. Closing the pane now stops the game.
+- Each match stops by itself after 10 minutes.
+
+### Added
+- Decision log per match in `~/.doom-pane/logs/`: `match-<time>.jsonl` (start, mode changes with
+  the full state, Jev decisions with probabilities and latency, stuck events, kills, deaths, position
+  every second) and `match-<time>-claude.json` (what Haiku said and when).
+- `bridge/bench_explore.py`: measures exploration as distinct 128x128 map cells visited in N frames.
+  Baseline of the current reflexes: **10.3 cells in 1500 frames** (3 seeds). It loops in the first
+  rooms and never opens doors.
+
+### Learned
+- Doom opens a door on the USE *press*, not while held, and only within 64 units. The reflexes
+  turned away from walls at ~120 units, so they never reached a door.
+- A quick fix (walk up to walls, pulse USE, steer to least visited cells) scored worse (7.0 cells),
+  so it was not shipped. Next step is real navigation: read the map from the WAD (doors, switches,
+  exits) and path to them.
+
 ## [0.1.0] - 2026-10-21
 
 ### Step 1: Doom without a window
