@@ -313,6 +313,17 @@ class Mapa:
 
     def paso_ok(self, a, b):
         sa, sb = self.sector[a[1], a[0]], self.sector[b[1], b[0]]
+        # el hueco ENTRE los dos sectores, no el de cada uno: MAP04, el cuarto-elevador 69 arriba
+        # (piso -32) junto al pasillo 103 (techo -32) deja 0 unidades, y se estrellaba ahi.
+        # Puertas y sectores remotos se mueven: los maneja transitable. Un elevador solo cuenta como
+        # paso si hay que SUBIR (llamarlo o esperar encima); bajar de el con hueco 0 no se puede
+        # hasta que baje de verdad, y entonces la altura en vivo abre el paso.
+        if sa != sb and min(self.techo[sa], self.techo[sb]) - max(self.piso[sa], self.piso[sb]) < ALTO_MIN:
+            puerta = ({sa, sb} & self.sector_puerta or sa in self.sector_llave or sb in self.sector_llave
+                      or sa in self.sector_remoto or sb in self.sector_remoto)
+            sube_en_elevador = self.piso[sb] > self.piso[sa] and {sa, sb} & self.sector_elevador
+            if not (puerta or sube_en_elevador):
+                return False
         if self.piso[sb] - self.piso[sa] <= PASO_MAX:
             return True
         # un elevador baja hasta el piso de al lado: se puede subir a el, y desde el (arriba) salir
