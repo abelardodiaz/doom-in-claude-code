@@ -54,3 +54,22 @@ Every step gets measured with `bridge/bench_reparto.py` and written up in the [c
     "blue door ahead", "press the switch on your left, then ride the lift", "imp behind you".
     Limit: this works inside ViZDoom only; reading GZDoom or the Steam version would need engine
     hooks or screen reading.
+12. **Minecraft challenge with the same method** (idea, 2026-10-22). rmalde/minecraft-agent killed
+    the Ender Dragon in 8:43 for under $1 (Astra plans, Jev controls). We do not know how long it
+    took them to build, so the comparison is on results, measured our way: fixed world seeds,
+    success rate over N seeds, deaths with context, time and cost, and the three columns (code
+    only, code + Jev, code + Jev + Claude).
+    - Recipe: Mineflayer bot (`mineflayer-pathfinder` for routes, crafting tree in code), Jev for
+      fast calls (fight or flee, eat, shelter), Claude for phases (wood, stone, iron, diamond,
+      Nether, eyes of Ender, stronghold, dragon). Debug scenes with `/tp`, `/give` and no mobs.
+    - No WAD here: the world is generated, so the bot builds its own map while exploring.
+    - First measurable goal: a diamond pickaxe from scratch.
+    - Cost: Minecraft is not open source, but the official server jar is free (accept the EULA).
+      A local server with `online-mode=false` lets the bot join without an account, and
+      `prismarine-viewer` shows the bot's view in a browser for streaming (OBS or Discord). A
+      licence (~30 USD) is only needed to watch with the real client.
+    - Licensed players can join an offline-mode server too, but it does not check identities:
+      keep it private (WireGuard or whitelist, port 25565 closed). If it goes public, switch to
+      `online-mode=true` and give the bot its own licensed account (Mineflayer supports Microsoft
+      login).
+    - Its own repo, after Doom 0.5.0.
