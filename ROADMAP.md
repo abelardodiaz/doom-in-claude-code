@@ -47,3 +47,10 @@ Every step gets measured with `bridge/bench_reparto.py` and written up in the [c
 10. **Another game with the same recipe:** the Mario AI Benchmark ("Infinite Mario"), an open Mario
     clone built for AI agents (2009-2012 competitions). Code moves, Jev decides fast, Claude plans.
     After Doom.
+11. **Real-time advisor for a human player** (idea, 2026-10-22). Same brain, but a person plays and
+    the bot only talks. ViZDoom's `Mode.ASYNC_SPECTATOR` lets a human play with keyboard and mouse
+    in a normal window while the API still reads position, angle, health, monsters, door and lift
+    heights and keys every tic. The navigator already knows the next goal and route, so it can say
+    "blue door ahead", "press the switch on your left, then ride the lift", "imp behind you".
+    Limit: this works inside ViZDoom only; reading GZDoom or the Steam version would need engine
+    hooks or screen reading.
