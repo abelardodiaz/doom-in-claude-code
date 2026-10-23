@@ -27,6 +27,9 @@ def main():
     ap.add_argument("--frames", type=int, default=300)
     ap.add_argument("--orden", default="avanzar")
     ap.add_argument("--cada", type=int, default=4, help="imprimir cada N frames")
+    ap.add_argument("--semilla", type=int, default=1)
+    ap.add_argument("--sin-monstruos", action="store_true",
+                    help="solo el rompecabezas: los monstruos cambian el camino en cada corrida")
     a = ap.parse_args()
 
     g = vzd.DoomGame()
@@ -47,6 +50,9 @@ def main():
         vzd.GameVariable.WEAPON5, vzd.GameVariable.WEAPON6, vzd.GameVariable.WEAPON7,
         vzd.GameVariable.SELECTED_WEAPON])
     g.add_game_args("+sv_cheats 1")
+    if a.sin_monstruos:
+        g.add_game_args("-nomonsters")
+    g.set_seed(a.semilla)
     g.init()
     g.make_action([0] * len(db.B), 10)
     llaves = {k for k in a.llaves.split(",") if k}
