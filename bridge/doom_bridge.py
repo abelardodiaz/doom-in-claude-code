@@ -543,7 +543,9 @@ class HiloJev:
                          brecha_meta=d["brecha_meta"], probs_meta=d["probs_meta"],
                          peligro=round(d["peligro"], 2), ms=d["ms"])
                 with self.lock:
-                    self.modo = TACTICA_A_MODO[d["tactica"]]
+                    # la tactica de Jev se registra pero no se obedece: en MAP02 con ella terminaba
+                    # 1 de 6 contra 3 de 6 solo con la meta (0.5.0); pelear lo decide el codigo
+                    self.modo = "explorar"
                     self.meta = d["meta"]
                     self.info.update(ms=d["ms"], probs=d["probs"], probs_meta=d["probs_meta"] or {},
                                      meta=d["meta"], peligro=round(d["peligro"], 2),
