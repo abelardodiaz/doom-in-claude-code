@@ -5,6 +5,83 @@ How this went from a forum joke to a playable mod, one step at a time.
 The challenge: someone in a forum listed the AI fads (personal finance apps, reverse engineering,
 TV launchers) and asked what was missing. "Running Doom in Claude." Challenge accepted.
 
+## [0.5.0] - 2026-10-25 - Jev measured against code alone, and code won the fight
+
+0.4.1 ended with "surviving is the next stage, and where Jev should earn its place". This version
+measured exactly that, with the same maps and seeds for every column. The short answer: in these
+maps Jev does not earn its place in combat. Code alone finishes more and dies less. Jev keeps the
+goal choice, where it hurts least, and the fighting goes back to the code.
+
+### Combat (code)
+- **Heal only when it is safe**: go for a medkit with no enemies in view, or one under 300 units;
+  otherwise retreat first.
+- **Barrels**: no shooting with a barrel in line under 250 units, step away under 100.
+- **Turn toward unseen attackers**: losing health with nobody on screen turns toward the nearest
+  monster for about a second. Fires 27-40 times per MAP04 run; imps sniping from off-screen were
+  a big share of the deaths.
+
+### Navigation
+- **Caged keys and moving pillars**: thin sectors that a switch lowers count as walls only while
+  closed (the red key cage in MAP04, opened by switch 7).
+- **Narrow-corridor fallback**: when no goal has a route, retry once with 14 units of wall clearance
+  instead of 20. Using 14 everywhere was tried and dropped: MAP02 fell to 1 of 3.
+- **The opening between two sectors**: a lift room whose floor sits at the next corridor's ceiling
+  left a zero-height gap the grid treated as walkable. Going down a lift now waits until it is down.
+- Keys count as a goal when a cell within ~32 units has a route (was ~64).
+
+### Jev and code: who decides what
+- Jev is no longer offered "explore" while a key, switch, exit or trigger line has a route. With it,
+  Jev picked "explore" 446-626 times per game and never finished MAP02.
+- A new weapon, health under 50 or ammo under 10 is decided by the code. Without that, Jev went
+  straight for the blue key without the shotgun: 20 deaths in 3 games, 9 of them with 0 ammo.
+- **Jev's tactic is logged and shown, not obeyed.** Pelear / esquivar was what killed it: it backed
+  away from Demons, which catch up with a player walking backwards, and fought them up close.
+
+### Measured (6000 frames per game; finished / deaths per seed)
+| MAP02 | Finished | Deaths |
+| --- | --- | --- |
+| Code alone (6 seeds) | **6/6** | 1 1 0 0 0 0 |
+| Jev tactic + goal, "explore" offered (3) | 0/3 | 0 1 1 |
+| Jev, no "explore" (3) | 0/3 | 7 5 8 |
+| Jev, code owns supplies (6) | 1/6 | 0 2 2 3 2 3 |
+| **Jev goal only, code fights (6)** | **3/6** | 1 2 0 0 1 0 |
+
+| MAP04 | Finished | Deaths |
+| --- | --- | --- |
+| Code alone, start of this version | 0 | 14-16 per game, stuck at the red key cage |
+| Code alone now (6 seeds) | 0/6 | 3 0 1 3 7 6; red key every time |
+| Jev tactic + goal (3) | 0/3 | 12 10 5 |
+| Code alone, no monsters (scene tool) | **finished**, 1095 frames | - |
+
+MAP01: code alone 3/3. Jev+Haiku only got one full MAP04 game (7 deaths) before Windows killed the
+run for low memory; it is not in the tables.
+
+Honest caveats:
+- Code alone barely varies with the seed: MAP02 seeds 3, 4 and 6 are the same game frame by frame.
+  Its 6/6 is closer to "one good route, repeated" than to six independent runs. Jev's games do vary
+  (shuffled options, live API).
+- The three Jev-goal games that did not finish each had one death, which resets the level, and ran
+  out of frames near the end. Jev's goals are also slower: 3547 and 5095 frames vs 3323.
+- In ViZDoom the code knows every monster's position and the whole map. Jev sees a 448x336 frame
+  plus a text built by that same code, so its edge, understanding the picture, adds nothing here.
+
+### MAP04: what is left
+The puzzle is solved: without monsters it goes switches 5, 1, 10 -> blue key -> blue switches 3/4 ->
+switches 6, 2 -> exit. With monsters, most runs end in an ambush ~110 frames after the red key,
+arriving with ~20 health and the pistol in hand.
+
+### Tools
+- `escena.py --semilla N --sin-monstruos`: debug a puzzle without monsters changing the path.
+- `bench_reparto.py --solo-meta` (Jev picks the goal, code fights) and `--desde N` (add seeds).
+- Benchmark kills now add up every life; before, a 7-death game reported 0.
+- Deaths are logged with what was around, plus combat events and a snapshot every 200 frames.
+
+### Next
+Ask Jev the kind of question it is calibrated for: yes/no with numbers the code computes ("with a
+shotgun and 40 health, fight a Demon at 200 units?"), instead of picking a control mode out of four.
+Longer term, a pure-pixels mode where the code does not get coordinates, so Jev is the only one who
+can read the screen.
+
 ## [0.4.1] - 2026-10-22 - MAP03 and MAP05 open up; the pane speaks English too
 
 ### Navigation
