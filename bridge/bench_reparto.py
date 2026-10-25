@@ -64,6 +64,7 @@ def correr(mapa, semilla, modo, frames, log):
         piloto = PilotoJev(con_imagen=True, pregunta=PREGUNTA)
     orden = "explorar"
     celdas, muertes, terminado = set(), 0, None
+    kills_previas = 0  # KILLCOUNT se reinicia con cada vida: se suman las anteriores
     ultimo = {}
     st_jev = {"llamadas": 0, "dudas_tactica": 0, "dudas_meta": 0, "errores": 0, "ms": 0}
     planea = modo in ("jev_haiku", "jev_haiku_sonnet")
@@ -83,6 +84,7 @@ def correr(mapa, semilla, modo, frames, log):
         if g.is_player_dead():
             muertes += 1
             log({"ev": "muerte", "frame": n, **ultimo})
+            kills_previas += int(g.get_game_variable(db.vzd.GameVariable.KILLCOUNT))
             g.new_episode()
             nav = nv.Navegador(nv.cargar(mapa))
             cerebro = db.Cerebro(nav)
@@ -130,7 +132,7 @@ def correr(mapa, semilla, modo, frames, log):
                 time.sleep(espera)
             ultima_llamada = time.time()
             estado = db.describir(st, v, False, muertes, st.screen_buffer.shape[1], cerebro) + " " + nav.resumen()
-            metas = [(c["id"], f"{c['desc']}, a {c['dist']} unidades") for c in nav.cands][:8]
+            metas = nav.metas_jev()
             try:
                 d = piloto.decidir(st.screen_buffer, estado, metas)
                 st_jev["llamadas"] += 1
@@ -163,7 +165,7 @@ def correr(mapa, semilla, modo, frames, log):
             elif nav.evento[0] == "atorado" and nav.fallos.get(nav.evento[2], 0) >= 3:
                 pendiente_haiku = "estancado" if planea else None
         g.make_action(act, 4)
-    kills = int(g.get_game_variable(db.vzd.GameVariable.KILLCOUNT))
+    kills = kills_previas + int(g.get_game_variable(db.vzd.GameVariable.KILLCOUNT))
     g.close()
     if st_jev["llamadas"]:
         st_jev["ms"] = round(st_jev["ms"] / st_jev["llamadas"])
@@ -176,6 +178,7 @@ if __name__ == "__main__":
     ap.add_argument("--modo", choices=["codigo", "jev", "jev_haiku", "jev_haiku_sonnet"], required=True)
     ap.add_argument("--mapas", default="MAP01,MAP02")
     ap.add_argument("--semillas", type=int, default=1)
+    ap.add_argument("--desde", type=int, default=1, help="primera semilla (para sumar semillas nuevas)")
     ap.add_argument("--frames", default="MAP01:2000,MAP02:6000", help="tope por mapa; default 4000")
     ap.add_argument("--salida", default=os.path.join(AQUI, "..", "bench-resultados"))
     ap.add_argument("--pregunta", choices=["v1", "v2"], default="v2")
@@ -184,7 +187,7 @@ if __name__ == "__main__":
     topes = dict(x.split(":") for x in a.frames.split(","))
     os.makedirs(a.salida, exist_ok=True)
     for mapa in a.mapas.split(","):
-        for s in range(1, a.semillas + 1):
+        for s in range(a.desde, a.desde + a.semillas):
             etiqueta = a.modo if a.modo == "codigo" else f"{a.modo}-{a.pregunta}"
             ruta = os.path.join(a.salida, f"{etiqueta}-{mapa}-s{s}.jsonl")
             with open(ruta, "w", encoding="utf-8") as f:
