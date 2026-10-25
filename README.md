@@ -8,7 +8,9 @@ the job it is good at:
 - **Code** walks, aims, opens doors, calls lifts and dodges fireballs. It reads the real map from the
   WAD (doors, keys, switches, lifts, teleporters, exit) and finds routes with A*.
 - **Jev** ([TypeSafe](https://typesafe.ai)) looks at the actual screen ~2.5 times per second
-  (~150 ms per call) and picks the tactic (fight / dodge / advance) and which goal to chase.
+  (~150 ms per call) and picks which goal to chase (key, switch, exit). It also rates the tactic
+  (fight / dodge / advance), shown in the pane, but since 0.5.0 the code decides the fighting: with
+  Jev's tactic the bot died more (MAP02 finished 1 of 6 vs 3 of 6 with Jev on goals only).
 - **Claude** plans the level puzzle (which key opens what, which switch moves which door) and
   narrates live like a streamer. Haiku does the routine; Sonnet steps in when it gets hard (map start,
   death, a minute without progress). It runs through your own Claude Code session: no extra API key.
@@ -25,7 +27,7 @@ The game is [ViZDoom](https://github.com/Farama-Foundation/ViZDoom) with
 | MAP01 | finished |
 | MAP02 | finished, 0 deaths: blue key -> switches -> red key -> switches -> yellow key -> teleporter -> exit |
 | MAP03 | gets all three keys and most switches; deaths cost it the time to reach the exit |
-| MAP04 | dies to packs of imps: this is where Jev should earn its place |
+| MAP04 | red key every time; an ambush right after it ends most runs. Without monsters it finishes |
 | MAP05 | partially explored |
 
 Every step is measured and written up in the [changelog](CHANGELOG.md), with the raw data in the repo.
@@ -84,7 +86,7 @@ tokens, so nothing keeps running unwatched.
         | actions every 4 tics                                     | bridge/navegacion.py: WAD map,
         +----------------------------------------------------------+ goals with a route, A*, doors
                                                                     |
- Jev (jev-1.14.0, image + state) <-- own thread -- bridge/jev_pilot.py: tactic + goal
+ Jev (jev-1.14.0, image + state) <-- own thread -- bridge/jev_pilot.py: goal (tactic logged)
                                                                     |
  Claude Code pane (hooks/register.tsx) <-- one JSON line per frame -+
         | draws half-block cells, Jev numbers, goal and plan, narration

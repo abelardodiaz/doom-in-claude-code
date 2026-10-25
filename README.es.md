@@ -9,7 +9,9 @@ en el trabajo que mejor hace:
   real del WAD (puertas, llaves, interruptores, elevadores, teletransportes, salida) y calcula rutas
   con A*.
 - **Jev** ([TypeSafe](https://typesafe.ai)) ve la pantalla real unas 2.5 veces por segundo (~150 ms
-  por llamada) y elige la táctica (pelear / esquivar / avanzar) y qué meta perseguir.
+  por llamada) y elige qué meta perseguir (llave, interruptor, salida). También califica la táctica
+  (pelear / esquivar / avanzar), que se ve en el panel, pero desde la 0.5.0 la pelea la decide el
+  código: con la táctica de Jev moría más (MAP02 terminado 1 de 6 contra 3 de 6 con Jev solo en la meta).
 - **Claude** resuelve el rompecabezas del nivel (qué llave abre qué, qué interruptor mueve qué
   puerta) y narra en vivo como streamer. Haiku hace la rutina; Sonnet entra cuando se pone difícil
   (inicio de mapa, muerte, un minuto sin avanzar). Usa tu propia sesión de Claude Code: no necesita
@@ -28,7 +30,7 @@ archivos originales de Doom.
 | MAP01 | terminado |
 | MAP02 | terminado, 0 muertes: llave azul -> interruptores -> llave roja -> interruptores -> llave amarilla -> teletransporte -> salida |
 | MAP03 | junta las tres llaves y casi todos los interruptores; las muertes le quitan el tiempo para llegar a la salida |
-| MAP04 | muere contra grupos de imps: aquí es donde Jev tiene que ganarse su lugar |
+| MAP04 | siempre llega a la llave roja; una emboscada justo después acaba casi todas las partidas. Sin monstruos lo termina |
 | MAP05 | explorado en parte |
 
 Cada paso se mide y queda en el [changelog](CHANGELOG.md) (en inglés), con los datos crudos en el
