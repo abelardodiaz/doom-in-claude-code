@@ -28,6 +28,7 @@ HAIKU_CADA = 900
 HAIKU_MIN = 150
 ESTANCADO = 540  # ~60 s de juego sin llave ni interruptor nuevo: replantear (Sonnet si hay escalamiento)
 PREGUNTA = "v2"  # pregunta de meta para Jev; --pregunta v1 para la original
+SOLO_META = False
 AQUI = os.path.dirname(os.path.abspath(__file__))
 PLANNER = os.path.join(AQUI, "..", "prompts", "planner.md")
 
@@ -139,7 +140,8 @@ def correr(mapa, semilla, modo, frames, log):
                 st_jev["ms"] += d["ms"]
                 st_jev["dudas_tactica"] += d["tactica"] is None
                 st_jev["dudas_meta"] += d["meta"] is None and len(metas) >= 2
-                orden = db.TACTICA_A_MODO[d["tactica"]]
+                # --solo-meta: Jev elige la meta y la tactica la decide el codigo, como en modo codigo
+                orden = "explorar" if SOLO_META else db.TACTICA_A_MODO[d["tactica"]]
                 nav.pedido_jev = d["meta"]
                 log({"ev": "jev", "frame": n, "tactica": d["tactica"], "cruda": d["tactica_cruda"],
                      "brecha": d["brecha_tactica"], "meta": d["meta"], "brecha_meta": d["brecha_meta"],
@@ -182,13 +184,15 @@ if __name__ == "__main__":
     ap.add_argument("--frames", default="MAP01:2000,MAP02:6000", help="tope por mapa; default 4000")
     ap.add_argument("--salida", default=os.path.join(AQUI, "..", "bench-resultados"))
     ap.add_argument("--pregunta", choices=["v1", "v2"], default="v2")
+    ap.add_argument("--solo-meta", action="store_true", help="Jev solo elige la meta; la tactica es del codigo")
     a = ap.parse_args()
     PREGUNTA = a.pregunta
+    SOLO_META = a.solo_meta
     topes = dict(x.split(":") for x in a.frames.split(","))
     os.makedirs(a.salida, exist_ok=True)
     for mapa in a.mapas.split(","):
         for s in range(a.desde, a.desde + a.semillas):
-            etiqueta = a.modo if a.modo == "codigo" else f"{a.modo}-{a.pregunta}"
+            etiqueta = a.modo if a.modo == "codigo" else f"{a.modo}-{a.pregunta}" + ("-solometa" if a.solo_meta else "")
             ruta = os.path.join(a.salida, f"{etiqueta}-{mapa}-s{s}.jsonl")
             with open(ruta, "w", encoding="utf-8") as f:
                 def log(d, f=f):
