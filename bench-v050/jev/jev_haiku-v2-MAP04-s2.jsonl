@@ -1,0 +1,735 @@
+{"ev": "foto", "frame": 0, "pos": [640, 640], "salud": 100, "municion": 50, "arma": 2, "modo": "explorar", "cerca": [[384, "DoomImp"], [384, "ShotgunGuy"], [387, "LostSoul"], [387, "LostSoul"], [453, "Zombieman"], [453, "Zombieman"]], "meta": null}
+{"ev": "jev", "frame": 0, "tactica": "pelear", "cruda": "pelear", "brecha": 0.89, "meta": null, "brecha_meta": null, "ms": 360}
+{"ev": "jev", "frame": 4, "tactica": "pelear", "cruda": "pelear", "brecha": 0.88, "meta": null, "brecha_meta": null, "ms": 143}
+{"ev": "jev", "frame": 8, "tactica": "pelear", "cruda": "pelear", "brecha": 0.91, "meta": null, "brecha_meta": null, "ms": 151}
+{"ev": "jev", "frame": 12, "tactica": "pelear", "cruda": "pelear", "brecha": 0.89, "meta": null, "brecha_meta": null, "ms": 155}
+{"ev": "jev", "frame": 16, "tactica": "pelear", "cruda": "pelear", "brecha": 0.87, "meta": null, "brecha_meta": null, "ms": 149}
+{"ev": "jev", "frame": 20, "tactica": "pelear", "cruda": "pelear", "brecha": 0.88, "meta": null, "brecha_meta": null, "ms": 151}
+{"ev": "jev", "frame": 24, "tactica": "pelear", "cruda": "pelear", "brecha": 0.88, "meta": null, "brecha_meta": null, "ms": 185}
+{"ev": "jev", "frame": 28, "tactica": "pelear", "cruda": "pelear", "brecha": 0.78, "meta": null, "brecha_meta": null, "ms": 151}
+{"ev": "jev", "frame": 32, "tactica": "pelear", "cruda": "pelear", "brecha": 0.74, "meta": null, "brecha_meta": null, "ms": 160}
+{"ev": "jev", "frame": 36, "tactica": "pelear", "cruda": "pelear", "brecha": 0.7, "meta": null, "brecha_meta": null, "ms": 161}
+{"ev": "jev", "frame": 40, "tactica": "pelear", "cruda": "pelear", "brecha": 0.5, "meta": null, "brecha_meta": null, "ms": 166}
+{"ev": "jev", "frame": 44, "tactica": "pelear", "cruda": "pelear", "brecha": 0.55, "meta": null, "brecha_meta": null, "ms": 147}
+{"ev": "jev", "frame": 48, "tactica": "pelear", "cruda": "pelear", "brecha": 0.62, "meta": null, "brecha_meta": null, "ms": 138}
+{"ev": "jev", "frame": 52, "tactica": "pelear", "cruda": "pelear", "brecha": 0.48, "meta": null, "brecha_meta": null, "ms": 147}
+{"ev": "jev", "frame": 56, "tactica": "pelear", "cruda": "pelear", "brecha": 0.55, "meta": null, "brecha_meta": null, "ms": 138}
+{"ev": "jev", "frame": 60, "tactica": "pelear", "cruda": "pelear", "brecha": 0.49, "meta": null, "brecha_meta": null, "ms": 139}
+{"ev": "jev", "frame": 64, "tactica": "pelear", "cruda": "pelear", "brecha": 0.71, "meta": null, "brecha_meta": null, "ms": 144}
+{"ev": "jev", "frame": 68, "tactica": "pelear", "cruda": "pelear", "brecha": 0.5, "meta": null, "brecha_meta": null, "ms": 159}
+{"ev": "jev", "frame": 72, "tactica": "pelear", "cruda": "pelear", "brecha": 0.65, "meta": null, "brecha_meta": null, "ms": 141}
+{"ev": "jev", "frame": 76, "tactica": "pelear", "cruda": "pelear", "brecha": 0.86, "meta": null, "brecha_meta": null, "ms": 143}
+{"ev": "jev", "frame": 80, "tactica": "pelear", "cruda": "pelear", "brecha": 0.73, "meta": null, "brecha_meta": null, "ms": 137}
+{"ev": "jev", "frame": 84, "tactica": "pelear", "cruda": "pelear", "brecha": 0.84, "meta": null, "brecha_meta": null, "ms": 148}
+{"ev": "jev", "frame": 88, "tactica": "pelear", "cruda": "pelear", "brecha": 0.97, "meta": null, "brecha_meta": null, "ms": 188}
+{"ev": "nav", "frame": 92, "que": ["meta", "salud_640_1184", "codigo", "10"]}
+{"ev": "haiku", "frame": 93, "modelo": "haiku", "motivo": "inicio", "plan": ["salud_640_1184", "arma_523_664", "frontera"], "comentario": "Primero stimpack, luego escopeta y a explorar; la salida está bloqueada, ni modo.", "seg": 11.8, "error": ""}
+{"ev": "jev", "frame": 94, "tactica": "curarse", "cruda": "curarse", "brecha": 0.39, "meta": "salud_640_1184", "brecha_meta": 0.55, "ms": 192}
+{"ev": "combate", "frame": 94, "que": ["curarse"], "salud": 46}
+{"ev": "jev", "frame": 103, "tactica": "curarse", "cruda": "curarse", "brecha": 0.53, "meta": "salud_640_1184", "brecha_meta": 0.29, "ms": 143}
+{"ev": "nav", "frame": 103, "que": ["provision_alcanzada", "salud_640_1184"]}
+{"ev": "nav", "frame": 104, "que": ["meta", "salud_96_640", "curarse", "41"]}
+{"ev": "nav", "frame": 106, "que": ["meta", "salud_1184_640", "curarse", "40"]}
+{"ev": "jev", "frame": 109, "tactica": "curarse", "cruda": "curarse", "brecha": 0.51, "meta": "frontera", "brecha_meta": 0.61, "ms": 154}
+{"ev": "jev", "frame": 113, "tactica": "curarse", "cruda": "curarse", "brecha": 0.55, "meta": null, "brecha_meta": 0.18, "ms": 148}
+{"ev": "combate", "frame": 117, "que": ["voltear", "LostSoul", "100"], "salud": 38}
+{"ev": "jev", "frame": 118, "tactica": null, "cruda": "curarse", "brecha": 0.16, "meta": "frontera", "brecha_meta": 0.4, "ms": 143}
+{"ev": "combate", "frame": 121, "que": ["retirada"], "salud": 23}
+{"ev": "jev", "frame": 122, "tactica": null, "cruda": "curarse", "brecha": 0.16, "meta": null, "brecha_meta": 0.04, "ms": 154}
+{"ev": "jev", "frame": 126, "tactica": "curarse", "cruda": "curarse", "brecha": 0.46, "meta": null, "brecha_meta": 0.11, "ms": 146}
+{"ev": "combate", "frame": 126, "que": ["curarse"], "salud": 23}
+{"ev": "jev", "frame": 130, "tactica": null, "cruda": "curarse", "brecha": 0.09, "meta": null, "brecha_meta": 0.04, "ms": 153}
+{"ev": "combate", "frame": 130, "que": ["retirada"], "salud": 23}
+{"ev": "jev", "frame": 134, "tactica": null, "cruda": "curarse", "brecha": 0.19, "meta": "salud_1184_640", "brecha_meta": 0.41, "ms": 149}
+{"ev": "jev", "frame": 138, "tactica": "curarse", "cruda": "curarse", "brecha": 0.25, "meta": null, "brecha_meta": 0.16, "ms": 151}
+{"ev": "combate", "frame": 138, "que": ["curarse"], "salud": 23}
+{"ev": "combate", "frame": 144, "que": ["voltear", "LostSoul", "-93"], "salud": 11}
+{"ev": "jev", "frame": 145, "tactica": "curarse", "cruda": "curarse", "brecha": 0.64, "meta": null, "brecha_meta": 0.17, "ms": 150}
+{"ev": "jev", "frame": 150, "tactica": "curarse", "cruda": "curarse", "brecha": 0.31, "meta": null, "brecha_meta": 0.04, "ms": 154}
+{"ev": "jev", "frame": 154, "tactica": "curarse", "cruda": "curarse", "brecha": 0.5, "meta": "salud_1184_640", "brecha_meta": 0.26, "ms": 152}
+{"ev": "muerte", "frame": 158, "pos": [754, 1175], "salud": 11, "municion": 29, "arma": 2, "modo": "curarse", "cerca": [[36, "DoomImp"], [63, "LostSoul"], [208, "ChaingunGuy"], [287, "Zombieman"], [408, "ShotgunGuy"], [503, "Zombieman"]]}
+{"ev": "jev", "frame": 158, "tactica": "pelear", "cruda": "pelear", "brecha": 0.83, "meta": null, "brecha_meta": null, "ms": 149}
+{"ev": "jev", "frame": 162, "tactica": "pelear", "cruda": "pelear", "brecha": 0.89, "meta": null, "brecha_meta": null, "ms": 154}
+{"ev": "jev", "frame": 166, "tactica": "pelear", "cruda": "pelear", "brecha": 0.93, "meta": null, "brecha_meta": null, "ms": 160}
+{"ev": "jev", "frame": 170, "tactica": "pelear", "cruda": "pelear", "brecha": 0.8, "meta": null, "brecha_meta": null, "ms": 165}
+{"ev": "jev", "frame": 174, "tactica": "pelear", "cruda": "pelear", "brecha": 0.84, "meta": null, "brecha_meta": null, "ms": 149}
+{"ev": "jev", "frame": 178, "tactica": "pelear", "cruda": "pelear", "brecha": 0.8, "meta": null, "brecha_meta": null, "ms": 155}
+{"ev": "jev", "frame": 182, "tactica": "pelear", "cruda": "pelear", "brecha": 0.87, "meta": null, "brecha_meta": null, "ms": 143}
+{"ev": "jev", "frame": 186, "tactica": "pelear", "cruda": "pelear", "brecha": 0.79, "meta": null, "brecha_meta": null, "ms": 143}
+{"ev": "jev", "frame": 190, "tactica": "pelear", "cruda": "pelear", "brecha": 0.85, "meta": null, "brecha_meta": null, "ms": 141}
+{"ev": "jev", "frame": 194, "tactica": null, "cruda": "pelear", "brecha": 0.01, "meta": null, "brecha_meta": null, "ms": 143}
+{"ev": "jev", "frame": 198, "tactica": null, "cruda": "pelear", "brecha": 0.18, "meta": null, "brecha_meta": null, "ms": 150}
+{"ev": "foto", "frame": 200, "pos": [492, 780], "salud": 58, "municion": 39, "arma": 2, "modo": "atacar", "cerca": [[52, "ShotgunGuy"], [99, "LostSoul"], [249, "Zombieman"], [438, "DoomImp"], [488, "LostSoul"], [491, "Zombieman"]], "meta": null}
+{"ev": "jev", "frame": 202, "tactica": null, "cruda": "esquivar", "brecha": 0.01, "meta": null, "brecha_meta": null, "ms": 153}
+{"ev": "jev", "frame": 206, "tactica": "pelear", "cruda": "pelear", "brecha": 0.35, "meta": null, "brecha_meta": null, "ms": 142}
+{"ev": "jev", "frame": 210, "tactica": null, "cruda": "pelear", "brecha": 0.05, "meta": null, "brecha_meta": null, "ms": 154}
+{"ev": "jev", "frame": 214, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.21, "meta": null, "brecha_meta": null, "ms": 141}
+{"ev": "combate", "frame": 214, "que": ["retirada"], "salud": 40}
+{"ev": "jev", "frame": 218, "tactica": "pelear", "cruda": "pelear", "brecha": 0.3, "meta": null, "brecha_meta": null, "ms": 147}
+{"ev": "jev", "frame": 222, "tactica": null, "cruda": "esquivar", "brecha": 0.18, "meta": null, "brecha_meta": null, "ms": 146}
+{"ev": "nav", "frame": 222, "que": ["meta", "arma_640_512", "codigo", "18"]}
+{"ev": "combate", "frame": 224, "que": ["curarse"], "salud": 13}
+{"ev": "nav", "frame": 224, "que": ["meta", "salud_640_1184", "curarse", "27"]}
+{"ev": "jev", "frame": 226, "tactica": null, "cruda": "curarse", "brecha": 0.16, "meta": null, "brecha_meta": 0.15, "ms": 153}
+{"ev": "jev", "frame": 230, "tactica": "curarse", "cruda": "curarse", "brecha": 0.58, "meta": "salud_640_1184", "brecha_meta": 0.37, "ms": 139}
+{"ev": "combate", "frame": 230, "que": ["curarse"], "salud": 13}
+{"ev": "muerte", "frame": 232, "pos": [520, 807], "salud": 13, "municion": 32, "arma": 2, "modo": "curarse", "cerca": [[70, "ShotgunGuy"], [102, "LostSoul"], [252, "Zombieman"], [277, "LostSoul"], [397, "DoomImp"], [466, "Zombieman"]]}
+{"ev": "jev", "frame": 234, "tactica": "pelear", "cruda": "pelear", "brecha": 0.81, "meta": null, "brecha_meta": null, "ms": 142}
+{"ev": "jev", "frame": 238, "tactica": "pelear", "cruda": "pelear", "brecha": 0.95, "meta": null, "brecha_meta": null, "ms": 149}
+{"ev": "jev", "frame": 242, "tactica": "pelear", "cruda": "pelear", "brecha": 0.84, "meta": null, "brecha_meta": null, "ms": 138}
+{"ev": "jev", "frame": 246, "tactica": "pelear", "cruda": "pelear", "brecha": 0.75, "meta": null, "brecha_meta": null, "ms": 185}
+{"ev": "jev", "frame": 250, "tactica": "pelear", "cruda": "pelear", "brecha": 0.8, "meta": null, "brecha_meta": null, "ms": 155}
+{"ev": "jev", "frame": 254, "tactica": "pelear", "cruda": "pelear", "brecha": 0.93, "meta": null, "brecha_meta": null, "ms": 167}
+{"ev": "jev", "frame": 258, "tactica": "pelear", "cruda": "pelear", "brecha": 0.84, "meta": null, "brecha_meta": null, "ms": 149}
+{"ev": "jev", "frame": 262, "tactica": "pelear", "cruda": "pelear", "brecha": 0.36, "meta": null, "brecha_meta": null, "ms": 142}
+{"ev": "jev", "frame": 266, "tactica": null, "cruda": "pelear", "brecha": 0.03, "meta": null, "brecha_meta": null, "ms": 141}
+{"ev": "jev", "frame": 270, "tactica": null, "cruda": "esquivar", "brecha": 0.15, "meta": null, "brecha_meta": null, "ms": 144}
+{"ev": "combate", "frame": 273, "que": ["retirada"], "salud": 25}
+{"ev": "jev", "frame": 274, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.54, "meta": null, "brecha_meta": null, "ms": 158}
+{"ev": "jev", "frame": 278, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.29, "meta": null, "brecha_meta": null, "ms": 147}
+{"ev": "jev", "frame": 282, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.46, "meta": null, "brecha_meta": null, "ms": 158}
+{"ev": "jev", "frame": 286, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.47, "meta": null, "brecha_meta": null, "ms": 143}
+{"ev": "jev", "frame": 290, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.58, "meta": null, "brecha_meta": null, "ms": 152}
+{"ev": "jev", "frame": 294, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.22, "meta": null, "brecha_meta": null, "ms": 147}
+{"ev": "jev", "frame": 298, "tactica": null, "cruda": "esquivar", "brecha": 0.02, "meta": null, "brecha_meta": null, "ms": 143}
+{"ev": "jev", "frame": 302, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.73, "meta": null, "brecha_meta": null, "ms": 243}
+{"ev": "jev", "frame": 306, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.7, "meta": null, "brecha_meta": null, "ms": 153}
+{"ev": "jev", "frame": 310, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.46, "meta": null, "brecha_meta": null, "ms": 146}
+{"ev": "jev", "frame": 314, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.27, "meta": null, "brecha_meta": null, "ms": 173}
+{"ev": "jev", "frame": 318, "tactica": null, "cruda": "curarse", "brecha": 0.1, "meta": null, "brecha_meta": null, "ms": 245}
+{"ev": "combate", "frame": 321, "que": ["retirada"], "salud": 25}
+{"ev": "jev", "frame": 322, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.49, "meta": null, "brecha_meta": null, "ms": 143}
+{"ev": "jev", "frame": 326, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.42, "meta": null, "brecha_meta": null, "ms": 150}
+{"ev": "nav", "frame": 327, "que": ["meta", "salud_640_1184", "codigo", "11"]}
+{"ev": "haiku", "frame": 328, "modelo": "haiku", "motivo": "muerte", "plan": ["salud_640_1184", "arma_604_826", "llave_roja", "llave_azul", "salida"], "comentario": "Primero me curo, luego escopeta y a cazar llaves, que aquí no hay de otra.", "seg": 12.0, "error": ""}
+{"ev": "muerte", "frame": 332, "pos": [535, 1250], "salud": 13, "municion": 31, "arma": 2, "modo": "explorar", "cerca": [[41, "LostSoul"], [135, "ChaingunGuy"], [162, "LostSoul"], [267, "Zombieman"], [380, "Zombieman"], [382, "Zombieman"]]}
+{"ev": "jev", "frame": 332, "tactica": "pelear", "cruda": "pelear", "brecha": 0.8, "meta": null, "brecha_meta": null, "ms": 145}
+{"ev": "jev", "frame": 336, "tactica": "pelear", "cruda": "pelear", "brecha": 0.85, "meta": null, "brecha_meta": null, "ms": 145}
+{"ev": "jev", "frame": 340, "tactica": "pelear", "cruda": "pelear", "brecha": 0.91, "meta": null, "brecha_meta": null, "ms": 142}
+{"ev": "jev", "frame": 344, "tactica": "pelear", "cruda": "pelear", "brecha": 0.82, "meta": null, "brecha_meta": null, "ms": 146}
+{"ev": "jev", "frame": 348, "tactica": "pelear", "cruda": "pelear", "brecha": 0.85, "meta": null, "brecha_meta": null, "ms": 165}
+{"ev": "jev", "frame": 352, "tactica": "pelear", "cruda": "pelear", "brecha": 0.85, "meta": null, "brecha_meta": null, "ms": 149}
+{"ev": "jev", "frame": 356, "tactica": "pelear", "cruda": "pelear", "brecha": 0.67, "meta": null, "brecha_meta": null, "ms": 149}
+{"ev": "jev", "frame": 360, "tactica": "pelear", "cruda": "pelear", "brecha": 0.66, "meta": null, "brecha_meta": null, "ms": 155}
+{"ev": "jev", "frame": 364, "tactica": "pelear", "cruda": "pelear", "brecha": 0.5, "meta": null, "brecha_meta": null, "ms": 142}
+{"ev": "jev", "frame": 368, "tactica": "pelear", "cruda": "pelear", "brecha": 0.62, "meta": null, "brecha_meta": null, "ms": 148}
+{"ev": "jev", "frame": 372, "tactica": "pelear", "cruda": "pelear", "brecha": 0.61, "meta": null, "brecha_meta": null, "ms": 144}
+{"ev": "jev", "frame": 376, "tactica": "pelear", "cruda": "pelear", "brecha": 0.69, "meta": null, "brecha_meta": null, "ms": 157}
+{"ev": "jev", "frame": 380, "tactica": "pelear", "cruda": "pelear", "brecha": 0.63, "meta": null, "brecha_meta": null, "ms": 160}
+{"ev": "jev", "frame": 384, "tactica": "pelear", "cruda": "pelear", "brecha": 0.5, "meta": null, "brecha_meta": null, "ms": 145}
+{"ev": "jev", "frame": 388, "tactica": null, "cruda": "esquivar", "brecha": 0.11, "meta": null, "brecha_meta": null, "ms": 170}
+{"ev": "jev", "frame": 392, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.26, "meta": null, "brecha_meta": null, "ms": 174}
+{"ev": "combate", "frame": 392, "que": ["retirada"], "salud": 37}
+{"ev": "jev", "frame": 396, "tactica": null, "cruda": "esquivar", "brecha": 0.19, "meta": null, "brecha_meta": null, "ms": 154}
+{"ev": "foto", "frame": 400, "pos": [699, 992], "salud": 37, "municion": 32, "arma": 2, "modo": "atacar", "cerca": [[263, "Zombieman"], [351, "DoomImp"], [358, "ChaingunGuy"], [380, "Zombieman"], [477, "Zombieman"], [599, "ShotgunGuy"]], "meta": null}
+{"ev": "jev", "frame": 400, "tactica": null, "cruda": "esquivar", "brecha": 0.08, "meta": null, "brecha_meta": null, "ms": 186}
+{"ev": "jev", "frame": 404, "tactica": null, "cruda": "esquivar", "brecha": 0.15, "meta": null, "brecha_meta": null, "ms": 147}
+{"ev": "jev", "frame": 408, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.27, "meta": null, "brecha_meta": null, "ms": 143}
+{"ev": "combate", "frame": 408, "que": ["retirada"], "salud": 37}
+{"ev": "jev", "frame": 413, "tactica": "pelear", "cruda": "pelear", "brecha": 0.2, "meta": null, "brecha_meta": null, "ms": 139}
+{"ev": "jev", "frame": 417, "tactica": "pelear", "cruda": "pelear", "brecha": 0.27, "meta": null, "brecha_meta": null, "ms": 137}
+{"ev": "jev", "frame": 421, "tactica": null, "cruda": "pelear", "brecha": 0.14, "meta": null, "brecha_meta": null, "ms": 142}
+{"ev": "jev", "frame": 425, "tactica": "pelear", "cruda": "pelear", "brecha": 0.41, "meta": null, "brecha_meta": null, "ms": 136}
+{"ev": "jev", "frame": 429, "tactica": "pelear", "cruda": "pelear", "brecha": 0.3, "meta": null, "brecha_meta": null, "ms": 155}
+{"ev": "nav", "frame": 431, "que": ["meta", "salud_640_1184", "codigo", "13"]}
+{"ev": "jev", "frame": 438, "tactica": null, "cruda": "curarse", "brecha": 0.09, "meta": "salud_640_1184", "brecha_meta": 0.44, "ms": 179}
+{"ev": "nav", "frame": 440, "que": ["provision_alcanzada", "salud_640_1184"]}
+{"ev": "nav", "frame": 441, "que": ["meta", "arma_562_738", "codigo", "30"]}
+{"ev": "jev", "frame": 443, "tactica": null, "cruda": "esquivar", "brecha": 0.02, "meta": "arma_562_738", "brecha_meta": 0.62, "ms": 148}
+{"ev": "jev", "frame": 447, "tactica": null, "cruda": "pelear", "brecha": 0.08, "meta": "arma_562_738", "brecha_meta": 0.22, "ms": 140}
+{"ev": "jev", "frame": 451, "tactica": null, "cruda": "pelear", "brecha": 0.09, "meta": null, "brecha_meta": 0.17, "ms": 147}
+{"ev": "jev", "frame": 455, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.2, "meta": "arma_562_738", "brecha_meta": 0.59, "ms": 144}
+{"ev": "combate", "frame": 455, "que": ["retirada"], "salud": 47}
+{"ev": "jev", "frame": 459, "tactica": null, "cruda": "pelear", "brecha": 0.01, "meta": "arma_562_738", "brecha_meta": 0.27, "ms": 148}
+{"ev": "jev", "frame": 463, "tactica": "pelear", "cruda": "pelear", "brecha": 0.26, "meta": null, "brecha_meta": 0.0, "ms": 157}
+{"ev": "jev", "frame": 467, "tactica": null, "cruda": "pelear", "brecha": 0.17, "meta": null, "brecha_meta": 0.0, "ms": 154}
+{"ev": "jev", "frame": 471, "tactica": null, "cruda": "esquivar", "brecha": 0.18, "meta": null, "brecha_meta": 0.08, "ms": 148}
+{"ev": "jev", "frame": 475, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.33, "meta": null, "brecha_meta": 0.04, "ms": 147}
+{"ev": "haiku", "frame": 478, "modelo": "haiku", "motivo": "muerte", "plan": ["municion_389_1048", "arma_562_738", "salud_1184_640", "llave_roja"], "comentario": "Primero munición cercana, luego escopeta, stimpack y por la llave roja, ¡vamos!", "seg": 10.8, "error": ""}
+{"ev": "jev", "frame": 479, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.31, "meta": "frontera", "brecha_meta": 0.22, "ms": 158}
+{"ev": "jev", "frame": 483, "tactica": null, "cruda": "esquivar", "brecha": 0.07, "meta": null, "brecha_meta": 0.06, "ms": 192}
+{"ev": "jev", "frame": 487, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.26, "meta": null, "brecha_meta": 0.01, "ms": 158}
+{"ev": "jev", "frame": 491, "tactica": null, "cruda": "pelear", "brecha": 0.02, "meta": null, "brecha_meta": 0.01, "ms": 153}
+{"ev": "jev", "frame": 495, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.23, "meta": null, "brecha_meta": 0.14, "ms": 163}
+{"ev": "jev", "frame": 499, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.42, "meta": null, "brecha_meta": 0.08, "ms": 166}
+{"ev": "jev", "frame": 503, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.31, "meta": null, "brecha_meta": 0.04, "ms": 143}
+{"ev": "jev", "frame": 507, "tactica": null, "cruda": "avanzar", "brecha": 0.11, "meta": "arma_562_738", "brecha_meta": 0.28, "ms": 157}
+{"ev": "jev", "frame": 511, "tactica": null, "cruda": "avanzar", "brecha": 0.15, "meta": "arma_562_738", "brecha_meta": 0.54, "ms": 147}
+{"ev": "jev", "frame": 515, "tactica": null, "cruda": "avanzar", "brecha": 0.13, "meta": null, "brecha_meta": 0.08, "ms": 168}
+{"ev": "jev", "frame": 519, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.31, "meta": null, "brecha_meta": 0.03, "ms": 184}
+{"ev": "nav", "frame": 519, "que": ["meta", "municion_389_1048", "haiku", "6"]}
+{"ev": "nav", "frame": 522, "que": ["provision_alcanzada", "municion_389_1048"]}
+{"ev": "nav", "frame": 523, "que": ["meta", "arma_562_738", "haiku", "22"]}
+{"ev": "muerte", "frame": 526, "pos": [349, 1034], "salud": 11, "municion": 14, "arma": 2, "modo": "explorar", "cerca": [[42, "LostSoul"], [269, "DoomImp"], [420, "ChaingunGuy"], [579, "ExplosiveBarrel"], [585, "ExplosiveBarrel"], [594, "ChaingunGuy"]]}
+{"ev": "jev", "frame": 526, "tactica": "pelear", "cruda": "pelear", "brecha": 0.85, "meta": null, "brecha_meta": null, "ms": 144}
+{"ev": "jev", "frame": 530, "tactica": "pelear", "cruda": "pelear", "brecha": 0.83, "meta": null, "brecha_meta": null, "ms": 153}
+{"ev": "jev", "frame": 534, "tactica": "pelear", "cruda": "pelear", "brecha": 0.89, "meta": null, "brecha_meta": null, "ms": 151}
+{"ev": "jev", "frame": 538, "tactica": "pelear", "cruda": "pelear", "brecha": 0.88, "meta": null, "brecha_meta": null, "ms": 188}
+{"ev": "jev", "frame": 542, "tactica": "pelear", "cruda": "pelear", "brecha": 0.88, "meta": null, "brecha_meta": null, "ms": 141}
+{"ev": "jev", "frame": 546, "tactica": "pelear", "cruda": "pelear", "brecha": 0.84, "meta": null, "brecha_meta": null, "ms": 146}
+{"ev": "jev", "frame": 550, "tactica": "pelear", "cruda": "pelear", "brecha": 0.83, "meta": null, "brecha_meta": null, "ms": 140}
+{"ev": "jev", "frame": 554, "tactica": "pelear", "cruda": "pelear", "brecha": 0.74, "meta": null, "brecha_meta": null, "ms": 151}
+{"ev": "jev", "frame": 558, "tactica": "pelear", "cruda": "pelear", "brecha": 0.66, "meta": null, "brecha_meta": null, "ms": 153}
+{"ev": "jev", "frame": 562, "tactica": "pelear", "cruda": "pelear", "brecha": 0.69, "meta": null, "brecha_meta": null, "ms": 159}
+{"ev": "jev", "frame": 566, "tactica": "pelear", "cruda": "pelear", "brecha": 0.35, "meta": null, "brecha_meta": null, "ms": 152}
+{"ev": "jev", "frame": 570, "tactica": "pelear", "cruda": "pelear", "brecha": 0.68, "meta": null, "brecha_meta": null, "ms": 139}
+{"ev": "jev", "frame": 574, "tactica": "pelear", "cruda": "pelear", "brecha": 0.4, "meta": null, "brecha_meta": null, "ms": 161}
+{"ev": "jev", "frame": 578, "tactica": "pelear", "cruda": "pelear", "brecha": 0.68, "meta": null, "brecha_meta": null, "ms": 141}
+{"ev": "jev", "frame": 582, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.24, "meta": null, "brecha_meta": null, "ms": 147}
+{"ev": "combate", "frame": 582, "que": ["retirada"], "salud": 37}
+{"ev": "jev", "frame": 586, "tactica": null, "cruda": "esquivar", "brecha": 0.07, "meta": null, "brecha_meta": null, "ms": 139}
+{"ev": "jev", "frame": 590, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.29, "meta": null, "brecha_meta": null, "ms": 146}
+{"ev": "combate", "frame": 590, "que": ["retirada"], "salud": 37}
+{"ev": "jev", "frame": 594, "tactica": null, "cruda": "pelear", "brecha": 0.06, "meta": null, "brecha_meta": null, "ms": 153}
+{"ev": "jev", "frame": 598, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.22, "meta": null, "brecha_meta": null, "ms": 148}
+{"ev": "combate", "frame": 598, "que": ["retirada"], "salud": 37}
+{"ev": "foto", "frame": 600, "pos": [931, 1106], "salud": 37, "municion": 42, "arma": 2, "modo": "retirada", "cerca": [[98, "Zombieman"], [340, "Zombieman"], [341, "DoomImp"], [382, "ChaingunGuy"], [467, "ShotgunGuy"], [475, "ShotgunGuy"]], "meta": null}
+{"ev": "jev", "frame": 602, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.57, "meta": null, "brecha_meta": null, "ms": 155}
+{"ev": "jev", "frame": 606, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.77, "meta": null, "brecha_meta": null, "ms": 139}
+{"ev": "jev", "frame": 610, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.22, "meta": null, "brecha_meta": null, "ms": 147}
+{"ev": "jev", "frame": 614, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.7, "meta": null, "brecha_meta": null, "ms": 154}
+{"ev": "jev", "frame": 618, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.46, "meta": null, "brecha_meta": null, "ms": 148}
+{"ev": "jev", "frame": 622, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.39, "meta": null, "brecha_meta": null, "ms": 164}
+{"ev": "nav", "frame": 624, "que": ["meta", "salud_640_1184", "codigo", "35"]}
+{"ev": "jev", "frame": 626, "tactica": "curarse", "cruda": "curarse", "brecha": 0.33, "meta": null, "brecha_meta": 0.02, "ms": 168}
+{"ev": "combate", "frame": 626, "que": ["curarse"], "salud": 13}
+{"ev": "haiku", "frame": 628, "modelo": "haiku", "motivo": "muerte", "plan": ["salud_640_1184", "arma_640_512", "municion_929_1034", "frontera"], "comentario": "Salud 13, así que primero me curo, luego agarro la escopeta y a explorar, ¡ni modo de otra forma!", "seg": 9.5, "error": ""}
+{"ev": "jev", "frame": 630, "tactica": "curarse", "cruda": "curarse", "brecha": 0.38, "meta": null, "brecha_meta": 0.0, "ms": 155}
+{"ev": "nav", "frame": 630, "que": ["meta", "salud_1184_640", "curarse", "31"]}
+{"ev": "jev", "frame": 634, "tactica": "curarse", "cruda": "curarse", "brecha": 0.73, "meta": null, "brecha_meta": 0.15, "ms": 165}
+{"ev": "jev", "frame": 643, "tactica": "curarse", "cruda": "curarse", "brecha": 0.39, "meta": "salud_1184_640", "brecha_meta": 0.33, "ms": 137}
+{"ev": "jev", "frame": 647, "tactica": "curarse", "cruda": "curarse", "brecha": 0.46, "meta": null, "brecha_meta": 0.09, "ms": 145}
+{"ev": "jev", "frame": 651, "tactica": "curarse", "cruda": "curarse", "brecha": 0.46, "meta": "salud_1184_640", "brecha_meta": 0.47, "ms": 136}
+{"ev": "jev", "frame": 655, "tactica": "curarse", "cruda": "curarse", "brecha": 0.58, "meta": "salud_1184_640", "brecha_meta": 0.26, "ms": 143}
+{"ev": "jev", "frame": 659, "tactica": "curarse", "cruda": "curarse", "brecha": 0.26, "meta": null, "brecha_meta": 0.01, "ms": 145}
+{"ev": "jev", "frame": 663, "tactica": "curarse", "cruda": "curarse", "brecha": 0.45, "meta": "salud_1184_640", "brecha_meta": 0.31, "ms": 159}
+{"ev": "jev", "frame": 667, "tactica": "curarse", "cruda": "curarse", "brecha": 0.47, "meta": null, "brecha_meta": 0.19, "ms": 183}
+{"ev": "nav", "frame": 667, "que": ["meta", "salud_640_1184", "curarse", "39"]}
+{"ev": "jev", "frame": 671, "tactica": "curarse", "cruda": "curarse", "brecha": 0.47, "meta": "frontera", "brecha_meta": 0.21, "ms": 156}
+{"ev": "jev", "frame": 675, "tactica": "curarse", "cruda": "curarse", "brecha": 0.63, "meta": null, "brecha_meta": 0.01, "ms": 152}
+{"ev": "jev", "frame": 679, "tactica": "curarse", "cruda": "curarse", "brecha": 0.54, "meta": "salud_640_1184", "brecha_meta": 0.3, "ms": 152}
+{"ev": "jev", "frame": 684, "tactica": "curarse", "cruda": "curarse", "brecha": 0.74, "meta": "frontera", "brecha_meta": 0.28, "ms": 148}
+{"ev": "jev", "frame": 688, "tactica": "curarse", "cruda": "curarse", "brecha": 0.4, "meta": "salud_640_1184", "brecha_meta": 0.24, "ms": 189}
+{"ev": "jev", "frame": 697, "tactica": "curarse", "cruda": "curarse", "brecha": 0.64, "meta": null, "brecha_meta": 0.08, "ms": 143}
+{"ev": "jev", "frame": 701, "tactica": "curarse", "cruda": "curarse", "brecha": 0.39, "meta": null, "brecha_meta": 0.01, "ms": 161}
+{"ev": "muerte", "frame": 707, "pos": [776, 1127], "salud": 2, "municion": 41, "arma": 2, "modo": "curarse", "cerca": [[67, "Zombieman"], [184, "DoomImp"], [260, "ChaingunGuy"], [325, "Zombieman"], [346, "DoomImpBall"], [444, "LostSoul"]]}
+{"ev": "jev", "frame": 707, "tactica": "pelear", "cruda": "pelear", "brecha": 0.89, "meta": null, "brecha_meta": null, "ms": 153}
+{"ev": "jev", "frame": 711, "tactica": "pelear", "cruda": "pelear", "brecha": 0.89, "meta": null, "brecha_meta": null, "ms": 155}
+{"ev": "jev", "frame": 715, "tactica": "pelear", "cruda": "pelear", "brecha": 0.89, "meta": null, "brecha_meta": null, "ms": 156}
+{"ev": "jev", "frame": 719, "tactica": "pelear", "cruda": "pelear", "brecha": 0.87, "meta": null, "brecha_meta": null, "ms": 140}
+{"ev": "jev", "frame": 723, "tactica": "pelear", "cruda": "pelear", "brecha": 0.89, "meta": null, "brecha_meta": null, "ms": 141}
+{"ev": "jev", "frame": 727, "tactica": "pelear", "cruda": "pelear", "brecha": 0.82, "meta": null, "brecha_meta": null, "ms": 144}
+{"ev": "jev", "frame": 731, "tactica": "pelear", "cruda": "pelear", "brecha": 0.79, "meta": null, "brecha_meta": null, "ms": 145}
+{"ev": "jev", "frame": 735, "tactica": "pelear", "cruda": "pelear", "brecha": 0.8, "meta": null, "brecha_meta": null, "ms": 160}
+{"ev": "jev", "frame": 739, "tactica": "pelear", "cruda": "pelear", "brecha": 0.4, "meta": null, "brecha_meta": null, "ms": 148}
+{"ev": "jev", "frame": 743, "tactica": "pelear", "cruda": "pelear", "brecha": 0.68, "meta": null, "brecha_meta": null, "ms": 157}
+{"ev": "jev", "frame": 747, "tactica": "pelear", "cruda": "pelear", "brecha": 0.5, "meta": null, "brecha_meta": null, "ms": 149}
+{"ev": "jev", "frame": 751, "tactica": "pelear", "cruda": "pelear", "brecha": 0.61, "meta": null, "brecha_meta": null, "ms": 140}
+{"ev": "jev", "frame": 755, "tactica": "pelear", "cruda": "pelear", "brecha": 0.53, "meta": null, "brecha_meta": null, "ms": 153}
+{"ev": "jev", "frame": 759, "tactica": "pelear", "cruda": "pelear", "brecha": 0.6, "meta": null, "brecha_meta": null, "ms": 166}
+{"ev": "jev", "frame": 763, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.29, "meta": null, "brecha_meta": null, "ms": 144}
+{"ev": "combate", "frame": 763, "que": ["retirada"], "salud": 37}
+{"ev": "jev", "frame": 767, "tactica": null, "cruda": "esquivar", "brecha": 0.17, "meta": null, "brecha_meta": null, "ms": 173}
+{"ev": "jev", "frame": 771, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.23, "meta": null, "brecha_meta": null, "ms": 142}
+{"ev": "combate", "frame": 771, "que": ["retirada"], "salud": 37}
+{"ev": "jev", "frame": 775, "tactica": null, "cruda": "esquivar", "brecha": 0.01, "meta": null, "brecha_meta": null, "ms": 154}
+{"ev": "jev", "frame": 779, "tactica": null, "cruda": "esquivar", "brecha": 0.08, "meta": null, "brecha_meta": null, "ms": 141}
+{"ev": "jev", "frame": 783, "tactica": null, "cruda": "esquivar", "brecha": 0.11, "meta": null, "brecha_meta": null, "ms": 153}
+{"ev": "jev", "frame": 787, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.26, "meta": null, "brecha_meta": null, "ms": 189}
+{"ev": "combate", "frame": 787, "que": ["retirada"], "salud": 37}
+{"ev": "jev", "frame": 791, "tactica": "pelear", "cruda": "pelear", "brecha": 0.34, "meta": null, "brecha_meta": null, "ms": 152}
+{"ev": "nav", "frame": 793, "que": ["meta", "salud_1184_640", "codigo", "16"]}
+{"ev": "haiku", "frame": 794, "modelo": "haiku", "motivo": "muerte", "plan": ["salud_1184_640", "arma_593_767", "frontera"], "comentario": "Stimpack primero, 37 de vida no perdona. Luego escopeta y a explorar, salida sin ruta.", "seg": 11.3, "error": ""}
+{"ev": "jev", "frame": 795, "tactica": "curarse", "cruda": "curarse", "brecha": 0.5, "meta": null, "brecha_meta": 0.19, "ms": 141}
+{"ev": "combate", "frame": 795, "que": ["curarse"], "salud": 37}
+{"ev": "jev", "frame": 799, "tactica": "curarse", "cruda": "curarse", "brecha": 0.5, "meta": "salud_1184_640", "brecha_meta": 0.27, "ms": 149}
+{"ev": "foto", "frame": 800, "pos": [1122, 790], "salud": 37, "municion": 39, "arma": 2, "modo": "curarse", "cerca": [[75, "DoomImp"], [295, "HellKnight"], [319, "ShotgunGuy"], [419, "Zombieman"], [450, "ShotgunGuy"], [462, "ShotgunGuy"]], "meta": "salud_1184_640"}
+{"ev": "jev", "frame": 803, "tactica": "curarse", "cruda": "curarse", "brecha": 0.25, "meta": "salud_1184_640", "brecha_meta": 0.56, "ms": 153}
+{"ev": "jev", "frame": 808, "tactica": "curarse", "cruda": "curarse", "brecha": 0.53, "meta": "salud_1184_640", "brecha_meta": 0.36, "ms": 140}
+{"ev": "jev", "frame": 813, "tactica": "curarse", "cruda": "curarse", "brecha": 0.56, "meta": "salud_1184_640", "brecha_meta": 0.42, "ms": 145}
+{"ev": "jev", "frame": 820, "tactica": "curarse", "cruda": "curarse", "brecha": 0.78, "meta": "salud_1184_640", "brecha_meta": 0.36, "ms": 142}
+{"ev": "jev", "frame": 824, "tactica": "curarse", "cruda": "curarse", "brecha": 0.66, "meta": null, "brecha_meta": 0.07, "ms": 149}
+{"ev": "jev", "frame": 828, "tactica": "curarse", "cruda": "curarse", "brecha": 0.51, "meta": "salud_1184_640", "brecha_meta": 0.23, "ms": 163}
+{"ev": "jev", "frame": 832, "tactica": "curarse", "cruda": "curarse", "brecha": 0.33, "meta": "salud_1184_640", "brecha_meta": 0.34, "ms": 145}
+{"ev": "muerte", "frame": 834, "pos": [1109, 828], "salud": 1, "municion": 39, "arma": 2, "modo": "curarse", "cerca": [[41, "DoomImp"], [300, "Zombieman"], [327, "HellKnight"], [332, "ShotgunGuy"], [445, "Zombieman"], [476, "ShotgunGuy"]]}
+{"ev": "jev", "frame": 836, "tactica": "pelear", "cruda": "pelear", "brecha": 0.79, "meta": null, "brecha_meta": null, "ms": 137}
+{"ev": "jev", "frame": 840, "tactica": "pelear", "cruda": "pelear", "brecha": 0.89, "meta": null, "brecha_meta": null, "ms": 149}
+{"ev": "jev", "frame": 844, "tactica": "pelear", "cruda": "pelear", "brecha": 0.82, "meta": null, "brecha_meta": null, "ms": 161}
+{"ev": "jev", "frame": 848, "tactica": "pelear", "cruda": "pelear", "brecha": 0.79, "meta": null, "brecha_meta": null, "ms": 150}
+{"ev": "jev", "frame": 852, "tactica": "pelear", "cruda": "pelear", "brecha": 0.75, "meta": null, "brecha_meta": null, "ms": 154}
+{"ev": "jev", "frame": 856, "tactica": "pelear", "cruda": "pelear", "brecha": 0.88, "meta": null, "brecha_meta": null, "ms": 145}
+{"ev": "jev", "frame": 860, "tactica": "pelear", "cruda": "pelear", "brecha": 0.87, "meta": null, "brecha_meta": null, "ms": 139}
+{"ev": "jev", "frame": 864, "tactica": "pelear", "cruda": "pelear", "brecha": 0.63, "meta": null, "brecha_meta": null, "ms": 145}
+{"ev": "jev", "frame": 868, "tactica": "pelear", "cruda": "pelear", "brecha": 0.89, "meta": null, "brecha_meta": null, "ms": 157}
+{"ev": "jev", "frame": 872, "tactica": "pelear", "cruda": "pelear", "brecha": 0.89, "meta": null, "brecha_meta": null, "ms": 171}
+{"ev": "jev", "frame": 876, "tactica": "pelear", "cruda": "pelear", "brecha": 0.75, "meta": null, "brecha_meta": null, "ms": 152}
+{"ev": "jev", "frame": 880, "tactica": "pelear", "cruda": "pelear", "brecha": 0.79, "meta": null, "brecha_meta": null, "ms": 161}
+{"ev": "jev", "frame": 884, "tactica": "pelear", "cruda": "pelear", "brecha": 0.39, "meta": null, "brecha_meta": null, "ms": 154}
+{"ev": "nav", "frame": 888, "que": ["meta", "arma_640_512", "codigo", "15"]}
+{"ev": "jev", "frame": 889, "tactica": null, "cruda": "pelear", "brecha": 0.04, "meta": "arma_640_512", "brecha_meta": 0.49, "ms": 231}
+{"ev": "jev", "frame": 893, "tactica": "pelear", "cruda": "pelear", "brecha": 0.27, "meta": null, "brecha_meta": 0.0, "ms": 151}
+{"ev": "jev", "frame": 897, "tactica": null, "cruda": "pelear", "brecha": 0.07, "meta": "arma_640_512", "brecha_meta": 0.55, "ms": 143}
+{"ev": "jev", "frame": 901, "tactica": null, "cruda": "pelear", "brecha": 0.06, "meta": null, "brecha_meta": 0.15, "ms": 140}
+{"ev": "jev", "frame": 905, "tactica": "pelear", "cruda": "pelear", "brecha": 0.29, "meta": "arma_640_512", "brecha_meta": 0.36, "ms": 148}
+{"ev": "jev", "frame": 909, "tactica": null, "cruda": "pelear", "brecha": 0.15, "meta": "arma_640_512", "brecha_meta": 0.2, "ms": 159}
+{"ev": "jev", "frame": 913, "tactica": null, "cruda": "avanzar", "brecha": 0.02, "meta": null, "brecha_meta": 0.08, "ms": 151}
+{"ev": "combate", "frame": 915, "que": ["curarse"], "salud": 25}
+{"ev": "nav", "frame": 915, "que": ["meta", "salud_640_1184", "curarse", "27"]}
+{"ev": "jev", "frame": 922, "tactica": "curarse", "cruda": "curarse", "brecha": 0.58, "meta": "salud_640_1184", "brecha_meta": 0.45, "ms": 143}
+{"ev": "jev", "frame": 931, "tactica": "curarse", "cruda": "curarse", "brecha": 0.59, "meta": null, "brecha_meta": 0.03, "ms": 160}
+{"ev": "nav", "frame": 933, "que": ["provision_alcanzada", "salud_640_1184"]}
+{"ev": "nav", "frame": 934, "que": ["meta", "salud_1184_640", "curarse", "40"]}
+{"ev": "jev", "frame": 936, "tactica": "curarse", "cruda": "curarse", "brecha": 0.53, "meta": null, "brecha_meta": 0.04, "ms": 146}
+{"ev": "jev", "frame": 940, "tactica": "curarse", "cruda": "curarse", "brecha": 0.51, "meta": "frontera", "brecha_meta": 0.22, "ms": 152}
+{"ev": "haiku", "frame": 944, "modelo": "haiku", "motivo": "muerte", "plan": ["municion_952_1120", "salud_1184_640", "arma_640_512", "frontera", "llave_roja"], "comentario": "Clip, stimpack y shotgun primero, que con 32 de vida no me la juego. Luego a explorar y por la llave roja.", "seg": 11.9, "error": ""}
+{"ev": "jev", "frame": 944, "tactica": "curarse", "cruda": "curarse", "brecha": 0.2, "meta": null, "brecha_meta": 0.1, "ms": 148}
+{"ev": "jev", "frame": 948, "tactica": "curarse", "cruda": "curarse", "brecha": 0.64, "meta": null, "brecha_meta": 0.03, "ms": 153}
+{"ev": "combate", "frame": 951, "que": ["voltear", "Zombieman", "63"], "salud": 20}
+{"ev": "jev", "frame": 952, "tactica": "curarse", "cruda": "curarse", "brecha": 0.43, "meta": null, "brecha_meta": 0.04, "ms": 149}
+{"ev": "jev", "frame": 958, "tactica": "curarse", "cruda": "curarse", "brecha": 0.68, "meta": "salud_1184_640", "brecha_meta": 0.22, "ms": 162}
+{"ev": "jev", "frame": 962, "tactica": "curarse", "cruda": "curarse", "brecha": 0.62, "meta": "salud_1184_640", "brecha_meta": 0.46, "ms": 163}
+{"ev": "nav", "frame": 969, "que": ["provision_alcanzada", "salud_1184_640"]}
+{"ev": "nav", "frame": 970, "que": ["meta", "salud_640_96", "curarse", "42"]}
+{"ev": "jev", "frame": 971, "tactica": "curarse", "cruda": "curarse", "brecha": 0.52, "meta": null, "brecha_meta": 0.16, "ms": 163}
+{"ev": "jev", "frame": 975, "tactica": "curarse", "cruda": "curarse", "brecha": 0.63, "meta": "frontera", "brecha_meta": 0.38, "ms": 151}
+{"ev": "combate", "frame": 981, "que": ["voltear", "Zombieman", "-120"], "salud": 27}
+{"ev": "jev", "frame": 984, "tactica": "curarse", "cruda": "curarse", "brecha": 0.73, "meta": null, "brecha_meta": 0.17, "ms": 151}
+{"ev": "jev", "frame": 989, "tactica": "curarse", "cruda": "curarse", "brecha": 0.51, "meta": "frontera", "brecha_meta": 0.28, "ms": 162}
+{"ev": "jev", "frame": 993, "tactica": "curarse", "cruda": "curarse", "brecha": 0.35, "meta": null, "brecha_meta": 0.13, "ms": 170}
+{"ev": "jev", "frame": 997, "tactica": "curarse", "cruda": "curarse", "brecha": 0.56, "meta": "salud_640_96", "brecha_meta": 0.42, "ms": 156}
+{"ev": "foto", "frame": 1000, "pos": [1075, 495], "salud": 15, "municion": 28, "arma": 2, "modo": "curarse", "cerca": [[52, "Zombieman"], [310, "LostSoul"], [334, "HellKnight"], [365, "ShotgunGuy"], [481, "ShotgunGuy"], [509, "ShotgunGuy"]], "meta": "salud_640_96"}
+{"ev": "jev", "frame": 1006, "tactica": "curarse", "cruda": "curarse", "brecha": 0.63, "meta": "salud_640_96", "brecha_meta": 0.23, "ms": 141}
+{"ev": "jev", "frame": 1010, "tactica": "curarse", "cruda": "curarse", "brecha": 0.69, "meta": "salud_640_96", "brecha_meta": 0.23, "ms": 147}
+{"ev": "jev", "frame": 1016, "tactica": "curarse", "cruda": "curarse", "brecha": 0.8, "meta": "salud_640_96", "brecha_meta": 0.45, "ms": 145}
+{"ev": "nav", "frame": 1019, "que": ["meta", "salud_96_640", "curarse", "45"]}
+{"ev": "jev", "frame": 1020, "tactica": "curarse", "cruda": "curarse", "brecha": 0.63, "meta": null, "brecha_meta": 0.1, "ms": 148}
+{"ev": "jev", "frame": 1024, "tactica": "curarse", "cruda": "curarse", "brecha": 0.61, "meta": "salud_96_640", "brecha_meta": 0.23, "ms": 163}
+{"ev": "combate", "frame": 1025, "que": ["voltear", "Zombieman", "164"], "salud": 10}
+{"ev": "jev", "frame": 1033, "tactica": "curarse", "cruda": "curarse", "brecha": 0.64, "meta": null, "brecha_meta": 0.0, "ms": 150}
+{"ev": "jev", "frame": 1037, "tactica": "curarse", "cruda": "curarse", "brecha": 0.34, "meta": null, "brecha_meta": 0.08, "ms": 141}
+{"ev": "jev", "frame": 1041, "tactica": "curarse", "cruda": "curarse", "brecha": 0.48, "meta": "salud_96_640", "brecha_meta": 0.22, "ms": 168}
+{"ev": "muerte", "frame": 1043, "pos": [587, 216], "salud": 1, "municion": 28, "arma": 2, "modo": "curarse", "cerca": [[75, "LostSoul"], [144, "Zombieman"], [330, "ExplosiveBarrel"], [401, "ShotgunGuy"], [440, "ExplosiveBarrel"], [455, "DoomImp"]]}
+{"ev": "jev", "frame": 1045, "tactica": "pelear", "cruda": "pelear", "brecha": 0.79, "meta": null, "brecha_meta": null, "ms": 158}
+{"ev": "jev", "frame": 1049, "tactica": "pelear", "cruda": "pelear", "brecha": 0.91, "meta": null, "brecha_meta": null, "ms": 141}
+{"ev": "jev", "frame": 1053, "tactica": "pelear", "cruda": "pelear", "brecha": 0.88, "meta": null, "brecha_meta": null, "ms": 152}
+{"ev": "jev", "frame": 1057, "tactica": "pelear", "cruda": "pelear", "brecha": 0.84, "meta": null, "brecha_meta": null, "ms": 138}
+{"ev": "jev", "frame": 1061, "tactica": "pelear", "cruda": "pelear", "brecha": 0.87, "meta": null, "brecha_meta": null, "ms": 147}
+{"ev": "jev", "frame": 1065, "tactica": "pelear", "cruda": "pelear", "brecha": 0.91, "meta": null, "brecha_meta": null, "ms": 148}
+{"ev": "jev", "frame": 1069, "tactica": "pelear", "cruda": "pelear", "brecha": 0.88, "meta": null, "brecha_meta": null, "ms": 161}
+{"ev": "jev", "frame": 1073, "tactica": "pelear", "cruda": "pelear", "brecha": 0.69, "meta": null, "brecha_meta": null, "ms": 143}
+{"ev": "jev", "frame": 1077, "tactica": "pelear", "cruda": "pelear", "brecha": 0.44, "meta": null, "brecha_meta": null, "ms": 147}
+{"ev": "jev", "frame": 1081, "tactica": "pelear", "cruda": "pelear", "brecha": 0.57, "meta": null, "brecha_meta": null, "ms": 146}
+{"ev": "jev", "frame": 1085, "tactica": "pelear", "cruda": "pelear", "brecha": 0.69, "meta": null, "brecha_meta": null, "ms": 145}
+{"ev": "jev", "frame": 1089, "tactica": "pelear", "cruda": "pelear", "brecha": 0.59, "meta": null, "brecha_meta": null, "ms": 169}
+{"ev": "jev", "frame": 1093, "tactica": "pelear", "cruda": "pelear", "brecha": 0.71, "meta": null, "brecha_meta": null, "ms": 141}
+{"ev": "jev", "frame": 1097, "tactica": "pelear", "cruda": "pelear", "brecha": 0.6, "meta": null, "brecha_meta": null, "ms": 155}
+{"ev": "jev", "frame": 1101, "tactica": "pelear", "cruda": "pelear", "brecha": 0.62, "meta": null, "brecha_meta": null, "ms": 143}
+{"ev": "jev", "frame": 1105, "tactica": "pelear", "cruda": "pelear", "brecha": 0.45, "meta": null, "brecha_meta": null, "ms": 143}
+{"ev": "jev", "frame": 1109, "tactica": "pelear", "cruda": "pelear", "brecha": 0.61, "meta": null, "brecha_meta": null, "ms": 165}
+{"ev": "jev", "frame": 1113, "tactica": "pelear", "cruda": "pelear", "brecha": 0.58, "meta": null, "brecha_meta": null, "ms": 144}
+{"ev": "jev", "frame": 1117, "tactica": "pelear", "cruda": "pelear", "brecha": 0.4, "meta": null, "brecha_meta": null, "ms": 153}
+{"ev": "jev", "frame": 1121, "tactica": null, "cruda": "esquivar", "brecha": 0.15, "meta": null, "brecha_meta": null, "ms": 137}
+{"ev": "jev", "frame": 1125, "tactica": "pelear", "cruda": "pelear", "brecha": 0.44, "meta": null, "brecha_meta": null, "ms": 148}
+{"ev": "jev", "frame": 1129, "tactica": null, "cruda": "pelear", "brecha": 0.1, "meta": null, "brecha_meta": null, "ms": 153}
+{"ev": "jev", "frame": 1133, "tactica": null, "cruda": "pelear", "brecha": 0.13, "meta": null, "brecha_meta": null, "ms": 146}
+{"ev": "jev", "frame": 1137, "tactica": null, "cruda": "pelear", "brecha": 0.01, "meta": null, "brecha_meta": null, "ms": 145}
+{"ev": "jev", "frame": 1141, "tactica": null, "cruda": "esquivar", "brecha": 0.18, "meta": null, "brecha_meta": null, "ms": 141}
+{"ev": "nav", "frame": 1143, "que": ["meta", "salud_640_1184", "codigo", "12"]}
+{"ev": "haiku", "frame": 1144, "modelo": "haiku", "motivo": "muerte", "plan": ["municion_952_1120", "salud_640_1184", "arma_621_843", "frontera"], "comentario": "La salida está cerrada y no hay llaves a la vista, así que primero munición, vida y escopeta, y luego a explorar.", "seg": 11.6, "error": ""}
+{"ev": "jev", "frame": 1145, "tactica": "curarse", "cruda": "curarse", "brecha": 0.52, "meta": "salud_640_1184", "brecha_meta": 0.31, "ms": 149}
+{"ev": "combate", "frame": 1145, "que": ["curarse"], "salud": 46}
+{"ev": "jev", "frame": 1149, "tactica": "curarse", "cruda": "curarse", "brecha": 0.59, "meta": "salud_640_1184", "brecha_meta": 0.38, "ms": 161}
+{"ev": "nav", "frame": 1152, "que": ["provision_alcanzada", "salud_640_1184"]}
+{"ev": "nav", "frame": 1153, "que": ["meta", "salud_1184_640", "curarse", "40"]}
+{"ev": "jev", "frame": 1154, "tactica": "curarse", "cruda": "curarse", "brecha": 0.21, "meta": "frontera", "brecha_meta": 0.24, "ms": 147}
+{"ev": "nav", "frame": 1156, "que": ["meta", "salud_96_640", "curarse", "39"]}
+{"ev": "jev", "frame": 1158, "tactica": "curarse", "cruda": "curarse", "brecha": 0.31, "meta": null, "brecha_meta": 0.01, "ms": 149}
+{"ev": "jev", "frame": 1162, "tactica": "curarse", "cruda": "curarse", "brecha": 0.29, "meta": null, "brecha_meta": 0.01, "ms": 157}
+{"ev": "combate", "frame": 1164, "que": ["voltear", "Zombieman", "49"], "salud": 35}
+{"ev": "jev", "frame": 1166, "tactica": "curarse", "cruda": "curarse", "brecha": 0.4, "meta": null, "brecha_meta": 0.17, "ms": 166}
+{"ev": "jev", "frame": 1170, "tactica": "curarse", "cruda": "curarse", "brecha": 0.34, "meta": null, "brecha_meta": 0.07, "ms": 172}
+{"ev": "jev", "frame": 1174, "tactica": "curarse", "cruda": "curarse", "brecha": 0.52, "meta": null, "brecha_meta": 0.1, "ms": 180}
+{"ev": "jev", "frame": 1178, "tactica": "curarse", "cruda": "curarse", "brecha": 0.53, "meta": null, "brecha_meta": 0.06, "ms": 137}
+{"ev": "combate", "frame": 1183, "que": ["voltear", "Zombieman", "-145"], "salud": 20}
+{"ev": "jev", "frame": 1186, "tactica": "curarse", "cruda": "curarse", "brecha": 0.6, "meta": "salud_96_640", "brecha_meta": 0.25, "ms": 182}
+{"ev": "jev", "frame": 1190, "tactica": "curarse", "cruda": "curarse", "brecha": 0.68, "meta": "salud_96_640", "brecha_meta": 0.34, "ms": 144}
+{"ev": "jev", "frame": 1194, "tactica": "curarse", "cruda": "curarse", "brecha": 0.68, "meta": "salud_96_640", "brecha_meta": 0.48, "ms": 143}
+{"ev": "foto", "frame": 1200, "pos": [144, 682], "salud": 14, "municion": 26, "arma": 2, "modo": "curarse", "cerca": [[221, "ChaingunGuy"], [365, "Zombieman"], [406, "Zombieman"], [487, "DoomImp"], [553, "Zombieman"], [563, "LostSoul"]], "meta": "salud_96_640"}
+{"ev": "nav", "frame": 1201, "que": ["meta", "salud_640_96", "curarse", "44"]}
+{"ev": "jev", "frame": 1202, "tactica": "curarse", "cruda": "curarse", "brecha": 0.68, "meta": "frontera", "brecha_meta": 0.21, "ms": 152}
+{"ev": "jev", "frame": 1206, "tactica": "curarse", "cruda": "curarse", "brecha": 0.68, "meta": null, "brecha_meta": 0.08, "ms": 148}
+{"ev": "jev", "frame": 1210, "tactica": "curarse", "cruda": "curarse", "brecha": 0.44, "meta": null, "brecha_meta": 0.18, "ms": 147}
+{"ev": "combate", "frame": 1213, "que": ["voltear", "Zombieman", "162"], "salud": 21}
+{"ev": "jev", "frame": 1216, "tactica": "curarse", "cruda": "curarse", "brecha": 0.5, "meta": "frontera", "brecha_meta": 0.27, "ms": 150}
+{"ev": "jev", "frame": 1220, "tactica": "curarse", "cruda": "curarse", "brecha": 0.77, "meta": null, "brecha_meta": 0.18, "ms": 149}
+{"ev": "jev", "frame": 1224, "tactica": null, "cruda": "curarse", "brecha": 0.15, "meta": null, "brecha_meta": 0.12, "ms": 147}
+{"ev": "nav", "frame": 1224, "que": ["meta", "frontera", "haiku", "10"]}
+{"ev": "jev", "frame": 1228, "tactica": null, "cruda": "esquivar", "brecha": 0.11, "meta": "frontera", "brecha_meta": 0.85, "ms": 148}
+{"ev": "combate", "frame": 1230, "que": ["curarse"], "salud": 15}
+{"ev": "nav", "frame": 1230, "que": ["meta", "salud_640_96", "curarse", "34"]}
+{"ev": "jev", "frame": 1232, "tactica": "curarse", "cruda": "curarse", "brecha": 0.56, "meta": null, "brecha_meta": 0.1, "ms": 141}
+{"ev": "combate", "frame": 1232, "que": ["curarse"], "salud": 15}
+{"ev": "jev", "frame": 1236, "tactica": "curarse", "cruda": "curarse", "brecha": 0.47, "meta": null, "brecha_meta": 0.06, "ms": 162}
+{"ev": "jev", "frame": 1240, "tactica": "curarse", "cruda": "curarse", "brecha": 0.24, "meta": null, "brecha_meta": 0.13, "ms": 143}
+{"ev": "jev", "frame": 1244, "tactica": "curarse", "cruda": "curarse", "brecha": 0.31, "meta": "frontera", "brecha_meta": 0.44, "ms": 152}
+{"ev": "muerte", "frame": 1246, "pos": [238, 489], "salud": 3, "municion": 25, "arma": 2, "modo": "curarse", "cerca": [[37, "Zombieman"], [256, "LostSoul"], [307, "Zombieman"], [325, "ChaingunGuy"], [334, "DoomImp"], [356, "Zombieman"]]}
+{"ev": "jev", "frame": 1248, "tactica": "pelear", "cruda": "pelear", "brecha": 0.89, "meta": null, "brecha_meta": null, "ms": 142}
+{"ev": "jev", "frame": 1252, "tactica": "pelear", "cruda": "pelear", "brecha": 0.9, "meta": null, "brecha_meta": null, "ms": 168}
+{"ev": "jev", "frame": 1256, "tactica": "pelear", "cruda": "pelear", "brecha": 0.87, "meta": null, "brecha_meta": null, "ms": 139}
+{"ev": "jev", "frame": 1260, "tactica": "pelear", "cruda": "pelear", "brecha": 0.83, "meta": null, "brecha_meta": null, "ms": 140}
+{"ev": "jev", "frame": 1264, "tactica": "pelear", "cruda": "pelear", "brecha": 0.78, "meta": null, "brecha_meta": null, "ms": 141}
+{"ev": "jev", "frame": 1268, "tactica": "pelear", "cruda": "pelear", "brecha": 0.81, "meta": null, "brecha_meta": null, "ms": 136}
+{"ev": "jev", "frame": 1272, "tactica": "pelear", "cruda": "pelear", "brecha": 0.86, "meta": null, "brecha_meta": null, "ms": 156}
+{"ev": "jev", "frame": 1276, "tactica": "pelear", "cruda": "pelear", "brecha": 0.85, "meta": null, "brecha_meta": null, "ms": 148}
+{"ev": "jev", "frame": 1280, "tactica": "pelear", "cruda": "pelear", "brecha": 0.71, "meta": null, "brecha_meta": null, "ms": 148}
+{"ev": "jev", "frame": 1284, "tactica": "pelear", "cruda": "pelear", "brecha": 0.77, "meta": null, "brecha_meta": null, "ms": 135}
+{"ev": "jev", "frame": 1288, "tactica": "pelear", "cruda": "pelear", "brecha": 0.77, "meta": null, "brecha_meta": null, "ms": 251}
+{"ev": "jev", "frame": 1292, "tactica": "pelear", "cruda": "pelear", "brecha": 0.92, "meta": null, "brecha_meta": null, "ms": 146}
+{"ev": "jev", "frame": 1296, "tactica": "pelear", "cruda": "pelear", "brecha": 0.76, "meta": null, "brecha_meta": null, "ms": 133}
+{"ev": "jev", "frame": 1300, "tactica": "pelear", "cruda": "pelear", "brecha": 0.82, "meta": null, "brecha_meta": null, "ms": 150}
+{"ev": "nav", "frame": 1304, "que": ["meta", "arma_509_744", "codigo", "20"]}
+{"ev": "haiku", "frame": 1305, "modelo": "haiku", "motivo": "muerte", "plan": ["pisar_3", "llave_roja", "interruptor_2", "salida"], "comentario": "Pisamos la línea 3, luego llave roja, y rezamos para que se abra la salida.", "seg": 12.2, "error": ""}
+{"ev": "jev", "frame": 1305, "tactica": "pelear", "cruda": "pelear", "brecha": 0.5, "meta": null, "brecha_meta": 0.01, "ms": 149}
+{"ev": "jev", "frame": 1309, "tactica": "pelear", "cruda": "pelear", "brecha": 0.67, "meta": "arma_509_744", "brecha_meta": 0.3, "ms": 149}
+{"ev": "jev", "frame": 1313, "tactica": "pelear", "cruda": "pelear", "brecha": 0.26, "meta": "arma_509_744", "brecha_meta": 0.5, "ms": 144}
+{"ev": "jev", "frame": 1317, "tactica": "pelear", "cruda": "pelear", "brecha": 0.55, "meta": null, "brecha_meta": 0.06, "ms": 145}
+{"ev": "jev", "frame": 1321, "tactica": "pelear", "cruda": "pelear", "brecha": 0.35, "meta": "arma_509_744", "brecha_meta": 0.3, "ms": 138}
+{"ev": "jev", "frame": 1325, "tactica": "pelear", "cruda": "pelear", "brecha": 0.41, "meta": "arma_509_744", "brecha_meta": 0.37, "ms": 152}
+{"ev": "jev", "frame": 1329, "tactica": "pelear", "cruda": "pelear", "brecha": 0.22, "meta": "arma_509_744", "brecha_meta": 0.33, "ms": 153}
+{"ev": "jev", "frame": 1333, "tactica": "pelear", "cruda": "pelear", "brecha": 0.31, "meta": null, "brecha_meta": 0.03, "ms": 156}
+{"ev": "jev", "frame": 1337, "tactica": "pelear", "cruda": "pelear", "brecha": 0.22, "meta": "frontera", "brecha_meta": 0.28, "ms": 144}
+{"ev": "jev", "frame": 1341, "tactica": null, "cruda": "esquivar", "brecha": 0.05, "meta": null, "brecha_meta": 0.04, "ms": 160}
+{"ev": "jev", "frame": 1345, "tactica": null, "cruda": "esquivar", "brecha": 0.19, "meta": "arma_509_744", "brecha_meta": 0.3, "ms": 144}
+{"ev": "jev", "frame": 1349, "tactica": "pelear", "cruda": "pelear", "brecha": 0.24, "meta": null, "brecha_meta": 0.18, "ms": 152}
+{"ev": "jev", "frame": 1353, "tactica": null, "cruda": "pelear", "brecha": 0.01, "meta": null, "brecha_meta": 0.05, "ms": 142}
+{"ev": "jev", "frame": 1357, "tactica": "pelear", "cruda": "pelear", "brecha": 0.24, "meta": null, "brecha_meta": 0.03, "ms": 164}
+{"ev": "jev", "frame": 1361, "tactica": "pelear", "cruda": "pelear", "brecha": 0.23, "meta": "arma_509_744", "brecha_meta": 0.35, "ms": 157}
+{"ev": "jev", "frame": 1365, "tactica": "pelear", "cruda": "pelear", "brecha": 0.23, "meta": "frontera", "brecha_meta": 0.5, "ms": 136}
+{"ev": "jev", "frame": 1369, "tactica": null, "cruda": "pelear", "brecha": 0.16, "meta": "arma_509_744", "brecha_meta": 0.37, "ms": 210}
+{"ev": "jev", "frame": 1373, "tactica": "pelear", "cruda": "pelear", "brecha": 0.37, "meta": "arma_509_744", "brecha_meta": 0.25, "ms": 172}
+{"ev": "jev", "frame": 1377, "tactica": "pelear", "cruda": "pelear", "brecha": 0.25, "meta": "frontera", "brecha_meta": 0.38, "ms": 160}
+{"ev": "nav", "frame": 1378, "que": ["meta", "pisar_3", "haiku", "124"]}
+{"ev": "jev", "frame": 1381, "tactica": null, "cruda": "pelear", "brecha": 0.12, "meta": "pisar_3", "brecha_meta": 0.26, "ms": 147}
+{"ev": "jev", "frame": 1385, "tactica": null, "cruda": "avanzar", "brecha": 0.02, "meta": "pisar_3", "brecha_meta": 0.26, "ms": 145}
+{"ev": "jev", "frame": 1389, "tactica": null, "cruda": "avanzar", "brecha": 0.07, "meta": null, "brecha_meta": 0.04, "ms": 146}
+{"ev": "jev", "frame": 1398, "tactica": null, "cruda": "pelear", "brecha": 0.15, "meta": null, "brecha_meta": 0.04, "ms": 145}
+{"ev": "foto", "frame": 1400, "pos": [581, 894], "salud": 44, "municion": 10, "arma": 2, "modo": "atacar", "cerca": [[453, "ChaingunGuy"], [616, "Zombieman"], [630, "Zombieman"], [688, "Zombieman"], [705, "ChaingunGuy"], [732, "ShotgunGuy"]], "meta": "pisar_3"}
+{"ev": "jev", "frame": 1402, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.2, "meta": null, "brecha_meta": 0.14, "ms": 152}
+{"ev": "jev", "frame": 1411, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.58, "meta": null, "brecha_meta": 0.02, "ms": 149}
+{"ev": "jev", "frame": 1415, "tactica": null, "cruda": "pelear", "brecha": 0.06, "meta": null, "brecha_meta": 0.02, "ms": 164}
+{"ev": "jev", "frame": 1419, "tactica": null, "cruda": "esquivar", "brecha": 0.0, "meta": "pisar_3", "brecha_meta": 0.43, "ms": 150}
+{"ev": "jev", "frame": 1423, "tactica": "pelear", "cruda": "pelear", "brecha": 0.24, "meta": "pisar_3", "brecha_meta": 0.25, "ms": 162}
+{"ev": "jev", "frame": 1427, "tactica": null, "cruda": "avanzar", "brecha": 0.05, "meta": null, "brecha_meta": 0.05, "ms": 143}
+{"ev": "jev", "frame": 1431, "tactica": "pelear", "cruda": "pelear", "brecha": 0.22, "meta": null, "brecha_meta": 0.06, "ms": 146}
+{"ev": "jev", "frame": 1435, "tactica": null, "cruda": "pelear", "brecha": 0.11, "meta": null, "brecha_meta": 0.15, "ms": 139}
+{"ev": "jev", "frame": 1439, "tactica": "pelear", "cruda": "pelear", "brecha": 0.25, "meta": null, "brecha_meta": 0.11, "ms": 180}
+{"ev": "jev", "frame": 1443, "tactica": null, "cruda": "esquivar", "brecha": 0.03, "meta": "pisar_3", "brecha_meta": 0.2, "ms": 153}
+{"ev": "jev", "frame": 1447, "tactica": null, "cruda": "avanzar", "brecha": 0.01, "meta": null, "brecha_meta": 0.08, "ms": 188}
+{"ev": "jev", "frame": 1451, "tactica": null, "cruda": "esquivar", "brecha": 0.05, "meta": null, "brecha_meta": 0.06, "ms": 148}
+{"ev": "jev", "frame": 1455, "tactica": null, "cruda": "avanzar", "brecha": 0.04, "meta": null, "brecha_meta": 0.1, "ms": 140}
+{"ev": "jev", "frame": 1459, "tactica": null, "cruda": "avanzar", "brecha": 0.11, "meta": null, "brecha_meta": 0.16, "ms": 150}
+{"ev": "jev", "frame": 1463, "tactica": null, "cruda": "avanzar", "brecha": 0.02, "meta": null, "brecha_meta": 0.02, "ms": 137}
+{"ev": "jev", "frame": 1467, "tactica": null, "cruda": "avanzar", "brecha": 0.04, "meta": null, "brecha_meta": 0.06, "ms": 182}
+{"ev": "jev", "frame": 1471, "tactica": null, "cruda": "pelear", "brecha": 0.02, "meta": null, "brecha_meta": 0.06, "ms": 146}
+{"ev": "jev", "frame": 1475, "tactica": null, "cruda": "avanzar", "brecha": 0.12, "meta": null, "brecha_meta": 0.13, "ms": 175}
+{"ev": "jev", "frame": 1479, "tactica": null, "cruda": "esquivar", "brecha": 0.02, "meta": "pisar_3", "brecha_meta": 0.37, "ms": 148}
+{"ev": "jev", "frame": 1483, "tactica": null, "cruda": "esquivar", "brecha": 0.09, "meta": null, "brecha_meta": 0.14, "ms": 145}
+{"ev": "jev", "frame": 1487, "tactica": null, "cruda": "esquivar", "brecha": 0.11, "meta": "pisar_3", "brecha_meta": 0.27, "ms": 151}
+{"ev": "jev", "frame": 1491, "tactica": null, "cruda": "esquivar", "brecha": 0.04, "meta": null, "brecha_meta": 0.03, "ms": 153}
+{"ev": "jev", "frame": 1495, "tactica": null, "cruda": "avanzar", "brecha": 0.09, "meta": "pisar_3", "brecha_meta": 0.53, "ms": 147}
+{"ev": "jev", "frame": 1499, "tactica": null, "cruda": "esquivar", "brecha": 0.03, "meta": "pisar_3", "brecha_meta": 0.24, "ms": 173}
+{"ev": "jev", "frame": 1503, "tactica": null, "cruda": "esquivar", "brecha": 0.13, "meta": "pisar_3", "brecha_meta": 0.22, "ms": 145}
+{"ev": "jev", "frame": 1507, "tactica": null, "cruda": "pelear", "brecha": 0.16, "meta": null, "brecha_meta": 0.08, "ms": 146}
+{"ev": "jev", "frame": 1511, "tactica": null, "cruda": "pelear", "brecha": 0.13, "meta": null, "brecha_meta": 0.08, "ms": 147}
+{"ev": "jev", "frame": 1515, "tactica": null, "cruda": "avanzar", "brecha": 0.15, "meta": "pisar_3", "brecha_meta": 0.31, "ms": 159}
+{"ev": "jev", "frame": 1524, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.2, "meta": null, "brecha_meta": 0.17, "ms": 145}
+{"ev": "jev", "frame": 1533, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.44, "meta": "pisar_3", "brecha_meta": 0.21, "ms": 159}
+{"ev": "jev", "frame": 1541, "tactica": "curarse", "cruda": "curarse", "brecha": 0.22, "meta": "frontera", "brecha_meta": 0.38, "ms": 161}
+{"ev": "combate", "frame": 1541, "que": ["curarse"], "salud": 44}
+{"ev": "nav", "frame": 1541, "que": ["meta", "salud_96_640", "curarse", "18"]}
+{"ev": "jev", "frame": 1545, "tactica": "curarse", "cruda": "curarse", "brecha": 0.39, "meta": "salud_96_640", "brecha_meta": 0.35, "ms": 170}
+{"ev": "nav", "frame": 1552, "que": ["provision_alcanzada", "salud_96_640"]}
+{"ev": "nav", "frame": 1553, "que": ["meta", "salud_640_96", "curarse", "42"]}
+{"ev": "jev", "frame": 1554, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.48, "meta": "frontera", "brecha_meta": 0.54, "ms": 142}
+{"ev": "nav", "frame": 1555, "que": ["meta", "pisar_3", "haiku", "105"]}
+{"ev": "jev", "frame": 1558, "tactica": "pelear", "cruda": "pelear", "brecha": 0.54, "meta": "pisar_3", "brecha_meta": 0.23, "ms": 164}
+{"ev": "jev", "frame": 1567, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.82, "meta": null, "brecha_meta": 0.02, "ms": 141}
+{"ev": "jev", "frame": 1576, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.8, "meta": null, "brecha_meta": 0.19, "ms": 144}
+{"ev": "jev", "frame": 1585, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.77, "meta": "pisar_3", "brecha_meta": 0.32, "ms": 165}
+{"ev": "jev", "frame": 1594, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.92, "meta": "pisar_3", "brecha_meta": 0.22, "ms": 163}
+{"ev": "foto", "frame": 1600, "pos": [101, 531], "salud": 54, "municion": 10, "arma": 2, "modo": "avanzar", "cerca": [[182, "ChaingunGuy"], [560, "Zombieman"], [673, "ExplosiveBarrel"], [740, "Demon"], [781, "ExplosiveBarrel"], [813, "DoomImp"]], "meta": "pisar_3"}
+{"ev": "jev", "frame": 1603, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.94, "meta": null, "brecha_meta": 0.12, "ms": 176}
+{"ev": "jev", "frame": 1612, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.84, "meta": "pisar_3", "brecha_meta": 0.24, "ms": 161}
+{"ev": "jev", "frame": 1621, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.88, "meta": "pisar_3", "brecha_meta": 0.27, "ms": 169}
+{"ev": "jev", "frame": 1630, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.48, "meta": "pisar_3", "brecha_meta": 0.21, "ms": 161}
+{"ev": "jev", "frame": 1639, "tactica": null, "cruda": "pelear", "brecha": 0.13, "meta": "pisar_3", "brecha_meta": 0.28, "ms": 143}
+{"ev": "jev", "frame": 1643, "tactica": "pelear", "cruda": "pelear", "brecha": 0.29, "meta": null, "brecha_meta": 0.01, "ms": 148}
+{"ev": "jev", "frame": 1652, "tactica": "pelear", "cruda": "pelear", "brecha": 0.4, "meta": null, "brecha_meta": 0.13, "ms": 144}
+{"ev": "jev", "frame": 1661, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.8, "meta": null, "brecha_meta": 0.16, "ms": 179}
+{"ev": "jev", "frame": 1670, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.82, "meta": "pisar_3", "brecha_meta": 0.31, "ms": 148}
+{"ev": "jev", "frame": 1679, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.9, "meta": "pisar_3", "brecha_meta": 0.27, "ms": 157}
+{"ev": "jev", "frame": 1688, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.6, "meta": null, "brecha_meta": 0.05, "ms": 144}
+{"ev": "jev", "frame": 1697, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.82, "meta": "pisar_3", "brecha_meta": 0.51, "ms": 143}
+{"ev": "nav", "frame": 1700, "que": ["puerta", "15"]}
+{"ev": "jev", "frame": 1705, "tactica": null, "cruda": "pelear", "brecha": 0.14, "meta": "pisar_3", "brecha_meta": 0.27, "ms": 159}
+{"ev": "haiku", "frame": 1709, "modelo": "haiku", "motivo": "estancado", "plan": ["municion_286_343", "arma_513_746", "frontera"], "comentario": "Primero munición y escopeta, luego explorar; la salida sigue bien encerrada, ya la abrimos.", "seg": 10.0, "error": ""}
+{"ev": "jev", "frame": 1709, "tactica": null, "cruda": "esquivar", "brecha": 0.19, "meta": "pisar_3", "brecha_meta": 0.23, "ms": 148}
+{"ev": "jev", "frame": 1713, "tactica": null, "cruda": "pelear", "brecha": 0.01, "meta": "pisar_3", "brecha_meta": 0.33, "ms": 146}
+{"ev": "jev", "frame": 1717, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.25, "meta": null, "brecha_meta": 0.07, "ms": 155}
+{"ev": "nav", "frame": 1717, "que": ["meta", "frontera", "haiku", "8"]}
+{"ev": "jev", "frame": 1721, "tactica": null, "cruda": "esquivar", "brecha": 0.12, "meta": "frontera", "brecha_meta": 0.69, "ms": 176}
+{"ev": "jev", "frame": 1725, "tactica": null, "cruda": "avanzar", "brecha": 0.02, "meta": "frontera", "brecha_meta": 0.62, "ms": 162}
+{"ev": "jev", "frame": 1729, "tactica": null, "cruda": "pelear", "brecha": 0.01, "meta": "frontera", "brecha_meta": 0.73, "ms": 173}
+{"ev": "jev", "frame": 1733, "tactica": null, "cruda": "esquivar", "brecha": 0.15, "meta": "frontera", "brecha_meta": 0.61, "ms": 144}
+{"ev": "jev", "frame": 1737, "tactica": "pelear", "cruda": "pelear", "brecha": 0.22, "meta": "frontera", "brecha_meta": 0.78, "ms": 154}
+{"ev": "jev", "frame": 1741, "tactica": null, "cruda": "pelear", "brecha": 0.09, "meta": "frontera", "brecha_meta": 0.59, "ms": 147}
+{"ev": "jev", "frame": 1745, "tactica": null, "cruda": "pelear", "brecha": 0.02, "meta": "frontera", "brecha_meta": 0.63, "ms": 142}
+{"ev": "jev", "frame": 1749, "tactica": "pelear", "cruda": "pelear", "brecha": 0.24, "meta": "frontera", "brecha_meta": 0.77, "ms": 142}
+{"ev": "jev", "frame": 1753, "tactica": "pelear", "cruda": "pelear", "brecha": 0.23, "meta": "frontera", "brecha_meta": 0.75, "ms": 159}
+{"ev": "jev", "frame": 1757, "tactica": "pelear", "cruda": "pelear", "brecha": 0.22, "meta": "frontera", "brecha_meta": 0.7, "ms": 156}
+{"ev": "jev", "frame": 1761, "tactica": "pelear", "cruda": "pelear", "brecha": 0.38, "meta": "frontera", "brecha_meta": 0.67, "ms": 144}
+{"ev": "jev", "frame": 1765, "tactica": "pelear", "cruda": "pelear", "brecha": 0.3, "meta": "frontera", "brecha_meta": 0.72, "ms": 141}
+{"ev": "jev", "frame": 1769, "tactica": "pelear", "cruda": "pelear", "brecha": 0.27, "meta": "frontera", "brecha_meta": 0.76, "ms": 216}
+{"ev": "jev", "frame": 1773, "tactica": null, "cruda": "pelear", "brecha": 0.1, "meta": "frontera", "brecha_meta": 0.47, "ms": 171}
+{"ev": "jev", "frame": 1782, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.7, "meta": "frontera", "brecha_meta": 0.82, "ms": 175}
+{"ev": "jev", "frame": 1791, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.7, "meta": "frontera", "brecha_meta": 0.57, "ms": 141}
+{"ev": "foto", "frame": 1800, "pos": [633, -617], "salud": 42, "municion": 4, "arma": 3, "modo": "avanzar", "cerca": [[119, "ExplosiveBarrel"], [132, "ExplosiveBarrel"], [278, "Zombieman"], [282, "DoomImp"], [292, "DoomImp"], [296, "Zombieman"]], "meta": "frontera"}
+{"ev": "jev", "frame": 1800, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.65, "meta": "frontera", "brecha_meta": 0.75, "ms": 154}
+{"ev": "jev", "frame": 1804, "tactica": null, "cruda": "pelear", "brecha": 0.02, "meta": "frontera", "brecha_meta": 0.65, "ms": 147}
+{"ev": "jev", "frame": 1813, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.69, "meta": "frontera", "brecha_meta": 0.47, "ms": 148}
+{"ev": "jev", "frame": 1817, "tactica": null, "cruda": "avanzar", "brecha": 0.02, "meta": "frontera", "brecha_meta": 0.53, "ms": 174}
+{"ev": "jev", "frame": 1821, "tactica": null, "cruda": "pelear", "brecha": 0.03, "meta": "frontera", "brecha_meta": 0.49, "ms": 152}
+{"ev": "jev", "frame": 1825, "tactica": null, "cruda": "esquivar", "brecha": 0.01, "meta": "frontera", "brecha_meta": 0.41, "ms": 150}
+{"ev": "jev", "frame": 1829, "tactica": null, "cruda": "avanzar", "brecha": 0.16, "meta": "frontera", "brecha_meta": 0.54, "ms": 139}
+{"ev": "jev", "frame": 1833, "tactica": null, "cruda": "esquivar", "brecha": 0.0, "meta": "frontera", "brecha_meta": 0.57, "ms": 168}
+{"ev": "jev", "frame": 1837, "tactica": null, "cruda": "esquivar", "brecha": 0.0, "meta": "frontera", "brecha_meta": 0.45, "ms": 152}
+{"ev": "jev", "frame": 1841, "tactica": null, "cruda": "pelear", "brecha": 0.03, "meta": "frontera", "brecha_meta": 0.36, "ms": 144}
+{"ev": "jev", "frame": 1845, "tactica": null, "cruda": "esquivar", "brecha": 0.04, "meta": "frontera", "brecha_meta": 0.45, "ms": 153}
+{"ev": "jev", "frame": 1849, "tactica": null, "cruda": "esquivar", "brecha": 0.06, "meta": "frontera", "brecha_meta": 0.37, "ms": 150}
+{"ev": "jev", "frame": 1853, "tactica": null, "cruda": "esquivar", "brecha": 0.01, "meta": "frontera", "brecha_meta": 0.57, "ms": 162}
+{"ev": "jev", "frame": 1857, "tactica": "pelear", "cruda": "pelear", "brecha": 0.2, "meta": "frontera", "brecha_meta": 0.52, "ms": 160}
+{"ev": "jev", "frame": 1861, "tactica": null, "cruda": "esquivar", "brecha": 0.0, "meta": "frontera", "brecha_meta": 0.6, "ms": 160}
+{"ev": "jev", "frame": 1870, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.55, "meta": "frontera", "brecha_meta": 0.42, "ms": 162}
+{"ev": "jev", "frame": 1879, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.27, "meta": null, "brecha_meta": 0.07, "ms": 146}
+{"ev": "jev", "frame": 1883, "tactica": null, "cruda": "curarse", "brecha": 0.06, "meta": null, "brecha_meta": 0.04, "ms": 160}
+{"ev": "jev", "frame": 1887, "tactica": null, "cruda": "curarse", "brecha": 0.03, "meta": "pisar_2", "brecha_meta": 0.23, "ms": 147}
+{"ev": "jev", "frame": 1891, "tactica": null, "cruda": "esquivar", "brecha": 0.05, "meta": "frontera", "brecha_meta": 0.21, "ms": 145}
+{"ev": "jev", "frame": 1895, "tactica": null, "cruda": "esquivar", "brecha": 0.14, "meta": null, "brecha_meta": 0.13, "ms": 196}
+{"ev": "jev", "frame": 1899, "tactica": null, "cruda": "esquivar", "brecha": 0.16, "meta": "pisar_2", "brecha_meta": 0.27, "ms": 147}
+{"ev": "combate", "frame": 1902, "que": ["retirada"], "salud": 28}
+{"ev": "jev", "frame": 1903, "tactica": null, "cruda": "esquivar", "brecha": 0.09, "meta": "frontera", "brecha_meta": 0.27, "ms": 145}
+{"ev": "jev", "frame": 1907, "tactica": null, "cruda": "esquivar", "brecha": 0.01, "meta": "pisar_2", "brecha_meta": 0.25, "ms": 155}
+{"ev": "jev", "frame": 1911, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.24, "meta": "frontera", "brecha_meta": 0.23, "ms": 149}
+{"ev": "jev", "frame": 1915, "tactica": null, "cruda": "esquivar", "brecha": 0.11, "meta": null, "brecha_meta": 0.18, "ms": 159}
+{"ev": "jev", "frame": 1919, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.47, "meta": null, "brecha_meta": 0.15, "ms": 241}
+{"ev": "jev", "frame": 1923, "tactica": null, "cruda": "esquivar", "brecha": 0.15, "meta": null, "brecha_meta": 0.15, "ms": 151}
+{"ev": "jev", "frame": 1927, "tactica": null, "cruda": "curarse", "brecha": 0.0, "meta": "pisar_2", "brecha_meta": 0.23, "ms": 158}
+{"ev": "jev", "frame": 1931, "tactica": "curarse", "cruda": "curarse", "brecha": 0.36, "meta": "frontera", "brecha_meta": 0.36, "ms": 144}
+{"ev": "combate", "frame": 1931, "que": ["curarse"], "salud": 20}
+{"ev": "nav", "frame": 1931, "que": ["meta", "salud_640_96", "curarse", "61"]}
+{"ev": "jev", "frame": 1935, "tactica": "curarse", "cruda": "curarse", "brecha": 0.64, "meta": null, "brecha_meta": 0.1, "ms": 178}
+{"ev": "jev", "frame": 1939, "tactica": "curarse", "cruda": "curarse", "brecha": 0.65, "meta": null, "brecha_meta": 0.03, "ms": 180}
+{"ev": "combate", "frame": 1941, "que": ["voltear", "Zombieman", "59"], "salud": 9}
+{"ev": "muerte", "frame": 1943, "pos": [390, -602], "salud": 9, "municion": 10, "arma": 2, "modo": "curarse", "cerca": [[30, "DoomImpBall"], [41, "Zombieman"], [144, "ExplosiveBarrel"], [146, "DoomImpBall"], [218, "DoomImp"], [232, "DoomImp"]]}
+{"ev": "jev", "frame": 1943, "tactica": "pelear", "cruda": "pelear", "brecha": 0.76, "meta": null, "brecha_meta": null, "ms": 152}
+{"ev": "jev", "frame": 1947, "tactica": "pelear", "cruda": "pelear", "brecha": 0.83, "meta": null, "brecha_meta": null, "ms": 205}
+{"ev": "jev", "frame": 1951, "tactica": "pelear", "cruda": "pelear", "brecha": 0.92, "meta": null, "brecha_meta": null, "ms": 150}
+{"ev": "jev", "frame": 1955, "tactica": "pelear", "cruda": "pelear", "brecha": 0.87, "meta": null, "brecha_meta": null, "ms": 209}
+{"ev": "jev", "frame": 1959, "tactica": "pelear", "cruda": "pelear", "brecha": 0.85, "meta": null, "brecha_meta": null, "ms": 155}
+{"ev": "jev", "frame": 1963, "tactica": "pelear", "cruda": "pelear", "brecha": 0.88, "meta": null, "brecha_meta": null, "ms": 161}
+{"ev": "jev", "frame": 1967, "tactica": "pelear", "cruda": "pelear", "brecha": 0.93, "meta": null, "brecha_meta": null, "ms": 144}
+{"ev": "jev", "frame": 1971, "tactica": "pelear", "cruda": "pelear", "brecha": 0.9, "meta": null, "brecha_meta": null, "ms": 147}
+{"ev": "jev", "frame": 1975, "tactica": "pelear", "cruda": "pelear", "brecha": 0.82, "meta": null, "brecha_meta": null, "ms": 145}
+{"ev": "nav", "frame": 1976, "que": ["meta", "arma_640_512", "codigo", "21"]}
+{"ev": "haiku", "frame": 1977, "modelo": "haiku", "motivo": "muerte", "plan": ["arma_640_512", "municion_328_1120", "frontera", "pisar_2"], "comentario": "Escopeta primero, munición después, a explorar; esas líneas quizá abran camino.", "seg": 10.2, "error": ""}
+{"ev": "jev", "frame": 1979, "tactica": "pelear", "cruda": "pelear", "brecha": 0.42, "meta": "arma_640_512", "brecha_meta": 0.2, "ms": 140}
+{"ev": "jev", "frame": 1983, "tactica": null, "cruda": "avanzar", "brecha": 0.15, "meta": null, "brecha_meta": 0.13, "ms": 153}
+{"ev": "jev", "frame": 1987, "tactica": "pelear", "cruda": "pelear", "brecha": 0.27, "meta": null, "brecha_meta": 0.16, "ms": 151}
+{"ev": "jev", "frame": 1991, "tactica": "pelear", "cruda": "pelear", "brecha": 0.44, "meta": null, "brecha_meta": 0.03, "ms": 146}
+{"ev": "jev", "frame": 1995, "tactica": "pelear", "cruda": "pelear", "brecha": 0.47, "meta": null, "brecha_meta": 0.11, "ms": 154}
+{"ev": "jev", "frame": 1999, "tactica": "pelear", "cruda": "pelear", "brecha": 0.42, "meta": null, "brecha_meta": 0.1, "ms": 199}
+{"ev": "foto", "frame": 2000, "pos": [573, 875], "salud": 82, "municion": 36, "arma": 2, "modo": "atacar", "cerca": [[267, "Zombieman"], [371, "DoomImp"], [396, "Zombieman"], [415, "LostSoul"], [473, "ChaingunGuy"], [610, "Zombieman"]], "meta": "arma_640_512"}
+{"ev": "jev", "frame": 2003, "tactica": "pelear", "cruda": "pelear", "brecha": 0.4, "meta": null, "brecha_meta": 0.03, "ms": 169}
+{"ev": "jev", "frame": 2007, "tactica": null, "cruda": "avanzar", "brecha": 0.11, "meta": "arma_640_512", "brecha_meta": 0.33, "ms": 162}
+{"ev": "jev", "frame": 2011, "tactica": null, "cruda": "pelear", "brecha": 0.03, "meta": null, "brecha_meta": 0.06, "ms": 146}
+{"ev": "jev", "frame": 2015, "tactica": "pelear", "cruda": "pelear", "brecha": 0.28, "meta": null, "brecha_meta": 0.19, "ms": 155}
+{"ev": "jev", "frame": 2019, "tactica": null, "cruda": "pelear", "brecha": 0.19, "meta": "arma_640_512", "brecha_meta": 0.51, "ms": 222}
+{"ev": "jev", "frame": 2023, "tactica": null, "cruda": "pelear", "brecha": 0.09, "meta": "arma_640_512", "brecha_meta": 0.38, "ms": 149}
+{"ev": "jev", "frame": 2027, "tactica": null, "cruda": "pelear", "brecha": 0.13, "meta": "arma_640_512", "brecha_meta": 0.32, "ms": 149}
+{"ev": "jev", "frame": 2031, "tactica": "pelear", "cruda": "pelear", "brecha": 0.3, "meta": "arma_640_512", "brecha_meta": 0.42, "ms": 149}
+{"ev": "jev", "frame": 2035, "tactica": "pelear", "cruda": "pelear", "brecha": 0.28, "meta": null, "brecha_meta": 0.13, "ms": 166}
+{"ev": "jev", "frame": 2039, "tactica": "pelear", "cruda": "pelear", "brecha": 0.28, "meta": null, "brecha_meta": 0.03, "ms": 151}
+{"ev": "nav", "frame": 2042, "que": ["meta", "frontera", "haiku", "8"]}
+{"ev": "jev", "frame": 2048, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.94, "meta": "frontera", "brecha_meta": 0.84, "ms": 143}
+{"ev": "jev", "frame": 2052, "tactica": "pelear", "cruda": "pelear", "brecha": 0.2, "meta": "frontera", "brecha_meta": 0.8, "ms": 161}
+{"ev": "jev", "frame": 2059, "tactica": null, "cruda": "avanzar", "brecha": 0.01, "meta": "frontera", "brecha_meta": 0.88, "ms": 153}
+{"ev": "jev", "frame": 2063, "tactica": "pelear", "cruda": "pelear", "brecha": 0.25, "meta": "frontera", "brecha_meta": 0.82, "ms": 163}
+{"ev": "jev", "frame": 2067, "tactica": "pelear", "cruda": "pelear", "brecha": 0.44, "meta": "frontera", "brecha_meta": 0.84, "ms": 144}
+{"ev": "jev", "frame": 2076, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.78, "meta": "frontera", "brecha_meta": 0.77, "ms": 159}
+{"ev": "nav", "frame": 2083, "que": ["meta", "municion_328_1120", "haiku", "27"]}
+{"ev": "jev", "frame": 2085, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.92, "meta": "municion_328_1120", "brecha_meta": 0.28, "ms": 155}
+{"ev": "jev", "frame": 2092, "tactica": null, "cruda": "pelear", "brecha": 0.02, "meta": "municion_328_1120", "brecha_meta": 0.21, "ms": 143}
+{"ev": "jev", "frame": 2101, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.88, "meta": "municion_328_1120", "brecha_meta": 0.3, "ms": 150}
+{"ev": "jev", "frame": 2105, "tactica": null, "cruda": "pelear", "brecha": 0.11, "meta": null, "brecha_meta": 0.01, "ms": 144}
+{"ev": "nav", "frame": 2107, "que": ["meta", "frontera", "haiku", "8"]}
+{"ev": "jev", "frame": 2114, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.9, "meta": "frontera", "brecha_meta": 0.81, "ms": 139}
+{"ev": "jev", "frame": 2123, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.78, "meta": "frontera", "brecha_meta": 0.75, "ms": 136}
+{"ev": "nav", "frame": 2130, "que": ["meta", "municion_328_1120", "haiku", "31"]}
+{"ev": "jev", "frame": 2132, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.66, "meta": "municion_328_1120", "brecha_meta": 0.26, "ms": 154}
+{"ev": "jev", "frame": 2141, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.94, "meta": "municion_328_1120", "brecha_meta": 0.3, "ms": 135}
+{"ev": "jev", "frame": 2145, "tactica": "pelear", "cruda": "pelear", "brecha": 0.53, "meta": null, "brecha_meta": 0.09, "ms": 172}
+{"ev": "jev", "frame": 2149, "tactica": "pelear", "cruda": "pelear", "brecha": 0.21, "meta": null, "brecha_meta": 0.14, "ms": 144}
+{"ev": "jev", "frame": 2153, "tactica": "pelear", "cruda": "pelear", "brecha": 0.39, "meta": "municion_328_1120", "brecha_meta": 0.44, "ms": 151}
+{"ev": "nav", "frame": 2160, "que": ["meta", "frontera", "haiku", "8"]}
+{"ev": "jev", "frame": 2162, "tactica": "pelear", "cruda": "pelear", "brecha": 0.24, "meta": "frontera", "brecha_meta": 0.56, "ms": 217}
+{"ev": "jev", "frame": 2166, "tactica": null, "cruda": "pelear", "brecha": 0.0, "meta": "frontera", "brecha_meta": 0.69, "ms": 149}
+{"ev": "jev", "frame": 2171, "tactica": "pelear", "cruda": "pelear", "brecha": 0.37, "meta": "frontera", "brecha_meta": 0.81, "ms": 155}
+{"ev": "jev", "frame": 2175, "tactica": "pelear", "cruda": "pelear", "brecha": 0.39, "meta": "frontera", "brecha_meta": 0.8, "ms": 146}
+{"ev": "jev", "frame": 2179, "tactica": "pelear", "cruda": "pelear", "brecha": 0.54, "meta": "frontera", "brecha_meta": 0.86, "ms": 170}
+{"ev": "jev", "frame": 2183, "tactica": "pelear", "cruda": "pelear", "brecha": 0.62, "meta": "frontera", "brecha_meta": 0.84, "ms": 152}
+{"ev": "jev", "frame": 2187, "tactica": "pelear", "cruda": "pelear", "brecha": 0.36, "meta": "frontera", "brecha_meta": 0.63, "ms": 161}
+{"ev": "jev", "frame": 2196, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.96, "meta": "frontera", "brecha_meta": 0.41, "ms": 143}
+{"ev": "foto", "frame": 2200, "pos": [109, 1201], "salud": 73, "municion": 30, "arma": 2, "modo": "avanzar", "cerca": [[341, "ExplosiveBarrel"], [343, "ExplosiveBarrel"], [429, "DoomImp"], [455, "ExplosiveBarrel"], [529, "Demon"], [542, "ChaingunGuy"]], "meta": "frontera"}
+{"ev": "jev", "frame": 2205, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.96, "meta": "frontera", "brecha_meta": 0.85, "ms": 147}
+{"ev": "jev", "frame": 2210, "tactica": "pelear", "cruda": "pelear", "brecha": 0.59, "meta": "frontera", "brecha_meta": 0.73, "ms": 148}
+{"ev": "jev", "frame": 2219, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.76, "meta": "frontera", "brecha_meta": 0.71, "ms": 164}
+{"ev": "jev", "frame": 2228, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.96, "meta": "frontera", "brecha_meta": 0.64, "ms": 206}
+{"ev": "jev", "frame": 2237, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.96, "meta": "frontera", "brecha_meta": 0.74, "ms": 168}
+{"ev": "jev", "frame": 2246, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.97, "meta": "frontera", "brecha_meta": 0.75, "ms": 142}
+{"ev": "haiku", "frame": 2249, "modelo": "haiku", "motivo": "estancado", "plan": ["municion_324_160", "arma_640_-160", "salud_640_96", "frontera"], "comentario": "Primero munición, luego la escopeta fuerte, curamos y exploramos. La salida espera, paciencia.", "seg": 12.3, "error": ""}
+{"ev": "nav", "frame": 2249, "que": ["meta", "municion_324_160", "haiku", "15"]}
+{"ev": "jev", "frame": 2253, "tactica": null, "cruda": "avanzar", "brecha": 0.01, "meta": "municion_324_160", "brecha_meta": 0.53, "ms": 147}
+{"ev": "jev", "frame": 2262, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.87, "meta": null, "brecha_meta": 0.18, "ms": 148}
+{"ev": "jev", "frame": 2271, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.69, "meta": "municion_324_160", "brecha_meta": 0.39, "ms": 144}
+{"ev": "jev", "frame": 2280, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.94, "meta": "frontera", "brecha_meta": 0.43, "ms": 146}
+{"ev": "nav", "frame": 2280, "que": ["meta", "arma_640_-160", "haiku", "36"]}
+{"ev": "jev", "frame": 2289, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.94, "meta": null, "brecha_meta": 0.05, "ms": 150}
+{"ev": "jev", "frame": 2298, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.96, "meta": "frontera", "brecha_meta": 0.62, "ms": 160}
+{"ev": "nav", "frame": 2302, "que": ["puerta", "15"]}
+{"ev": "jev", "frame": 2307, "tactica": "pelear", "cruda": "pelear", "brecha": 0.27, "meta": null, "brecha_meta": 0.14, "ms": 146}
+{"ev": "jev", "frame": 2311, "tactica": "pelear", "cruda": "pelear", "brecha": 0.4, "meta": "arma_640_-160", "brecha_meta": 0.22, "ms": 146}
+{"ev": "jev", "frame": 2315, "tactica": "pelear", "cruda": "pelear", "brecha": 0.36, "meta": "arma_640_-160", "brecha_meta": 0.42, "ms": 150}
+{"ev": "jev", "frame": 2319, "tactica": "pelear", "cruda": "pelear", "brecha": 0.38, "meta": "arma_640_-160", "brecha_meta": 0.49, "ms": 181}
+{"ev": "jev", "frame": 2323, "tactica": "pelear", "cruda": "pelear", "brecha": 0.22, "meta": null, "brecha_meta": 0.06, "ms": 152}
+{"ev": "jev", "frame": 2327, "tactica": "pelear", "cruda": "pelear", "brecha": 0.36, "meta": null, "brecha_meta": 0.02, "ms": 143}
+{"ev": "jev", "frame": 2331, "tactica": "pelear", "cruda": "pelear", "brecha": 0.28, "meta": null, "brecha_meta": 0.0, "ms": 170}
+{"ev": "jev", "frame": 2335, "tactica": "pelear", "cruda": "pelear", "brecha": 0.32, "meta": null, "brecha_meta": 0.1, "ms": 152}
+{"ev": "jev", "frame": 2339, "tactica": "pelear", "cruda": "pelear", "brecha": 0.45, "meta": null, "brecha_meta": 0.05, "ms": 144}
+{"ev": "jev", "frame": 2343, "tactica": "pelear", "cruda": "pelear", "brecha": 0.35, "meta": "arma_640_-160", "brecha_meta": 0.3, "ms": 157}
+{"ev": "jev", "frame": 2352, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.98, "meta": null, "brecha_meta": 0.01, "ms": 145}
+{"ev": "nav", "frame": 2354, "que": ["meta", "frontera", "haiku", "8"]}
+{"ev": "jev", "frame": 2360, "tactica": null, "cruda": "pelear", "brecha": 0.16, "meta": "frontera", "brecha_meta": 0.79, "ms": 147}
+{"ev": "jev", "frame": 2364, "tactica": "pelear", "cruda": "pelear", "brecha": 0.3, "meta": null, "brecha_meta": 0.13, "ms": 147}
+{"ev": "jev", "frame": 2373, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.98, "meta": "frontera", "brecha_meta": 0.68, "ms": 148}
+{"ev": "jev", "frame": 2380, "tactica": "pelear", "cruda": "pelear", "brecha": 0.33, "meta": "frontera", "brecha_meta": 0.69, "ms": 196}
+{"ev": "jev", "frame": 2385, "tactica": "pelear", "cruda": "pelear", "brecha": 0.53, "meta": "frontera", "brecha_meta": 0.64, "ms": 144}
+{"ev": "jev", "frame": 2389, "tactica": "pelear", "cruda": "pelear", "brecha": 0.26, "meta": "frontera", "brecha_meta": 0.7, "ms": 174}
+{"ev": "jev", "frame": 2393, "tactica": "pelear", "cruda": "pelear", "brecha": 0.54, "meta": "frontera", "brecha_meta": 0.57, "ms": 160}
+{"ev": "jev", "frame": 2397, "tactica": "pelear", "cruda": "pelear", "brecha": 0.58, "meta": "frontera", "brecha_meta": 0.66, "ms": 148}
+{"ev": "foto", "frame": 2400, "pos": [600, -363], "salud": 83, "municion": 16, "arma": 3, "modo": "atacar", "cerca": [[84, "ExplosiveBarrel"], [156, "ExplosiveBarrel"], [176, "DoomImp"], [178, "DoomImp"], [210, "ExplosiveBarrel"], [226, "DoomImp"]], "meta": "frontera"}
+{"ev": "jev", "frame": 2401, "tactica": "pelear", "cruda": "pelear", "brecha": 0.56, "meta": "frontera", "brecha_meta": 0.54, "ms": 153}
+{"ev": "jev", "frame": 2410, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.96, "meta": "frontera", "brecha_meta": 0.77, "ms": 182}
+{"ev": "jev", "frame": 2419, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.9, "meta": "frontera", "brecha_meta": 0.65, "ms": 143}
+{"ev": "jev", "frame": 2424, "tactica": null, "cruda": "pelear", "brecha": 0.12, "meta": "frontera", "brecha_meta": 0.62, "ms": 1116}
+{"ev": "jev", "frame": 2433, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.94, "meta": "frontera", "brecha_meta": 0.39, "ms": 165}
+{"ev": "jev", "frame": 2442, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.86, "meta": null, "brecha_meta": 0.09, "ms": 152}
+{"ev": "jev", "frame": 2446, "tactica": "pelear", "cruda": "pelear", "brecha": 0.32, "meta": null, "brecha_meta": 0.08, "ms": 162}
+{"ev": "jev", "frame": 2450, "tactica": "pelear", "cruda": "pelear", "brecha": 0.31, "meta": "pisar_3", "brecha_meta": 0.34, "ms": 149}
+{"ev": "jev", "frame": 2454, "tactica": "pelear", "cruda": "pelear", "brecha": 0.26, "meta": null, "brecha_meta": 0.05, "ms": 160}
+{"ev": "jev", "frame": 2458, "tactica": "pelear", "cruda": "pelear", "brecha": 0.42, "meta": null, "brecha_meta": 0.02, "ms": 200}
+{"ev": "jev", "frame": 2462, "tactica": "pelear", "cruda": "pelear", "brecha": 0.81, "meta": "pisar_3", "brecha_meta": 0.24, "ms": 145}
+{"ev": "jev", "frame": 2466, "tactica": "pelear", "cruda": "pelear", "brecha": 0.54, "meta": "pisar_3", "brecha_meta": 0.3, "ms": 153}
+{"ev": "jev", "frame": 2470, "tactica": "pelear", "cruda": "pelear", "brecha": 0.59, "meta": null, "brecha_meta": 0.07, "ms": 144}
+{"ev": "nav", "frame": 2474, "que": ["holgura_fina"]}
+{"ev": "jev", "frame": 2479, "tactica": "avanzar", "cruda": "avanzar", "brecha": 1.0, "meta": "frontera", "brecha_meta": 0.86, "ms": 191}
+{"ev": "combate", "frame": 2480, "que": ["voltear", "Zombieman", "74"], "salud": 93}
+{"ev": "jev", "frame": 2488, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.98, "meta": "frontera", "brecha_meta": 0.87, "ms": 216}
+{"ev": "jev", "frame": 2497, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.98, "meta": "frontera", "brecha_meta": 0.47, "ms": 171}
+{"ev": "jev", "frame": 2506, "tactica": "avanzar", "cruda": "avanzar", "brecha": 1.0, "meta": "frontera", "brecha_meta": 0.21, "ms": 166}
+{"ev": "jev", "frame": 2514, "tactica": "pelear", "cruda": "pelear", "brecha": 0.67, "meta": "frontera", "brecha_meta": 0.54, "ms": 175}
+{"ev": "jev", "frame": 2518, "tactica": "pelear", "cruda": "pelear", "brecha": 0.62, "meta": "frontera", "brecha_meta": 0.22, "ms": 173}
+{"ev": "jev", "frame": 2522, "tactica": "pelear", "cruda": "pelear", "brecha": 0.49, "meta": "frontera", "brecha_meta": 0.44, "ms": 154}
+{"ev": "jev", "frame": 2526, "tactica": "pelear", "cruda": "pelear", "brecha": 0.68, "meta": "frontera", "brecha_meta": 0.38, "ms": 144}
+{"ev": "jev", "frame": 2530, "tactica": "pelear", "cruda": "pelear", "brecha": 0.24, "meta": null, "brecha_meta": 0.13, "ms": 170}
+{"ev": "jev", "frame": 2539, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.96, "meta": "frontera", "brecha_meta": 0.5, "ms": 160}
+{"ev": "jev", "frame": 2547, "tactica": "pelear", "cruda": "pelear", "brecha": 0.35, "meta": "frontera", "brecha_meta": 0.76, "ms": 149}
+{"ev": "combate", "frame": 2555, "que": ["voltear", "Zombieman", "114"], "salud": 50}
+{"ev": "jev", "frame": 2556, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.73, "meta": "frontera", "brecha_meta": 0.58, "ms": 154}
+{"ev": "jev", "frame": 2565, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.91, "meta": "frontera", "brecha_meta": 0.55, "ms": 145}
+{"ev": "jev", "frame": 2574, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.84, "meta": "frontera", "brecha_meta": 0.54, "ms": 167}
+{"ev": "jev", "frame": 2578, "tactica": null, "cruda": "esquivar", "brecha": 0.03, "meta": "frontera", "brecha_meta": 0.75, "ms": 158}
+{"ev": "jev", "frame": 2587, "tactica": "curarse", "cruda": "curarse", "brecha": 0.52, "meta": "frontera", "brecha_meta": 0.83, "ms": 166}
+{"ev": "jev", "frame": 2596, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.54, "meta": "frontera", "brecha_meta": 0.37, "ms": 171}
+{"ev": "foto", "frame": 2600, "pos": [449, -212], "salud": 58, "municion": 6, "arma": 3, "modo": "avanzar", "cerca": [[134, "ExplosiveBarrel"], [138, "ExplosiveBarrel"], [192, "Zombieman"], [303, "ExplosiveBarrel"], [319, "Zombieman"], [356, "ExplosiveBarrel"]], "meta": "frontera"}
+{"ev": "jev", "frame": 2605, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.91, "meta": null, "brecha_meta": 0.12, "ms": 149}
+{"ev": "jev", "frame": 2614, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.8, "meta": null, "brecha_meta": 0.18, "ms": 277}
+{"ev": "jev", "frame": 2623, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.7, "meta": null, "brecha_meta": 0.05, "ms": 154}
+{"ev": "jev", "frame": 2632, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.88, "meta": null, "brecha_meta": 0.11, "ms": 169}
+{"ev": "jev", "frame": 2641, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.79, "meta": null, "brecha_meta": 0.16, "ms": 171}
+{"ev": "jev", "frame": 2645, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.28, "meta": "frontera", "brecha_meta": 0.22, "ms": 168}
+{"ev": "combate", "frame": 2645, "que": ["retirada"], "salud": 58}
+{"ev": "jev", "frame": 2649, "tactica": null, "cruda": "pelear", "brecha": 0.13, "meta": "frontera", "brecha_meta": 0.41, "ms": 155}
+{"ev": "jev", "frame": 2653, "tactica": "pelear", "cruda": "pelear", "brecha": 0.21, "meta": "frontera", "brecha_meta": 0.24, "ms": 145}
+{"ev": "jev", "frame": 2657, "tactica": "pelear", "cruda": "pelear", "brecha": 0.32, "meta": "frontera", "brecha_meta": 0.34, "ms": 208}
+{"ev": "jev", "frame": 2666, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.81, "meta": null, "brecha_meta": 0.15, "ms": 152}
+{"ev": "jev", "frame": 2671, "tactica": null, "cruda": "pelear", "brecha": 0.01, "meta": null, "brecha_meta": 0.07, "ms": 164}
+{"ev": "jev", "frame": 2675, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.34, "meta": null, "brecha_meta": 0.19, "ms": 196}
+{"ev": "combate", "frame": 2675, "que": ["retirada"], "salud": 58}
+{"ev": "jev", "frame": 2679, "tactica": null, "cruda": "pelear", "brecha": 0.03, "meta": "frontera", "brecha_meta": 0.21, "ms": 216}
+{"ev": "jev", "frame": 2683, "tactica": null, "cruda": "esquivar", "brecha": 0.07, "meta": null, "brecha_meta": 0.01, "ms": 145}
+{"ev": "jev", "frame": 2687, "tactica": null, "cruda": "pelear", "brecha": 0.16, "meta": null, "brecha_meta": 0.06, "ms": 159}
+{"ev": "jev", "frame": 2691, "tactica": null, "cruda": "pelear", "brecha": 0.0, "meta": "frontera", "brecha_meta": 0.39, "ms": 152}
+{"ev": "jev", "frame": 2695, "tactica": null, "cruda": "esquivar", "brecha": 0.07, "meta": "frontera", "brecha_meta": 0.24, "ms": 191}
+{"ev": "jev", "frame": 2699, "tactica": "pelear", "cruda": "pelear", "brecha": 0.3, "meta": null, "brecha_meta": 0.12, "ms": 163}
+{"ev": "jev", "frame": 2708, "tactica": null, "cruda": "pelear", "brecha": 0.05, "meta": "pisar_2", "brecha_meta": 0.21, "ms": 143}
+{"ev": "jev", "frame": 2712, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.39, "meta": "frontera", "brecha_meta": 0.27, "ms": 146}
+{"ev": "combate", "frame": 2712, "que": ["retirada"], "salud": 47}
+{"ev": "jev", "frame": 2717, "tactica": null, "cruda": "esquivar", "brecha": 0.05, "meta": null, "brecha_meta": 0.09, "ms": 163}
+{"ev": "jev", "frame": 2721, "tactica": null, "cruda": "pelear", "brecha": 0.04, "meta": null, "brecha_meta": 0.09, "ms": 144}
+{"ev": "jev", "frame": 2725, "tactica": null, "cruda": "esquivar", "brecha": 0.15, "meta": "frontera", "brecha_meta": 0.24, "ms": 163}
+{"ev": "combate", "frame": 2732, "que": ["voltear", "ShotgunGuy", "-38"], "salud": 39}
+{"ev": "jev", "frame": 2734, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.41, "meta": null, "brecha_meta": 0.12, "ms": 140}
+{"ev": "jev", "frame": 2739, "tactica": "pelear", "cruda": "pelear", "brecha": 0.21, "meta": "frontera", "brecha_meta": 0.4, "ms": 172}
+{"ev": "jev", "frame": 2743, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.25, "meta": null, "brecha_meta": 0.08, "ms": 145}
+{"ev": "combate", "frame": 2743, "que": ["retirada"], "salud": 39}
+{"ev": "jev", "frame": 2747, "tactica": null, "cruda": "esquivar", "brecha": 0.07, "meta": "frontera", "brecha_meta": 0.37, "ms": 164}
+{"ev": "jev", "frame": 2751, "tactica": null, "cruda": "esquivar", "brecha": 0.13, "meta": "frontera", "brecha_meta": 0.42, "ms": 218}
+{"ev": "jev", "frame": 2755, "tactica": "esquivar", "cruda": "esquivar", "brecha": 0.2, "meta": "frontera", "brecha_meta": 0.32, "ms": 146}
+{"ev": "combate", "frame": 2755, "que": ["retirada"], "salud": 33}
+{"ev": "jev", "frame": 2759, "tactica": "pelear", "cruda": "pelear", "brecha": 0.22, "meta": "frontera", "brecha_meta": 0.57, "ms": 180}
+{"ev": "jev", "frame": 2763, "tactica": null, "cruda": "pelear", "brecha": 0.13, "meta": null, "brecha_meta": 0.03, "ms": 148}
+{"ev": "jev", "frame": 2768, "tactica": "pelear", "cruda": "pelear", "brecha": 0.25, "meta": "frontera", "brecha_meta": 0.52, "ms": 157}
+{"ev": "jev", "frame": 2772, "tactica": null, "cruda": "pelear", "brecha": 0.15, "meta": null, "brecha_meta": 0.13, "ms": 149}
+{"ev": "jev", "frame": 2781, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.43, "meta": "frontera", "brecha_meta": 0.35, "ms": 145}
+{"ev": "haiku", "frame": 2789, "modelo": "haiku", "motivo": "estancado", "plan": ["salud_1184_640", "interruptor_7", "frontera"], "comentario": "Salida bloqueada, así que primero un stimpack pa' no morir como novato, luego el switch.", "seg": 9.8, "error": ""}
+{"ev": "nav", "frame": 2789, "que": ["meta", "salud_1184_640", "haiku", "54"]}
+{"ev": "jev", "frame": 2790, "tactica": "curarse", "cruda": "curarse", "brecha": 0.53, "meta": "salud_1184_640", "brecha_meta": 0.21, "ms": 145}
+{"ev": "combate", "frame": 2790, "que": ["curarse"], "salud": 33}
+{"ev": "jev", "frame": 2799, "tactica": "curarse", "cruda": "curarse", "brecha": 0.69, "meta": null, "brecha_meta": 0.07, "ms": 141}
+{"ev": "foto", "frame": 2800, "pos": [730, 119], "salud": 33, "municion": 8, "arma": 3, "modo": "curarse", "cerca": [[297, "ExplosiveBarrel"], [300, "ExplosiveBarrel"], [483, "ExplosiveBarrel"], [539, "ExplosiveBarrel"], [680, "ExplosiveBarrel"], [793, "ShotgunGuy"]], "meta": "salud_1184_640"}
+{"ev": "jev", "frame": 2808, "tactica": "curarse", "cruda": "curarse", "brecha": 0.51, "meta": null, "brecha_meta": 0.06, "ms": 217}
+{"ev": "jev", "frame": 2817, "tactica": "curarse", "cruda": "curarse", "brecha": 0.5, "meta": null, "brecha_meta": 0.05, "ms": 147}
+{"ev": "jev", "frame": 2826, "tactica": "curarse", "cruda": "curarse", "brecha": 0.65, "meta": "salud_1184_640", "brecha_meta": 0.36, "ms": 146}
+{"ev": "jev", "frame": 2835, "tactica": null, "cruda": "curarse", "brecha": 0.08, "meta": null, "brecha_meta": 0.08, "ms": 143}
+{"ev": "jev", "frame": 2844, "tactica": "curarse", "cruda": "curarse", "brecha": 0.28, "meta": null, "brecha_meta": 0.1, "ms": 150}
+{"ev": "combate", "frame": 2844, "que": ["curarse"], "salud": 33}
+{"ev": "jev", "frame": 2853, "tactica": "curarse", "cruda": "curarse", "brecha": 0.56, "meta": null, "brecha_meta": 0.04, "ms": 197}
+{"ev": "jev", "frame": 2862, "tactica": "curarse", "cruda": "curarse", "brecha": 0.59, "meta": "salud_1184_640", "brecha_meta": 0.35, "ms": 147}
+{"ev": "jev", "frame": 2871, "tactica": null, "cruda": "curarse", "brecha": 0.16, "meta": "salud_1184_640", "brecha_meta": 0.46, "ms": 199}
+{"ev": "nav", "frame": 2871, "que": ["provision_alcanzada", "salud_1184_640"]}
+{"ev": "nav", "frame": 2872, "que": ["meta", "interruptor_7", "haiku", "134"]}
+{"ev": "jev", "frame": 2880, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.5, "meta": "interruptor_7", "brecha_meta": 0.36, "ms": 162}
+{"ev": "jev", "frame": 2889, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.74, "meta": null, "brecha_meta": 0.02, "ms": 156}
+{"ev": "jev", "frame": 2898, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.56, "meta": "interruptor_7", "brecha_meta": 0.31, "ms": 139}
+{"ev": "jev", "frame": 2907, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.64, "meta": "interruptor_7", "brecha_meta": 0.6, "ms": 171}
+{"ev": "jev", "frame": 2916, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.75, "meta": "interruptor_7", "brecha_meta": 0.72, "ms": 152}
+{"ev": "jev", "frame": 2925, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.62, "meta": "interruptor_7", "brecha_meta": 0.5, "ms": 180}
+{"ev": "nav", "frame": 2925, "que": ["puerta", "15"]}
+{"ev": "jev", "frame": 2934, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.61, "meta": "interruptor_7", "brecha_meta": 0.38, "ms": 167}
+{"ev": "jev", "frame": 2943, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.53, "meta": "interruptor_7", "brecha_meta": 0.71, "ms": 165}
+{"ev": "jev", "frame": 2952, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.81, "meta": null, "brecha_meta": 0.11, "ms": 144}
+{"ev": "jev", "frame": 2961, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.64, "meta": "interruptor_7", "brecha_meta": 0.64, "ms": 170}
+{"ev": "jev", "frame": 2970, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.64, "meta": "interruptor_7", "brecha_meta": 0.69, "ms": 149}
+{"ev": "jev", "frame": 2979, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.8, "meta": "interruptor_7", "brecha_meta": 0.91, "ms": 221}
+{"ev": "jev", "frame": 2988, "tactica": "avanzar", "cruda": "avanzar", "brecha": 0.76, "meta": "interruptor_7", "brecha_meta": 0.94, "ms": 156}
+{"ev": "nav", "frame": 2994, "que": ["interruptor", "7"]}
