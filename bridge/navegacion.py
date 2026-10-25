@@ -567,6 +567,15 @@ class Navegador:
                 return min(grupo, key=lambda c: c["dist"])
         return None
 
+    def metas_jev(self):
+        """Las metas que se le ofrecen a Jev. Sin la frontera mientras haya salida, llave, interruptor
+        o linea con ruta: con ella en la lista Jev exploraba 446-626 veces por partida y no termino
+        MAP02 en 0 de 3 (solo codigo, 3 de 3), aunque la pregunta dice que explorar es el ultimo recurso."""
+        avanzar = {"salida", "llave", "interruptor", "pisar"}
+        hay = any(c["tipo"] in avanzar for c in self.cands)
+        return [(c["id"], f"{c['desc']}, a {c['dist']} unidades") for c in self.cands
+                if not (hay and c["tipo"] == "frontera")][:8]
+
     def hay_salud(self):
         """Hay un botiquin (o similar) con ruta en el ultimo replanteo."""
         return any(c["tipo"] == "provision" and c["datos"] == "salud" for c in self.cands)
@@ -583,6 +592,11 @@ class Navegador:
             salud = [c for c in cands if c["tipo"] == "provision" and c["datos"] == "salud"]
             if salud:
                 return min(salud, key=lambda c: c["dist"]), "curarse"
+        # arma nueva, salud o municion que hacen falta: las decide el codigo. Sin esto Jev iba por la
+        # llave azul de MAP02 sin la escopeta y sin balas (20 muertes en 3 partidas, 9 con 0 balas)
+        fija = self.prioridad_fija(cands)
+        if fija and fija["tipo"] == "provision":
+            return fija, "codigo"
         # plan de Haiku: el primer paso del plan que hoy tenga ruta
         objetivo = next((por_id[i] for i in self.plan if i in por_id), None)
         if self.pedido_jev in por_id:

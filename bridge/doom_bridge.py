@@ -653,7 +653,7 @@ def main():
         if cerebro.evento:
             log("cerebro", frame=n, que=list(cerebro.evento), orden=orden, pos=[round(vars_[4]), round(vars_[5])])
         if jev:
-            metas = [(c["id"], f"{c['desc']}, a {c['dist']} unidades") for c in nav.cands][:8]
+            metas = nav.metas_jev()
             jev.ofrecer(st.screen_buffer, estado, metas, n)
         pos = [round(vars_[4]), round(vars_[5])]
         if cerebro.modo != previo["modo"]:
