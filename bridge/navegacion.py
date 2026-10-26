@@ -49,6 +49,14 @@ TELEPORTES = {39, 97}  # los del jugador; 125 y 126 solo mueven monstruos y se p
 PISAR = {2, 3, 4, 5, 6, 8, 16, 19, 22, 25, 30, 36, 37, 38, 40, 44, 53, 54, 56, 57, 58, 59, 72, 73,
          74, 75, 76, 77, 79, 80, 81, 82, 83, 84, 86, 87, 89, 90, 91, 92, 93, 94, 95, 96, 98, 100, 104,
          105, 106, 107, 108, 109, 110, 119, 128, 129, 130, 141}
+# aplastadores: techos que bajan hasta 8 del piso y vuelven a subir. No se pisan a proposito.
+# MAP04: el bot pisaba la linea 25 junto al interruptor 5 (estaba en PISAR) y luego se quedaba
+# debajo volteando hacia un monstruo: 6 de 11 muertes con barriles+bonus, con salud 82-86
+APLASTADORES = {6, 25, 44, 49, 73, 77, 141}
+PISAR -= APLASTADORES
+APLASTA_ALTO = 64      # hueco bajo el que el techo ya pega (el jugador mide 56)
+APLASTA_BAJANDO = 100  # si va bajando, ya no se entra con este hueco o menos
+APLASTA_COSTO = 3      # costo extra por celda bajo un aplastador al planear rutas
 DESTINO_TELEPORT = 14  # tipo de cosa que marca a donde llega un teletransporte
 
 # abastecimiento: nombres de objetos de ViZDoom por necesidad
@@ -155,6 +163,17 @@ class Mapa:
                     self.sector_elevador |= {s for s, sec in enumerate(m.sectors) if sec.tag == tag}
                 elif bk >= 0:
                     self.sector_elevador.add(bk)
+        # aplastadores: sus sectores y las celdas a menos de RADIO de ellos (el techo pega a todo lo
+        # que toque el sector, y el jugador mide 16 de radio: MAP04 murio en x=749, 13 fuera del borde)
+        tags_apl = {tag for (*_c, act, tag, _f) in lineas if act in APLASTADORES and tag}
+        self.sector_aplastador = {s for s, sec in enumerate(m.sectors) if sec.tag in tags_apl}
+        self.baja = set()  # aplastadores cuyo techo va bajando ahora
+        self.zona_aplastador = np.full((self.H, self.W), -1, dtype=np.int32)
+        for s in self.sector_aplastador:
+            for j, i in zip(*np.nonzero(self.sector == s)):
+                for dx, dy in disco:
+                    if 0 <= j + dy < self.H and 0 <= i + dx < self.W:
+                        self.zona_aplastador[j + dy, i + dx] = s
         # llaves tiradas en el mapa (se omiten las que solo salen en multijugador)
         self.llaves_mapa = [(LLAVES[t.type][0], LLAVES[t.type][1], t.x, t.y)
                             for t in m.things if t.type in LLAVES and not (t.flags & 16)]
@@ -283,8 +302,23 @@ class Mapa:
     def actualizar_alturas(self, sectores):
         for s in sectores:
             if 0 <= s.id < len(self.piso):
+                if s.id in self.sector_aplastador:
+                    if s.ceiling_height < self.techo[s.id] - 0.1:
+                        self.baja.add(s.id)
+                    elif s.ceiling_height > self.techo[s.id] + 0.1:
+                        self.baja.discard(s.id)
                 self.piso[s.id] = s.floor_height
                 self.techo[s.id] = s.ceiling_height
+
+    def aplasta(self, i, j):
+        """La celda esta bajo (o junto a) un aplastador que pega o que ya viene bajando."""
+        if not (0 <= i < self.W and 0 <= j < self.H):
+            return False
+        s = self.zona_aplastador[j, i]
+        if s < 0:
+            return False
+        hueco = self.techo[s] - self.piso[s]
+        return hueco < APLASTA_ALTO or (s in self.baja and hueco <= APLASTA_BAJANDO)
 
     def puerta_cerrada(self, s):
         return (s in self.sector_puerta or s in self.sector_llave) and self.techo[s] - self.piso[s] < ALTO_MIN
@@ -357,7 +391,9 @@ class Mapa:
             if self.transitable(*n) and self.paso_ok(c, n):
                 if dx and dy and not (self.transitable(i + dx, j) and self.transitable(i, j + dy)):
                     continue
-                yield n, costo
+                # bajo un aplastador se puede pasar (en MAP04 el 22 es el pasillo al interruptor 5),
+                # pero cuesta: se rodea si hay por donde. Esperar y huir lo hacen en decidir
+                yield n, costo + (APLASTA_COSTO if self.zona_aplastador[n[1], n[0]] >= 0 else 0)
         if c in self.saltos:
             yield self.saltos[c][0], 3
 
@@ -442,6 +478,35 @@ class Navegador:
         self.por_verificar = {}   # interruptor -> (paso, alturas de sus sectores al presionarlo)
         self.sin_efecto = {}      # interruptor -> veces que se presiono sin que se moviera nada
         self.forzar = None        # "salud": ir por un botiquin antes que cualquier otra meta
+        self.huyendo = False      # saliendo de debajo de un aplastador
+        self.espera_apl = -9      # ultimo paso esperando a que un aplastador suba
+
+    def huir_aplastador(self, x, y, sectores, angulo, accion):
+        """Debajo de un aplastador que pega o baja: salir a la celda segura mas cercana, sin girar
+        (adelante, atras o de lado segun donde quede). Manda sobre todo lo demas, pelea incluida."""
+        m = self.mapa
+        if sectores is not None:
+            m.actualizar_alturas(sectores)
+        aqui = m.celda(x, y)
+        if not m.aplasta(*aqui):
+            self.huyendo = False
+            return None
+        i0, j0 = aqui
+        libres = [(dx * dx + dy * dy, (i0 + dx, j0 + dy)) for dx in range(-8, 9) for dy in range(-8, 9)
+                  if m.transitable(i0 + dx, j0 + dy) and not m.aplasta(i0 + dx, j0 + dy)]
+        if not libres:
+            return None
+        libre = min(libres)[1]
+        if not self.huyendo:
+            self.huyendo = True
+            self.evento = ("aplastador", int(m.zona_aplastador[aqui[1], aqui[0]]))
+        self.camino, self.uso = [], 0
+        dif = self._dif(x, y, angulo, *m.centro(*libre))
+        if abs(dif) < 60:
+            return accion("MOVE_FORWARD")
+        if abs(dif) > 120:
+            return accion("MOVE_BACKWARD")
+        return accion("MOVE_LEFT" if dif > 0 else "MOVE_RIGHT")
 
     # ---------- metas posibles ----------
 
@@ -636,8 +701,9 @@ class Navegador:
         self.armas = armas or set()  # casilleros de arma que ya trae
         self.arma_actual = arma_actual
         self.objetos = objetos or []
-        if sectores is not None:
-            m.actualizar_alturas(sectores)
+        huir = self.huir_aplastador(x, y, sectores, angulo, accion)
+        if huir:
+            return huir
         if objetos is not None:
             nuevas = m.actualizar_llaves(objetos)
             if nuevas:
@@ -793,6 +859,17 @@ class Navegador:
                     return accion()
                 break
         self.espera_elevador = 0
+
+        # aplastador en los proximos pasos: esperar afuera. Huir ya debajo llega tarde: con el techo
+        # bajo 56 Doom no deja moverse a ningun punto que aun toque el sector (MAP04 s1: entro 10
+        # unidades por la orilla del 82 con el techo bajando y se quedo trabado de 35 a 0)
+        for c in self.camino[:5]:
+            if m.aplasta(*c):
+                if self.paso - self.espera_apl > 1:  # un evento por espera, no uno por paso
+                    self.evento = ("espera_aplastador", int(m.zona_aplastador[c[1], c[0]]))
+                self.espera_apl = self.paso
+                self.ultimo_avance = (self.paso, (x, y))  # esperar no es atorarse
+                return accion()
 
         # puerta cerrada en los proximos pasos: mirarla y presionar USE UNA vez. Un segundo USE
         # sobre una puerta que va abriendo la regresa (MAP02: tres pulsos la abrian y la cerraban).

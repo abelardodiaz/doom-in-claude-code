@@ -360,6 +360,14 @@ class Cerebro:
                 return None
             return accion(*extra, giro=-grados)
 
+        # debajo de un aplastador no se pelea ni se voltea: primero salir (MAP04: se quedaba volteando
+        # hacia un ChaingunGuy mientras el techo le quitaba 5 por paso, de 86 a 0)
+        if self.navegador:
+            huir = self.navegador.huir_aplastador(x, y, st.sectors, vars_[6], accion)
+            if huir:
+                self.salud_prev = vars_[0]
+                return huir, atorado
+
         # reflejo de supervivencia, en cualquier modo: esquivar un proyectil que viene directo
         esquive = esquivar(st.objects, x, y, vars_[6])
 
