@@ -845,6 +845,18 @@ class Navegador:
             if a in m.saltos and m.saltos[a][0] == self.camino[1]:
                 break
             self.camino.pop(0)
+        # cortando una esquina puede no pasar nunca a menos de 24 de la primera celda: ubicarse en la
+        # mas cercana de las siguientes y dar por pasadas las anteriores. MAP04: tras la llave roja
+        # iba y venia en el pasillo de y=1400 apuntando a una celda que ya habia dejado atras, a
+        # 35-50 unidades, y nunca llegaba al interruptor 5 (1 vez en 48 partidas)
+        n = min(8, len(self.camino) - 1)
+        if n > 0:
+            dist = [math.hypot(*(np.subtract(m.centro(*c), (x, y)))) for c in self.camino[:n + 1]]
+            k = min(range(n + 1), key=dist.__getitem__)
+            saltos_antes = any(c in m.saltos and m.saltos[c][0] == d
+                               for c, d in zip(self.camino[:k], self.camino[1:k + 1]))
+            if k > 0 and dist[k] < 48 and not saltos_antes:
+                del self.camino[:k]
 
         # elevador en la ruta: llamarlo si esta arriba, esperar encima mientras sube
         for a, b in zip(self.camino[:5], self.camino[1:6]):
