@@ -5,6 +5,53 @@ How this went from a forum joke to a playable mod, one step at a time.
 The challenge: someone in a forum listed the AI fads (personal finance apps, reverse engineering,
 TV launchers) and asked what was missing. "Running Doom in Claude." Challenge accepted.
 
+## [Unreleased] - seeds that really vary, crushers, and a route bug that cost half the time
+
+### The seeds were not seeds
+ViZDoom ignores `set_seed()` after `init()`. Up to 0.5.0 every benchmark seed played the same game:
+with fixed actions, seeds 3, 4, 6 and 99 gave identical monsters and damage. The seed now goes in
+before `init()`; 8 seeds give 6 different games (1, 4 and 6 still coincide). **Every number before
+this section was measured on one game repeated**, so the 0.5.0 tables are not comparable with these.
+
+### Navigation
+- **Corners**: a route cell was only dropped when the bot passed within 24 units of it. Cutting a
+  corner 35-50 units away, it kept aiming at a point already behind it and went back and forth.
+  Now it takes the closest of the next 8 cells and drops the ones before. This one change is most
+  of the table below.
+- **Crushers** (MAP04 has three): their trigger lines were walk-on goals, so the bot stepped on them
+  on purpose and then stood under the ceiling turning toward an off-screen monster (6 of 11 deaths
+  with bonuses, at 82-86 health). Now it waits outside while the ceiling comes down and walks out
+  if it is already under one, before any fighting. Walking out alone came too late: with the
+  ceiling under 56, Doom does not let the player move anywhere that still touches the sector.
+- **Teleports**: crossing a teleport from the second route cell went undetected; the bot replanned
+  back to the teleporter, which sent it to the same spot. MAP02 seed 2 spent 2400 frames like that.
+- **Switch retries**: a switch that did nothing gets a second try where the bot first walks back to
+  the front of the line and aims. Doing it on every press changed MAP02's switch order (6/6 -> 2/6),
+  so only retries do it. MAP04 switch 7 (the red key cage) failed 3 of 3 before.
+- **Never without a goal**: with nothing left, it retries switches given up as useless and explores
+  visited cells again (MAP04: 2300 frames standing still).
+
+### Measured (code alone, real seeds, 6 per map; MAP01 2000 frames, MAP02 and MAP04 6000)
+| | Real seeds, before these fixes | Now |
+| --- | --- | --- |
+| MAP01 | 6/6, 573-1082 frames | **6/6, 336-509** |
+| MAP02 | 6/6, 3301-5602 frames, 1 death | **6/6, 1814-2777, 0 deaths** |
+| MAP04 | 0/6, 26 deaths, red key 2/6 | 0/6, **4 deaths**, red key 6/6, switch 5 6/6 |
+
+Switch 5 was pressed once in the 48 earlier MAP04 games.
+
+### Experiments, off by default (`bench_reparto.py --barriles --bonus`)
+- Shooting barrels from afar and picking up health/armor bonuses under 75 health.
+- Before the route fix they helped MAP04 (26 -> 11 deaths, red key 6/6). After it they do not:
+  bonuses take MAP02 from 6/6 to 2/6, MAP04 stays 0/6 with 3 deaths. Barrels change nothing in MAP02.
+- `--pelea`: ask Jev "fight or follow the goal" with the numbers the code computes. MAP02 2/6, MAP04
+  0/3, measured before the seed fix. Jev said "don't fight" in 8% of 2093 calls but in 48 of the 98 calls before a death: it
+  says it with low health, when it is already late.
+
+### MAP04: what is left
+Switches 5 and 1 move the same lift (tag 3). The bot presses 5 standing on the lift, rides it down
+and loses the route to 1 while the lift moves. After that it explores until the frames run out.
+
 ## [0.5.0] - 2026-10-25 - Jev measured against code alone, and code won the fight
 
 0.4.1 ended with "surviving is the next stage, and where Jev should earn its place". This version
