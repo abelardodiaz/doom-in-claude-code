@@ -425,7 +425,9 @@ class Navegador:
         self.castigo = {}
         self.ultimo_avance = (0, None)
         self.uso = 0
+        self.uso_tope = 0         # paso hasta el que acomodarse antes de un USE no gasta pulsos
         self.mirar = None
+        self.pararse = None       # punto frente al interruptor desde donde se presiona
         self.paso = 0
         self.evento = None        # ultimo evento para la bitacora
         self.salud, self.municion, self.armadura, self.objetos = 100, 50, 0, []
@@ -662,6 +664,19 @@ class Navegador:
 
         # pulsos de USE en curso (abrir puerta, presionar interruptor, llamar elevador)
         if self.uso > 0:
+            # reintento de un interruptor: acomodarse no gasta pulsos. Llegaba con impulso, se pasaba
+            # ~45 unidades de lado y los pulsos se iban girando. MAP04: el 7 (el de la llave roja)
+            # fallo 3 de 3 mirando el canto de una columna, se dio por inutil y el bot se quedo sin
+            # metas 2300 frames. Solo en el reintento: hacerlo siempre cambio el orden de los
+            # interruptores de MAP02 y abrio antes la sala de los Demons (6/6 -> 2/6)
+            if self.paso < self.uso_tope:
+                if self.pararse and math.hypot(self.pararse[0] - x, self.pararse[1] - y) > 20:
+                    dif = self._dif(x, y, angulo, *self.pararse)
+                    giro = max(-45, min(45, dif))
+                    return accion("MOVE_FORWARD", giro=giro) if abs(dif) < 30 else accion(giro=giro)
+                dif = self._dif(x, y, angulo, *self.mirar)
+                if abs(dif) > 6:
+                    return accion(giro=max(-45, min(45, dif)))
             self.uso -= 1
             extra = []
             if self.mirar:
@@ -699,8 +714,8 @@ class Navegador:
             self.camino = []
             self.meta = None
             self.ultimo_avance = (self.paso, (x, y))
-            self.uso = 4
-            self.mirar = None
+            self.uso, self.uso_tope = 4, 0
+            self.mirar = self.pararse = None
             return accion("MOVE_BACKWARD", "USE")
 
         # replantear: sin ruta, cada ~8 s, al alejarse de la ruta, o si el controlador pide otra meta
@@ -720,6 +735,19 @@ class Navegador:
             if elegido is None and m.usar_holgura_fina():
                 self.evento = ("holgura_fina",)
                 self.castigo, self.descartados = {}, {}
+                inicio = aqui if m.transitable(*aqui) else (m.celda_libre_cerca(x, y, 3) or aqui)
+                cands = self.candidatos(inicio)
+                elegido, quien = self.elegir(cands) if cands else (None, None)
+            # nunca quedarse sin meta (MAP04 s3: 2300 frames quieto girando): reintentar los
+            # interruptores dados por inutiles, olvidar descartes y volver a recorrer lo ya visto
+            if elegido is None:
+                self.evento = ("sin_metas",)
+                for idx, veces in self.sin_efecto.items():
+                    if veces >= 3:
+                        m.presionados.discard(idx)
+                self.sin_efecto, self.castigo, self.descartados = {}, {}, {}
+                self.visitado[:] = False
+                self.marcar_visto(x, y)
                 inicio = aqui if m.transitable(*aqui) else (m.celda_libre_cerca(x, y, 3) or aqui)
                 cands = self.candidatos(inicio)
                 elegido, quien = self.elegir(cands) if cands else (None, None)
@@ -756,7 +784,7 @@ class Navegador:
                 if que == "llamar" and math.hypot(bx - x, by - y) < 80:
                     self.espera_elevador = 1
                     self.mirar = (bx, by)
-                    self.uso = 4
+                    self.uso, self.uso_tope = 4, 0
                     self.evento = ("elevador", int(s), "llamar")
                     return accion("USE")
                 if que == "esperar" and m.sector[aqui[1], aqui[0]] == s:
@@ -811,9 +839,10 @@ class Navegador:
         if len(self.camino) <= 2 and self.meta and self.meta["tipo"] in ("salida", "interruptor"):
             t = self.meta["datos"]
             if math.hypot(t[0] - x, t[1] - y) < 40:
-                self.mirar = (t[2], t[3])
+                self.mirar, self.pararse = (t[2], t[3]), (t[0], t[1])
                 self.uso = 8
                 idx = m.metas_uso.index(t)
+                self.uso_tope = self.paso + 40 if self.sin_efecto.get(idx, 0) >= 1 else 0
                 m.presionados.add(idx)
                 # verificar despues que algo se movio; si no, se desmarca y se reintenta
                 sectores = [s for s, _cx, _cy in m.tags.get(t[6], [])] if t[6] else []
