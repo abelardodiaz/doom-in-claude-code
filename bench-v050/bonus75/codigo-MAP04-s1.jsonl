@@ -1,0 +1,872 @@
+{"ev": "foto", "frame": 0, "pos": [640, 640], "salud": 100, "municion": 50, "arma": 2, "modo": "explorar", "cerca": [[384, "DoomImp"], [384, "ShotgunGuy"], [387, "LostSoul"], [387, "LostSoul"], [453, "Zombieman"], [453, "Zombieman"]], "meta": null}
+{"ev": "nav", "frame": 79, "que": ["meta", "salud_640_96", "codigo", "26"]}
+{"ev": "nav", "frame": 168, "que": ["provision_alcanzada", "salud_640_96"]}
+{"ev": "nav", "frame": 169, "que": ["meta", "arma_640_-160", "codigo", "16"]}
+{"ev": "nav", "frame": 171, "que": ["puerta", "15"]}
+{"ev": "foto", "frame": 200, "pos": [681, -38], "salud": 43, "municion": 2, "arma": 3, "modo": "atacar", "cerca": [[156, "ExplosiveBarrel"], [169, "ExplosiveBarrel"], [218, "Zombieman"], [241, "DoomImp"], [256, "Demon"], [269, "Zombieman"]], "meta": "arma_640_-160"}
+{"ev": "combate", "frame": 216, "que": ["voltear", "DoomImp", "115"], "salud": 41}
+{"ev": "combate", "frame": 228, "que": ["barril", "225"], "salud": 41}
+{"ev": "nav", "frame": 229, "que": ["provision_alcanzada", "arma_640_-160"]}
+{"ev": "combate", "frame": 230, "que": ["voltear", "Zombieman", "-150"], "salud": 39}
+{"ev": "nav", "frame": 236, "que": ["meta", "municion_632_-346", "codigo", "11"]}
+{"ev": "nav", "frame": 244, "que": ["provision_alcanzada", "municion_632_-346"]}
+{"ev": "nav", "frame": 245, "que": ["meta", "salud_96_640", "codigo", "67"]}
+{"ev": "combate", "frame": 247, "que": ["barril", "236"], "salud": 39}
+{"ev": "combate", "frame": 253, "que": ["barril", "322"], "salud": 39}
+{"ev": "nav", "frame": 267, "que": ["meta", "salud_1184_640", "codigo", "70"]}
+{"ev": "nav", "frame": 368, "que": ["meta", "municion_1120_324", "codigo", "8"]}
+{"ev": "nav", "frame": 377, "que": ["provision_alcanzada", "municion_1120_324"]}
+{"ev": "nav", "frame": 378, "que": ["meta", "salud_1184_640", "codigo", "22"]}
+{"ev": "foto", "frame": 400, "pos": [1195, 639], "salud": 49, "municion": 12, "arma": 3, "modo": "explorar", "cerca": [[181, "HellKnight"], [296, "ShotgunGuy"], [297, "ShotgunGuy"], [423, "ShotgunGuy"], [424, "ShotgunGuy"], [558, "ShotgunGuy"]], "meta": "salud_1184_640"}
+{"ev": "nav", "frame": 424, "que": ["provision_alcanzada", "salud_1184_640"]}
+{"ev": "nav", "frame": 425, "que": ["meta", "salud_640_1184", "codigo", "39"]}
+{"ev": "nav", "frame": 512, "que": ["provision_alcanzada", "salud_640_1184"]}
+{"ev": "nav", "frame": 513, "que": ["meta", "municion_328_1120", "codigo", "20"]}
+{"ev": "nav", "frame": 540, "que": ["provision_alcanzada", "municion_328_1120"]}
+{"ev": "nav", "frame": 541, "que": ["meta", "municion_322_967", "codigo", "9"]}
+{"ev": "foto", "frame": 600, "pos": [297, 1047], "salud": 59, "municion": 8, "arma": 3, "modo": "explorar", "cerca": [[448, "ChaingunGuy"], [526, "ExplosiveBarrel"], [548, "ExplosiveBarrel"], [568, "ChaingunGuy"], [610, "ExplosiveBarrel"], [635, "Zombieman"]], "meta": "municion_322_967"}
+{"ev": "nav", "frame": 613, "que": ["meta", "municion_160_952", "codigo", "9"]}
+{"ev": "nav", "frame": 620, "que": ["provision_alcanzada", "municion_160_952"]}
+{"ev": "nav", "frame": 621, "que": ["meta", "pisar_2", "codigo", "126"]}
+{"ev": "nav", "frame": 771, "que": ["puerta", "15"]}
+{"ev": "foto", "frame": 800, "pos": [610, 2], "salud": 59, "municion": 12, "arma": 3, "modo": "explorar", "cerca": [[265, "Zombieman"], [278, "DoomImp"], [292, "Demon"], [320, "DoomImp"], [332, "ExplosiveBarrel"], [350, "Demon"]], "meta": "pisar_2"}
+{"ev": "nav", "frame": 849, "que": ["meta", "bonus_272_-448", "codigo", "21"]}
+{"ev": "nav", "frame": 901, "que": ["provision_alcanzada", "bonus_272_-384"]}
+{"ev": "nav", "frame": 902, "que": ["meta", "bonus_272_-432", "codigo", "4"]}
+{"ev": "nav", "frame": 905, "que": ["provision_alcanzada", "bonus_272_-432"]}
+{"ev": "nav", "frame": 906, "que": ["meta", "bonus_272_-320", "codigo", "8"]}
+{"ev": "nav", "frame": 915, "que": ["provision_alcanzada", "bonus_272_-320"]}
+{"ev": "nav", "frame": 916, "que": ["meta", "bonus_272_-256", "codigo", "5"]}
+{"ev": "nav", "frame": 917, "que": ["provision_alcanzada", "bonus_272_-256"]}
+{"ev": "nav", "frame": 918, "que": ["meta", "bonus_272_-192", "codigo", "5"]}
+{"ev": "nav", "frame": 919, "que": ["provision_alcanzada", "bonus_272_-192"]}
+{"ev": "nav", "frame": 920, "que": ["meta", "bonus_272_-128", "codigo", "5"]}
+{"ev": "nav", "frame": 921, "que": ["provision_alcanzada", "bonus_272_-128"]}
+{"ev": "nav", "frame": 922, "que": ["meta", "municion_544_-528", "codigo", "46"]}
+{"ev": "nav", "frame": 937, "que": ["holgura_fina"]}
+{"ev": "nav", "frame": 972, "que": ["provision_alcanzada", "bonus_476_-160"]}
+{"ev": "nav", "frame": 973, "que": ["meta", "bonus_476_-256", "codigo", "7"]}
+{"ev": "nav", "frame": 976, "que": ["provision_alcanzada", "bonus_476_-256"]}
+{"ev": "nav", "frame": 977, "que": ["meta", "bonus_476_-288", "codigo", "3"]}
+{"ev": "nav", "frame": 978, "que": ["provision_alcanzada", "bonus_476_-288"]}
+{"ev": "nav", "frame": 979, "que": ["meta", "bonus_476_-368", "codigo", "5"]}
+{"ev": "nav", "frame": 980, "que": ["provision_alcanzada", "bonus_476_-368"]}
+{"ev": "nav", "frame": 981, "que": ["provision_alcanzada", "bonus_476_-400"]}
+{"ev": "nav", "frame": 982, "que": ["provision_alcanzada", "bonus_476_-432"]}
+{"ev": "nav", "frame": 983, "que": ["meta", "interruptor_7", "codigo", "39"]}
+{"ev": "foto", "frame": 1000, "pos": [356, -142], "salud": 74, "municion": 70, "arma": 2, "modo": "explorar", "cerca": [[248, "ExplosiveBarrel"], [452, "ExplosiveBarrel"], [473, "ExplosiveBarrel"], [482, "DoomImp"], [504, "DoomImp"], [514, "Zombieman"]], "meta": "interruptor_7"}
+{"ev": "nav", "frame": 1091, "que": ["interruptor", "7"]}
+{"ev": "nav", "frame": 1100, "que": ["meta", "pisar_2", "codigo", "30"]}
+{"ev": "nav", "frame": 1152, "que": ["pisado", "2"]}
+{"ev": "nav", "frame": 1153, "que": ["meta", "pisar_3", "codigo", "69"]}
+{"ev": "combate", "frame": 1161, "que": ["barril", "198"], "salud": 74}
+{"ev": "nav", "frame": 1165, "que": ["interruptor_sin_efecto", "7"]}
+{"ev": "foto", "frame": 1200, "pos": [322, -579], "salud": 74, "municion": 68, "arma": 2, "modo": "explorar", "cerca": [[331, "ExplosiveBarrel"], [466, "ExplosiveBarrel"], [528, "DoomImp"], [540, "Zombieman"], [575, "DoomImp"], [586, "DoomImp"]], "meta": "pisar_3"}
+{"ev": "nav", "frame": 1237, "que": ["meta", "interruptor_7", "codigo", "46"]}
+{"ev": "nav", "frame": 1283, "que": ["interruptor", "7"]}
+{"ev": "nav", "frame": 1292, "que": ["meta", "pisar_3", "codigo", "99"]}
+{"ev": "nav", "frame": 1319, "que": ["meta", "llave_roja", "codigo", "101"]}
+{"ev": "foto", "frame": 1400, "pos": [409, -556], "salud": 74, "municion": 57, "arma": 2, "modo": "explorar", "cerca": [[264, "ExplosiveBarrel"], [317, "Zombieman"], [371, "DoomImp"], [377, "ExplosiveBarrel"], [435, "DoomImp"], [465, "DoomImp"]], "meta": "llave_roja"}
+{"ev": "combate", "frame": 1422, "que": ["barril", "268"], "salud": 74}
+{"ev": "combate", "frame": 1445, "que": ["barril", "285"], "salud": 68}
+{"ev": "nav", "frame": 1488, "que": ["meta", "bonus_1008_-448", "codigo", "17"]}
+{"ev": "combate", "frame": 1498, "que": ["retirada"], "salud": 14}
+{"ev": "muerte", "frame": 1520, "pos": [904, -542], "salud": 1, "municion": 48, "arma": 2, "modo": "explorar", "cerca": [[40, "DoomImp"], [76, "DoomImpBall"], [111, "Zombieman"], [156, "DoomImp"], [227, "DoomImp"], [285, "ShotgunGuy"]]}
+{"ev": "foto", "frame": 1600, "pos": [726, 1002], "salud": 37, "municion": 30, "arma": 2, "modo": "atacar", "cerca": [[232, "Zombieman"], [327, "DoomImp"], [355, "ChaingunGuy"], [408, "Zombieman"], [459, "Zombieman"], [583, "ShotgunGuy"]], "meta": null}
+{"ev": "nav", "frame": 1660, "que": ["meta", "arma_562_738", "codigo", "21"]}
+{"ev": "nav", "frame": 1693, "que": ["meta", "salud_96_640", "codigo", "28"]}
+{"ev": "nav", "frame": 1697, "que": ["meta", "arma_562_738", "codigo", "26"]}
+{"ev": "nav", "frame": 1735, "que": ["meta", "municion_553_1026", "codigo", "7"]}
+{"ev": "nav", "frame": 1744, "que": ["provision_alcanzada", "municion_553_1026"]}
+{"ev": "nav", "frame": 1745, "que": ["meta", "arma_562_738", "codigo", "19"]}
+{"ev": "nav", "frame": 1785, "que": ["provision_alcanzada", "arma_562_738"]}
+{"ev": "nav", "frame": 1786, "que": ["meta", "armadura_640_576", "codigo", "13"]}
+{"ev": "nav", "frame": 1795, "que": ["provision_alcanzada", "armadura_640_576"]}
+{"ev": "nav", "frame": 1796, "que": ["meta", "salud_640_96", "codigo", "31"]}
+{"ev": "foto", "frame": 1800, "pos": [658, 457], "salud": 32, "municion": 12, "arma": 3, "modo": "explorar", "cerca": [[331, "Zombieman"], [365, "Zombieman"], [581, "ExplosiveBarrel"], [656, "ExplosiveBarrel"], [696, "DoomImp"], [702, "Demon"]], "meta": "salud_640_96"}
+{"ev": "nav", "frame": 1810, "que": ["provision_alcanzada", "salud_640_96"]}
+{"ev": "nav", "frame": 1811, "que": ["meta", "arma_640_-160", "codigo", "16"]}
+{"ev": "nav", "frame": 1813, "que": ["puerta", "15"]}
+{"ev": "combate", "frame": 1818, "que": ["barril", "413"], "salud": 42}
+{"ev": "combate", "frame": 1819, "que": ["barril", "345"], "salud": 42}
+{"ev": "combate", "frame": 1821, "que": ["barril", "420"], "salud": 42}
+{"ev": "nav", "frame": 1879, "que": ["meta", "salud_96_640", "codigo", "56"]}
+{"ev": "nav", "frame": 1905, "que": ["atorado", "(163, 67)", "salud_96_640"]}
+{"ev": "nav", "frame": 1910, "que": ["meta", "salud_1184_640", "codigo", "48"]}
+{"ev": "nav", "frame": 1913, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 1995, "que": ["provision_alcanzada", "salud_1184_640"]}
+{"ev": "nav", "frame": 1996, "que": ["meta", "pisar_3", "codigo", "108"]}
+{"ev": "foto", "frame": 2000, "pos": [1233, 704], "salud": 47, "municion": 13, "arma": 3, "modo": "explorar", "cerca": [[156, "HellKnight"], [231, "ShotgunGuy"], [310, "ShotgunGuy"], [366, "ShotgunGuy"], [420, "ShotgunGuy"], [505, "ShotgunGuy"]], "meta": "pisar_3"}
+{"ev": "nav", "frame": 2050, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 2098, "que": ["meta", "bonus_1008_-448", "codigo", "18"]}
+{"ev": "combate", "frame": 2105, "que": ["barril", "338"], "salud": 47}
+{"ev": "nav", "frame": 2174, "que": ["provision_alcanzada", "bonus_1008_-448"]}
+{"ev": "nav", "frame": 2175, "que": ["meta", "bonus_1008_-384", "codigo", "5"]}
+{"ev": "nav", "frame": 2180, "que": ["provision_alcanzada", "bonus_1008_-384"]}
+{"ev": "nav", "frame": 2181, "que": ["meta", "municion_917_-380", "codigo", "5"]}
+{"ev": "nav", "frame": 2195, "que": ["provision_alcanzada", "municion_917_-380"]}
+{"ev": "nav", "frame": 2196, "que": ["meta", "bonus_1008_-288", "codigo", "5"]}
+{"ev": "nav", "frame": 2199, "que": ["provision_alcanzada", "bonus_1008_-288"]}
+{"ev": "foto", "frame": 2200, "pos": [989, -278], "salud": 57, "municion": 9, "arma": 3, "modo": "explorar", "cerca": [[145, "DoomImp"], [156, "DoomImp"], [200, "DoomImp"], [252, "ExplosiveBarrel"], [368, "ExplosiveBarrel"], [475, "ExplosiveBarrel"]], "meta": null}
+{"ev": "nav", "frame": 2200, "que": ["meta", "bonus_1008_-192", "codigo", "7"]}
+{"ev": "nav", "frame": 2234, "que": ["meta", "bonus_804_-160", "codigo", "12"]}
+{"ev": "nav", "frame": 2242, "que": ["provision_alcanzada", "bonus_804_-160"]}
+{"ev": "nav", "frame": 2243, "que": ["provision_alcanzada", "bonus_804_-208"]}
+{"ev": "nav", "frame": 2244, "que": ["meta", "municion_689_-595", "codigo", "39"]}
+{"ev": "nav", "frame": 2316, "que": ["meta", "bonus_804_-400", "codigo", "7"]}
+{"ev": "nav", "frame": 2324, "que": ["provision_alcanzada", "bonus_804_-400"]}
+{"ev": "nav", "frame": 2325, "que": ["provision_alcanzada", "bonus_804_-432"]}
+{"ev": "nav", "frame": 2326, "que": ["meta", "municion_689_-595", "codigo", "31"]}
+{"ev": "nav", "frame": 2365, "que": ["provision_alcanzada", "municion_689_-595"]}
+{"ev": "nav", "frame": 2366, "que": ["meta", "municion_606_-612", "codigo", "6"]}
+{"ev": "nav", "frame": 2368, "que": ["provision_alcanzada", "municion_606_-612"]}
+{"ev": "nav", "frame": 2369, "que": ["meta", "municion_544_-528", "codigo", "7"]}
+{"ev": "nav", "frame": 2397, "que": ["atorado", "(159, 35)", "municion_544_-528"]}
+{"ev": "foto", "frame": 2400, "pos": [548, -581], "salud": 62, "municion": 5, "arma": 3, "modo": "explorar", "cerca": [[205, "ExplosiveBarrel"], [226, "ShotgunGuy"], [229, "DoomImp"], [246, "DoomImp"], [440, "ExplosiveBarrel"], [469, "ExplosiveBarrel"]], "meta": null}
+{"ev": "nav", "frame": 2402, "que": ["meta", "municion_410_-603", "codigo", "10"]}
+{"ev": "nav", "frame": 2409, "que": ["provision_alcanzada", "municion_410_-603"]}
+{"ev": "nav", "frame": 2410, "que": ["meta", "bonus_272_-448", "codigo", "10"]}
+{"ev": "nav", "frame": 2464, "que": ["provision_alcanzada", "bonus_272_-448"]}
+{"ev": "nav", "frame": 2465, "que": ["meta", "bonus_272_-384", "codigo", "4"]}
+{"ev": "nav", "frame": 2466, "que": ["provision_alcanzada", "bonus_272_-384"]}
+{"ev": "nav", "frame": 2467, "que": ["meta", "bonus_272_-320", "codigo", "4"]}
+{"ev": "nav", "frame": 2468, "que": ["provision_alcanzada", "bonus_272_-320"]}
+{"ev": "nav", "frame": 2469, "que": ["meta", "bonus_272_-192", "codigo", "8"]}
+{"ev": "nav", "frame": 2472, "que": ["provision_alcanzada", "bonus_272_-192"]}
+{"ev": "nav", "frame": 2473, "que": ["meta", "bonus_476_-160", "codigo", "12"]}
+{"ev": "nav", "frame": 2526, "que": ["provision_alcanzada", "bonus_476_-160"]}
+{"ev": "nav", "frame": 2527, "que": ["provision_alcanzada", "bonus_476_-208"]}
+{"ev": "nav", "frame": 2528, "que": ["meta", "pisar_2", "codigo", "10"]}
+{"ev": "nav", "frame": 2539, "que": ["pisado", "2"]}
+{"ev": "nav", "frame": 2540, "que": ["meta", "bonus_476_-288", "codigo", "12"]}
+{"ev": "nav", "frame": 2567, "que": ["provision_alcanzada", "bonus_476_-288"]}
+{"ev": "nav", "frame": 2568, "que": ["meta", "bonus_476_-320", "codigo", "4"]}
+{"ev": "nav", "frame": 2572, "que": ["provision_alcanzada", "bonus_476_-320"]}
+{"ev": "nav", "frame": 2573, "que": ["meta", "bonus_476_-368", "codigo", "5"]}
+{"ev": "nav", "frame": 2574, "que": ["provision_alcanzada", "bonus_476_-368"]}
+{"ev": "nav", "frame": 2575, "que": ["provision_alcanzada", "bonus_476_-400"]}
+{"ev": "nav", "frame": 2576, "que": ["meta", "pisar_3", "codigo", "70"]}
+{"ev": "foto", "frame": 2600, "pos": [373, -347], "salud": 77, "municion": 1, "arma": 3, "modo": "explorar", "cerca": [[166, "Zombieman"], [168, "Zombieman"], [187, "Zombieman"], [228, "DoomImp"], [229, "DoomImp"], [272, "Zombieman"]], "meta": "pisar_3"}
+{"ev": "combate", "frame": 2688, "que": ["barril", "411"], "salud": 77}
+{"ev": "combate", "frame": 2745, "que": ["barril", "518"], "salud": 77}
+{"ev": "combate", "frame": 2751, "que": ["barril", "540"], "salud": 77}
+{"ev": "foto", "frame": 2800, "pos": [426, -563], "salud": 77, "municion": 18, "arma": 2, "modo": "atacar", "cerca": [[118, "ShotgunGuy"], [179, "DoomImp"], [193, "ShotgunGuy"], [237, "DoomImp"], [247, "Zombieman"], [345, "ExplosiveBarrel"]], "meta": "pisar_3"}
+{"ev": "nav", "frame": 2841, "que": ["meta", "municion_653_-503", "codigo", "23"]}
+{"ev": "combate", "frame": 2875, "que": ["voltear", "ShotgunGuy", "90"], "salud": 63}
+{"ev": "nav", "frame": 2883, "que": ["meta", "pisar_3", "codigo", "41"]}
+{"ev": "nav", "frame": 2993, "que": ["pisado", "3"]}
+{"ev": "nav", "frame": 2994, "que": ["meta", "bonus_804_-256", "codigo", "9"]}
+{"ev": "foto", "frame": 3000, "pos": [924, -208], "salud": 63, "municion": 13, "arma": 2, "modo": "explorar", "cerca": [[169, "ExplosiveBarrel"], [385, "ExplosiveBarrel"], [392, "ExplosiveBarrel"], [854, "ShotgunGuy"], [942, "ShotgunGuy"], [948, "ShotgunGuy"]], "meta": "bonus_804_-256"}
+{"ev": "nav", "frame": 3016, "que": ["meta", "frontera", "codigo", "85"]}
+{"ev": "nav", "frame": 3067, "que": ["atorado", "(174, 35)", "frontera"]}
+{"ev": "nav", "frame": 3072, "que": ["meta", "frontera", "codigo", "63"]}
+{"ev": "nav", "frame": 3114, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 3144, "que": ["meta", "municion_324_160", "codigo", "14"]}
+{"ev": "nav", "frame": 3178, "que": ["provision_alcanzada", "municion_324_160"]}
+{"ev": "nav", "frame": 3179, "que": ["meta", "municion_160_328", "codigo", "11"]}
+{"ev": "nav", "frame": 3186, "que": ["provision_alcanzada", "municion_160_328"]}
+{"ev": "nav", "frame": 3187, "que": ["meta", "frontera", "codigo", "8"]}
+{"ev": "foto", "frame": 3200, "pos": [152, 433], "salud": 63, "municion": 12, "arma": 3, "modo": "explorar", "cerca": [[278, "ChaingunGuy"], [635, "Zombieman"], [671, "ExplosiveBarrel"], [784, "ExplosiveBarrel"], [859, "ExplosiveBarrel"], [928, "DoomImp"]], "meta": "frontera"}
+{"ev": "foto", "frame": 3400, "pos": [0, 640], "salud": 73, "municion": 12, "arma": 3, "modo": "explorar", "cerca": [[72, "ChaingunGuy"], [448, "Zombieman"], [530, "ExplosiveBarrel"], [752, "DoomImp"], [844, "Demon"], [897, "ExplosiveBarrel"]], "meta": "frontera"}
+{"ev": "foto", "frame": 3600, "pos": [719, 1097], "salud": 73, "municion": 12, "arma": 3, "modo": "explorar", "cerca": [[262, "ChaingunGuy"], [372, "Zombieman"], [493, "ShotgunGuy"], [563, "Zombieman"], [686, "ShotgunGuy"], [698, "Demon"]], "meta": "frontera"}
+{"ev": "foto", "frame": 3800, "pos": [1091, 779], "salud": 73, "municion": 16, "arma": 3, "modo": "explorar", "cerca": [[317, "HellKnight"], [350, "ShotgunGuy"], [465, "ShotgunGuy"], [494, "ShotgunGuy"], [581, "ShotgunGuy"], [637, "ShotgunGuy"]], "meta": "frontera"}
+{"ev": "foto", "frame": 4000, "pos": [735, 451], "salud": 73, "municion": 16, "arma": 3, "modo": "explorar", "cerca": [[595, "ExplosiveBarrel"], [629, "ExplosiveBarrel"], [668, "HellKnight"], [705, "ShotgunGuy"], [790, "ShotgunGuy"], [814, "ChaingunGuy"]], "meta": "frontera"}
+{"ev": "foto", "frame": 4200, "pos": [162, 140], "salud": 73, "municion": 16, "arma": 3, "modo": "explorar", "cerca": [[458, "ExplosiveBarrel"], [519, "ChaingunGuy"], [675, "ExplosiveBarrel"], [788, "Zombieman"], [930, "ExplosiveBarrel"], [1041, "DoomImp"]], "meta": "frontera"}
+{"ev": "foto", "frame": 4400, "pos": [1184, 459], "salud": 73, "municion": 20, "arma": 3, "modo": "explorar", "cerca": [[256, "ShotgunGuy"], [264, "HellKnight"], [400, "ShotgunGuy"], [433, "ShotgunGuy"], [531, "ShotgunGuy"], [544, "ShotgunGuy"]], "meta": "frontera"}
+{"ev": "nav", "frame": 4504, "que": ["holgura_fina"]}
+{"ev": "nav", "frame": 4565, "que": ["puerta", "15"]}
+{"ev": "foto", "frame": 4600, "pos": [643, -503], "salud": 73, "municion": 20, "arma": 3, "modo": "explorar", "cerca": [[141, "ExplosiveBarrel"], [346, "ExplosiveBarrel"], [403, "ExplosiveBarrel"], [1259, "ShotgunGuy"], [1317, "ChaingunGuy"], [1317, "ShotgunGuy"]], "meta": "interruptor_7"}
+{"ev": "combate", "frame": 4614, "que": ["barril", "424"], "salud": 73}
+{"ev": "nav", "frame": 4686, "que": ["interruptor", "7"]}
+{"ev": "nav", "frame": 4695, "que": ["meta", "frontera", "codigo", "121"]}
+{"ev": "nav", "frame": 4757, "que": ["interruptor_sin_efecto", "7"]}
+{"ev": "nav", "frame": 4767, "que": ["meta", "interruptor_7", "codigo", "71"]}
+{"ev": "foto", "frame": 4800, "pos": [298, -171], "salud": 73, "municion": 24, "arma": 3, "modo": "explorar", "cerca": [[253, "ExplosiveBarrel"], [613, "ExplosiveBarrel"], [859, "ChaingunGuy"], [1102, "Zombieman"], [1311, "ShotgunGuy"], [1327, "DoomImp"]], "meta": "interruptor_7"}
+{"ev": "nav", "frame": 4815, "que": ["interruptor", "7"]}
+{"ev": "nav", "frame": 4824, "que": ["meta", "frontera", "codigo", "118"]}
+{"ev": "nav", "frame": 4886, "que": ["interruptor_sin_efecto", "7"]}
+{"ev": "combate", "frame": 4896, "que": ["barril", "468"], "salud": 73}
+{"ev": "nav", "frame": 4954, "que": ["atorado", "(171, 35)", "frontera"]}
+{"ev": "nav", "frame": 4959, "que": ["meta", "interruptor_7", "codigo", "69"]}
+{"ev": "foto", "frame": 5000, "pos": [244, -8], "salud": 73, "municion": 20, "arma": 3, "modo": "explorar", "cerca": [[689, "ChaingunGuy"], [764, "ExplosiveBarrel"], [948, "Zombieman"], [1189, "DoomImp"], [1221, "ExplosiveBarrel"], [1288, "ShotgunGuy"]], "meta": "interruptor_7"}
+{"ev": "nav", "frame": 5006, "que": ["interruptor", "7"]}
+{"ev": "nav", "frame": 5015, "que": ["meta", "frontera", "codigo", "121"]}
+{"ev": "nav", "frame": 5077, "que": ["interruptor_inutil", "7"]}
+{"ev": "nav", "frame": 5161, "que": ["meta", "bonus_804_-432", "codigo", "22"]}
+{"ev": "nav", "frame": 5192, "que": ["provision_alcanzada", "bonus_804_-432"]}
+{"ev": "nav", "frame": 5193, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5194, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5195, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5196, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5197, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5198, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5199, "que": ["meta", "None", "None", "0"]}
+{"ev": "foto", "frame": 5200, "pos": [800, -432], "salud": 73, "municion": 20, "arma": 3, "modo": "explorar", "cerca": [[132, "ExplosiveBarrel"], [1108, "ShotgunGuy"], [1145, "ShotgunGuy"], [1197, "ShotgunGuy"], [1217, "HellKnight"], [1218, "ShotgunGuy"]], "meta": null}
+{"ev": "nav", "frame": 5200, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5201, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5202, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5203, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5204, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5205, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5206, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5207, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5208, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5209, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5210, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5211, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5212, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5213, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5214, "que": ["atorado", "(175, 44)", "None"]}
+{"ev": "nav", "frame": 5219, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5220, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5221, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5222, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5223, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5224, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5225, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5226, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5227, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5228, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5229, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5230, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5231, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5232, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5233, "que": ["atorado", "(176, 44)", "None"]}
+{"ev": "nav", "frame": 5238, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5239, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5240, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5241, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5242, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5243, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5244, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5245, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5246, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5247, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5248, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5249, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5250, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5251, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5252, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5253, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5254, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5255, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5256, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5257, "que": ["atorado", "(178, 44)", "None"]}
+{"ev": "nav", "frame": 5262, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5263, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5264, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5265, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5266, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5267, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5268, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5269, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5270, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5271, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5272, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5273, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5274, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5275, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5276, "que": ["atorado", "(177, 44)", "None"]}
+{"ev": "nav", "frame": 5281, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5282, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5283, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5284, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5285, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5286, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5287, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5288, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5289, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5290, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5291, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5292, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5293, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5294, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5295, "que": ["atorado", "(178, 44)", "None"]}
+{"ev": "nav", "frame": 5300, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5301, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5302, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5303, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5304, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5305, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5306, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5307, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5308, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5309, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5310, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5311, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5312, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5313, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5314, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5315, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5316, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5317, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5318, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5319, "que": ["atorado", "(179, 44)", "None"]}
+{"ev": "nav", "frame": 5324, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5325, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5326, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5327, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5328, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5329, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5330, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5331, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5332, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5333, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5334, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5335, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5336, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5337, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5338, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5339, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5340, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5341, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5342, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5343, "que": ["atorado", "(177, 44)", "None"]}
+{"ev": "nav", "frame": 5348, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5349, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5350, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5351, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5352, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5353, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5354, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5355, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5356, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5357, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5358, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5359, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5360, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5361, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5362, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5363, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5364, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5365, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5366, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5367, "que": ["atorado", "(179, 45)", "None"]}
+{"ev": "nav", "frame": 5372, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5373, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5374, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5375, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5376, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5377, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5378, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5379, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5380, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5381, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5382, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5383, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5384, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5385, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5386, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5387, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5388, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5389, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5390, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5391, "que": ["atorado", "(178, 44)", "None"]}
+{"ev": "nav", "frame": 5396, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5397, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5398, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5399, "que": ["meta", "None", "None", "0"]}
+{"ev": "foto", "frame": 5400, "pos": [849, -402], "salud": 73, "municion": 20, "arma": 3, "modo": "explorar", "cerca": [[178, "ExplosiveBarrel"], [1055, "ShotgunGuy"], [1087, "ShotgunGuy"], [1142, "ShotgunGuy"], [1160, "ShotgunGuy"], [1167, "HellKnight"]], "meta": null}
+{"ev": "nav", "frame": 5400, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5401, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5402, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5403, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5404, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5405, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5406, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5407, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5408, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5409, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5410, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5411, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5412, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5413, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5414, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5415, "que": ["atorado", "(178, 45)", "None"]}
+{"ev": "nav", "frame": 5420, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5421, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5422, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5423, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5424, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5425, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5426, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5427, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5428, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5429, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5430, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5431, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5432, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5433, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5434, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5435, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5436, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5437, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5438, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5439, "que": ["atorado", "(179, 44)", "None"]}
+{"ev": "nav", "frame": 5444, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5445, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5446, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5447, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5448, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5449, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5450, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5451, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5452, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5453, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5454, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5455, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5456, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5457, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5458, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5459, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5460, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5461, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5462, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5463, "que": ["atorado", "(177, 45)", "None"]}
+{"ev": "nav", "frame": 5468, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5469, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5470, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5471, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5472, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5473, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5474, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5475, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5476, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5477, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5478, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5479, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5480, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5481, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5482, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5483, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5484, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5485, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5486, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5487, "que": ["atorado", "(178, 45)", "None"]}
+{"ev": "nav", "frame": 5492, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5493, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5494, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5495, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5496, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5497, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5498, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5499, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5500, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5501, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5502, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5503, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5504, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5505, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5506, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5507, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5508, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5509, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5510, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5511, "que": ["atorado", "(177, 44)", "None"]}
+{"ev": "nav", "frame": 5516, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5517, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5518, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5519, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5520, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5521, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5522, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5523, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5524, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5525, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5526, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5527, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5528, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5529, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5530, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5531, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5532, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5533, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5534, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5535, "que": ["atorado", "(177, 46)", "None"]}
+{"ev": "nav", "frame": 5540, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5541, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5542, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5543, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5544, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5545, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5546, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5547, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5548, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5549, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5550, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5551, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5552, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5553, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5554, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5555, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5556, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5557, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5558, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5559, "que": ["atorado", "(178, 44)", "None"]}
+{"ev": "nav", "frame": 5564, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5565, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5566, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5567, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5568, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5569, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5570, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5571, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5572, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5573, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5574, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5575, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5576, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5577, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5578, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5579, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5580, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5581, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5582, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5583, "que": ["atorado", "(177, 45)", "None"]}
+{"ev": "nav", "frame": 5588, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5589, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5590, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5591, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5592, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5593, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5594, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5595, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5596, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5597, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5598, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5599, "que": ["meta", "None", "None", "0"]}
+{"ev": "foto", "frame": 5600, "pos": [867, -411], "salud": 73, "municion": 20, "arma": 3, "modo": "explorar", "cerca": [[178, "ExplosiveBarrel"], [1053, "ShotgunGuy"], [1076, "ShotgunGuy"], [1138, "ShotgunGuy"], [1151, "ShotgunGuy"], [1166, "LostSoul"]], "meta": null}
+{"ev": "nav", "frame": 5600, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5601, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5602, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5603, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5604, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5605, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5606, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5607, "que": ["atorado", "(179, 45)", "None"]}
+{"ev": "nav", "frame": 5612, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5613, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5614, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5615, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5616, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5617, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5618, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5619, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5620, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5621, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5622, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5623, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5624, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5625, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5626, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5627, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5628, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5629, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5630, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5631, "que": ["atorado", "(177, 44)", "None"]}
+{"ev": "nav", "frame": 5636, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5637, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5638, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5639, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5640, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5641, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5642, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5643, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5644, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5645, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5646, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5647, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5648, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5649, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5650, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5651, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5652, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5653, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5654, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5655, "que": ["atorado", "(178, 46)", "None"]}
+{"ev": "nav", "frame": 5660, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5661, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5662, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5663, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5664, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5665, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5666, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5667, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5668, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5669, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5670, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5671, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5672, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5673, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5674, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5675, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5676, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5677, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5678, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5679, "que": ["atorado", "(178, 44)", "None"]}
+{"ev": "nav", "frame": 5684, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5685, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5686, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5687, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5688, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5689, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5690, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5691, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5692, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5693, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5694, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5695, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5696, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5697, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5698, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5699, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5700, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5701, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5702, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5703, "que": ["atorado", "(177, 45)", "None"]}
+{"ev": "nav", "frame": 5708, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5709, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5710, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5711, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5712, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5713, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5714, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5715, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5716, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5717, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5718, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5719, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5720, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5721, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5722, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5723, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5724, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5725, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5726, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5727, "que": ["atorado", "(179, 44)", "None"]}
+{"ev": "nav", "frame": 5732, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5733, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5734, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5735, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5736, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5737, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5738, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5739, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5740, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5741, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5742, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5743, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5744, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5745, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5746, "que": ["atorado", "(177, 44)", "None"]}
+{"ev": "nav", "frame": 5751, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5752, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5753, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5754, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5755, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5756, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5757, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5758, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5759, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5760, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5761, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5762, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5763, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5764, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5765, "que": ["atorado", "(176, 44)", "None"]}
+{"ev": "nav", "frame": 5770, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5771, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5772, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5773, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5774, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5775, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5776, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5777, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5778, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5779, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5780, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5781, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5782, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5783, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5784, "que": ["atorado", "(177, 44)", "None"]}
+{"ev": "nav", "frame": 5789, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5790, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5791, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5792, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5793, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5794, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5795, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5796, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5797, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5798, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5799, "que": ["meta", "None", "None", "0"]}
+{"ev": "foto", "frame": 5800, "pos": [870, -432], "salud": 73, "municion": 20, "arma": 3, "modo": "explorar", "cerca": [[163, "ExplosiveBarrel"], [1068, "ShotgunGuy"], [1083, "ShotgunGuy"], [1152, "ShotgunGuy"], [1160, "ShotgunGuy"], [1171, "LostSoul"]], "meta": null}
+{"ev": "nav", "frame": 5800, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5801, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5802, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5803, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5804, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5805, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5806, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5807, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5808, "que": ["atorado", "(179, 44)", "None"]}
+{"ev": "nav", "frame": 5813, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5814, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5815, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5816, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5817, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5818, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5819, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5820, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5821, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5822, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5823, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5824, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5825, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5826, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5827, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5828, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5829, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5830, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5831, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5832, "que": ["atorado", "(177, 44)", "None"]}
+{"ev": "nav", "frame": 5837, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5838, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5839, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5840, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5841, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5842, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5843, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5844, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5845, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5846, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5847, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5848, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5849, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5850, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5851, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5852, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5853, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5854, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5855, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5856, "que": ["atorado", "(178, 45)", "None"]}
+{"ev": "nav", "frame": 5861, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5862, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5863, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5864, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5865, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5866, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5867, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5868, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5869, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5870, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5871, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5872, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5873, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5874, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5875, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5876, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5877, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5878, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5879, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5880, "que": ["atorado", "(178, 44)", "None"]}
+{"ev": "nav", "frame": 5885, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5886, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5887, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5888, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5889, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5890, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5891, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5892, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5893, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5894, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5895, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5896, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5897, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5898, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5899, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5900, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5901, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5902, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5903, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5904, "que": ["atorado", "(177, 45)", "None"]}
+{"ev": "nav", "frame": 5909, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5910, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5911, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5912, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5913, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5914, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5915, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5916, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5917, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5918, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5919, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5920, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5921, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5922, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5923, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5924, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5925, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5926, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5927, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5928, "que": ["atorado", "(178, 44)", "None"]}
+{"ev": "nav", "frame": 5933, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5934, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5935, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5936, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5937, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5938, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5939, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5940, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5941, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5942, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5943, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5944, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5945, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5946, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5947, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5948, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5949, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5950, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5951, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5952, "que": ["atorado", "(176, 44)", "None"]}
+{"ev": "nav", "frame": 5957, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5958, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5959, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5960, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5961, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5962, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5963, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5964, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5965, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5966, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5967, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5968, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5969, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5970, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5971, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5972, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5973, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5974, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5975, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5976, "que": ["atorado", "(178, 45)", "None"]}
+{"ev": "nav", "frame": 5981, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5982, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5983, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5984, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5985, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5986, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5987, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5988, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5989, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5990, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5991, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5992, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5993, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5994, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5995, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5996, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5997, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5998, "que": ["meta", "None", "None", "0"]}
+{"ev": "nav", "frame": 5999, "que": ["meta", "None", "None", "0"]}
+{"ev": "resultado", "mapa": "MAP04", "semilla": 1, "modo": "codigo", "pregunta": null, "celdas": 121, "kills": 55, "muertes": 1, "terminado": null, "jev": {"llamadas": 0, "dudas_tactica": 0, "dudas_meta": 0, "errores": 0, "ms": 0}, "haiku": {"llamadas": 0, "seg": 0.0, "fallos": 0, "sonnet": 0}, "seg_reales": 311}
