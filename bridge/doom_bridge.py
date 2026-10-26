@@ -65,8 +65,10 @@ def siguiente_mapa(mapa):
     return f"MAP{n:02d}" if n <= 32 else "MAP01"
 
 
-def crear_juego(mapa="MAP01"):
+def crear_juego(mapa="MAP01", semilla=None):
     g = vzd.DoomGame()
+    if semilla is not None:
+        g.set_seed(semilla)
     base = os.path.dirname(vzd.__file__)
     g.set_doom_scenario_path(os.path.join(base, "freedoom2.wad"))
     g.set_doom_map(mapa)

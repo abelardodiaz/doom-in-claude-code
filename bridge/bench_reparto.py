@@ -69,8 +69,9 @@ def pedir_plan(resumen, modelo="haiku"):
 
 def correr(mapa, semilla, modo, frames, log):
     random.seed(semilla)
-    g = db.crear_juego(mapa)
-    g.set_seed(semilla)
+    # la semilla va antes de init(): despues no hace nada, y hasta 0.5.0 todas las semillas jugaban
+    # el mismo juego (MAP02, mismas acciones: monstruos y dano identicos con 3, 4, 6 y 99)
+    g = db.crear_juego(mapa, semilla)
     g.new_episode()
     nav = nv.Navegador(nv.cargar(mapa))
     cerebro = db.Cerebro(nav)
