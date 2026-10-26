@@ -207,7 +207,11 @@ if __name__ == "__main__":
     ap.add_argument("--solo-meta", action="store_true", help="Jev solo elige la meta; la tactica es del codigo")
     ap.add_argument("--pelea", action="store_true",
                     help="Jev elige la meta y responde si/no a pelear; un no claro manda seguir a la meta")
+    ap.add_argument("--barriles", action="store_true", help="experimento: dispararle a los barriles")
+    ap.add_argument("--bonus", action="store_true", help="experimento: recoger bonus con salud < 75")
     a = ap.parse_args()
+    db.BARRILES = a.barriles
+    nv.BONUS_ACTIVO = a.bonus
     PREGUNTA = a.pregunta
     SOLO_META = a.solo_meta
     PELEA = a.pelea
@@ -216,6 +220,7 @@ if __name__ == "__main__":
     for mapa in a.mapas.split(","):
         for s in range(a.desde, a.desde + a.semillas):
             etiqueta = a.modo if a.modo == "codigo" else f"{a.modo}-{a.pregunta}" + ("-solometa" if a.solo_meta else "") + ("-pelea" if a.pelea else "")
+            etiqueta += ("-barriles" if a.barriles else "") + ("-bonus" if a.bonus else "")
             ruta = os.path.join(a.salida, f"{etiqueta}-{mapa}-s{s}.jsonl")
             with open(ruta, "w", encoding="utf-8") as f:
                 def log(d, f=f):

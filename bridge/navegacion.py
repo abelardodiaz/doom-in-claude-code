@@ -56,6 +56,15 @@ ARMAS = {"Shotgun", "SuperShotgun", "Chaingun", "RocketLauncher", "PlasmaRifle",
 # casillero de cada arma (la doble comparte el 3 con la escopeta, pero es mejora: no se mapea)
 CASILLERO = {"Shotgun": 3, "Chaingun": 4, "RocketLauncher": 5, "PlasmaRifle": 6, "BFG9000": 7}
 SALUD = {"Stimpack", "Medikit", "Soulsphere", "Megasphere"}
+# MAP04: ~30 HealthBonus y ~40 ArmorBonus en filas junto a la emboscada de la llave roja, y el bot
+# llegaba con salud 8-20 sin armadura porque solo contaba botiquines
+ARMADURA = {"GreenArmor", "BlueArmor"}
+BONUS = {"HealthBonus", "ArmorBonus"}
+BONUS_DIST = 400  # unidades de camino: los bonus solo valen un desvio corto
+# y solo con la salud ya gastada: tomarlos siempre hizo MAP01 un 60% mas lento (749-1440 frames
+# contra 479-884) y MAP02 de 3323 a 3953-4689
+BONUS_SALUD = 75
+BONUS_ACTIVO = False  # experimento apagado por defecto, igual que los barriles de doom_bridge
 MUNICION = {"Clip", "ClipBox", "Shell", "ShellBox", "RocketAmmo", "RocketBox", "Cell", "CellPack", "Backpack"}
 # municion que sirve para el arma en mano (casillero). La mochila sirve para todas.
 # MAP03: con 5 cartuchos iba por un cargador de balas que no podia recoger (balas al maximo)
@@ -419,7 +428,7 @@ class Navegador:
         self.mirar = None
         self.paso = 0
         self.evento = None        # ultimo evento para la bitacora
-        self.salud, self.municion, self.objetos = 100, 50, []
+        self.salud, self.municion, self.armadura, self.objetos = 100, 50, 0, []
         self.armas, self.arma_actual = set(), None
         self.descartados = {}  # id -> paso hasta el que se ignora (no se pudo llegar)
         self.fallos = {}          # id -> veces que se atoro yendo ahi
@@ -514,6 +523,8 @@ class Navegador:
             utiles |= MUNICION_DE.get(casillero, set())
         clases = (("arma", ARMAS, "un arma nueva"), ("salud", SALUD, "salud"),
                   ("municion", utiles, "municion para el arma en mano"))
+        if BONUS_ACTIVO:
+            clases += (("armadura", ARMADURA, "armadura"), ("bonus", BONUS, "un bonus de salud o armadura"))
         for clase, nombres, texto in clases:
             mejor = None
             for o in self.objetos:
@@ -559,7 +570,10 @@ class Navegador:
         for c in cands:
             por_tipo.setdefault(c["tipo"], []).append(c)
         prov = [c for c in por_tipo.get("provision", [])
-                if c["datos"] == "arma" or (c["datos"] == "salud" and self.salud < 50)
+                if c["datos"] == "arma" or (c["datos"] == "armadura" and BONUS_ACTIVO and self.armadura < 100)
+                or (c["datos"] == "salud" and self.salud < 50)
+                or (c["datos"] == "bonus" and BONUS_ACTIVO and self.salud < BONUS_SALUD
+                    and c["dist"] < BONUS_DIST)
                 or (c["datos"] == "municion" and self.municion < 10 and c["dist"] < 800)]
         for grupo in (prov, por_tipo.get("salida", []), por_tipo.get("llave", []),
                       por_tipo.get("interruptor", []), por_tipo.get("pisar", []), por_tipo.get("frontera", [])):
@@ -611,12 +625,12 @@ class Navegador:
     # ---------- caminar ----------
 
     def decidir(self, x, y, angulo, sectores, accion, objetos=None, salud=100, municion=50, armas=None,
-                arma_actual=None):
+                arma_actual=None, armadura=0):
         """accion(*botones) arma el vector de botones del juego."""
         m = self.mapa
         self.paso += 1
         self.evento = None
-        self.salud, self.municion = salud, municion
+        self.salud, self.municion, self.armadura = salud, municion, armadura
         self.armas = armas or set()  # casilleros de arma que ya trae
         self.arma_actual = arma_actual
         self.objetos = objetos or []

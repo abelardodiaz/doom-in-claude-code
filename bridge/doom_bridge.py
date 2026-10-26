@@ -166,7 +166,39 @@ def esquivar(objetos, x, y, angulo):
     return None
 
 
-def peligro_barril(objetos, x, y, angulo, grados_objetivo):
+# experimento apagado por defecto: bajo las muertes de MAP04 (20 -> 12 en 6 semillas) pero MAP02
+# termino 5/6 en vez de 6/6 y mas lento (bench-v050/barriles, bonus75)
+BARRILES = False
+BARRIL_RADIO = 140   # la explosion hace dano hasta 128 unidades
+BARRIL_MIN = 180     # distancia minima del jugador al barril para reventarlo sin lastimarse
+BARRIL_LEJOS = 600   # sin pelea, solo los barriles a esta distancia o menos (no gastar balas de lejos)
+BARRIL_BALAS = 20    # y solo con municion de sobra
+# pasos maximos apuntandole a un mismo barril; despues se olvida. MAP01: dos barriles a 528 y 561
+# se turnaban como el mas grande en pantalla y el bot giro entre ellos los 2000 frames sin disparar
+BARRIL_PASOS = 30
+BARRIL_TIRO = 800    # en pelea tampoco mas lejos: MAP01 gasto la pistola en un barril a 1221
+BARRIL_BALAS_PELEA = 10  # en pelea, solo con municion: MAP02 s5 se quedo en 0 y murio a punetazos
+
+
+def barril_util(labels, objetos, x, y, descartados=()):
+    """Un barril a la vista con monstruos pegados y el jugador fuera del radio: dispararle a el.
+    MAP04: la emboscada tras la llave roja mataba siempre en el mismo punto con un imp a 80 y un
+    zombie a 97 junto a un barril a 165, y el codigo solo sabia evitar los barriles."""
+    monstruos = [o for o in objetos if o.name in MONSTRUOS]
+    mejor = None
+    for l in labels:
+        if l.object_name != "ExplosiveBarrel" or l.object_id in descartados:
+            continue
+        bx, by = l.object_position_x, l.object_position_y
+        if not BARRIL_MIN <= math.hypot(bx - x, by - y) <= BARRIL_TIRO:
+            continue
+        n = sum(math.hypot(o.position_x - bx, o.position_y - by) < BARRIL_RADIO for o in monstruos)
+        if n and (mejor is None or n > mejor[0]):
+            mejor = (n, l)
+    return mejor[1] if mejor else None
+
+
+def peligro_barril(objetos, x, y, angulo, grados_objetivo, excepto=None):
     """(no_disparar, alejarse): MAP04 mataba al bot con salud 52 cada vida en el mismo punto,
     a 56 unidades de un barril al que le daba disparando a los enemigos de al lado.
 
@@ -175,7 +207,7 @@ def peligro_barril(objetos, x, y, angulo, grados_objetivo):
     """
     no_disparar, alejarse = False, None
     for o in objetos:
-        if o.name != "ExplosiveBarrel":
+        if o.name != "ExplosiveBarrel" or o.id == excepto:
             continue
         dx, dy = o.position_x - x, o.position_y - y
         d = math.hypot(dx, dy)
@@ -231,6 +263,18 @@ class Cerebro:
         self.cesion = 0  # pasos en que el navegador manda aunque la orden diga otra cosa
         self.salud_prev = 100
         self.voltear = 0  # pasos girando hacia quien le pega sin que se vea en pantalla
+        self.barril_ult = None  # ultimo barril al que se le disparo (un evento por barril)
+        self.barril_pasos = {}  # id de barril -> pasos apuntandole (tope BARRIL_PASOS)
+
+    def barril_descartados(self):
+        return {i for i, n in self.barril_pasos.items() if n >= BARRIL_PASOS}
+
+    def apuntar_barril(self, b, x, y):
+        """Cuenta el paso contra el tope del barril y emite un evento la primera vez."""
+        self.barril_pasos[b.object_id] = self.barril_pasos.get(b.object_id, 0) + 1
+        if self.barril_ult != b.object_id:
+            self.barril_ult = b.object_id
+            self.evento = ("barril", round(math.hypot(b.object_position_x - x, b.object_position_y - y)))
 
     @staticmethod
     def clave(l):
@@ -338,13 +382,18 @@ class Cerebro:
             self.voltear = 0
 
         if modo == "atacar":
-            obj = elegir_objetivo(enemigos, x, y)
+            barril = barril_util(st.labels, st.objects, x, y, self.barril_descartados()) \
+                if BARRILES and vars_[2] > BARRIL_BALAS_PELEA else None
+            obj = barril or elegir_objetivo(enemigos, x, y)
+            if barril:
+                self.apuntar_barril(barril, x, y)
             cx = obj.x + obj.width / 2
             grados = math.degrees(math.atan((cx - ancho / 2) / (ancho / 2)))
             lateral = esquive or ("MOVE_LEFT" if (self.paso // 10) % 2 else "MOVE_RIGHT")
-            arma = elegir_arma(obj, x, y, vars_)
+            arma = None if barril else elegir_arma(obj, x, y, vars_)
             extra = [arma] if arma else []
-            no_disparar, alejarse = peligro_barril(st.objects, x, y, vars_[6], grados)
+            no_disparar, alejarse = peligro_barril(st.objects, x, y, vars_[6], grados,
+                                                   barril.object_id if barril else None)
             if alejarse:
                 lateral = alejarse
             # gira justo lo que falta y dispara en el mismo paso si ya casi esta centrado
@@ -354,6 +403,21 @@ class Cerebro:
         if esquive and enemigos:
             # fuera de pelea pero con un proyectil encima: hacerse a un lado sin perder el rumbo
             return accion(esquive, "MOVE_FORWARD"), atorado
+
+        # sin pelea: reventar de lejos los barriles a la vista, que no exploten despues en la cara
+        if BARRILES and not enemigos and modo in ("explorar", "avanzar") and vars_[2] > BARRIL_BALAS:
+            descartados = self.barril_descartados()
+            barriles = [l for l in st.labels if l.object_name == "ExplosiveBarrel"
+                        and l.object_id not in descartados
+                        and BARRIL_MIN <= math.hypot(l.object_position_x - x,
+                                                     l.object_position_y - y) <= BARRIL_LEJOS]
+            if barriles:
+                # seguir con el mismo barril mientras se vea; si no, el mas grande en pantalla
+                b = next((l for l in barriles if l.object_id == self.barril_ult), None) or \
+                    max(barriles, key=lambda l: l.width * l.height)
+                self.apuntar_barril(b, x, y)
+                a = apuntar(b, [])
+                return (a or accion("ATTACK")), atorado
 
         if modo == "retirada":
             if enemigos:
@@ -373,7 +437,8 @@ class Cerebro:
             a = self.navegador.decidir(x, y, vars_[6], st.sectors, accion, st.objects,
                                        salud=vars_[0], municion=vars_[2],
                                        armas={k for k, val in zip((3, 4, 5, 6, 7), vars_[7:12]) if val > 0},
-                                       arma_actual=int(vars_[12]) if len(vars_) > 12 else None)
+                                       arma_actual=int(vars_[12]) if len(vars_) > 12 else None,
+                                       armadura=vars_[1])
             # avanzar ignora a los enemigos, pero si uno queda justo enfrente se le dispara al pasar
             if modo == "avanzar" and enemigos:
                 obj = max(enemigos, key=lambda l: l.width * l.height)
