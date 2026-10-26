@@ -1,0 +1,30 @@
+{"ev": "foto", "frame": 0, "pos": [-192, -192], "salud": 100, "municion": 50, "arma": 2, "modo": "explorar", "cerca": [[685, "Zombieman"], [907, "DoomImp"], [974, "Zombieman"], [1024, "ExplosiveBarrel"], [1089, "ExplosiveBarrel"], [1092, "ExplosiveBarrel"]], "meta": null}
+{"ev": "nav", "frame": 0, "que": ["meta", "salida", "codigo", "285"]}
+{"ev": "nav", "frame": 28, "que": ["puerta", "27"]}
+{"ev": "combate", "frame": 29, "que": ["barril", "324"], "salud": 100}
+{"ev": "combate", "frame": 32, "que": ["barril", "563"], "salud": 100}
+{"ev": "combate", "frame": 44, "que": ["barril", "534"], "salud": 100}
+{"ev": "combate", "frame": 51, "que": ["barril", "300"], "salud": 100}
+{"ev": "combate", "frame": 52, "que": ["barril", "328"], "salud": 100}
+{"ev": "combate", "frame": 56, "que": ["barril", "298"], "salud": 100}
+{"ev": "combate", "frame": 58, "que": ["barril", "324"], "salud": 100}
+{"ev": "nav", "frame": 107, "que": ["meta", "armadura_1088_368", "codigo", "31"]}
+{"ev": "nav", "frame": 135, "que": ["provision_alcanzada", "armadura_1088_368"]}
+{"ev": "nav", "frame": 136, "que": ["meta", "arma_1536_-160", "codigo", "51"]}
+{"ev": "foto", "frame": 200, "pos": [1406, -32], "salud": 100, "municion": 40, "arma": 2, "modo": "explorar", "cerca": [[677, "Zombieman"], [737, "Zombieman"], [743, "Zombieman"], [954, "Zombieman"], [961, "ExplosiveBarrel"], [968, "Zombieman"]], "meta": "arma_1536_-160"}
+{"ev": "nav", "frame": 255, "que": ["atorado", "(118, 109)", "arma_1536_-160"]}
+{"ev": "nav", "frame": 260, "que": ["meta", "salida", "codigo", "168"]}
+{"ev": "nav", "frame": 270, "que": ["puerta", "56"]}
+{"ev": "nav", "frame": 299, "que": ["atorado", "(132, 104)", "salida"]}
+{"ev": "nav", "frame": 304, "que": ["meta", "salida", "codigo", "163"]}
+{"ev": "nav", "frame": 333, "que": ["atorado", "(132, 108)", "salida"]}
+{"ev": "nav", "frame": 338, "que": ["meta", "salida", "codigo", "156"]}
+{"ev": "nav", "frame": 340, "que": ["puerta", "56"]}
+{"ev": "foto", "frame": 400, "pos": [1882, -627], "salud": 100, "municion": 38, "arma": 2, "modo": "explorar", "cerca": [[336, "Zombieman"], [581, "Zombieman"], [1180, "ExplosiveBarrel"], [1219, "Zombieman"], [1572, "Zombieman"], [1713, "Zombieman"]], "meta": "salida"}
+{"ev": "nav", "frame": 510, "que": ["puerta", "161"]}
+{"ev": "nav", "frame": 579, "que": ["atorado", "(61, 53)", "salida"]}
+{"ev": "nav", "frame": 586, "que": ["meta", "salida", "codigo", "43"]}
+{"ev": "foto", "frame": 600, "pos": [664, -1062], "salud": 102, "municion": 20, "arma": 2, "modo": "explorar", "cerca": [[376, "ExplosiveBarrel"], [406, "Zombieman"], [1323, "Zombieman"], [1863, "Zombieman"]], "meta": "salida"}
+{"ev": "nav", "frame": 600, "que": ["puerta", "161"]}
+{"ev": "nav", "frame": 738, "que": ["salida", "2"]}
+{"ev": "resultado", "mapa": "MAP01", "semilla": 3, "modo": "codigo", "pregunta": null, "celdas": 61, "kills": 8, "muertes": 0, "terminado": 739, "jev": {"llamadas": 0, "dudas_tactica": 0, "dudas_meta": 0, "errores": 0, "ms": 0}, "haiku": {"llamadas": 0, "seg": 0.0, "fallos": 0, "sonnet": 0}, "seg_reales": 38}
