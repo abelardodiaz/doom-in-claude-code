@@ -163,6 +163,18 @@ class Mapa:
                     self.sector_elevador |= {s for s, sec in enumerate(m.sectors) if sec.tag == tag}
                 elif bk >= 0:
                     self.sector_elevador.add(bk)
+        # los que se llaman con USE sobre su propio costado (con o sin tag); los demas solo con un
+        # interruptor aparte. Tratar los de costado como "interruptor aparte" en MAP02 los hacia
+        # esperar cada vez que el elevador se movia: semillas 7-12 de 2774 a 3826 frames
+        self.lado_elevador = {bk for (*_c, fr, bk, act, tag, _f) in lineas
+                              if act in ELEVADORES_USE and bk in self.sector_elevador}
+        # un elevador baja al piso mas bajo de sus vecinos y regresa a su altura original
+        self.piso_alto = {s: float(self.piso[s]) for s in self.sector_elevador}
+        self.piso_bajo = {s: float(self.piso[s]) for s in self.sector_elevador}
+        for (*_c, fr, bk, act, tag, _f) in lineas:
+            for a, b in ((fr, bk), (bk, fr)):
+                if a in self.piso_bajo and b >= 0:
+                    self.piso_bajo[a] = min(self.piso_bajo[a], float(self.piso[b]))
         # aplastadores: sus sectores y las celdas a menos de RADIO de ellos (el techo pega a todo lo
         # que toque el sector, y el jugador mide 16 de radio: MAP04 murio en x=749, 13 fuera del borde)
         tags_apl = {tag for (*_c, act, tag, _f) in lineas if act in APLASTADORES and tag}
@@ -221,6 +233,24 @@ class Mapa:
                 n = math.hypot(nx, ny) or 1
                 px, py = mx + nx / n * 32, my + ny / n * 32
                 self.metas_uso.append((px, py, mx, my, act, act in SALIDAS, tag))
+        # interruptores que mueven cada elevador (por su tag)
+        tag_de = {s: sec.tag for s, sec in enumerate(m.sectors)}
+        self.disparo_elevador = {}
+        for idx, t in enumerate(self.metas_uso):
+            if t[4] in ELEVADORES_USE and t[6]:
+                for s in self.sector_elevador:
+                    if tag_de[s] == t[6]:
+                        self.disparo_elevador.setdefault(s, []).append(idx)
+        # los que se pueden bajar desde arriba: con un interruptor encima o al nivel de arriba.
+        # MAP04: el 73 solo lo bajan el 8 y el 10, los dos abajo; planear "bajarlo" desde arriba
+        # mandaba al bot a un interruptor al que solo se llega bajando el otro elevador
+        self.baja_desde_arriba = set()
+        for s, idxs in self.disparo_elevador.items():
+            for idx in idxs:
+                i, j = self.celda(*self.metas_uso[idx][:2])
+                st = self.sector[j, i] if 0 <= i < self.W and 0 <= j < self.H else -1
+                if st == s or (st >= 0 and self.piso[st] >= self.piso_alto[s] - PASO_MAX):
+                    self.baja_desde_arriba.add(s)
         # que mueve cada tag: centro de los sectores con ese tag (para explicarle el mapa a Haiku)
         self.tags = {}
         for s, sec in enumerate(m.sectors):
@@ -365,7 +395,12 @@ class Mapa:
             puerta = ({sa, sb} & self.sector_puerta or sa in self.sector_llave or sb in self.sector_llave
                       or sa in self.sector_remoto or sb in self.sector_remoto)
             sube_en_elevador = self.piso[sb] > self.piso[sa] and {sa, sb} & self.sector_elevador
-            if not (puerta or sube_en_elevador):
+            # bajar de un elevador que esta arriba: se puede si un interruptor lo baja y abajo abre
+            # el hueco (MAP04: del 69 al 103 hay 0 unidades hasta que el interruptor 5 lo baja)
+            baja_en_elevador = (self.piso[sb] < self.piso[sa] and sa in self.baja_desde_arriba
+                                and min(self.techo[sa], self.techo[sb])
+                                - max(self.piso_bajo[sa], self.piso[sb]) >= ALTO_MIN)
+            if not (puerta or sube_en_elevador or baja_en_elevador):
                 return False
         if self.piso[sb] - self.piso[sa] <= PASO_MAX:
             return True
@@ -375,6 +410,9 @@ class Mapa:
     def bloqueo_elevador(self, a, b):
         """Si el paso a->b necesita un elevador que ahora no esta a la altura, devuelve su sector."""
         sa, sb = self.sector[a[1], a[0]], self.sector[b[1], b[0]]
+        if sa in self.sector_elevador and self.piso[sb] < self.piso[sa] and \
+                min(self.techo[sa], self.techo[sb]) - max(self.piso[sa], self.piso[sb]) < ALTO_MIN:
+            return ("bajar", sa)    # vamos encima y abajo no hay hueco: hacer que baje
         if self.piso[sb] - self.piso[sa] <= PASO_MAX:
             return None
         if sb in self.sector_elevador:
@@ -858,12 +896,38 @@ class Navegador:
             if k > 0 and dist[k] < 48 and not saltos_antes:
                 del self.camino[:k]
 
-        # elevador en la ruta: llamarlo si esta arriba, esperar encima mientras sube
-        for a, b in zip(self.camino[:5], self.camino[1:6]):
+        # elevador en la ruta: llamarlo si esta arriba, esperar encima mientras sube. Para bajar se
+        # revisa tambien desde la celda actual: la primera de la ruta ya puede estar del otro lado
+        # del borde (MAP04: empujaba el hueco del 69 al 103). Para llamar y esperar no: en MAP02 la
+        # celda redondeada caia sobre el 165 estando al lado y esperaba 80 frames a que subiera
+        for k, (a, b) in enumerate(zip([aqui] + self.camino[:5], self.camino[:6])):
             bloqueo = m.bloqueo_elevador(a, b)
+            if bloqueo and k == 0 and bloqueo[0] != "bajar":
+                continue
             if bloqueo:
                 que, s = bloqueo
                 bx, by = m.centro(*b)
+                # elevador que solo mueve un interruptor aparte (MAP04, el 69 con los interruptores
+                # 5 y 1). En movimiento se espera; quieto en su altura, se va a presionar uno.
+                # La ruta pudo planearse con el elevador abajo: tras una pelea subio y el bot
+                # empujaba un hueco de 0 unidades hasta que se daba por atorado
+                if que == "bajar" or (que == "llamar" and s not in m.lado_elevador):
+                    if self.meta and self.meta["id"].startswith("elevador_"):
+                        break  # ya va al interruptor
+                    quieto = m.piso[s] in (m.piso_alto[s], m.piso_bajo[s])
+                    if not quieto:
+                        if math.hypot(bx - x, by - y) < 80:
+                            self.espera_elevador = 1
+                            self.evento = ("elevador", int(s), "esperar")
+                            return accion()
+                        break
+                    meta = self._interruptor_elevador(aqui, s)
+                    if meta:
+                        self.meta, self.camino = meta, list(meta["camino"])
+                        self.cambio_meta = self.paso
+                        self.replan = self.paso + 72
+                        self.evento = ("elevador", int(s), que, meta["id"])
+                    break
                 if que == "llamar" and math.hypot(bx - x, by - y) < 80:
                     self.espera_elevador = 1
                     self.mirar = (bx, by)
@@ -961,6 +1025,26 @@ class Navegador:
         if abs(dif) > 45:
             return accion(giro=max(-45, min(45, dif)))
         return accion("MOVE_FORWARD", giro=dif)
+
+    def _interruptor_elevador(self, aqui, s):
+        """La meta de presionar el interruptor mas cercano que mueve el elevador s, con una ruta que
+        no necesite ningun elevador (desde abajo no sirve el que esta arriba)."""
+        m = self.mapa
+        mejor = None
+        for idx in m.disparo_elevador.get(s, []):
+            t = m.metas_uso[idx]
+            if t[4] in (21, 122) and idx in m.presionados:
+                continue  # S1: ya no hace nada
+            celda = m.celda_libre_cerca(t[0], t[1])
+            camino = m.ruta(aqui, [celda]) if celda else None
+            # ni este elevador ni otro: llegar al interruptor no puede depender de un elevador
+            if not camino or any(m.bloqueo_elevador(a, b) for a, b in zip(camino, camino[1:])):
+                continue
+            if mejor is None or len(camino) < len(mejor["camino"]):
+                mejor = {"id": f"elevador_{idx}", "tipo": "interruptor", "celda": celda, "datos": t,
+                         "camino": camino, "desc": f"el interruptor {idx}, que mueve el elevador {s}",
+                         "dist": len(camino) * CEL}
+        return mejor
 
     def _dif(self, x, y, angulo, tx, ty):
         deseado = math.degrees(math.atan2(ty - y, tx - x))
