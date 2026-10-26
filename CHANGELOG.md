@@ -48,9 +48,37 @@ Switch 5 was pressed once in the 48 earlier MAP04 games.
   0/3, measured before the seed fix. Jev said "don't fight" in 8% of 2093 calls but in 48 of the 98 calls before a death: it
   says it with low health, when it is already late.
 
+### Lifts moved by a separate switch (MAP04)
+Switches 5 and 1 move the same lift (sector 69, tag 3). Its edge to the lower corridor has a gap of
+0 units until it goes down, and the bot only knew how to call lifts by pressing USE on their side.
+The route to switch 1 was planned with the lift down; a fight lasted longer than the lift waits,
+it came back up, and the bot kept pushing a closed gap until it gave up on the goal.
+- The planner now knows a lift goes down to the lowest floor next to it, so "step down off the lift"
+  is a valid route when some switch at the top level can lower it.
+- Following the route, if the lift is up and the next step goes down off it, the bot goes to press
+  the nearest switch with its tag (one it can reach without any lift), rides down and carries on.
+  The same for calling a lift from below when its side has no USE line.
+- Lifts that are called on their own edge (MAP02, MAP03, MAP05) keep the old behavior. Treating
+  them like the MAP04 one made the bot wait every time they moved: MAP02 seeds 7-12 went from 2774
+  to 3826 frames on average. With the fix MAP01 and MAP02 are identical frame by frame to before
+  (12 MAP02 seeds, `bench-v050/elevador/`).
+
+| MAP04, code alone, 6 seeds | Before | Now |
+| --- | --- | --- |
+| Finished | 0/6 | 0/6 |
+| Red key | 6/6 | 6/6 |
+| Switch 1 (down the lift) | 0/6 | **6/6** |
+| Switch 10 | 0/6 | **6/6** |
+| Blue key | 0/6 | **6/6** |
+| Deaths | 4 | 21 |
+
+More deaths because it now reaches the lower half of the map. 11 of the 21 are in the same spot,
+(-379, 1232), right after the blue key: it walks in with 55 health and 4-12 shells and the Lost
+Souls finish it. Every life after a death repeats the previous one, so the same death comes back.
+Seed 3 got out alive once and pressed blue switch 3.
+
 ### MAP04: what is left
-Switches 5 and 1 move the same lift (tag 3). The bot presses 5 standing on the lift, rides it down
-and loses the route to 1 while the lift moves. After that it explores until the frames run out.
+Surviving the blue key room, then the blue switches 3/4, switches 6 and 2, and the exit.
 
 ## [0.5.0] - 2026-10-25 - Jev measured against code alone, and code won the fight
 
