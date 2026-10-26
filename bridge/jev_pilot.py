@@ -74,14 +74,23 @@ class PilotoJev:
         if con_imagen:
             self.s.headers["TypeSafe-Danger-Zone-Images"] = "true"
 
-    def decidir(self, frame_rgb, estado, metas):
-        """metas: lista de (id, descripcion). Devuelve un dict con la decision y sus numeros."""
+    def decidir(self, frame_rgb, estado, metas, pelea=None):
+        """metas: lista de (id, descripcion). pelea: texto con los numeros del codigo (enemigos,
+        distancias, arma) para la pregunta si/no de pelear; None = no se pregunta.
+        Devuelve un dict con la decision y sus numeros."""
         texto = f"Juego Doom, vista en primera persona. {estado}"
+        if pelea:
+            texto += f" Situacion de combate: {pelea}"
         preguntas = {
             "tactica": {"type": "choice", "instructions": "Que debe hacer el jugador en este momento?",
                         "criteria": _barajar(TACTICAS)},
             "peligro": {"type": "noul", "instructions": "El jugador esta en peligro inmediato de morir?"},
         }
+        if pelea:
+            preguntas["pelear"] = {
+                "type": "noul",
+                "instructions": ("Con esta arma, esta municion y esta salud, conviene pelear ahora con los "
+                                 "enemigos a la vista, en vez de ignorarlos y seguir hacia la meta?")}
         if len(metas) >= 2:
             preguntas["meta"] = {
                 "type": "choice",
@@ -109,7 +118,8 @@ class PilotoJev:
         tactica, brecha_t, probs_t = _decision(ans["tactica"])
         out = {"tactica": tactica if brecha_t >= BRECHA_MIN else None, "tactica_cruda": tactica,
                "brecha_tactica": brecha_t, "probs": probs_t, "peligro": ans["peligro"]["noul"], "ms": ms,
-               "meta": None, "brecha_meta": None, "probs_meta": None}
+               "meta": None, "brecha_meta": None, "probs_meta": None,
+               "pelear": ans["pelear"]["noul"] if "pelear" in ans else None}
         if len(metas) == 1:
             out["meta"] = metas[0][0]
         elif "meta" in ans:

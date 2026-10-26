@@ -29,6 +29,21 @@ HAIKU_MIN = 150
 ESTANCADO = 540  # ~60 s de juego sin llave ni interruptor nuevo: replantear (Sonnet si hay escalamiento)
 PREGUNTA = "v2"  # pregunta de meta para Jev; --pregunta v1 para la original
 SOLO_META = False
+PELEA = False      # pregunta si/no a Jev: pelear o seguir a la meta (implica SOLO_META)
+PELEA_NO = 0.3     # por debajo de esta probabilidad de "si pelear", el bot sigue a la meta
+ARMAS = {1: "punos o motosierra", 2: "pistola", 3: "escopeta", 4: "ametralladora", 5: "lanzacohetes",
+         6: "rifle de plasma", 7: "BFG"}
+
+
+def situacion_pelea(st, v, nav):
+    """Los numeros que el codigo ya sabe, en una frase para Jev."""
+    visibles = {l.object_id for l in st.labels if l.object_name in db.MONSTRUOS}
+    enem = sorted((round(math.hypot(o.position_x - v[4], o.position_y - v[5])), o.name)
+                  for o in st.objects if o.id in visibles)
+    lista = ", ".join(f"{n} a {d} unidades" for d, n in enem[:5])
+    meta = f"; la meta esta a {nav.meta['dist']} unidades de camino" if nav.meta and "dist" in nav.meta else ""
+    return (f"salud {int(v[0])}, arma {ARMAS.get(int(v[12]), int(v[12]))} con {int(v[2])} de municion; "
+            f"enemigos a la vista: {lista}{meta}.")
 AQUI = os.path.dirname(os.path.abspath(__file__))
 PLANNER = os.path.join(AQUI, "..", "prompts", "planner.md")
 
@@ -134,17 +149,22 @@ def correr(mapa, semilla, modo, frames, log):
             ultima_llamada = time.time()
             estado = db.describir(st, v, False, muertes, st.screen_buffer.shape[1], cerebro) + " " + nav.resumen()
             metas = nav.metas_jev()
+            pelea = situacion_pelea(st, v, nav) if PELEA and en_combate else None
             try:
-                d = piloto.decidir(st.screen_buffer, estado, metas)
+                d = piloto.decidir(st.screen_buffer, estado, metas, pelea)
                 st_jev["llamadas"] += 1
                 st_jev["ms"] += d["ms"]
                 st_jev["dudas_tactica"] += d["tactica"] is None
                 st_jev["dudas_meta"] += d["meta"] is None and len(metas) >= 2
                 # --solo-meta: Jev elige la meta y la tactica la decide el codigo, como en modo codigo
-                orden = "explorar" if SOLO_META else db.TACTICA_A_MODO[d["tactica"]]
+                orden = "explorar" if SOLO_META or PELEA else db.TACTICA_A_MODO[d["tactica"]]
+                # --pelea: solo un "no" claro de Jev cambia algo; si no, pelea el codigo como siempre
+                if PELEA and d["pelear"] is not None and d["pelear"] < PELEA_NO:
+                    orden = "avanzar"
                 nav.pedido_jev = d["meta"]
                 log({"ev": "jev", "frame": n, "tactica": d["tactica"], "cruda": d["tactica_cruda"],
                      "brecha": d["brecha_tactica"], "meta": d["meta"], "brecha_meta": d["brecha_meta"],
+                     "pelear": d["pelear"], "pelea": pelea,
                      "ms": d["ms"]})
             except Exception as ex:  # 403/429/499: falla, no decision
                 st_jev["errores"] += 1
@@ -185,14 +205,17 @@ if __name__ == "__main__":
     ap.add_argument("--salida", default=os.path.join(AQUI, "..", "bench-resultados"))
     ap.add_argument("--pregunta", choices=["v1", "v2"], default="v2")
     ap.add_argument("--solo-meta", action="store_true", help="Jev solo elige la meta; la tactica es del codigo")
+    ap.add_argument("--pelea", action="store_true",
+                    help="Jev elige la meta y responde si/no a pelear; un no claro manda seguir a la meta")
     a = ap.parse_args()
     PREGUNTA = a.pregunta
     SOLO_META = a.solo_meta
+    PELEA = a.pelea
     topes = dict(x.split(":") for x in a.frames.split(","))
     os.makedirs(a.salida, exist_ok=True)
     for mapa in a.mapas.split(","):
         for s in range(a.desde, a.desde + a.semillas):
-            etiqueta = a.modo if a.modo == "codigo" else f"{a.modo}-{a.pregunta}" + ("-solometa" if a.solo_meta else "")
+            etiqueta = a.modo if a.modo == "codigo" else f"{a.modo}-{a.pregunta}" + ("-solometa" if a.solo_meta else "") + ("-pelea" if a.pelea else "")
             ruta = os.path.join(a.salida, f"{etiqueta}-{mapa}-s{s}.jsonl")
             with open(ruta, "w", encoding="utf-8") as f:
                 def log(d, f=f):
