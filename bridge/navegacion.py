@@ -828,11 +828,16 @@ class Navegador:
                 return accion("USE", giro=30) if self.paso % 2 else accion(giro=30)
 
         # avanzar el indice de la ruta
-        # ya cruzo: aparecio junto al destino del teletransporte, la entrada queda atras
-        if len(self.camino) > 1 and self.camino[0] in m.saltos and m.saltos[self.camino[0]][0] == self.camino[1] \
-                and math.hypot(*(np.subtract(m.centro(*self.camino[1]), (x, y)))) < 64:
-            self.camino.pop(0)
-            self.evento = ("teletransportado", self.camino[0])
+        # ya cruzo: aparecio junto al destino del teletransporte, la entrada queda atras. La entrada
+        # puede no ser la primera celda: cortando la esquina cruza la linea antes de pasar la anterior
+        # (MAP02 s2 con bonus: no lo detectaba, replanteaba de vuelta al teletransporte, que lo
+        # regresaba al mismo punto; 2400 frames en ese circulo con las tres llaves)
+        for k in range(min(4, len(self.camino) - 1)):
+            a, b = self.camino[k], self.camino[k + 1]
+            if a in m.saltos and m.saltos[a][0] == b and math.hypot(*(np.subtract(m.centro(*b), (x, y)))) < 64:
+                del self.camino[:k + 1]
+                self.evento = ("teletransportado", self.camino[0])
+                break
         while len(self.camino) > 1 and math.hypot(*(np.subtract(m.centro(*self.camino[0]), (x, y)))) < 24:
             # una entrada de teletransporte no se da por pasada hasta cruzar la linea: si se quita,
             # lo siguiente es el destino (lejos) y el bot se da la vuelta (MAP02: 300 frames asi)
