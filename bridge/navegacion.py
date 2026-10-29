@@ -73,6 +73,7 @@ BONUS_DIST = 400  # unidades de camino: los bonus solo valen un desvio corto
 # y solo con la salud ya gastada: tomarlos siempre hizo MAP01 un 60% mas lento (749-1440 frames
 # contra 479-884) y MAP02 de 3323 a 3953-4689
 BONUS_SALUD = 75
+SALUD_ANTES_LLAVE = 70  # bajo esto, curarse antes de ir por una llave o la salida
 BONUS_ACTIVO = False  # experimento apagado por defecto, igual que los barriles de doom_bridge
 MUNICION = {"Clip", "ClipBox", "Shell", "ShellBox", "RocketAmmo", "RocketBox", "Cell", "CellPack", "Backpack"}
 # municion que sirve para el arma en mano (casillero). La mochila sirve para todas.
@@ -691,9 +692,15 @@ class Navegador:
         por_tipo = {}
         for c in cands:
             por_tipo.setdefault(c["tipo"], []).append(c)
+        # antes de abrir camino (llave, salida, interruptor, linea de pisar) se llega curado: detras
+        # suele estar la sala mas peligrosa. MAP04: pisaba la linea 3, que abre la sala de la llave
+        # azul, con 55 de salud y un botiquin a la mano, y ahi murieron 11 de 21 veces. Solo con
+        # llave y salida no cambiaba nada: la llave azul no tiene ruta hasta pisar esa linea
+        antes_de_llave = (self.salud < SALUD_ANTES_LLAVE
+                          and any(por_tipo.get(t) for t in ("llave", "salida", "interruptor", "pisar")))
         prov = [c for c in por_tipo.get("provision", [])
                 if c["datos"] == "arma" or (c["datos"] == "armadura" and BONUS_ACTIVO and self.armadura < 100)
-                or (c["datos"] == "salud" and self.salud < 50)
+                or (c["datos"] == "salud" and (self.salud < 50 or antes_de_llave))
                 or (c["datos"] == "bonus" and BONUS_ACTIVO and self.salud < BONUS_SALUD
                     and c["dist"] < BONUS_DIST)
                 or (c["datos"] == "municion" and self.municion < 10 and c["dist"] < 800)]
