@@ -77,6 +77,27 @@ More deaths because it now reaches the lower half of the map. 11 of the 21 are i
 Souls finish it. Every life after a death repeats the previous one, so the same death comes back.
 Seed 3 got out alive once and pressed blue switch 3.
 
+### MAP03 finished: 0/6 -> 6/6
+Measured again with real seeds, MAP03 did not finish any game, with no deaths: it had the three keys
+by frame ~1500 and then walked around for 6000 frames. Three causes, one after the other:
+- **Walk-on lifts count for stepping down.** Lift 282 goes down to the exit area when you step onto
+  it from the top (action 88 on its edge). Only switches counted as a way to lower a lift from
+  above, so no route went down there.
+- **Walk-over exits are crossed, not pressed.** MAP03 and MAP04 end on action 52 lines. The bot
+  stood in front of them pressing USE.
+- **The exit is counted from the other side of the line.** Inside MAP03's exit box the floor is 128
+  units higher until switch 16 lowers it. Counted from outside, the exit looked reachable, and as
+  the exit goes before switches, switch 16 was never pressed.
+- Logging: a key picked up on the same frame as a replan was logged as "no goals left", so the
+  benchmark showed MAP03's red key as never taken.
+
+| Code alone | MAP01 | MAP02 | MAP03 | MAP04 |
+| --- | --- | --- | --- | --- |
+| Finished | 6/6, 336-509 | 12/12, 1814-3279 | **6/6, 2047-4463** | 0/6 |
+| Deaths | 0 | 3 | 1 | 21 |
+
+MAP01, MAP02 and MAP04 are identical frame by frame to the previous run (`bench-v050/salida-pisar/`).
+
 ### MAP04: what is left
 Surviving the blue key room, then the blue switches 3/4, switches 6 and 2, and the exit.
 
