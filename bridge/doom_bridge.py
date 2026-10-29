@@ -687,6 +687,7 @@ def main():
         elif g.is_player_dead():
             muertes += 1
             log("muerte", frame=n, muertes=muertes, mapa=mapa)
+            g.set_seed(random.randrange(2 ** 31))  # que la vida nueva no repita la anterior
             g.new_episode()
             cerebro = Cerebro(navegacion.Navegador(navegacion.cargar(mapa)))
             previo["kills"] = 0

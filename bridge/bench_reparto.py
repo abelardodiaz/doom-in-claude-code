@@ -102,6 +102,9 @@ def correr(mapa, semilla, modo, frames, log):
             muertes += 1
             log({"ev": "muerte", "frame": n, **ultimo})
             kills_previas += int(g.get_game_variable(db.vzd.GameVariable.KILLCOUNT))
+            # otra semilla por vida (reproducible): con la misma, cada vida repetia la anterior y el
+            # bot moria en el mismo punto (MAP04: 11 de 21 muertes en (-379, 1232))
+            g.set_seed(semilla * 100 + muertes)
             g.new_episode()
             nav = nv.Navegador(nv.cargar(mapa))
             cerebro = db.Cerebro(nav)
