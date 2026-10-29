@@ -39,6 +39,7 @@ INTERRUPTORES = {7, 9, 11, 14, 15, 18, 20, 21, 23, 29, 41, 49, 50, 51, 55, 60, 6
                  66, 67, 68, 69, 70, 71, 99, 101, 102, 103, 111, 112, 113, 114, 115, 116, 122, 123,
                  127, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140}
 SALIDAS = {11, 52, 197}
+SALIDAS_PISAR = {52}  # las que se cruzan caminando; las otras se presionan con USE
 # elevadores (bajan, esperan y suben): por interruptor/USE o al pisar una linea
 ELEVADORES_USE = {21, 62, 122, 123}
 ELEVADORES_PISAR = {10, 88, 120, 121}
@@ -251,6 +252,15 @@ class Mapa:
                 st = self.sector[j, i] if 0 <= i < self.W and 0 <= j < self.H else -1
                 if st == s or (st >= 0 and self.piso[st] >= self.piso_alto[s] - PASO_MAX):
                     self.baja_desde_arriba.add(s)
+        # o con una linea de pisar en su borde desde arriba: baja solo al subirse. MAP03: el 282
+        # baja al sector 15 de la salida al cruzar su orilla desde el 30; el bot nunca planeaba
+        # bajar ahi y daba vueltas 6000 frames con las tres llaves
+        for (*_c, fr, bk, act, tag, _f) in lineas:
+            if act in ELEVADORES_PISAR:
+                for s in self.sector_elevador & {fr, bk}:
+                    otro = bk if fr == s else fr
+                    if otro >= 0 and self.piso[otro] >= self.piso_alto[s] - PASO_MAX:
+                        self.baja_desde_arriba.add(s)
         # que mueve cada tag: centro de los sectores con ese tag (para explicarle el mapa a Haiku)
         self.tags = {}
         for s, sec in enumerate(m.sectors):
@@ -594,7 +604,14 @@ class Navegador:
 
         for t in m.metas_uso:
             if t[5]:
-                agregar("salida", "salida", "la salida del nivel", m.celda_libre_cerca(t[0], t[1]), t)
+                if t[4] in SALIDAS_PISAR:
+                    # la de pisar se cuenta del otro lado de la linea: en MAP03 adentro hay un bloque
+                    # 128 unidades mas alto que baja el interruptor 16, y contada desde afuera la
+                    # salida tapaba a ese interruptor (la salida va primero)
+                    celda = m.celda_libre_cerca(t[2] - (t[0] - t[2]) * 0.75, t[3] - (t[1] - t[3]) * 0.75, 2)
+                else:
+                    celda = m.celda_libre_cerca(t[0], t[1])
+                agregar("salida", "salida", "la salida del nivel", celda, t)
         for color, _n, x, y in m.llaves_mapa:
             if color not in m.llaves:
                 # radio 2 (~32 unidades, lo que alcanza para recogerla): con 4 una celda afuera de
@@ -836,8 +853,11 @@ class Navegador:
             elegido, quien = self.elegir(cands) if cands else (None, None)
             # nada que elegir (a lo mas provisiones que no hacen falta), ni zonas sin visitar:
             # probar los pasillos estrechos, una sola vez (MAP04 s2: solo quedaba municion de sobra)
+            # la llave recien recogida se reporta antes que el replanteo: en MAP03 "sin_metas" la
+            # tapaba y el benchmark contaba la llave roja como no recogida
+            llave = self.evento if self.evento and self.evento[0] == "llave_recogida" else None
             if elegido is None and m.usar_holgura_fina():
-                self.evento = ("holgura_fina",)
+                self.evento = llave or ("holgura_fina",)
                 self.castigo, self.descartados = {}, {}
                 inicio = aqui if m.transitable(*aqui) else (m.celda_libre_cerca(x, y, 3) or aqui)
                 cands = self.candidatos(inicio)
@@ -845,7 +865,7 @@ class Navegador:
             # nunca quedarse sin meta (MAP04 s3: 2300 frames quieto girando): reintentar los
             # interruptores dados por inutiles, olvidar descartes y volver a recorrer lo ya visto
             if elegido is None:
-                self.evento = ("sin_metas",)
+                self.evento = llave or ("sin_metas",)
                 for idx, veces in self.sin_efecto.items():
                     if veces >= 3:
                         m.presionados.discard(idx)
@@ -992,6 +1012,16 @@ class Navegador:
                 return accion("MOVE_FORWARD")
             # la meta quedo a un lado de la linea: caminar derecho hasta pisarla
             return accion("MOVE_FORWARD", giro=max(-45, min(45, self._dif(x, y, angulo, mx, my))))
+
+        # salida al pisar (accion 52): no se presiona, se cruza la linea caminando. MAP03 y MAP04
+        # terminan asi; en MAP03 llegaba y presionaba USE frente a ella 6000 frames
+        if len(self.camino) <= 2 and self.meta and self.meta["tipo"] == "salida" and \
+                self.meta["datos"][4] in SALIDAS_PISAR:
+            t = self.meta["datos"]
+            if math.hypot(t[0] - x, t[1] - y) < 64:
+                # un punto 24 unidades pasando la linea, del lado contrario al de llegada
+                tx, ty = t[2] - (t[0] - t[2]) * 0.75, t[3] - (t[1] - t[3]) * 0.75
+                return accion("MOVE_FORWARD", giro=max(-45, min(45, self._dif(x, y, angulo, tx, ty))))
 
         # al final de la ruta: presionar el interruptor o la salida
         if len(self.camino) <= 2 and self.meta and self.meta["tipo"] in ("salida", "interruptor"):
