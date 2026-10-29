@@ -98,8 +98,40 @@ by frame ~1500 and then walked around for 6000 frames. Three causes, one after t
 
 MAP01, MAP02 and MAP04 are identical frame by frame to the previous run (`bench-v050/salida-pisar/`).
 
+### A different game every life, and arriving healed
+- **New seed on every death** (`seed * 100 + deaths` in the benchmark, random in the live bridge).
+  The game reset with the same seed and the bot is deterministic, so every life repeated the one
+  before and died in the same spot. Some lives still come out the same: the bot plays the same way
+  and the room is just as hard, so this alone does not fix MAP04.
+- **Heal before opening the way.** Under 70 health, with a key, the exit, a switch or a walk-on
+  line on the list, the bot goes for a nearby medkit first. In MAP04 it stepped on the line that
+  opens the blue key room with 55 health and a medkit at hand. Only keys and the exit were tried
+  first: nothing changed in MAP04, because the blue key has no route until that line is crossed.
+
+| MAP04, code alone, 6 seeds | Before | Now |
+| --- | --- | --- |
+| Blue key | 6/6 | 6/6 |
+| Blue switches 3 and 4 | 1/6 (only 3) | **6/6** |
+| Switch 6 | 0/6 | **6/6** |
+| Deaths | 21 (11 in the blue key room) | **15 (0 there)** |
+
+Healing before keys only vs before any way-opening goal, on 12 seeds not used before:
+| | Keys and exit only | Any way-opening goal |
+| --- | --- | --- |
+| MAP02 | 12/12, avg 2528 frames, 7 deaths | 12/12, avg 2771, 9 deaths |
+| MAP03 | 10/12, avg 2594, 5 deaths | 11/12, avg 2569, 3 deaths |
+
+The wider rule stays: a bit slower in MAP02, a bit better in MAP03, and it is the one that opens
+MAP04. Raw results in `bench-v050/salud/`. With a different game per life the numbers move more
+from run to run, so comparisons now use 12 fresh seeds.
+
+Where it dies now, out of the last 25 deaths: 16 right after deciding to go heal (walking to a
+medkit through the fire) and 7 after a "retreat", which walks straight backwards while shooting.
+Nothing ever takes cover.
+
 ### MAP04: what is left
-Surviving the blue key room, then the blue switches 3/4, switches 6 and 2, and the exit.
+Switch 2 and the exit. Most deaths are now at (2285, 948) with 15 health. Next: retreat sideways
+instead of backwards and take cover behind corners to heal.
 
 ## [0.5.0] - 2026-10-25 - Jev measured against code alone, and code won the fight
 
