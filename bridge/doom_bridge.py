@@ -37,11 +37,24 @@ MODOS = ("atacar", "explorar", "retirada", "recoger", "avanzar", "curarse")
 TACTICA_A_MODO = {"pelear": "atacar", "esquivar": "retirada", "avanzar": "avanzar", "curarse": "curarse",
                   None: "explorar"}
 SALUD_CRITICA = 30  # regla de supervivencia del script: debajo de esto deja de pelear
+# apagadas: corriendo siempre, con ellas MAP02 dio 2593 frames y 6 muertes contra 2315 y 3 sin ellas,
+# MAP03 igual y MAP04 3/12 en los dos casos (82 muertes contra 48). Actuan con la salud ya critica
+_TACTICAS = os.environ.get("DOOM_TACTICAS", "0") == "1"
+RETIRADA_LATERAL = _TACTICAS  # retirarse de lado en vez de hacia atras
+CUBRIRSE = _TACTICAS          # con salud critica y el botiquin lejos, ir a donde no lo vean
+ENCARAR = _TACTICAS           # yendo a cubrirse o a curarse, moverse sin darle la espalda al enemigo
+# correr: hasta aqui el bot caminaba, mas lento que un Demon. "siempre" (cl_run) termino MAP04 por
+# primera vez (3 de 12) pero hizo mas lentos MAP01 y MAP03: se pasaba de largo frente a interruptores
+# y esquinas. "selectivo": corre con peligro o en tramos rectos sin nada que presionar cerca
+# "selectivo" contaba con eso y con correr ante monstruos cercanos aunque no se vieran; en la medicion
+# empato a "siempre" en MAP02 pero perdio en MAP03 (7/12 contra 12/12) y MAP04 (2/12 contra 3/12)
+CORRER = os.environ.get("DOOM_CORRER", "siempre")  # "no", "siempre" o "selectivo"
+PELIGRO_CERCA = 800  # monstruo a menos de esto (aunque no se vea): correr
 
 # Indices de botones
 B = ["MOVE_FORWARD", "MOVE_BACKWARD", "TURN_LEFT", "TURN_RIGHT",
      "MOVE_LEFT", "MOVE_RIGHT", "ATTACK", "USE",
-     "SELECT_WEAPON2", "SELECT_WEAPON3", "SELECT_WEAPON4",
+     "SELECT_WEAPON2", "SELECT_WEAPON3", "SELECT_WEAPON4", "SPEED",
      "TURN_LEFT_RIGHT_DELTA"]  # el giro fino va al final: es el unico boton con valor
 IDX = {n: i for i, n in enumerate(B)}
 TICS = 4  # tics por accion (35 tics = 1 s); main lo ajusta segun los fps
@@ -85,6 +98,9 @@ def crear_juego(mapa="MAP01", semilla=None):
     g.set_render_weapon(True)
     g.set_render_messages(False)
     g.set_episode_timeout(0)
+    # siempre explicito: ViZDoom guarda los cvars en _vizdoom.ini y un "+cl_run 1" de una corrida
+    # anterior seguia activo en las siguientes (MAP01 "sin correr" dio lo mismo que corriendo)
+    g.add_game_args("+cl_run 1" if CORRER == "siempre" else "+cl_run 0")
     g.set_available_buttons([getattr(vzd.Button, n) for n in B])
     g.set_available_game_variables([
         vzd.GameVariable.HEALTH, vzd.GameVariable.ARMOR,
@@ -265,11 +281,25 @@ class Cerebro:
         self.cesion = 0  # pasos en que el navegador manda aunque la orden diga otra cosa
         self.salud_prev = 100
         self.voltear = 0  # pasos girando hacia quien le pega sin que se vea en pantalla
+        self.cubierta_hasta = 0  # mientras paso < esto, sigue la ruta a la cubierta
         self.barril_ult = None  # ultimo barril al que se le disparo (un evento por barril)
         self.barril_pasos = {}  # id de barril -> pasos apuntandole (tope BARRIL_PASOS)
 
     def barril_descartados(self):
         return {i for i, n in self.barril_pasos.items() if n >= BARRIL_PASOS}
+
+    def cubrirse(self, enemigos, x, y):
+        """Sigue (o arma) la ruta a una celda que los enemigos a la vista no ven."""
+        nav = self.navegador
+        if self.paso < self.cubierta_hasta and nav.meta and nav.meta["id"] == "cubierta":
+            return True
+        amenazas = [(l.object_position_x, l.object_position_y) for l in enemigos]
+        largo = nav.cubrirse(x, y, amenazas)
+        if not largo:
+            return False
+        self.cubierta_hasta = self.paso + (nav.replan - nav.paso)  # lo que sostiene la ruta
+        self.evento = ("cubrirse", largo)
+        return True
 
     def apuntar_barril(self, b, x, y):
         """Cuenta el paso contra el tope del barril y emite un evento la primera vez."""
@@ -287,6 +317,20 @@ class Cerebro:
                 and self.ignorados.get(self.clave(l), 0) < self.paso]
 
     def decidir(self, st, vars_, orden):
+        a, atorado = self._decidir(st, vars_, orden)
+        if CORRER == "selectivo":
+            # peligro tambien con monstruos cerca que no se ven: contando solo los de la pantalla,
+            # caminaba con Demons a la espalda y lo mordian (MAP02: 37 muertes en su sala contra 2)
+            x, y = vars_[4], vars_[5]
+            peligro = (self.modo in ("atacar", "retirada", "cubrirse", "curarse") or vars_[0] < 50
+                       or any(l.object_name in MONSTRUOS for l in st.labels)
+                       or any(o.name in MONSTRUOS and math.hypot(o.position_x - x, o.position_y - y)
+                              < PELIGRO_CERCA for o in st.objects))
+            if peligro or (self.navegador and self.navegador.tramo_libre(vars_[4], vars_[5])):
+                a[IDX["SPEED"]] = 1
+        return a, atorado
+
+    def _decidir(self, st, vars_, orden):
         self.paso += 1
         self.evento = None
         if self.navegador:
@@ -328,6 +372,11 @@ class Cerebro:
             cerca_salud = self.navegador.distancia_salud()
             if cerca_salud is not None and (not enemigos or cerca_salud < 300):
                 modo = "curarse"
+            elif enemigos and CUBRIRSE and self.cubrirse(enemigos, x, y):
+                # con enemigos a la vista y el botiquin lejos: ponerse donde no lo vean (tras una
+                # esquina) y curarse desde ahi. Ir al botiquin a traves del fuego o retroceder en
+                # linea recta: 23 de 25 muertes en MAP01-04
+                modo = "cubrirse"
             elif len(enemigos) >= 2:
                 modo = "retirada"
         if modo == "curarse" and not (self.navegador and self.navegador.hay_salud()):
@@ -432,8 +481,12 @@ class Cerebro:
         if modo == "retirada":
             if enemigos:
                 obj = max(enemigos, key=lambda l: l.width * l.height)
-                a = apuntar(obj, ["MOVE_BACKWARD"])
-                return (a or accion("MOVE_BACKWARD", "ATTACK")), atorado
+                # de lado, hacia donde hay mas espacio: hacia atras en linea recta el disparo que
+                # viene de frente siempre pega (7 de 25 muertes justo despues de retroceder)
+                paso = (esquive or ("MOVE_LEFT" if izq > der else "MOVE_RIGHT")) if RETIRADA_LATERAL \
+                    else "MOVE_BACKWARD"
+                a = apuntar(obj, [paso])
+                return (a or accion(paso, "ATTACK")), atorado
             return accion("MOVE_FORWARD", "TURN_LEFT" if izq > der else "TURN_RIGHT"), atorado
 
         if modo == "recoger":
@@ -449,8 +502,32 @@ class Cerebro:
                                        armas={k for k, val in zip((3, 4, 5, 6, 7), vars_[7:12]) if val > 0},
                                        arma_actual=int(vars_[12]) if len(vars_) > 12 else None,
                                        armadura=vars_[1])
-            # avanzar ignora a los enemigos, pero si uno queda justo enfrente se le dispara al pasar
-            if modo == "avanzar" and enemigos:
+            # a cubrirse o a curarse con enemigos a la vista: seguir la ruta sin darles la espalda.
+            # Se apunta al enemigo y se camina hacia el punto de la ruta con la combinacion de
+            # adelante/atras/lados que toque. Dandoles la espalda morian 8 de 37 yendo a cubrirse
+            if ENCARAR and modo in ("cubrirse", "curarse") and enemigos and a[IDX["MOVE_FORWARD"]] \
+                    and self.navegador.camino:
+                nav = self.navegador
+                tx, ty = nav.mapa.centro(*nav.camino[min(2, len(nav.camino) - 1)])
+                obj = max(enemigos, key=lambda l: l.width * l.height)
+                cx = obj.x + obj.width / 2
+                grados = math.degrees(math.atan((cx - ancho / 2) / (ancho / 2)))
+                rel = math.radians(math.degrees(math.atan2(ty - y, tx - x)) - vars_[6])
+                pasos = []
+                if math.cos(rel) > 0.38:
+                    pasos.append("MOVE_FORWARD")
+                elif math.cos(rel) < -0.38:
+                    pasos.append("MOVE_BACKWARD")
+                if math.sin(rel) > 0.38:
+                    pasos.append("MOVE_LEFT")
+                elif math.sin(rel) < -0.38:
+                    pasos.append("MOVE_RIGHT")
+                if abs(grados) < 8:
+                    pasos.append("ATTACK")
+                return accion(*pasos, giro=-grados), atorado
+            # avanzar (y cubrirse) ignoran a los enemigos, pero si uno queda justo enfrente se le
+            # dispara al pasar
+            if modo in ("avanzar", "cubrirse") and enemigos:
                 obj = max(enemigos, key=lambda l: l.width * l.height)
                 cx = obj.x + obj.width / 2
                 if abs(math.degrees(math.atan((cx - ancho / 2) / (ancho / 2)))) < 5:
