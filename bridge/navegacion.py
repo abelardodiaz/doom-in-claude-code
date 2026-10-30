@@ -74,6 +74,10 @@ BONUS_DIST = 400  # unidades de camino: los bonus solo valen un desvio corto
 # contra 479-884) y MAP02 de 3323 a 3953-4689
 BONUS_SALUD = 75
 SALUD_ANTES_LLAVE = 70  # bajo esto, curarse antes de ir por una llave o la salida
+CUBIERTA_MAX = 20       # costo de ruta (celdas) hasta donde se busca donde cubrirse
+CUBIERTA_PASOS = 40     # pasos que se sostiene la ruta a la cubierta antes de replantear
+CORRER_CELDAS = 10      # tramo de ruta (celdas) que debe ir casi recto para correr
+CORRER_FRENO = 160      # a menos de esto de un interruptor, salida o linea de pisar, caminar
 BONUS_ACTIVO = False  # experimento apagado por defecto, igual que los barriles de doom_bridge
 MUNICION = {"Clip", "ClipBox", "Shell", "ShellBox", "RocketAmmo", "RocketBox", "Cell", "CellPack", "Backpack"}
 # municion que sirve para el arma en mano (casillero). La mochila sirve para todas.
@@ -140,6 +144,12 @@ class Mapa:
                 continue
             self._marcar_pared(x1, y1, x2, y2, disco)
             self._marcar_pared(x1, y1, x2, y2, disco_fino, self.pared_fina)
+
+        # muros que tapan la vista (lineas de un solo lado, sin holgura): para buscar donde cubrirse
+        self.muro = np.zeros((self.H, self.W), dtype=bool)
+        for (x1, y1, x2, y2, fr, bk, act, tag, flags) in lineas:
+            if bk < 0:
+                self._marcar_pared(x1, y1, x2, y2, [(0, 0)], self.muro)
 
         # puertas que se abren con USE: el sector de atras de la linea
         self.sector_puerta = set()
@@ -336,6 +346,16 @@ class Mapa:
 
     def celda(self, x, y):
         return int((x - self.x0) // CEL), int((y - self.y0) // CEL)
+
+    def se_ve(self, x1, y1, x2, y2):
+        """Linea de vista entre dos puntos: ningun muro en medio (aproximado, cada 8 unidades)."""
+        n = int(math.hypot(x2 - x1, y2 - y1) // 8) + 1
+        for k in range(1, n):
+            t = k / n
+            i, j = self.celda(x1 + (x2 - x1) * t, y1 + (y2 - y1) * t)
+            if 0 <= i < self.W and 0 <= j < self.H and self.muro[j, i]:
+                return False
+        return True
 
     def centro(self, i, j):
         return self.x0 + (i + 0.5) * CEL, self.y0 + (j + 0.5) * CEL
@@ -1062,6 +1082,57 @@ class Navegador:
         if abs(dif) > 45:
             return accion(giro=max(-45, min(45, dif)))
         return accion("MOVE_FORWARD", giro=dif)
+
+    def tramo_libre(self, x, y):
+        """Se puede correr: la ruta sigue casi recta un buen tramo y no hay cerca nada que presionar,
+        ni puerta, elevador o teletransporte. Corriendo se pasaba de largo frente a interruptores
+        y esquinas (MAP01 de 389 a 470 frames, MAP03 de 2569 a 3688)."""
+        m = self.mapa
+        if self.uso > 0 or self.espera_elevador or len(self.camino) < CORRER_CELDAS:
+            return False
+        tramo = self.camino[:CORRER_CELDAS]
+        fx, fy = m.centro(*tramo[-1])
+        largo = math.hypot(fx - x, fy - y)
+        if largo < CORRER_CELDAS * CEL * 0.7:
+            return False  # la ruta da vueltas
+        for c in tramo:
+            cx, cy = m.centro(*c)
+            # distancia del punto a la recta bot -> final del tramo: mas de ~1.5 celdas es una curva
+            if abs((fx - x) * (y - cy) - (x - cx) * (fy - y)) / largo > CEL * 1.5:
+                return False
+            s = int(m.sector[c[1], c[0]])
+            if c in m.saltos or s in m.sector_elevador or s in m.sector_puerta or s in m.sector_llave \
+                    or s in m.sector_remoto:
+                return False
+        if self.meta and self.meta["tipo"] in ("interruptor", "salida", "pisar"):
+            cx, cy = m.centro(*self.meta["celda"])
+            if math.hypot(cx - x, cy - y) < CORRER_FRENO:
+                return False
+        return True
+
+    def cubrirse(self, x, y, amenazas, maximo=CUBIERTA_MAX):
+        """Pone como ruta el camino a la celda mas cercana (hasta `maximo` de costo) que ninguna
+        amenaza ve. Devuelve el largo de la ruta, o None si no hay donde cubrirse."""
+        m = self.mapa
+        inicio = m.celda(x, y)
+        if not m.transitable(*inicio):
+            inicio = m.celda_libre_cerca(x, y, 3) or inicio
+        dist, prev = self._dijkstra(inicio, limite=4000)
+        for c, d in sorted(dist.items(), key=lambda kv: kv[1]):
+            if d > maximo:
+                return None
+            if d < 2:
+                continue  # aqui mismo lo estan viendo
+            cx, cy = m.centro(*c)
+            if not any(m.se_ve(ax, ay, cx, cy) for ax, ay in amenazas):
+                camino = self._camino(prev, c)
+                self.meta = {"id": "cubierta", "tipo": "cubierta", "celda": c, "datos": None,
+                             "camino": camino, "desc": "cubrirse", "dist": round(d * CEL)}
+                self.camino = list(camino)
+                self.cambio_meta = self.paso
+                self.replan = self.paso + CUBIERTA_PASOS
+                return len(camino)
+        return None
 
     def _interruptor_elevador(self, aqui, s):
         """La meta de presionar el interruptor mas cercano que mueve el elevador s, con una ruta que
