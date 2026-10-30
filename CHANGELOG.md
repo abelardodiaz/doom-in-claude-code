@@ -129,9 +129,41 @@ Where it dies now, out of the last 25 deaths: 16 right after deciding to go heal
 medkit through the fire) and 7 after a "retreat", which walks straight backwards while shooting.
 Nothing ever takes cover.
 
+### MAP04 finished for the first time: the bot was walking
+After switch 6 a pack of Demons comes out, and the bot died there with 87 health in 50 frames.
+Looking at why, it turned out the bot never ran: no run button, no `cl_run`. Walking, a Demon is
+faster than the player. Running, the player moves twice as far per step (396 units in 10 steps
+against 197).
+
+Measured on the same seeds (MAP01 1-6, MAP02 13-24, MAP03 7-18, MAP04 1-12 with 12000 frames):
+
+| | Walking | Running always | Selective v1 | Selective v2 | **Running, no tactics** |
+| --- | --- | --- | --- | --- | --- |
+| MAP01 | 6/6, 389 | 6/6, 470 | 6/6, 433 | 6/6, 439 | 6/6, 470 |
+| MAP02 | 11/12, 2534, 10 deaths | 12/12, 2593, 6 | 6/12, 3834, 55 | 12/12, 2603, 6 | **12/12, 2315, 3** |
+| MAP03 | 11/12, 2932, 4 | 12/12, 3688, 8 | 5/12, 2995, 23 | 7/12, 5469, 26 | **12/12, 3868, 8** |
+| MAP04 | 0/6 | 3/12, 82 deaths | 3/12, 38 | 2/12, 99 | **3/12, 4433, 48** |
+
+- **MAP04 is finished in 3 of 12 seeds** (1, 4 and 9). In seed 1 the last life did the whole level,
+  12 goals from start to exit, in about 2670 frames without dying.
+- **Selective running** (run with danger or on straight stretches with nothing to press nearby,
+  walk near switches, doors and lifts) looked like the fix for MAP01 and MAP03 getting slower.
+  v1 only counted monsters on screen: Demons behind the bot caught it walking (MAP02: 37 deaths in
+  their room against 2). v2 also counts monsters within 800 units that are not on screen: it ties
+  in MAP02 but loses in MAP03 and MAP04. It stays in the code (`DOOM_CORRER=selectivo`), off.
+- **Combat tactics from the web search, off.** Retreat sideways instead of backwards, take cover
+  where no visible enemy can see the bot (line of sight on the map's one-sided walls), and walk to
+  cover or a medkit facing the enemy and shooting. Walking they were neutral; running, turning them
+  off is better (MAP02 3 deaths against 6, MAP04 48 against 82). They kick in under 30 health, when
+  it is already late. In the code, `DOOM_TACTICAS=1` turns them on.
+- ViZDoom saves cvars in `_vizdoom.ini`: one `+cl_run 1` stayed on for every later run, and a
+  "no running" test gave the same numbers as running. `cl_run` is now always set explicitly.
+
+Raw results: `bench-v050/correr/`, one folder per column.
+
 ### MAP04: what is left
-Switch 2 and the exit. Most deaths are now at (2285, 948) with 15 health. Next: retreat sideways
-instead of backwards and take cover behind corners to heal.
+Finished 3 of 12. Next: the seeds where it gets stuck without dying (seed 8: 0 deaths, not
+finished) and the deaths after switch 6.
 
 ## [0.5.0] - 2026-10-25 - Jev measured against code alone, and code won the fight
 
