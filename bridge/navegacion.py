@@ -871,7 +871,11 @@ class Navegador:
                      and ((self.pedido_jev and self.pedido_jev != self.meta["id"])
                           or (self.plan and self.plan[0] != self.meta["id"])))
         # curarse no espera: si se pide y la meta no es salud, replantear ya
-        if self.forzar == "salud" and self.hay_salud() and \
+        # ...salvo que vaya al interruptor de un elevador o a cubrirse, que son el camino para llegar:
+        # MAP04 s8 iba y venia entre el botiquin de abajo y el interruptor 5 que baja el elevador 69,
+        # cada ~7 frames, durante 10000 frames con 28 de salud
+        de_paso = self.meta and self.meta["id"].startswith(("elevador_", "cubierta"))
+        if self.forzar == "salud" and self.hay_salud() and not de_paso and \
                 not (self.meta and self.meta["tipo"] == "provision" and self.meta["datos"] == "salud"):
             pide_otra = True
         if not self.camino or self.paso >= self.replan or not self._cerca_de_ruta(aqui) or pide_otra:
