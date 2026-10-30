@@ -1,0 +1,6 @@
+Semillas: MAP01 1-6, MAP02 13-24, MAP03 7-18, MAP04 1-12 (12000 frames; caminar-con-tacticas: 1-6 a 6000).
+caminar-con-tacticas: sin correr, con cubrirse + encarar + retirada de lado.
+siempre-con-tacticas: cl_run 1 (MAP04 con 12000 frames).
+selectivo-v1: correr con enemigos en pantalla o en tramo recto sin nada cerca.
+selectivo-v2: v1 + monstruos a menos de 800 aunque no se vean.
+final-siempre-sin-tacticas: la configuracion que queda (correr siempre, tacticas apagadas).
