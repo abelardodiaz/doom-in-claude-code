@@ -161,9 +161,23 @@ Measured on the same seeds (MAP01 1-6, MAP02 13-24, MAP03 7-18, MAP04 1-12 with 
 
 Raw results: `bench-v050/correr/`, one folder per column.
 
+### Healing no longer undoes the way to the medkit
+MAP04 seed 8 never died and never finished: with 28 health it wanted the medkit downstairs, went to
+switch 5 to lower lift 69, and the "go heal now" rule sent it back to the medkit goal on the next
+replan. It went back and forth every ~7 frames for 10000 frames. Going to a lift's switch (or to
+cover) now counts as part of the way, not as a different goal. Seed 8 now finishes (frame 8737).
+
+| Code alone, 12 seeds | Before | Now |
+| --- | --- | --- |
+| MAP02 | 12/12, 2315 frames, 3 deaths | identical |
+| MAP03 | 12/12, 3868, 8 deaths | identical |
+| MAP04 | 3/12 (seeds 1, 4, 9) | **4/12** (seeds 6, 8, 10, 12) |
+
+Different seeds finish because the change alters every trip to a medkit, and with that the whole
+game: MAP04 still has a lot of luck in it. Raw results in `bench-v050/curarse-elevador/`.
+
 ### MAP04: what is left
-Finished 3 of 12. Next: the seeds where it gets stuck without dying (seed 8: 0 deaths, not
-finished) and the deaths after switch 6.
+Finished 4 of 12. Next: the Demon pack after switch 6, where most deaths are.
 
 ## [0.5.0] - 2026-10-25 - Jev measured against code alone, and code won the fight
 
