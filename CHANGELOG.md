@@ -176,8 +176,36 @@ cover) now counts as part of the way, not as a different goal. Seed 8 now finish
 Different seeds finish because the change alters every trip to a medkit, and with that the whole
 game: MAP04 still has a lot of luck in it. Raw results in `bench-v050/curarse-elevador/`.
 
+### MAP04 finished 11 of 12: back off from the Demon pack
+Two death spots, each found by replaying the deaths step by step.
+
+**Crusher 22 (22 of 52 deaths, all at 5 health).** Running for an ammo box 24 units from the crusher,
+the bot's momentum carried it about 50 units under the ceiling while it was coming down. The
+"wait outside" check only looked at route cells. Now it also looks 64 units around a crusher,
+but only while the ceiling is coming down (a crusher resting low left the bot waiting forever)
+and not with monsters on top of the bot (stopping there with Demons behind killed it 16 times).
+
+**The Demon pack after switch 6 (18 of 39 deaths).** Switch 2 was 238 units away and the exit right
+after it, but the bot stood and fought, strafing left and right, while five Demons closed in.
+Now, with two or more biters (Demon, Spectre) within 250 units, it **backs off shooting the
+closest one**: running backwards the player is faster than a Demon, so they arrive one at a time.
+It checks the map for room behind (64 and 128 units) and strafes toward open space if there is none.
+
+Also tried, and off: rushing a nearby goal (switch, exit, key) instead of fighting. MAP03 fell
+from 12/12 to 7/12, 33 deaths rushing through Zombiemen, which shoot.
+
+| Code alone, 12 seeds | Before | Back off + rush goal | **Back off only** |
+| --- | --- | --- | --- |
+| MAP02 | 12/12, 2315 frames, 3 deaths | 12/12, 2861, 8 | **12/12, 2392, 3** |
+| MAP03 | 12/12, 3868, 8 | 7/12, 4444, 49 | **12/12, 3868, 8** |
+| MAP04 | 4/12, 39 deaths | 11/12, 10 | **11/12, 3805, 7** |
+
+MAP01 is identical. Raw results in `bench-v050/horda/`.
+
+**All four maps are now finished by code alone**: MAP01 6/6, MAP02 12/12, MAP03 12/12, MAP04 11/12.
+
 ### MAP04: what is left
-Finished 4 of 12. Next: the Demon pack after switch 6, where most deaths are.
+One seed of 12 still fails.
 
 ## [0.5.0] - 2026-10-25 - Jev measured against code alone, and code won the fight
 
