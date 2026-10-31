@@ -9,6 +9,7 @@ Metas, en orden:
 Las puertas que se abren con USE cuentan como paso; al llegar a una cerrada, el bot la abre.
 Las alturas de piso y techo se actualizan con los sectores que reporta ViZDoom en vivo.
 """
+import collections
 import heapq
 import math
 import os
@@ -644,6 +645,31 @@ class Mapa:
                         mejor = (d, (i + dx, j + dy))
         return mejor[1] if mejor else None
 
+    def salida_de_pared(self, inicio, limite=80):
+        """Camino desde una celda que la holgura marca como pared hasta la primera transitable,
+        sin cruzar muros ni escalones. MAP04 s4: el pasillo 17 mide 32 entre un muro y el
+        aplastador 62; el jugador cabe justo, entro por la puerta 19 y adentro todo era pared
+        aun con la holgura fina: 7000 frames sin metas."""
+        previo = {inicio: None}
+        cola = collections.deque([inicio])
+        while cola and len(previo) < limite:
+            c = cola.popleft()
+            if c != inicio and self.transitable(*c):
+                camino = []
+                while c != inicio:
+                    camino.append(c)
+                    c = previo[c]
+                return camino[::-1]
+            for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                n = (c[0] + dx, c[1] + dy)
+                if n in previo or not (0 <= n[0] < self.W and 0 <= n[1] < self.H):
+                    continue
+                if self.muro[n[1], n[0]] or self.sector[n[1], n[0]] < 0 or not self.paso_ok(c, n):
+                    continue
+                previo[n] = c
+                cola.append(n)
+        return []
+
 
 class Navegador:
     """Las piernas del bot: arma la lista de metas posibles con su ruta y camina hacia la elegida.
@@ -1019,7 +1045,11 @@ class Navegador:
                 not (self.meta and self.meta["tipo"] == "provision" and self.meta["datos"] == "salud"):
             pide_otra = True
         if not self.camino or self.paso >= self.replan or not self._cerca_de_ruta(aqui) or pide_otra:
-            inicio = aqui if m.transitable(*aqui) else (m.celda_libre_cerca(x, y, 3) or aqui)
+            inicio = aqui if m.transitable(*aqui) else m.celda_libre_cerca(x, y, 3)
+            # metido donde la holgura no deja nada libre cerca: salir primero por celdas sin muro
+            prefijo = m.salida_de_pared(aqui) if inicio is None else []
+            inicio = prefijo[-1] if prefijo else (inicio or aqui)
+            prefijo = prefijo[:-1]
             cands = self.candidatos(inicio)
             elegido, quien = self.elegir(cands) if cands else (None, None)
             # nada que elegir (a lo mas provisiones que no hacen falta), ni zonas sin visitar:
@@ -1030,7 +1060,8 @@ class Navegador:
             if elegido is None and m.usar_holgura_fina():
                 self.evento = llave or ("holgura_fina",)
                 self.castigo, self.descartados = {}, {}
-                inicio = aqui if m.transitable(*aqui) else (m.celda_libre_cerca(x, y, 3) or aqui)
+                if not prefijo:
+                    inicio = aqui if m.transitable(*aqui) else (m.celda_libre_cerca(x, y, 3) or aqui)
                 cands = self.candidatos(inicio)
                 elegido, quien = self.elegir(cands) if cands else (None, None)
             # nunca quedarse sin meta (MAP04 s3: 2300 frames quieto girando): reintentar los
@@ -1040,10 +1071,14 @@ class Navegador:
                 for idx, veces in self.sin_efecto.items():
                     if veces >= 3:
                         m.presionados.discard(idx)
+                # y las lineas de pisar: se dan por pisadas a 24 del punto medio, sin cruzarlas
+                # siempre (MAP04 s49: la 3 "pisada", el cuarto azul cerrado, 2000 frames sin metas)
+                m.pisados.clear()
                 self.sin_efecto, self.castigo, self.descartados = {}, {}, {}
                 self.visitado[:] = False
                 self.marcar_visto(x, y)
-                inicio = aqui if m.transitable(*aqui) else (m.celda_libre_cerca(x, y, 3) or aqui)
+                if not prefijo:
+                    inicio = aqui if m.transitable(*aqui) else (m.celda_libre_cerca(x, y, 3) or aqui)
                 cands = self.candidatos(inicio)
                 elegido, quien = self.elegir(cands) if cands else (None, None)
             if elegido is None or self.meta is None or elegido["id"] != self.meta["id"]:
@@ -1051,7 +1086,7 @@ class Navegador:
                 self.evento = self.evento or ("meta", elegido["id"] if elegido else None, quien,
                                               len(elegido["camino"]) if elegido else 0)
             self.meta = elegido
-            self.camino = list(elegido["camino"]) if elegido else []
+            self.camino = prefijo + list(elegido["camino"]) if elegido else []
             self.replan = self.paso + 72
             if not self.camino:
                 return accion("USE", giro=30) if self.paso % 2 else accion(giro=30)
