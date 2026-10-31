@@ -59,6 +59,13 @@ APLASTA_ALTO = 64      # hueco bajo el que el techo ya pega (el jugador mide 56)
 APLASTA_BAJANDO = 100  # si va bajando, ya no se entra con este hueco o menos
 APLASTA_COSTO = 3      # costo extra por celda bajo un aplastador al planear rutas
 APLASTA_MARGEN = 64    # unidades extra alrededor del aplastador para frenar a tiempo (inercia corriendo)
+PISOS_DANIO = {4, 5, 7, 11, 16}  # tipos de sector con piso que quita salud
+DANIO_COSTO = 4        # costo extra por celda de piso con dano al planear rutas
+POZO_ORILLA = 256      # a esta distancia de un pozo con dano se camina en vez de correr
+POZO_COSTO = 10        # costo extra por celda a 2 o menos de un pozo
+COSAS_SOLIDAS = {"ExplosiveBarrel"}  # objetos que no se mueven y tapan el paso
+COSA_HOLGURA = 26      # radio del barril (10) + el del jugador (16)
+COSA_TOPE = 48         # atorado con una de esas cosas a esta distancia: pasa a ser obstaculo
 DESTINO_TELEPORT = 14  # tipo de cosa que marca a donde llega un teletransporte
 
 # abastecimiento: nombres de objetos de ViZDoom por necesidad
@@ -100,6 +107,9 @@ class Mapa:
         self.H = int((max(ys) - self.y0 + 64) // CEL) + 1
         self.piso = np.array([s.z_floor for s in m.sectors], dtype=np.float32)
         self.techo = np.array([s.z_ceil for s in m.sectors], dtype=np.float32)
+        self.sector_pozo = set()  # se calcula al final; transitable ya lo consulta antes
+        self.celdas_cosas = set()  # celdas tapadas por cosas solidas en vivo (barriles)
+        self.cosas_tope = set()    # ids de las cosas solidas contra las que se atoro
 
         lineas = []
         for ld in m.linedefs:
@@ -167,6 +177,24 @@ class Mapa:
                 # (MAP02: la puerta roja 122 se abre con el interruptor rojo en (720,504).)
                 if not tag and bk >= 0:
                     self.sector_llave[bk] = color
+        # barrotes: postes de puerta de 16 con huecos de 16 entre ellos, donde el jugador (32) no
+        # cabe. La celda del hueco entre dos celdas de la misma puerta es parte de la puerta; si no,
+        # la ruta pasa por el hueco, nunca pisa la puerta y nadie presiona USE (MAP02: los barrotes
+        # amarillos 128 frente a la salida, miles de frames empujando el hueco)
+        puertas = self.sector_puerta | set(self.sector_llave)
+        sec = self.sector.copy()
+        for j in range(1, self.H - 1):
+            for i in range(1, self.W - 1):
+                s = sec[j, i]
+                if s < 0 or s in puertas:
+                    continue
+                for a, b in ((sec[j, i - 1], sec[j, i + 1]), (sec[j - 1, i], sec[j + 1, i])):
+                    # tambien el hueco entre el ultimo poste y la pared
+                    if a in puertas and b in (a, -1) or b in puertas and a == -1:
+                        d = a if a in puertas else b
+                        if self.piso[d] == self.piso[s]:
+                            self.sector[j, i] = d
+                            break
         # elevadores: sectores con el tag de una linea de elevador. Las lineas de USE sin tag
         # (estilo "presiona el costado del elevador") apuntan a su propio sector de atras.
         self.sector_elevador = set()
@@ -336,6 +364,53 @@ class Mapa:
                 if self.transitable(*c):
                     self.saltos[c] = (dest, cruce)
 
+        # pisos que hacen dano (acido, lava): cuestan al planear. Los que no tienen salida son pozos
+        # y no se pisan: MAP03, el acido 242 esta 32 abajo de su orilla y su unico otro vecino es
+        # una isla; explorando la frontera el bot caia ahi y moria con salud 92-100 (8 de 12 muertes).
+        # Pozo = sector con dano desde el que no se puede volver al inicio subiendo escalones de 24
+        # o menos (los sectores que se mueven y los teletransportes cuentan como paso).
+        self.sector_danio = {s for s, sec in enumerate(m.sectors) if sec.type in PISOS_DANIO}
+        self.sector_pozo = set()
+        inicio = next((t for t in m.things if t.type == 1), None)
+        if self.sector_danio and inicio is not None:
+            i, j = self.celda(inicio.x, inicio.y)
+            s0 = self.sector[j, i] if 0 <= j < self.H and 0 <= i < self.W else -1
+            moviles_todos = moviles | self.sector_remoto.keys()
+            llega = {}  # sector -> sectores desde los que se llega a el (grafo al reves)
+            for (_x1, _y1, _x2, _y2, fr, bk, act, tag, _f) in lineas:
+                if fr < 0 or bk < 0:
+                    continue
+                hueco = min(self.techo[fr], self.techo[bk]) - max(self.piso[fr], self.piso[bk])
+                for a, b in ((fr, bk), (bk, fr)):
+                    movil = a in moviles_todos or b in moviles_todos
+                    if movil or (hueco >= ALTO_MIN and self.piso[b] - self.piso[a] <= PASO_MAX):
+                        llega.setdefault(b, set()).add(a)
+            for (_x1, _y1, _x2, _y2, fr, bk, act, tag, _f) in lineas:
+                if act in TELEPORTES and tag in destinos and fr >= 0:
+                    di, dj = self.celda(*destinos[tag])
+                    llega.setdefault(int(self.sector[dj, di]), set()).add(fr)
+            vuelve, pila = {s0}, [s0]
+            while pila:
+                for a in llega.get(pila.pop(), ()):
+                    if a not in vuelve:
+                        vuelve.add(a)
+                        pila.append(a)
+            if s0 >= 0:
+                self.sector_pozo = {s for s in self.sector_danio - vuelve if s not in moviles_todos}
+        self.celda_danio = np.isin(self.sector, list(self.sector_danio)) if self.sector_danio else \
+            np.zeros((self.H, self.W), dtype=bool)
+        # orilla de los pozos: ahi se camina. MAP03: al acido 242 lo rodea una cornisa de 32 unidades
+        # (el ancho del jugador) que lleva al interruptor 16; corriendo, la inercia lo tiraba al pozo
+        # La ruta ademas rodea el borde (2 celdas) si hay por donde: alli el cuarto 204 de al lado esta
+        # al mismo nivel y la cornisa solo era el camino mas corto.
+        self.zona_pozo = np.zeros((self.H, self.W), dtype=bool)
+        self.borde_pozo = np.zeros((self.H, self.W), dtype=bool)
+        r = POZO_ORILLA // CEL
+        for s in self.sector_pozo:
+            for j, i in zip(*np.nonzero(self.sector == s)):
+                self.zona_pozo[max(0, j - r):j + r + 1, max(0, i - r):i + r + 1] = True
+                self.borde_pozo[max(0, j - 2):j + 3, max(0, i - 2):i + 3] = True
+
     def _marcar_pared(self, x1, y1, x2, y2, disco, capa=None):
         capa = self.pared_gruesa if capa is None else capa
         largo = math.hypot(x2 - x1, y2 - y1)
@@ -365,6 +440,23 @@ class Mapa:
             i, j = self.celda(x1 + (x2 - x1) * t, y1 + (y2 - y1) * t)
             if 0 <= i < self.W and 0 <= j < self.H and self.muro[j, i]:
                 return False
+        return True
+
+    def recta_ok(self, x1, y1, x2, y2):
+        """Se puede caminar en linea recta: ningun muro ni escalon alto en medio.
+        se_ve solo mira muros; un pilar de 48 no es muro (MAP01: el del interruptor de salida).
+        No exige transitable: la holgura junto a la pared no estorba al cortar una esquina, y
+        exigirla apuntaba recto y se pasaba de largo frente a un pasillo de una celda (MAP03 s27)."""
+        n = int(math.hypot(x2 - x1, y2 - y1) // 8) + 1
+        prev = self.celda(x1, y1)
+        for k in range(1, n + 1):
+            t = k / n
+            c = self.celda(x1 + (x2 - x1) * t, y1 + (y2 - y1) * t)
+            if c != prev:
+                if not (0 <= c[0] < self.W and 0 <= c[1] < self.H) or self.muro[c[1], c[0]] \
+                        or not self.paso_ok(prev, c):
+                    return False
+                prev = c
         return True
 
     def centro(self, i, j):
@@ -400,13 +492,13 @@ class Mapa:
         return (s in self.sector_puerta or s in self.sector_llave) and self.techo[s] - self.piso[s] < ALTO_MIN
 
     def transitable(self, i, j):
-        if not (0 <= i < self.W and 0 <= j < self.H) or self.pared[j, i]:
+        if not (0 <= i < self.W and 0 <= j < self.H) or self.pared[j, i] or (i, j) in self.celdas_cosas:
             return False
         pm = self.pared_movil[j, i]
         if pm >= 0 and self.techo[pm] - self.piso[pm] < ALTO_MIN:
             return False
         s = self.sector[j, i]
-        if s < 0:
+        if s < 0 or s in self.sector_pozo:
             return False
         if self.techo[s] - self.piso[s] >= ALTO_MIN:
             return True
@@ -419,6 +511,31 @@ class Mapa:
         if s in self.sector_remoto:
             return False
         return s in self.sector_puerta or s in self.sector_llave
+
+    def orilla_pozo(self, x, y):
+        i, j = self.celda(x, y)
+        return 0 <= i < self.W and 0 <= j < self.H and bool(self.zona_pozo[j, i])
+
+    def actualizar_cosas(self, objetos):
+        """Tapa las celdas de las cosas solidas contra las que ya se atoro (cosas_tope) y que siguen
+        en el mundo. Devuelve True si cambiaron. MAP04 s12: un barril junto al interruptor 5, arriba
+        del elevador 69; la ruta pasaba por encima y el bot lo empujo 10000 frames. Taparlos todos
+        desde el principio cambiaba rutas y retiradas en los cuartos llenos de barriles (MAP04 de
+        23/24 a 11/24, 54 muertes en la sala de los Demons): solo los que ya estorbaron."""
+        celdas = set()
+        for o in objetos:
+            if o.name not in COSAS_SOLIDAS or o.id not in self.cosas_tope:
+                continue
+            ci, cj = self.celda(o.position_x, o.position_y)
+            for dx in range(-2, 3):
+                for dy in range(-2, 3):
+                    cx, cy = self.centro(ci + dx, cj + dy)
+                    if math.hypot(cx - o.position_x, cy - o.position_y) <= COSA_HOLGURA:
+                        celdas.add((ci + dx, cj + dy))
+        if celdas == self.celdas_cosas:
+            return False
+        self.celdas_cosas = celdas
+        return True
 
     def actualizar_llaves(self, objetos):
         """Una llave que ya no esta en el mundo es una llave que el jugador recogio."""
@@ -477,7 +594,9 @@ class Mapa:
                     continue
                 # bajo un aplastador se puede pasar (en MAP04 el 22 es el pasillo al interruptor 5),
                 # pero cuesta: se rodea si hay por donde. Esperar y huir lo hacen en decidir
-                yield n, costo + (APLASTA_COSTO if self.zona_aplastador[n[1], n[0]] >= 0 else 0)
+                yield n, costo + (APLASTA_COSTO if self.zona_aplastador[n[1], n[0]] >= 0 else 0) \
+                    + (DANIO_COSTO if self.celda_danio[n[1], n[0]] else 0) \
+                    + (POZO_COSTO if self.borde_pozo[n[1], n[0]] else 0)
         if c in self.saltos:
             yield self.saltos[c][0], 3
 
@@ -803,6 +922,8 @@ class Navegador:
         if huir:
             return huir
         if objetos is not None:
+            if m.actualizar_cosas(objetos) and any(c in m.celdas_cosas for c in self.camino):
+                self.camino = []
             nuevas = m.actualizar_llaves(objetos)
             if nuevas:
                 # con llave nueva cambian las rutas posibles: replanear ya
@@ -860,6 +981,9 @@ class Navegador:
             self.ultimo_avance = (self.paso, (x, y))
         elif self.paso - self.ultimo_avance[0] > 18:
             self.evento = ("atorado", aqui, self.meta["id"] if self.meta else None)
+            for o in self.objetos:
+                if o.name in COSAS_SOLIDAS and math.hypot(o.position_x - x, o.position_y - y) < COSA_TOPE:
+                    m.cosas_tope.add(o.id)
             if self.meta:
                 mid = self.meta["id"]
                 self.fallos[mid] = self.fallos.get(mid, 0) + 1
@@ -966,10 +1090,12 @@ class Navegador:
         # elevador en la ruta: llamarlo si esta arriba, esperar encima mientras sube. Para bajar se
         # revisa tambien desde la celda actual: la primera de la ruta ya puede estar del otro lado
         # del borde (MAP04: empujaba el hueco del 69 al 103). Para llamar y esperar no: en MAP02 la
-        # celda redondeada caia sobre el 165 estando al lado y esperaba 80 frames a que subiera
+        # celda redondeada caia sobre el 165 estando al lado y esperaba 80 frames a que subiera.
+        # Llamar si: si la celda de antes del elevador ya se recorto de la ruta, el unico paso al 165
+        # es desde aqui (MAP02 s24: 9000 frames deslizandose junto al 165 sin presionar USE)
         for k, (a, b) in enumerate(zip([aqui] + self.camino[:5], self.camino[:6])):
             bloqueo = m.bloqueo_elevador(a, b)
-            if bloqueo and k == 0 and bloqueo[0] != "bajar":
+            if bloqueo and k == 0 and bloqueo[0] == "esperar":
                 continue
             if bloqueo:
                 que, s = bloqueo
@@ -1100,8 +1226,14 @@ class Navegador:
 
         # seguir la ruta: apuntar a un punto ~3 celdas adelante; si en ese tramo hay un salto de
         # teletransporte, apuntar a cruzar su linea (al aparecer en el destino se replantea solo)
-        k = min(3, len(self.camino) - 1)
+        # junto a un pozo, a la celda siguiente: 3 adelante corta la esquina de la cornisa por encima
+        k = min(1 if m.orilla_pozo(x, y) else 3, len(self.camino) - 1)
         tx, ty = m.centro(*self.camino[k])
+        # si la recta cruza un escalon alto, apuntar mas cerca. MAP01 s3: 2400 frames empujando el
+        # pilar del interruptor de salida, con la ruta rodeandolo y la mira atravesandolo
+        while k > 0 and not m.recta_ok(x, y, tx, ty):
+            k -= 1
+            tx, ty = m.centro(*self.camino[k])
         for a, b in zip(self.camino[:4], self.camino[1:5]):
             if a in m.saltos and m.saltos[a][0] == b:
                 tx, ty = m.saltos[a][1]

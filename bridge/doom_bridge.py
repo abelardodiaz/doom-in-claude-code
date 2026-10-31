@@ -337,6 +337,9 @@ class Cerebro:
                               < PELIGRO_CERCA for o in st.objects))
             if peligro or (self.navegador and self.navegador.tramo_libre(vars_[4], vars_[5])):
                 a[IDX["SPEED"]] = 1
+        elif CORRER == "siempre" and self.navegador and self.navegador.mapa.orilla_pozo(vars_[4], vars_[5]):
+            # con cl_run 1, SPEED invierte: camina. Junto a un pozo de acido la inercia lo tiraba
+            a[IDX["SPEED"]] = 1
         return a, atorado
 
     def _decidir(self, st, vars_, orden):
@@ -822,6 +825,9 @@ def main():
             log("muerte", frame=n, muertes=muertes, mapa=mapa)
             g.set_seed(random.randrange(2 ** 31))  # que la vida nueva no repita la anterior
             g.new_episode()
+            # la semilla sola casi nunca basta; unos tics de espera si cambian el juego
+            g.set_action([0] * len(B))
+            g.advance_action(random.randint(1, 35))
             cerebro = Cerebro(navegacion.Navegador(navegacion.cargar(mapa)))
             previo["kills"] = 0
         # plan de Haiku (lo escribe el mod en el archivo de ordenes); vale con o sin Jev

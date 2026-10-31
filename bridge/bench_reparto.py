@@ -73,6 +73,10 @@ def correr(mapa, semilla, modo, frames, log):
     # el mismo juego (MAP02, mismas acciones: monstruos y dano identicos con 3, 4, 6 y 99)
     g = db.crear_juego(mapa, semilla)
     g.new_episode()
+    # tampoco basta para la primera vida: en MAP04, 10 de 24 semillas terminaban en el frame 3227
+    # exacto (la misma partida). Unos tics quieto al empezar, como en cada vida nueva
+    g.set_action([0] * len(db.B))
+    g.advance_action(random.Random(semilla * 100).randint(1, 35))
     nav = nv.Navegador(nv.cargar(mapa))
     cerebro = db.Cerebro(nav)
     piloto = None
@@ -106,6 +110,11 @@ def correr(mapa, semilla, modo, frames, log):
             # bot moria en el mismo punto (MAP04: 11 de 21 muertes en (-379, 1232))
             g.set_seed(semilla * 100 + muertes)
             g.new_episode()
+            # set_seed sola casi nunca cambia el juego tras init() (1201-1204 y 777777 dieron la misma
+            # partida); esperar unos tics al aparecer si (1, 7 y 13 tics: tres partidas distintas).
+            # MAP04 s12 moria 5 veces igual, una vida cada 2025 frames exactos.
+            g.set_action([0] * len(db.B))  # quieto: advance_action repite la ultima accion
+            g.advance_action(random.Random(semilla * 100 + muertes).randint(1, 35))
             nav = nv.Navegador(nv.cargar(mapa))
             cerebro = db.Cerebro(nav)
             pendiente_haiku = "muerte" if planea else None
