@@ -1,0 +1,855 @@
+{"ev": "foto", "frame": 0, "pos": [640, 640], "salud": 100, "municion": 50, "arma": 2, "modo": "explorar", "cerca": [[384, "DoomImp"], [384, "ShotgunGuy"], [387, "LostSoul"], [387, "LostSoul"], [453, "Zombieman"], [453, "Zombieman"]], "meta": null}
+{"ev": "nav", "frame": 34, "que": ["meta", "arma_640_512", "codigo", "16"]}
+{"ev": "nav", "frame": 42, "que": ["provision_alcanzada", "arma_640_512"]}
+{"ev": "nav", "frame": 43, "que": ["meta", "arma_640_-160", "codigo", "39"]}
+{"ev": "nav", "frame": 53, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 65, "que": ["meta", "municion_324_160", "codigo", "14"]}
+{"ev": "nav", "frame": 80, "que": ["provision_alcanzada", "municion_324_160"]}
+{"ev": "nav", "frame": 81, "que": ["meta", "municion_454_214", "codigo", "9"]}
+{"ev": "nav", "frame": 91, "que": ["provision_alcanzada", "municion_454_214"]}
+{"ev": "nav", "frame": 92, "que": ["meta", "municion_160_328", "codigo", "21"]}
+{"ev": "nav", "frame": 108, "que": ["meta", "arma_640_-160", "codigo", "36"]}
+{"ev": "nav", "frame": 123, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 143, "que": ["provision_alcanzada", "arma_640_-160"]}
+{"ev": "nav", "frame": 144, "que": ["meta", "pisar_0", "codigo", "57"]}
+{"ev": "foto", "frame": 200, "pos": [282, -234], "salud": 84, "municion": 11, "arma": 3, "modo": "atacar", "cerca": [[103, "Demon"], [152, "DoomImp"], [169, "DoomImp"], [239, "DoomImp"], [261, "ExplosiveBarrel"], [291, "ExplosiveBarrel"]], "meta": "pisar_0"}
+{"ev": "nav", "frame": 222, "que": ["holgura_fina"]}
+{"ev": "nav", "frame": 230, "que": ["interruptor", "7"]}
+{"ev": "nav", "frame": 239, "que": ["meta", "pisar_0", "codigo", "30"]}
+{"ev": "nav", "frame": 272, "que": ["pisado", "0"]}
+{"ev": "nav", "frame": 273, "que": ["meta", "municion_736_-528", "codigo", "37"]}
+{"ev": "muerte", "frame": 390, "pos": [472, -560], "salud": 3, "municion": 57, "arma": 2, "modo": "atacar", "cerca": [[53, "Demon"], [57, "DoomImpBall"], [246, "ExplosiveBarrel"], [312, "LostSoul"], [316, "ExplosiveBarrel"], [349, "DoomImp"]]}
+{"ev": "nav", "frame": 397, "que": ["meta", "arma_640_512", "codigo", "17"]}
+{"ev": "foto", "frame": 400, "pos": [374, 576], "salud": 100, "municion": 48, "arma": 2, "modo": "atacar", "cerca": [[55, "ShotgunGuy"], [261, "Zombieman"], [388, "Zombieman"], [431, "LostSoul"], [439, "ChaingunGuy"], [500, "LostSoul"]], "meta": "arma_640_512"}
+{"ev": "combate", "frame": 429, "que": ["curarse"], "salud": 22}
+{"ev": "nav", "frame": 435, "que": ["meta", "salud_96_640", "curarse", "22"]}
+{"ev": "combate", "frame": 439, "que": ["retirada"], "salud": 22}
+{"ev": "combate", "frame": 464, "que": ["retirada"], "salud": 22}
+{"ev": "nav", "frame": 466, "que": ["meta", "salud_1184_640", "codigo", "10"]}
+{"ev": "combate", "frame": 467, "que": ["curarse"], "salud": 22}
+{"ev": "nav", "frame": 471, "que": ["provision_alcanzada", "salud_1184_640"]}
+{"ev": "nav", "frame": 472, "que": ["meta", "arma_640_512", "codigo", "33"]}
+{"ev": "nav", "frame": 536, "que": ["meta", "salud_640_96", "codigo", "32"]}
+{"ev": "combate", "frame": 544, "que": ["voltear", "Demon", "62"], "salud": 26}
+{"ev": "combate", "frame": 544, "que": ["curarse"], "salud": 26}
+{"ev": "combate", "frame": 555, "que": ["curarse"], "salud": 26}
+{"ev": "combate", "frame": 559, "que": ["curarse"], "salud": 26}
+{"ev": "nav", "frame": 577, "que": ["provision_alcanzada", "salud_640_96"]}
+{"ev": "nav", "frame": 578, "que": ["meta", "arma_640_-160", "codigo", "17"]}
+{"ev": "nav", "frame": 589, "que": ["puerta", "15"]}
+{"ev": "foto", "frame": 600, "pos": [603, 7], "salud": 36, "municion": 24, "arma": 2, "modo": "atacar", "cerca": [[133, "ExplosiveBarrel"], [249, "ExplosiveBarrel"], [279, "DoomImp"], [280, "Demon"], [295, "Zombieman"], [329, "DoomImp"]], "meta": "arma_640_-160"}
+{"ev": "combate", "frame": 614, "que": ["retirada"], "salud": 21}
+{"ev": "combate", "frame": 642, "que": ["retirada"], "salud": 21}
+{"ev": "combate", "frame": 660, "que": ["retirada"], "salud": 21}
+{"ev": "combate", "frame": 669, "que": ["retirada"], "salud": 21}
+{"ev": "muerte", "frame": 670, "pos": [688, 1277], "salud": 21, "municion": 6, "arma": 2, "modo": "atacar", "cerca": [[39, "LostSoul"], [87, "ChaingunGuy"], [240, "Zombieman"], [340, "ShotgunGuy"], [383, "Zombieman"], [421, "Zombieman"]]}
+{"ev": "nav", "frame": 677, "que": ["meta", "arma_640_512", "codigo", "17"]}
+{"ev": "nav", "frame": 732, "que": ["meta", "arma_391_556", "codigo", "12"]}
+{"ev": "nav", "frame": 776, "que": ["meta", "salud_640_96", "codigo", "35"]}
+{"ev": "foto", "frame": 800, "pos": [276, 253], "salud": 55, "municion": 26, "arma": 2, "modo": "atacar", "cerca": [[200, "LostSoul"], [206, "DoomImp"], [399, "LostSoul"], [431, "Demon"], [452, "ExplosiveBarrel"], [490, "DoomImp"]], "meta": "salud_640_96"}
+{"ev": "nav", "frame": 839, "que": ["provision_alcanzada", "salud_640_96"]}
+{"ev": "nav", "frame": 840, "que": ["meta", "arma_640_-160", "codigo", "14"]}
+{"ev": "nav", "frame": 842, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 877, "que": ["meta", "arma_640_512", "codigo", "23"]}
+{"ev": "nav", "frame": 893, "que": ["provision_alcanzada", "arma_640_512"]}
+{"ev": "nav", "frame": 894, "que": ["meta", "salud_96_640", "codigo", "33"]}
+{"ev": "nav", "frame": 927, "que": ["provision_alcanzada", "salud_96_640"]}
+{"ev": "nav", "frame": 928, "que": ["meta", "municion_186_593", "codigo", "4"]}
+{"ev": "nav", "frame": 929, "que": ["provision_alcanzada", "municion_186_593"]}
+{"ev": "nav", "frame": 930, "que": ["meta", "municion_160_952", "codigo", "24"]}
+{"ev": "nav", "frame": 950, "que": ["provision_alcanzada", "municion_160_952"]}
+{"ev": "nav", "frame": 951, "que": ["meta", "arma_640_-160", "codigo", "70"]}
+{"ev": "nav", "frame": 971, "que": ["puerta", "15"]}
+{"ev": "foto", "frame": 1000, "pos": [603, 12], "salud": 75, "municion": 14, "arma": 3, "modo": "atacar", "cerca": [[137, "ExplosiveBarrel"], [252, "ExplosiveBarrel"], [266, "Demon"], [282, "DoomImp"], [332, "DoomImp"], [340, "ExplosiveBarrel"]], "meta": "arma_640_-160"}
+{"ev": "nav", "frame": 1023, "que": ["provision_alcanzada", "arma_640_-160"]}
+{"ev": "nav", "frame": 1024, "que": ["meta", "pisar_0", "codigo", "55"]}
+{"ev": "combate", "frame": 1034, "que": ["voltear", "Zombieman", "98"], "salud": 66}
+{"ev": "nav", "frame": 1040, "que": ["meta", "pisar_1", "codigo", "33"]}
+{"ev": "nav", "frame": 1107, "que": ["pisado", "1"]}
+{"ev": "nav", "frame": 1108, "que": ["meta", "pisar_0", "codigo", "69"]}
+{"ev": "nav", "frame": 1172, "que": ["meta", "municion_544_-528", "codigo", "23"]}
+{"ev": "nav", "frame": 1196, "que": ["provision_alcanzada", "municion_544_-528"]}
+{"ev": "nav", "frame": 1197, "que": ["meta", "pisar_0", "codigo", "35"]}
+{"ev": "foto", "frame": 1200, "pos": [555, -589], "salud": 70, "municion": 10, "arma": 3, "modo": "explorar", "cerca": [[249, "DoomImp"], [270, "ExplosiveBarrel"], [273, "ExplosiveBarrel"], [288, "ShotgunGuy"], [443, "ExplosiveBarrel"], [477, "ExplosiveBarrel"]], "meta": "pisar_0"}
+{"ev": "nav", "frame": 1216, "que": ["pisado", "0"]}
+{"ev": "nav", "frame": 1217, "que": ["meta", "frontera", "codigo", "8"]}
+{"ev": "nav", "frame": 1354, "que": ["meta", "municion_684_-56", "codigo", "36"]}
+{"ev": "foto", "frame": 1400, "pos": [740, -534], "salud": 78, "municion": 2, "arma": 3, "modo": "atacar", "cerca": [[134, "ExplosiveBarrel"], [151, "DoomImpBall"], [293, "ExplosiveBarrel"], [335, "ExplosiveBarrel"], [544, "DoomImpBall"], [632, "DoomImp"]], "meta": "municion_684_-56"}
+{"ev": "nav", "frame": 1409, "que": ["meta", "frontera", "codigo", "16"]}
+{"ev": "nav", "frame": 1433, "que": ["meta", "municion_952_156", "codigo", "24"]}
+{"ev": "nav", "frame": 1447, "que": ["provision_alcanzada", "municion_952_156"]}
+{"ev": "nav", "frame": 1448, "que": ["meta", "municion_1120_324", "codigo", "12"]}
+{"ev": "nav", "frame": 1457, "que": ["provision_alcanzada", "municion_1120_324"]}
+{"ev": "nav", "frame": 1458, "que": ["meta", "municion_1120_952", "codigo", "37"]}
+{"ev": "nav", "frame": 1472, "que": ["provision_alcanzada", "municion_1120_952"]}
+{"ev": "nav", "frame": 1473, "que": ["meta", "frontera", "codigo", "8"]}
+{"ev": "foto", "frame": 1600, "pos": [1236, 157], "salud": 88, "municion": 10, "arma": 3, "modo": "explorar", "cerca": [[376, "ShotgunGuy"], [470, "ShotgunGuy"], [503, "HellKnight"], [583, "ShotgunGuy"], [584, "ShotgunGuy"], [586, "ShotgunGuy"]], "meta": "frontera"}
+{"ev": "foto", "frame": 1800, "pos": [194, 211], "salud": 88, "municion": 10, "arma": 3, "modo": "explorar", "cerca": [[474, "ChaingunGuy"], [638, "ExplosiveBarrel"], [697, "ExplosiveBarrel"], [772, "Zombieman"], [827, "ExplosiveBarrel"], [1001, "ExplosiveBarrel"]], "meta": "frontera"}
+{"ev": "nav", "frame": 1846, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 1886, "que": ["holgura_fina"]}
+{"ev": "nav", "frame": 1935, "que": ["interruptor", "7"]}
+{"ev": "nav", "frame": 1944, "que": ["meta", "frontera", "codigo", "119"]}
+{"ev": "nav", "frame": 1972, "que": ["meta", "llave_roja", "codigo", "65"]}
+{"ev": "nav", "frame": 1994, "que": ["llave_recogida", "['roja']"]}
+{"ev": "foto", "frame": 2000, "pos": [972, 7], "salud": 88, "municion": 10, "arma": 3, "modo": "explorar", "cerca": [[298, "ExplosiveBarrel"], [463, "ExplosiveBarrel"], [563, "ExplosiveBarrel"], [660, "ShotgunGuy"], [751, "HellKnight"], [769, "ShotgunGuy"]], "meta": "interruptor_1"}
+{"ev": "nav", "frame": 2034, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 2063, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 2097, "que": ["meta", "municion_832_1504", "codigo", "23"]}
+{"ev": "nav", "frame": 2144, "que": ["provision_alcanzada", "municion_832_1504"]}
+{"ev": "nav", "frame": 2145, "que": ["meta", "frontera", "codigo", "11"]}
+{"ev": "nav", "frame": 2153, "que": ["espera_aplastador", "22"]}
+{"ev": "nav", "frame": 2173, "que": ["meta", "interruptor_1", "codigo", "90"]}
+{"ev": "nav", "frame": 2199, "que": ["aplastador", "22"]}
+{"ev": "foto", "frame": 2200, "pos": [662, 1556], "salud": 64, "municion": 8, "arma": 3, "modo": "atacar", "cerca": [[145, "ShotgunGuy"], [266, "Demon"], [336, "Zombieman"], [428, "ChaingunGuy"], [445, "ShotgunGuy"], [479, "ExplosiveBarrel"]], "meta": "interruptor_1"}
+{"ev": "nav", "frame": 2210, "que": ["meta", "frontera", "codigo", "7"]}
+{"ev": "nav", "frame": 2216, "que": ["meta", "municion_832_1888", "codigo", "25"]}
+{"ev": "nav", "frame": 2236, "que": ["espera_aplastador", "82"]}
+{"ev": "nav", "frame": 2267, "que": ["provision_alcanzada", "municion_832_1888"]}
+{"ev": "nav", "frame": 2268, "que": ["meta", "interruptor_1", "codigo", "61"]}
+{"ev": "nav", "frame": 2308, "que": ["aplastador", "82"]}
+{"ev": "muerte", "frame": 2323, "pos": [725, 1803], "salud": 14, "municion": 8, "arma": 3, "modo": "explorar", "cerca": [[55, "Spectre"], [555, "ExplosiveBarrel"], [581, "Demon"], [728, "ExplosiveBarrel"], [799, "DoomImp"], [1149, "Zombieman"]]}
+{"ev": "nav", "frame": 2331, "que": ["meta", "arma_640_512", "codigo", "17"]}
+{"ev": "nav", "frame": 2395, "que": ["meta", "arma_319_674", "codigo", "12"]}
+{"ev": "foto", "frame": 2400, "pos": [103, 660], "salud": 56, "municion": 32, "arma": 2, "modo": "atacar", "cerca": [[175, "ChaingunGuy"], [227, "Zombieman"], [361, "LostSoul"], [517, "LostSoul"], [551, "Zombieman"], [564, "ExplosiveBarrel"]], "meta": "arma_319_674"}
+{"ev": "combate", "frame": 2540, "que": ["curarse"], "salud": 29}
+{"ev": "nav", "frame": 2540, "que": ["meta", "salud_640_96", "curarse", "38"]}
+{"ev": "combate", "frame": 2555, "que": ["curarse"], "salud": 29}
+{"ev": "combate", "frame": 2573, "que": ["curarse"], "salud": 29}
+{"ev": "nav", "frame": 2577, "que": ["provision_alcanzada", "salud_640_96"]}
+{"ev": "nav", "frame": 2578, "que": ["meta", "municion_952_156", "codigo", "17"]}
+{"ev": "nav", "frame": 2582, "que": ["provision_alcanzada", "municion_952_156"]}
+{"ev": "nav", "frame": 2583, "que": ["meta", "arma_640_512", "codigo", "29"]}
+{"ev": "nav", "frame": 2584, "que": ["meta", "salud_1184_640", "codigo", "32"]}
+{"ev": "nav", "frame": 2599, "que": ["meta", "arma_640_512", "codigo", "24"]}
+{"ev": "foto", "frame": 2600, "pos": [883, 149], "salud": 39, "municion": 10, "arma": 2, "modo": "explorar", "cerca": [[334, "Demon"], [363, "DoomImp"], [365, "ExplosiveBarrel"], [428, "ExplosiveBarrel"], [463, "DoomImp"], [557, "Zombieman"]], "meta": "arma_640_512"}
+{"ev": "nav", "frame": 2616, "que": ["provision_alcanzada", "arma_640_512"]}
+{"ev": "nav", "frame": 2617, "que": ["meta", "arma_640_-160", "codigo", "39"]}
+{"ev": "nav", "frame": 2627, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 2652, "que": ["meta", "municion_324_160", "codigo", "14"]}
+{"ev": "nav", "frame": 2665, "que": ["provision_alcanzada", "municion_324_160"]}
+{"ev": "nav", "frame": 2666, "que": ["meta", "municion_160_328", "codigo", "10"]}
+{"ev": "nav", "frame": 2681, "que": ["provision_alcanzada", "municion_160_328"]}
+{"ev": "nav", "frame": 2682, "que": ["meta", "municion_160_952", "codigo", "42"]}
+{"ev": "nav", "frame": 2683, "que": ["meta", "arma_640_-160", "codigo", "38"]}
+{"ev": "nav", "frame": 2700, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 2737, "que": ["meta", "municion_938_285", "codigo", "16"]}
+{"ev": "nav", "frame": 2747, "que": ["provision_alcanzada", "municion_938_285"]}
+{"ev": "nav", "frame": 2748, "que": ["meta", "municion_1120_324", "codigo", "8"]}
+{"ev": "nav", "frame": 2750, "que": ["provision_alcanzada", "municion_1120_324"]}
+{"ev": "nav", "frame": 2751, "que": ["meta", "salud_1184_640", "codigo", "22"]}
+{"ev": "nav", "frame": 2763, "que": ["meta", "salud_640_1184", "codigo", "37"]}
+{"ev": "nav", "frame": 2786, "que": ["provision_alcanzada", "salud_640_1184"]}
+{"ev": "nav", "frame": 2787, "que": ["meta", "arma_640_-160", "codigo", "87"]}
+{"ev": "foto", "frame": 2800, "pos": [599, 884], "salud": 54, "municion": 9, "arma": 3, "modo": "explorar", "cerca": [[461, "ChaingunGuy"], [616, "Zombieman"], [718, "ChaingunGuy"], [734, "ShotgunGuy"], [750, "Zombieman"], [815, "HellKnight"]], "meta": "arma_640_-160"}
+{"ev": "nav", "frame": 2813, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 2837, "que": ["provision_alcanzada", "arma_640_-160"]}
+{"ev": "nav", "frame": 2838, "que": ["meta", "pisar_0", "codigo", "55"]}
+{"ev": "nav", "frame": 2912, "que": ["pisado", "0"]}
+{"ev": "nav", "frame": 2913, "que": ["meta", "pisar_1", "codigo", "69"]}
+{"ev": "nav", "frame": 2934, "que": ["meta", "municion_387_-600", "codigo", "4"]}
+{"ev": "nav", "frame": 2937, "que": ["provision_alcanzada", "municion_387_-600"]}
+{"ev": "nav", "frame": 2938, "que": ["meta", "municion_544_-528", "codigo", "15"]}
+{"ev": "nav", "frame": 2998, "que": ["provision_alcanzada", "municion_544_-528"]}
+{"ev": "nav", "frame": 2999, "que": ["meta", "municion_684_-591", "codigo", "9"]}
+{"ev": "foto", "frame": 3000, "pos": [536, -547], "salud": 54, "municion": 7, "arma": 3, "modo": "explorar", "cerca": [[227, "ExplosiveBarrel"], [257, "DoomImp"], [262, "ExplosiveBarrel"], [314, "Zombieman"], [349, "DoomImp"], [359, "DoomImp"]], "meta": "municion_684_-591"}
+{"ev": "nav", "frame": 3007, "que": ["provision_alcanzada", "municion_684_-591"]}
+{"ev": "nav", "frame": 3008, "que": ["meta", "municion_736_-528", "codigo", "7"]}
+{"ev": "nav", "frame": 3048, "que": ["atorado", "(171, 35)", "municion_736_-528"]}
+{"ev": "nav", "frame": 3053, "que": ["meta", "pisar_1", "codigo", "29"]}
+{"ev": "nav", "frame": 3080, "que": ["pisado", "1"]}
+{"ev": "nav", "frame": 3081, "que": ["meta", "frontera", "codigo", "8"]}
+{"ev": "nav", "frame": 3098, "que": ["holgura_fina"]}
+{"ev": "nav", "frame": 3156, "que": ["interruptor", "7"]}
+{"ev": "nav", "frame": 3165, "que": ["meta", "frontera", "codigo", "29"]}
+{"ev": "nav", "frame": 3184, "que": ["meta", "llave_roja", "codigo", "90"]}
+{"ev": "foto", "frame": 3200, "pos": [457, -618], "salud": 76, "municion": 5, "arma": 3, "modo": "explorar", "cerca": [[306, "ExplosiveBarrel"], [367, "ExplosiveBarrel"], [367, "Zombieman"], [513, "ExplosiveBarrel"], [515, "Zombieman"], [518, "ExplosiveBarrel"]], "meta": "llave_roja"}
+{"ev": "nav", "frame": 3229, "que": ["llave_recogida", "['roja']"]}
+{"ev": "nav", "frame": 3282, "que": ["meta", "municion_617_-378", "codigo", "20"]}
+{"ev": "nav", "frame": 3313, "que": ["meta", "interruptor_1", "codigo", "241"]}
+{"ev": "nav", "frame": 3377, "que": ["puerta", "15"]}
+{"ev": "foto", "frame": 3400, "pos": [626, 878], "salud": 57, "municion": 4, "arma": 3, "modo": "explorar", "cerca": [[466, "ChaingunGuy"], [611, "Zombieman"], [730, "ShotgunGuy"], [741, "ChaingunGuy"], [759, "Zombieman"], [786, "HellKnight"]], "meta": "interruptor_1"}
+{"ev": "nav", "frame": 3407, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 3414, "que": ["meta", "municion_952_1120", "codigo", "18"]}
+{"ev": "nav", "frame": 3426, "que": ["provision_alcanzada", "municion_952_1120"]}
+{"ev": "nav", "frame": 3427, "que": ["meta", "municion_1120_952", "codigo", "9"]}
+{"ev": "nav", "frame": 3445, "que": ["meta", "municion_828_577", "codigo", "25"]}
+{"ev": "nav", "frame": 3461, "que": ["provision_alcanzada", "municion_828_577"]}
+{"ev": "nav", "frame": 3462, "que": ["meta", "municion_791_172", "codigo", "29"]}
+{"ev": "nav", "frame": 3475, "que": ["provision_alcanzada", "municion_791_172"]}
+{"ev": "nav", "frame": 3476, "que": ["meta", "municion_691_57", "codigo", "6"]}
+{"ev": "nav", "frame": 3480, "que": ["meta", "municion_568_74", "codigo", "5"]}
+{"ev": "nav", "frame": 3485, "que": ["provision_alcanzada", "municion_568_74"]}
+{"ev": "nav", "frame": 3486, "que": ["meta", "municion_619_-180", "codigo", "19"]}
+{"ev": "nav", "frame": 3498, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 3510, "que": ["provision_alcanzada", "municion_619_-180"]}
+{"ev": "nav", "frame": 3511, "que": ["meta", "municion_609_-379", "codigo", "10"]}
+{"ev": "nav", "frame": 3515, "que": ["meta", "municion_618_-378", "codigo", "5"]}
+{"ev": "nav", "frame": 3520, "que": ["provision_alcanzada", "municion_618_-378"]}
+{"ev": "nav", "frame": 3521, "que": ["meta", "interruptor_1", "codigo", "218"]}
+{"ev": "nav", "frame": 3545, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 3577, "que": ["espera_aplastador", "22"]}
+{"ev": "nav", "frame": 3578, "que": ["meta", "municion_619_1317", "codigo", "15"]}
+{"ev": "nav", "frame": 3584, "que": ["provision_alcanzada", "municion_619_1317"]}
+{"ev": "nav", "frame": 3585, "que": ["meta", "municion_328_1120", "codigo", "23"]}
+{"ev": "foto", "frame": 3600, "pos": [426, 1112], "salud": 57, "municion": 6, "arma": 3, "modo": "explorar", "cerca": [[568, "ExplosiveBarrel"], [585, "ExplosiveBarrel"], [650, "ExplosiveBarrel"], [659, "ShotgunGuy"], [680, "DoomImp"], [703, "ChaingunGuy"]], "meta": "municion_328_1120"}
+{"ev": "nav", "frame": 3603, "que": ["provision_alcanzada", "municion_328_1120"]}
+{"ev": "nav", "frame": 3604, "que": ["meta", "municion_160_952", "codigo", "10"]}
+{"ev": "nav", "frame": 3616, "que": ["provision_alcanzada", "municion_160_952"]}
+{"ev": "nav", "frame": 3617, "que": ["meta", "interruptor_1", "codigo", "147"]}
+{"ev": "nav", "frame": 3636, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 3660, "que": ["meta", "salud_480_1696", "codigo", "21"]}
+{"ev": "nav", "frame": 3673, "que": ["provision_alcanzada", "salud_480_1696"]}
+{"ev": "nav", "frame": 3674, "que": ["meta", "frontera", "codigo", "8"]}
+{"ev": "nav", "frame": 3692, "que": ["sin_metas"]}
+{"ev": "nav", "frame": 3697, "que": ["meta", "interruptor_1", "codigo", "84"]}
+{"ev": "nav", "frame": 3719, "que": ["meta", "frontera", "codigo", "19"]}
+{"ev": "nav", "frame": 3732, "que": ["aplastador", "22"]}
+{"ev": "nav", "frame": 3735, "que": ["espera_aplastador", "22"]}
+{"ev": "foto", "frame": 3800, "pos": [924, 1599], "salud": 82, "municion": 6, "arma": 3, "modo": "explorar", "cerca": [[358, "ShotgunGuy"], [460, "ChaingunGuy"], [613, "Spectre"], [734, "ExplosiveBarrel"], [759, "Spectre"], [804, "Demon"]], "meta": "frontera"}
+{"ev": "nav", "frame": 3826, "que": ["meta", "interruptor_1", "codigo", "111"]}
+{"ev": "nav", "frame": 3835, "que": ["meta", "frontera", "codigo", "22"]}
+{"ev": "nav", "frame": 3847, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 3896, "que": ["meta", "interruptor_1", "codigo", "195"]}
+{"ev": "nav", "frame": 3919, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 3950, "que": ["espera_aplastador", "82"]}
+{"ev": "nav", "frame": 3953, "que": ["meta", "frontera", "codigo", "50"]}
+{"ev": "nav", "frame": 3958, "que": ["espera_aplastador", "22"]}
+{"ev": "foto", "frame": 4000, "pos": [750, 1640], "salud": 82, "municion": 6, "arma": 3, "modo": "explorar", "cerca": [[333, "ShotgunGuy"], [353, "ChaingunGuy"], [458, "Spectre"], [558, "ExplosiveBarrel"], [587, "Spectre"], [625, "Demon"]], "meta": "frontera"}
+{"ev": "nav", "frame": 4021, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 4062, "que": ["meta", "interruptor_1", "codigo", "134"]}
+{"ev": "nav", "frame": 4076, "que": ["meta", "frontera", "codigo", "20"]}
+{"ev": "nav", "frame": 4084, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 4104, "que": ["meta", "interruptor_1", "codigo", "129"]}
+{"ev": "nav", "frame": 4114, "que": ["meta", "frontera", "codigo", "17"]}
+{"ev": "nav", "frame": 4177, "que": ["meta", "interruptor_1", "codigo", "168"]}
+{"ev": "foto", "frame": 4200, "pos": [623, 1280], "salud": 82, "municion": 10, "arma": 3, "modo": "explorar", "cerca": [[567, "ExplosiveBarrel"], [630, "ExplosiveBarrel"], [702, "Demon"], [706, "ChaingunGuy"], [714, "ShotgunGuy"], [726, "Spectre"]], "meta": "interruptor_1"}
+{"ev": "nav", "frame": 4201, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 4232, "que": ["meta", "frontera", "codigo", "57"]}
+{"ev": "nav", "frame": 4236, "que": ["espera_aplastador", "22"]}
+{"ev": "nav", "frame": 4300, "que": ["meta", "interruptor_1", "codigo", "116"]}
+{"ev": "nav", "frame": 4309, "que": ["meta", "frontera", "codigo", "37"]}
+{"ev": "nav", "frame": 4321, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 4345, "que": ["meta", "interruptor_1", "codigo", "132"]}
+{"ev": "nav", "frame": 4358, "que": ["meta", "frontera", "codigo", "31"]}
+{"ev": "nav", "frame": 4391, "que": ["meta", "interruptor_1", "codigo", "149"]}
+{"ev": "foto", "frame": 4400, "pos": [777, 1104], "salud": 82, "municion": 10, "arma": 3, "modo": "explorar", "cerca": [[726, "ShotgunGuy"], [758, "HellKnight"], [799, "ExplosiveBarrel"], [847, "ExplosiveBarrel"], [853, "ShotgunGuy"], [860, "ShotgunGuy"]], "meta": "interruptor_1"}
+{"ev": "nav", "frame": 4401, "que": ["meta", "frontera", "codigo", "16"]}
+{"ev": "nav", "frame": 4459, "que": ["meta", "interruptor_1", "codigo", "187"]}
+{"ev": "nav", "frame": 4480, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 4493, "que": ["meta", "frontera", "codigo", "38"]}
+{"ev": "nav", "frame": 4507, "que": ["meta", "interruptor_1", "codigo", "148"]}
+{"ev": "nav", "frame": 4525, "que": ["meta", "frontera", "codigo", "38"]}
+{"ev": "nav", "frame": 4576, "que": ["meta", "interruptor_1", "codigo", "184"]}
+{"ev": "foto", "frame": 4600, "pos": [838, 1099], "salud": 82, "municion": 10, "arma": 3, "modo": "explorar", "cerca": [[669, "ShotgunGuy"], [707, "HellKnight"], [801, "ShotgunGuy"], [848, "ExplosiveBarrel"], [854, "ShotgunGuy"], [869, "ShotgunGuy"]], "meta": "interruptor_1"}
+{"ev": "nav", "frame": 4608, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 4630, "que": ["espera_aplastador", "22"]}
+{"ev": "nav", "frame": 4633, "que": ["meta", "frontera", "codigo", "54"]}
+{"ev": "nav", "frame": 4665, "que": ["meta", "interruptor_1", "codigo", "156"]}
+{"ev": "nav", "frame": 4687, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 4706, "que": ["espera_aplastador", "22"]}
+{"ev": "nav", "frame": 4710, "que": ["espera_aplastador", "22"]}
+{"ev": "nav", "frame": 4734, "que": ["meta", "frontera", "codigo", "75"]}
+{"ev": "nav", "frame": 4740, "que": ["espera_aplastador", "22"]}
+{"ev": "nav", "frame": 4745, "que": ["meta", "interruptor_1", "codigo", "88"]}
+{"ev": "nav", "frame": 4751, "que": ["espera_aplastador", "82"]}
+{"ev": "nav", "frame": 4790, "que": ["meta", "municion_802_1815", "codigo", "7"]}
+{"ev": "nav", "frame": 4792, "que": ["espera_aplastador", "82"]}
+{"ev": "foto", "frame": 4800, "pos": [864, 1817], "salud": 82, "municion": 8, "arma": 3, "modo": "explorar", "cerca": [[254, "ChaingunGuy"], [448, "Spectre"], [629, "Spectre"], [693, "ExplosiveBarrel"], [720, "Demon"], [863, "ExplosiveBarrel"]], "meta": "municion_802_1815"}
+{"ev": "nav", "frame": 4807, "que": ["provision_alcanzada", "municion_802_1815"]}
+{"ev": "nav", "frame": 4808, "que": ["meta", "municion_832_1888", "codigo", "7"]}
+{"ev": "nav", "frame": 4815, "que": ["provision_alcanzada", "municion_832_1888"]}
+{"ev": "nav", "frame": 4816, "que": ["meta", "interruptor_1", "codigo", "63"]}
+{"ev": "nav", "frame": 4888, "que": ["meta", "municion_-280_1528", "codigo", "37"]}
+{"ev": "nav", "frame": 4934, "que": ["elevador", "69", "bajar", "elevador_5"]}
+{"ev": "nav", "frame": 4940, "que": ["interruptor", "5"]}
+{"ev": "nav", "frame": 4949, "que": ["meta", "municion_-232_1645", "codigo", "21"]}
+{"ev": "nav", "frame": 4974, "que": ["meta", "salud_-624_1712", "codigo", "26"]}
+{"ev": "nav", "frame": 4989, "que": ["provision_alcanzada", "salud_-624_1712"]}
+{"ev": "nav", "frame": 4990, "que": ["meta", "interruptor_10", "codigo", "8"]}
+{"ev": "nav", "frame": 4999, "que": ["interruptor", "10"]}
+{"ev": "foto", "frame": 5000, "pos": [-586, 1566], "salud": 62, "municion": 126, "arma": 4, "modo": "explorar", "cerca": [[254, "ExplosiveBarrel"], [267, "Demon"], [332, "LostSoul"], [494, "LostSoul"], [534, "DoomImp"], [574, "ExplosiveBarrel"]], "meta": null}
+{"ev": "nav", "frame": 5008, "que": ["meta", "arma_288_1576", "codigo", "57"]}
+{"ev": "nav", "frame": 5021, "que": ["elevador", "69", "llamar", "elevador_1"]}
+{"ev": "nav", "frame": 5022, "que": ["interruptor", "1"]}
+{"ev": "nav", "frame": 5031, "que": ["meta", "arma_288_1576", "codigo", "24"]}
+{"ev": "nav", "frame": 5044, "que": ["elevador", "73", "llamar"]}
+{"ev": "nav", "frame": 5049, "que": ["elevador", "73", "bajar", "elevador_10"]}
+{"ev": "nav", "frame": 5067, "que": ["interruptor", "10"]}
+{"ev": "nav", "frame": 5076, "que": ["meta", "arma_288_1576", "codigo", "57"]}
+{"ev": "nav", "frame": 5090, "que": ["elevador", "69", "llamar", "elevador_1"]}
+{"ev": "nav", "frame": 5091, "que": ["interruptor", "1"]}
+{"ev": "nav", "frame": 5100, "que": ["meta", "pisar_3", "codigo", "56"]}
+{"ev": "nav", "frame": 5112, "que": ["meta", "salud_-1036_564", "codigo", "74"]}
+{"ev": "nav", "frame": 5125, "que": ["puerta", "104"]}
+{"ev": "nav", "frame": 5139, "que": ["meta", "municion_-84_1368", "codigo", "36"]}
+{"ev": "nav", "frame": 5171, "que": ["meta", "salud_-1036_564", "codigo", "72"]}
+{"ev": "foto", "frame": 5200, "pos": [-91, 1168], "salud": 50, "municion": 119, "arma": 4, "modo": "atacar", "cerca": [[106, "LostSoul"], [141, "ExplosiveBarrel"], [286, "DoomImpBall"], [557, "ExplosiveBarrel"], [561, "ChaingunGuy"], [637, "Zombieman"]], "meta": "salud_-1036_564"}
+{"ev": "nav", "frame": 5272, "que": ["provision_alcanzada", "salud_-1036_564"]}
+{"ev": "nav", "frame": 5273, "que": ["meta", "municion_-820_564", "codigo", "13"]}
+{"ev": "nav", "frame": 5320, "que": ["meta", "pisar_2", "codigo", "52"]}
+{"ev": "nav", "frame": 5347, "que": ["llave_recogida", "['azul']"]}
+{"ev": "nav", "frame": 5397, "que": ["puerta", "9"]}
+{"ev": "foto", "frame": 5400, "pos": [-48, 650], "salud": 83, "municion": 71, "arma": 4, "modo": "explorar", "cerca": [[502, "ExplosiveBarrel"], [547, "Zombieman"], [578, "DoomImp"], [605, "DoomImp"], [721, "LostSoul"], [993, "ExplosiveBarrel"]], "meta": "interruptor_3"}
+{"ev": "nav", "frame": 5426, "que": ["interruptor", "3"]}
+{"ev": "nav", "frame": 5469, "que": ["meta", "interruptor_4", "codigo", "39"]}
+{"ev": "nav", "frame": 5550, "que": ["meta", "municion_1376_544", "codigo", "40"]}
+{"ev": "foto", "frame": 5600, "pos": [1167, 739], "salud": 55, "municion": 53, "arma": 4, "modo": "atacar", "cerca": [[478, "ShotgunGuy"], [536, "ShotgunGuy"], [581, "ShotgunGuy"], [608, "ShotgunGuy"], [643, "ShotgunGuy"], [672, "ShotgunGuy"]], "meta": "municion_1376_544"}
+{"ev": "nav", "frame": 5602, "que": ["meta", "salud_1984_944", "codigo", "56"]}
+{"ev": "nav", "frame": 5609, "que": ["meta", "salud_1984_336", "codigo", "50"]}
+{"ev": "nav", "frame": 5612, "que": ["meta", "municion_1376_544", "codigo", "18"]}
+{"ev": "nav", "frame": 5619, "que": ["meta", "municion_1376_736", "codigo", "14"]}
+{"ev": "nav", "frame": 5628, "que": ["meta", "municion_1376_544", "codigo", "16"]}
+{"ev": "nav", "frame": 5639, "que": ["meta", "municion_1376_736", "codigo", "15"]}
+{"ev": "nav", "frame": 5648, "que": ["meta", "salud_1984_336", "codigo", "50"]}
+{"ev": "nav", "frame": 5661, "que": ["meta", "salud_1984_944", "codigo", "52"]}
+{"ev": "nav", "frame": 5670, "que": ["meta", "salud_1984_336", "codigo", "50"]}
+{"ev": "nav", "frame": 5681, "que": ["meta", "salud_1984_944", "codigo", "52"]}
+{"ev": "nav", "frame": 5692, "que": ["meta", "salud_1984_336", "codigo", "51"]}
+{"ev": "nav", "frame": 5699, "que": ["meta", "salud_1984_944", "codigo", "50"]}
+{"ev": "nav", "frame": 5709, "que": ["meta", "salud_1984_336", "codigo", "50"]}
+{"ev": "nav", "frame": 5716, "que": ["meta", "salud_1984_944", "codigo", "50"]}
+{"ev": "nav", "frame": 5725, "que": ["meta", "salud_1984_336", "codigo", "48"]}
+{"ev": "nav", "frame": 5735, "que": ["espera_aplastador", "62"]}
+{"ev": "nav", "frame": 5779, "que": ["meta", "salud_1984_944", "codigo", "39"]}
+{"ev": "nav", "frame": 5780, "que": ["espera_aplastador", "62"]}
+{"ev": "foto", "frame": 5800, "pos": [1872, 829], "salud": 66, "municion": 11, "arma": 4, "modo": "atacar", "cerca": [[70, "ShotgunGuy"], [305, "Demon"], [320, "Demon"], [370, "Demon"], [379, "Demon"], [403, "Demon"]], "meta": "salud_1984_944"}
+{"ev": "nav", "frame": 5806, "que": ["provision_alcanzada", "salud_1984_944"]}
+{"ev": "nav", "frame": 5807, "que": ["meta", "interruptor_6", "codigo", "23"]}
+{"ev": "combate", "frame": 5815, "que": ["voltear", "Demon", "105"], "salud": 83}
+{"ev": "nav", "frame": 5827, "que": ["interruptor", "6"]}
+{"ev": "combate", "frame": 5850, "que": ["kitear", "2"], "salud": 83}
+{"ev": "combate", "frame": 5851, "que": ["kitear", "3"], "salud": 83}
+{"ev": "combate", "frame": 5852, "que": ["kitear", "4"], "salud": 83}
+{"ev": "combate", "frame": 5853, "que": ["kitear", "5"], "salud": 83}
+{"ev": "combate", "frame": 5854, "que": ["kitear", "5"], "salud": 83}
+{"ev": "combate", "frame": 5855, "que": ["kitear", "5"], "salud": 83}
+{"ev": "combate", "frame": 5856, "que": ["kitear", "5"], "salud": 83}
+{"ev": "combate", "frame": 5857, "que": ["kitear", "5"], "salud": 83}
+{"ev": "combate", "frame": 5858, "que": ["kitear", "2"], "salud": 83}
+{"ev": "combate", "frame": 5859, "que": ["kitear", "5"], "salud": 83}
+{"ev": "combate", "frame": 5860, "que": ["kitear", "4"], "salud": 83}
+{"ev": "combate", "frame": 5861, "que": ["kitear", "3"], "salud": 83}
+{"ev": "combate", "frame": 5862, "que": ["kitear", "2"], "salud": 83}
+{"ev": "combate", "frame": 5870, "que": ["kitear", "2"], "salud": 83}
+{"ev": "combate", "frame": 5871, "que": ["kitear", "3"], "salud": 83}
+{"ev": "combate", "frame": 5872, "que": ["kitear", "4"], "salud": 83}
+{"ev": "combate", "frame": 5873, "que": ["kitear", "5"], "salud": 83}
+{"ev": "combate", "frame": 5874, "que": ["kitear", "5"], "salud": 83}
+{"ev": "combate", "frame": 5875, "que": ["kitear", "6"], "salud": 83}
+{"ev": "combate", "frame": 5876, "que": ["kitear", "6"], "salud": 83}
+{"ev": "combate", "frame": 5877, "que": ["kitear", "6"], "salud": 83}
+{"ev": "combate", "frame": 5878, "que": ["kitear", "8"], "salud": 83}
+{"ev": "combate", "frame": 5879, "que": ["kitear", "7"], "salud": 83}
+{"ev": "combate", "frame": 5880, "que": ["kitear", "6"], "salud": 83}
+{"ev": "combate", "frame": 5881, "que": ["kitear", "6"], "salud": 83}
+{"ev": "combate", "frame": 5882, "que": ["kitear", "5"], "salud": 83}
+{"ev": "combate", "frame": 5883, "que": ["kitear", "5"], "salud": 83}
+{"ev": "combate", "frame": 5884, "que": ["kitear", "5"], "salud": 67}
+{"ev": "combate", "frame": 5885, "que": ["kitear", "5"], "salud": 67}
+{"ev": "combate", "frame": 5886, "que": ["kitear", "5"], "salud": 67}
+{"ev": "combate", "frame": 5887, "que": ["kitear", "7"], "salud": 67}
+{"ev": "combate", "frame": 5888, "que": ["kitear", "7"], "salud": 67}
+{"ev": "combate", "frame": 5889, "que": ["kitear", "6"], "salud": 67}
+{"ev": "combate", "frame": 5890, "que": ["kitear", "6"], "salud": 67}
+{"ev": "combate", "frame": 5891, "que": ["kitear", "6"], "salud": 67}
+{"ev": "combate", "frame": 5892, "que": ["kitear", "6"], "salud": 67}
+{"ev": "combate", "frame": 5893, "que": ["kitear", "6"], "salud": 67}
+{"ev": "combate", "frame": 5894, "que": ["kitear", "4"], "salud": 67}
+{"ev": "combate", "frame": 5895, "que": ["kitear", "3"], "salud": 67}
+{"ev": "combate", "frame": 5896, "que": ["kitear", "4"], "salud": 57}
+{"ev": "combate", "frame": 5897, "que": ["kitear", "4"], "salud": 57}
+{"ev": "combate", "frame": 5898, "que": ["kitear", "4"], "salud": 57}
+{"ev": "combate", "frame": 5899, "que": ["kitear", "5"], "salud": 57}
+{"ev": "combate", "frame": 5900, "que": ["kitear", "6"], "salud": 57}
+{"ev": "combate", "frame": 5901, "que": ["kitear", "5"], "salud": 57}
+{"ev": "combate", "frame": 5902, "que": ["kitear", "5"], "salud": 57}
+{"ev": "combate", "frame": 5903, "que": ["kitear", "5"], "salud": 57}
+{"ev": "combate", "frame": 5904, "que": ["kitear", "3"], "salud": 57}
+{"ev": "combate", "frame": 5905, "que": ["kitear", "3"], "salud": 57}
+{"ev": "combate", "frame": 5906, "que": ["kitear", "4"], "salud": 57}
+{"ev": "combate", "frame": 5907, "que": ["kitear", "4"], "salud": 57}
+{"ev": "combate", "frame": 5908, "que": ["kitear", "5"], "salud": 57}
+{"ev": "combate", "frame": 5909, "que": ["kitear", "6"], "salud": 57}
+{"ev": "combate", "frame": 5910, "que": ["kitear", "5"], "salud": 57}
+{"ev": "combate", "frame": 5911, "que": ["kitear", "4"], "salud": 57}
+{"ev": "combate", "frame": 5912, "que": ["kitear", "3"], "salud": 57}
+{"ev": "combate", "frame": 5913, "que": ["kitear", "3"], "salud": 57}
+{"ev": "combate", "frame": 5914, "que": ["kitear", "3"], "salud": 57}
+{"ev": "combate", "frame": 5915, "que": ["kitear", "3"], "salud": 57}
+{"ev": "combate", "frame": 5916, "que": ["kitear", "5"], "salud": 57}
+{"ev": "combate", "frame": 5917, "que": ["kitear", "7"], "salud": 57}
+{"ev": "combate", "frame": 5918, "que": ["kitear", "6"], "salud": 57}
+{"ev": "combate", "frame": 5919, "que": ["kitear", "6"], "salud": 57}
+{"ev": "combate", "frame": 5920, "que": ["kitear", "5"], "salud": 57}
+{"ev": "combate", "frame": 5921, "que": ["kitear", "5"], "salud": 57}
+{"ev": "combate", "frame": 5922, "que": ["kitear", "6"], "salud": 57}
+{"ev": "combate", "frame": 5923, "que": ["kitear", "5"], "salud": 57}
+{"ev": "combate", "frame": 5924, "que": ["kitear", "5"], "salud": 57}
+{"ev": "combate", "frame": 5925, "que": ["kitear", "5"], "salud": 57}
+{"ev": "combate", "frame": 5926, "que": ["kitear", "5"], "salud": 57}
+{"ev": "combate", "frame": 5927, "que": ["kitear", "6"], "salud": 57}
+{"ev": "combate", "frame": 5928, "que": ["kitear", "7"], "salud": 57}
+{"ev": "combate", "frame": 5929, "que": ["kitear", "5"], "salud": 57}
+{"ev": "combate", "frame": 5930, "que": ["kitear", "5"], "salud": 57}
+{"ev": "combate", "frame": 5931, "que": ["kitear", "3"], "salud": 57}
+{"ev": "combate", "frame": 5932, "que": ["kitear", "3"], "salud": 57}
+{"ev": "combate", "frame": 5933, "que": ["kitear", "4"], "salud": 57}
+{"ev": "combate", "frame": 5934, "que": ["kitear", "6"], "salud": 57}
+{"ev": "combate", "frame": 5935, "que": ["kitear", "5"], "salud": 57}
+{"ev": "combate", "frame": 5936, "que": ["kitear", "5"], "salud": 57}
+{"ev": "combate", "frame": 5937, "que": ["kitear", "5"], "salud": 57}
+{"ev": "combate", "frame": 5938, "que": ["kitear", "5"], "salud": 57}
+{"ev": "combate", "frame": 5939, "que": ["kitear", "4"], "salud": 57}
+{"ev": "combate", "frame": 5940, "que": ["kitear", "3"], "salud": 57}
+{"ev": "combate", "frame": 5941, "que": ["kitear", "3"], "salud": 57}
+{"ev": "combate", "frame": 5942, "que": ["kitear", "3"], "salud": 57}
+{"ev": "combate", "frame": 5943, "que": ["kitear", "4"], "salud": 35}
+{"ev": "combate", "frame": 5944, "que": ["kitear", "5"], "salud": 35}
+{"ev": "combate", "frame": 5945, "que": ["kitear", "4"], "salud": 35}
+{"ev": "combate", "frame": 5946, "que": ["kitear", "5"], "salud": 35}
+{"ev": "combate", "frame": 5947, "que": ["kitear", "3"], "salud": 35}
+{"ev": "combate", "frame": 5948, "que": ["kitear", "4"], "salud": 35}
+{"ev": "combate", "frame": 5949, "que": ["kitear", "4"], "salud": 17}
+{"ev": "combate", "frame": 5950, "que": ["kitear", "4"], "salud": 17}
+{"ev": "combate", "frame": 5951, "que": ["kitear", "6"], "salud": 17}
+{"ev": "combate", "frame": 5952, "que": ["kitear", "6"], "salud": 17}
+{"ev": "combate", "frame": 5953, "que": ["kitear", "5"], "salud": 17}
+{"ev": "combate", "frame": 5954, "que": ["kitear", "5"], "salud": 17}
+{"ev": "combate", "frame": 5955, "que": ["kitear", "7"], "salud": 17}
+{"ev": "combate", "frame": 5956, "que": ["kitear", "5"], "salud": 17}
+{"ev": "combate", "frame": 5957, "que": ["kitear", "5"], "salud": 17}
+{"ev": "combate", "frame": 5958, "que": ["kitear", "6"], "salud": 17}
+{"ev": "combate", "frame": 5959, "que": ["kitear", "5"], "salud": 17}
+{"ev": "combate", "frame": 5960, "que": ["kitear", "5"], "salud": 17}
+{"ev": "combate", "frame": 5961, "que": ["kitear", "6"], "salud": 17}
+{"ev": "combate", "frame": 5962, "que": ["kitear", "7"], "salud": 17}
+{"ev": "combate", "frame": 5963, "que": ["kitear", "6"], "salud": 17}
+{"ev": "combate", "frame": 5964, "que": ["kitear", "5"], "salud": 17}
+{"ev": "combate", "frame": 5965, "que": ["kitear", "6"], "salud": 17}
+{"ev": "combate", "frame": 5966, "que": ["kitear", "5"], "salud": 17}
+{"ev": "combate", "frame": 5967, "que": ["kitear", "6"], "salud": 17}
+{"ev": "combate", "frame": 5968, "que": ["kitear", "5"], "salud": 17}
+{"ev": "combate", "frame": 5969, "que": ["kitear", "3"], "salud": 17}
+{"ev": "combate", "frame": 5970, "que": ["kitear", "3"], "salud": 17}
+{"ev": "combate", "frame": 5971, "que": ["kitear", "4"], "salud": 17}
+{"ev": "combate", "frame": 5972, "que": ["kitear", "4"], "salud": 17}
+{"ev": "combate", "frame": 5973, "que": ["kitear", "5"], "salud": 17}
+{"ev": "combate", "frame": 5974, "que": ["kitear", "3"], "salud": 17}
+{"ev": "combate", "frame": 5975, "que": ["kitear", "3"], "salud": 17}
+{"ev": "combate", "frame": 5976, "que": ["kitear", "3"], "salud": 17}
+{"ev": "combate", "frame": 5977, "que": ["kitear", "3"], "salud": 17}
+{"ev": "combate", "frame": 5979, "que": ["kitear", "2"], "salud": 17}
+{"ev": "combate", "frame": 5996, "que": ["kitear", "2"], "salud": 17}
+{"ev": "combate", "frame": 5998, "que": ["kitear", "3"], "salud": 17}
+{"ev": "combate", "frame": 5999, "que": ["kitear", "3"], "salud": 17}
+{"ev": "foto", "frame": 6000, "pos": [1406, 532], "salud": 17, "municion": 2, "arma": 4, "modo": "kitear", "cerca": [[47, "Demon"], [83, "Demon"], [93, "Demon"], [150, "Demon"], [184, "Demon"], [223, "Demon"]], "meta": null}
+{"ev": "combate", "frame": 6000, "que": ["kitear", "3"], "salud": 17}
+{"ev": "combate", "frame": 6001, "que": ["kitear", "5"], "salud": 17}
+{"ev": "combate", "frame": 6002, "que": ["kitear", "5"], "salud": 17}
+{"ev": "combate", "frame": 6003, "que": ["kitear", "2"], "salud": 17}
+{"ev": "combate", "frame": 6004, "que": ["kitear", "2"], "salud": 17}
+{"ev": "combate", "frame": 6005, "que": ["kitear", "4"], "salud": 17}
+{"ev": "combate", "frame": 6006, "que": ["kitear", "4"], "salud": 17}
+{"ev": "combate", "frame": 6007, "que": ["kitear", "4"], "salud": 17}
+{"ev": "combate", "frame": 6008, "que": ["kitear", "4"], "salud": 17}
+{"ev": "combate", "frame": 6009, "que": ["kitear", "4"], "salud": 1}
+{"ev": "combate", "frame": 6010, "que": ["kitear", "5"], "salud": 1}
+{"ev": "combate", "frame": 6011, "que": ["kitear", "6"], "salud": 1}
+{"ev": "combate", "frame": 6012, "que": ["kitear", "5"], "salud": 1}
+{"ev": "combate", "frame": 6013, "que": ["kitear", "5"], "salud": 1}
+{"ev": "combate", "frame": 6014, "que": ["kitear", "4"], "salud": 1}
+{"ev": "combate", "frame": 6015, "que": ["kitear", "3"], "salud": 1}
+{"ev": "combate", "frame": 6016, "que": ["kitear", "4"], "salud": 1}
+{"ev": "combate", "frame": 6017, "que": ["kitear", "4"], "salud": 1}
+{"ev": "combate", "frame": 6018, "que": ["kitear", "4"], "salud": 1}
+{"ev": "combate", "frame": 6019, "que": ["kitear", "4"], "salud": 1}
+{"ev": "combate", "frame": 6020, "que": ["kitear", "4"], "salud": 1}
+{"ev": "combate", "frame": 6021, "que": ["kitear", "4"], "salud": 1}
+{"ev": "combate", "frame": 6022, "que": ["kitear", "2"], "salud": 1}
+{"ev": "combate", "frame": 6023, "que": ["kitear", "2"], "salud": 1}
+{"ev": "combate", "frame": 6024, "que": ["kitear", "2"], "salud": 1}
+{"ev": "combate", "frame": 6025, "que": ["kitear", "2"], "salud": 1}
+{"ev": "combate", "frame": 6026, "que": ["kitear", "4"], "salud": 1}
+{"ev": "combate", "frame": 6027, "que": ["kitear", "3"], "salud": 1}
+{"ev": "combate", "frame": 6028, "que": ["kitear", "2"], "salud": 1}
+{"ev": "combate", "frame": 6029, "que": ["kitear", "2"], "salud": 1}
+{"ev": "combate", "frame": 6030, "que": ["kitear", "2"], "salud": 1}
+{"ev": "combate", "frame": 6031, "que": ["kitear", "2"], "salud": 1}
+{"ev": "combate", "frame": 6032, "que": ["kitear", "2"], "salud": 1}
+{"ev": "combate", "frame": 6033, "que": ["kitear", "3"], "salud": 1}
+{"ev": "combate", "frame": 6034, "que": ["kitear", "3"], "salud": 1}
+{"ev": "combate", "frame": 6035, "que": ["kitear", "2"], "salud": 1}
+{"ev": "combate", "frame": 6036, "que": ["kitear", "3"], "salud": 1}
+{"ev": "combate", "frame": 6038, "que": ["kitear", "2"], "salud": 1}
+{"ev": "combate", "frame": 6039, "que": ["kitear", "4"], "salud": 1}
+{"ev": "combate", "frame": 6040, "que": ["kitear", "3"], "salud": 1}
+{"ev": "combate", "frame": 6041, "que": ["kitear", "3"], "salud": 1}
+{"ev": "combate", "frame": 6042, "que": ["kitear", "3"], "salud": 1}
+{"ev": "combate", "frame": 6043, "que": ["kitear", "4"], "salud": 1}
+{"ev": "combate", "frame": 6044, "que": ["kitear", "4"], "salud": 1}
+{"ev": "combate", "frame": 6045, "que": ["kitear", "4"], "salud": 1}
+{"ev": "combate", "frame": 6046, "que": ["kitear", "3"], "salud": 1}
+{"ev": "combate", "frame": 6047, "que": ["kitear", "4"], "salud": 1}
+{"ev": "combate", "frame": 6049, "que": ["kitear", "2"], "salud": 1}
+{"ev": "combate", "frame": 6050, "que": ["kitear", "3"], "salud": 1}
+{"ev": "combate", "frame": 6051, "que": ["kitear", "3"], "salud": 1}
+{"ev": "combate", "frame": 6052, "que": ["kitear", "3"], "salud": 1}
+{"ev": "combate", "frame": 6053, "que": ["kitear", "2"], "salud": 1}
+{"ev": "combate", "frame": 6054, "que": ["kitear", "2"], "salud": 1}
+{"ev": "combate", "frame": 6055, "que": ["kitear", "2"], "salud": 1}
+{"ev": "combate", "frame": 6056, "que": ["kitear", "2"], "salud": 1}
+{"ev": "combate", "frame": 6057, "que": ["kitear", "2"], "salud": 1}
+{"ev": "combate", "frame": 6058, "que": ["kitear", "2"], "salud": 1}
+{"ev": "combate", "frame": 6059, "que": ["kitear", "2"], "salud": 1}
+{"ev": "combate", "frame": 6060, "que": ["kitear", "2"], "salud": 1}
+{"ev": "combate", "frame": 6061, "que": ["kitear", "3"], "salud": 1}
+{"ev": "combate", "frame": 6062, "que": ["kitear", "4"], "salud": 1}
+{"ev": "combate", "frame": 6063, "que": ["kitear", "3"], "salud": 1}
+{"ev": "combate", "frame": 6064, "que": ["kitear", "4"], "salud": 1}
+{"ev": "combate", "frame": 6065, "que": ["kitear", "4"], "salud": 1}
+{"ev": "muerte", "frame": 6066, "pos": [1724, 564], "salud": 1, "municion": 0, "arma": 1, "modo": "kitear", "cerca": [[52, "Demon"], [53, "Demon"], [94, "Demon"], [122, "Demon"], [148, "LostSoul"], [169, "Demon"]]}
+{"ev": "nav", "frame": 6074, "que": ["meta", "arma_640_512", "codigo", "19"]}
+{"ev": "nav", "frame": 6165, "que": ["meta", "salud_96_640", "codigo", "21"]}
+{"ev": "nav", "frame": 6185, "que": ["meta", "salud_640_1184", "codigo", "36"]}
+{"ev": "foto", "frame": 6200, "pos": [235, 1149], "salud": 55, "municion": 17, "arma": 2, "modo": "atacar", "cerca": [[430, "ExplosiveBarrel"], [442, "ChaingunGuy"], [460, "ExplosiveBarrel"], [475, "LostSoul"], [501, "ExplosiveBarrel"], [533, "DoomImp"]], "meta": "salud_640_1184"}
+{"ev": "nav", "frame": 6210, "que": ["meta", "salud_96_640", "codigo", "22"]}
+{"ev": "nav", "frame": 6284, "que": ["meta", "arma_640_512", "codigo", "9"]}
+{"ev": "nav", "frame": 6300, "que": ["meta", "salud_1184_640", "codigo", "21"]}
+{"ev": "nav", "frame": 6309, "que": ["meta", "municion_1120_324", "codigo", "16"]}
+{"ev": "nav", "frame": 6332, "que": ["provision_alcanzada", "municion_1120_324"]}
+{"ev": "nav", "frame": 6333, "que": ["meta", "municion_977_332", "codigo", "8"]}
+{"ev": "nav", "frame": 6335, "que": ["meta", "municion_977_329", "codigo", "9"]}
+{"ev": "nav", "frame": 6341, "que": ["provision_alcanzada", "municion_977_329"]}
+{"ev": "nav", "frame": 6342, "que": ["meta", "municion_952_156", "codigo", "13"]}
+{"ev": "nav", "frame": 6351, "que": ["provision_alcanzada", "municion_952_156"]}
+{"ev": "nav", "frame": 6352, "que": ["meta", "salud_640_96", "codigo", "20"]}
+{"ev": "nav", "frame": 6366, "que": ["provision_alcanzada", "salud_640_96"]}
+{"ev": "nav", "frame": 6367, "que": ["meta", "arma_640_-160", "codigo", "17"]}
+{"ev": "nav", "frame": 6379, "que": ["puerta", "15"]}
+{"ev": "foto", "frame": 6400, "pos": [688, -4], "salud": 72, "municion": 7, "arma": 3, "modo": "atacar", "cerca": [[180, "ExplosiveBarrel"], [198, "ExplosiveBarrel"], [257, "Demon"], [262, "DoomImp"], [330, "DoomImp"], [347, "DoomImp"]], "meta": "arma_640_-160"}
+{"ev": "nav", "frame": 6419, "que": ["provision_alcanzada", "arma_640_-160"]}
+{"ev": "nav", "frame": 6433, "que": ["meta", "pisar_1", "codigo", "46"]}
+{"ev": "nav", "frame": 6448, "que": ["meta", "municion_578_-325", "codigo", "5"]}
+{"ev": "nav", "frame": 6450, "que": ["provision_alcanzada", "municion_578_-325"]}
+{"ev": "nav", "frame": 6451, "que": ["meta", "pisar_0", "codigo", "44"]}
+{"ev": "nav", "frame": 6477, "que": ["pisado", "0"]}
+{"ev": "nav", "frame": 6478, "que": ["meta", "pisar_1", "codigo", "74"]}
+{"ev": "nav", "frame": 6511, "que": ["meta", "municion_625_-579", "codigo", "43"]}
+{"ev": "nav", "frame": 6547, "que": ["meta", "municion_774_-640", "codigo", "5"]}
+{"ev": "nav", "frame": 6553, "que": ["provision_alcanzada", "municion_774_-640"]}
+{"ev": "nav", "frame": 6554, "que": ["meta", "pisar_1", "codigo", "29"]}
+{"ev": "foto", "frame": 6600, "pos": [940, -108], "salud": 82, "municion": 5, "arma": 3, "modo": "explorar", "cerca": [[206, "ExplosiveBarrel"], [262, "Zombieman"], [347, "ExplosiveBarrel"], [396, "ExplosiveBarrel"], [434, "Zombieman"], [463, "ExplosiveBarrel"]], "meta": "pisar_1"}
+{"ev": "nav", "frame": 6608, "que": ["pisado", "1"]}
+{"ev": "nav", "frame": 6609, "que": ["meta", "frontera", "codigo", "8"]}
+{"ev": "nav", "frame": 6685, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 6708, "que": ["meta", "municion_664_50", "codigo", "19"]}
+{"ev": "nav", "frame": 6774, "que": ["meta", "frontera", "codigo", "7"]}
+{"ev": "foto", "frame": 6800, "pos": [177, 375], "salud": 72, "municion": 49, "arma": 2, "modo": "atacar", "cerca": [[335, "ChaingunGuy"], [430, "DoomImp"], [610, "ExplosiveBarrel"], [679, "Zombieman"], [705, "Zombieman"], [779, "ExplosiveBarrel"]], "meta": "frontera"}
+{"ev": "nav", "frame": 6811, "que": ["meta", "municion_544_649", "codigo", "24"]}
+{"ev": "nav", "frame": 6824, "que": ["provision_alcanzada", "municion_544_649"]}
+{"ev": "nav", "frame": 6825, "que": ["meta", "municion_624_487", "codigo", "12"]}
+{"ev": "nav", "frame": 6839, "que": ["provision_alcanzada", "municion_624_487"]}
+{"ev": "nav", "frame": 6840, "que": ["meta", "municion_735_262", "codigo", "16"]}
+{"ev": "nav", "frame": 6854, "que": ["meta", "frontera", "codigo", "8"]}
+{"ev": "nav", "frame": 6863, "que": ["meta", "municion_793_129", "codigo", "8"]}
+{"ev": "nav", "frame": 6868, "que": ["provision_alcanzada", "municion_793_129"]}
+{"ev": "nav", "frame": 6869, "que": ["provision_alcanzada", "municion_705_100"]}
+{"ev": "nav", "frame": 6870, "que": ["meta", "municion_735_262", "codigo", "13"]}
+{"ev": "nav", "frame": 6880, "que": ["provision_alcanzada", "municion_735_262"]}
+{"ev": "nav", "frame": 6881, "que": ["meta", "municion_1120_952", "codigo", "40"]}
+{"ev": "nav", "frame": 6903, "que": ["provision_alcanzada", "municion_1120_952"]}
+{"ev": "nav", "frame": 6904, "que": ["meta", "frontera", "codigo", "8"]}
+{"ev": "foto", "frame": 7000, "pos": [769, 804], "salud": 72, "municion": 12, "arma": 3, "modo": "explorar", "cerca": [[557, "ChaingunGuy"], [629, "HellKnight"], [643, "Zombieman"], [671, "ShotgunGuy"], [749, "ShotgunGuy"], [770, "ShotgunGuy"]], "meta": "frontera"}
+{"ev": "foto", "frame": 7200, "pos": [1258, 177], "salud": 82, "municion": 12, "arma": 3, "modo": "explorar", "cerca": [[347, "ShotgunGuy"], [440, "ShotgunGuy"], [478, "HellKnight"], [555, "ShotgunGuy"], [561, "ShotgunGuy"], [563, "ShotgunGuy"]], "meta": "frontera"}
+{"ev": "nav", "frame": 7302, "que": ["holgura_fina"]}
+{"ev": "nav", "frame": 7337, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 7386, "que": ["interruptor", "7"]}
+{"ev": "nav", "frame": 7395, "que": ["sin_metas"]}
+{"ev": "foto", "frame": 7400, "pos": [319, 63], "salud": 82, "municion": 16, "arma": 3, "modo": "explorar", "cerca": [[284, "ExplosiveBarrel"], [436, "ExplosiveBarrel"], [502, "ExplosiveBarrel"], [633, "ExplosiveBarrel"], [657, "ExplosiveBarrel"], [667, "ChaingunGuy"]], "meta": "frontera"}
+{"ev": "nav", "frame": 7412, "que": ["meta", "llave_roja", "codigo", "95"]}
+{"ev": "nav", "frame": 7453, "que": ["llave_recogida", "['roja']"]}
+{"ev": "nav", "frame": 7495, "que": ["atorado", "(173, 35)", "interruptor_1"]}
+{"ev": "nav", "frame": 7500, "que": ["meta", "interruptor_1", "codigo", "247"]}
+{"ev": "nav", "frame": 7521, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 7550, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 7572, "que": ["meta", "arma_655_1390", "codigo", "10"]}
+{"ev": "nav", "frame": 7577, "que": ["provision_alcanzada", "arma_655_1390"]}
+{"ev": "nav", "frame": 7578, "que": ["meta", "interruptor_1", "codigo", "115"]}
+{"ev": "foto", "frame": 7600, "pos": [667, 1276], "salud": 79, "municion": 10, "arma": 3, "modo": "explorar", "cerca": [[119, "ShotgunGuy"], [377, "Zombieman"], [499, "ShotgunGuy"], [529, "Demon"], [582, "Zombieman"], [603, "ExplosiveBarrel"]], "meta": "interruptor_1"}
+{"ev": "nav", "frame": 7609, "que": ["meta", "municion_821_1388", "codigo", "14"]}
+{"ev": "nav", "frame": 7621, "que": ["meta", "interruptor_1", "codigo", "105"]}
+{"ev": "nav", "frame": 7632, "que": ["aplastador", "22"]}
+{"ev": "combate", "frame": 7642, "que": ["curarse"], "salud": 29}
+{"ev": "muerte", "frame": 7648, "pos": [738, 1602], "salud": 4, "municion": 14, "arma": 3, "modo": "curarse", "cerca": [[195, "Demon"], [250, "ShotgunGuy"], [255, "Zombieman"], [372, "ShotgunGuy"], [388, "ChaingunGuy"], [479, "Spectre"]]}
+{"ev": "nav", "frame": 7655, "que": ["meta", "arma_640_512", "codigo", "17"]}
+{"ev": "nav", "frame": 7699, "que": ["meta", "arma_433_575", "codigo", "10"]}
+{"ev": "foto", "frame": 7800, "pos": [551, 859], "salud": 83, "municion": 29, "arma": 2, "modo": "explorar", "cerca": [[439, "LostSoul"], [459, "LostSoul"], [492, "ChaingunGuy"], [660, "Zombieman"], [664, "ChaingunGuy"], [677, "Zombieman"]], "meta": "arma_433_575"}
+{"ev": "nav", "frame": 7856, "que": ["meta", "arma_640_-160", "codigo", "41"]}
+{"ev": "nav", "frame": 7865, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 7913, "que": ["provision_alcanzada", "arma_640_-160"]}
+{"ev": "nav", "frame": 7914, "que": ["meta", "pisar_0", "codigo", "55"]}
+{"ev": "nav", "frame": 7990, "que": ["holgura_fina"]}
+{"ev": "foto", "frame": 8000, "pos": [403, -34], "salud": 70, "municion": 15, "arma": 3, "modo": "explorar", "cerca": [[161, "ExplosiveBarrel"], [176, "DoomImp"], [199, "LostSoul"], [221, "Zombieman"], [312, "ExplosiveBarrel"], [357, "LostSoul"]], "meta": "interruptor_7"}
+{"ev": "nav", "frame": 8018, "que": ["interruptor", "7"]}
+{"ev": "nav", "frame": 8027, "que": ["meta", "pisar_0", "codigo", "30"]}
+{"ev": "nav", "frame": 8043, "que": ["meta", "llave_roja", "codigo", "107"]}
+{"ev": "combate", "frame": 8055, "que": ["voltear", "Zombieman", "12"], "salud": 65}
+{"ev": "nav", "frame": 8074, "que": ["meta", "municion_615_-651", "codigo", "21"]}
+{"ev": "nav", "frame": 8087, "que": ["provision_alcanzada", "municion_615_-651"]}
+{"ev": "nav", "frame": 8088, "que": ["meta", "municion_657_-573", "codigo", "5"]}
+{"ev": "nav", "frame": 8097, "que": ["provision_alcanzada", "municion_657_-573"]}
+{"ev": "nav", "frame": 8098, "que": ["meta", "municion_736_-528", "codigo", "7"]}
+{"ev": "nav", "frame": 8113, "que": ["provision_alcanzada", "municion_736_-528"]}
+{"ev": "nav", "frame": 8114, "que": ["meta", "salud_1184_640", "codigo", "74"]}
+{"ev": "nav", "frame": 8116, "que": ["meta", "llave_roja", "codigo", "46"]}
+{"ev": "nav", "frame": 8153, "que": ["meta", "municion_633_-260", "codigo", "37"]}
+{"ev": "combate", "frame": 8155, "que": ["voltear", "Zombieman", "46"], "salud": 58}
+{"ev": "nav", "frame": 8179, "que": ["meta", "municion_562_-278", "codigo", "19"]}
+{"ev": "foto", "frame": 8200, "pos": [608, -516], "salud": 58, "municion": 1, "arma": 3, "modo": "atacar", "cerca": [[91, "ExplosiveBarrel"], [151, "ExplosiveBarrel"], [185, "ExplosiveBarrel"], [212, "ExplosiveBarrel"], [355, "ExplosiveBarrel"], [549, "Zombieman"]], "meta": "municion_562_-278"}
+{"ev": "nav", "frame": 8242, "que": ["meta", "salud_1184_640", "codigo", "77"]}
+{"ev": "nav", "frame": 8253, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 8293, "que": ["provision_alcanzada", "salud_1184_640"]}
+{"ev": "nav", "frame": 8294, "que": ["meta", "municion_1120_952", "codigo", "17"]}
+{"ev": "nav", "frame": 8303, "que": ["provision_alcanzada", "municion_1120_952"]}
+{"ev": "nav", "frame": 8304, "que": ["meta", "salud_640_1184", "codigo", "27"]}
+{"ev": "nav", "frame": 8320, "que": ["meta", "llave_roja", "codigo", "158"]}
+{"ev": "nav", "frame": 8344, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 8388, "que": ["llave_recogida", "['roja']"]}
+{"ev": "foto", "frame": 8400, "pos": [899, -651], "salud": 92, "municion": 12, "arma": 3, "modo": "explorar", "cerca": [[173, "ExplosiveBarrel"], [291, "ExplosiveBarrel"], [382, "ExplosiveBarrel"], [482, "ExplosiveBarrel"], [497, "ExplosiveBarrel"], [1183, "ShotgunGuy"]], "meta": "interruptor_1"}
+{"ev": "nav", "frame": 8423, "que": ["atorado", "(173, 35)", "interruptor_1"]}
+{"ev": "nav", "frame": 8428, "que": ["meta", "interruptor_1", "codigo", "247"]}
+{"ev": "nav", "frame": 8451, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 8480, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 8490, "que": ["meta", "arma_656_1373", "codigo", "9"]}
+{"ev": "nav", "frame": 8514, "que": ["meta", "interruptor_1", "codigo", "121"]}
+{"ev": "nav", "frame": 8524, "que": ["meta", "municion_832_1504", "codigo", "20"]}
+{"ev": "nav", "frame": 8558, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 8578, "que": ["provision_alcanzada", "municion_832_1504"]}
+{"ev": "nav", "frame": 8579, "que": ["espera_aplastador", "22"]}
+{"ev": "nav", "frame": 8584, "que": ["espera_aplastador", "22"]}
+{"ev": "foto", "frame": 8600, "pos": [802, 1545], "salud": 87, "municion": 8, "arma": 3, "modo": "explorar", "cerca": [[248, "Demon"], [286, "Zombieman"], [336, "ShotgunGuy"], [412, "ShotgunGuy"], [458, "ChaingunGuy"], [564, "Spectre"]], "meta": "interruptor_1"}
+{"ev": "nav", "frame": 8627, "que": ["meta", "municion_541_1628", "codigo", "4"]}
+{"ev": "nav", "frame": 8629, "que": ["provision_alcanzada", "municion_541_1628"]}
+{"ev": "nav", "frame": 8633, "que": ["meta", "pisar_0", "codigo", "182"]}
+{"ev": "nav", "frame": 8634, "que": ["espera_aplastador", "22"]}
+{"ev": "nav", "frame": 8689, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 8718, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 8737, "que": ["meta", "interruptor_1", "codigo", "236"]}
+{"ev": "nav", "frame": 8770, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 8793, "que": ["meta", "pisar_0", "codigo", "171"]}
+{"ev": "foto", "frame": 8800, "pos": [808, 1552], "salud": 87, "municion": 14, "arma": 3, "modo": "explorar", "cerca": [[213, "Zombieman"], [228, "Demon"], [404, "ShotgunGuy"], [453, "ChaingunGuy"], [563, "Spectre"], [624, "ExplosiveBarrel"]], "meta": "pisar_0"}
+{"ev": "nav", "frame": 8836, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 8856, "que": ["meta", "interruptor_1", "codigo", "235"]}
+{"ev": "nav", "frame": 8892, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 8915, "que": ["meta", "pisar_0", "codigo", "171"]}
+{"ev": "nav", "frame": 8958, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 8977, "que": ["meta", "interruptor_1", "codigo", "236"]}
+{"ev": "foto", "frame": 9000, "pos": [599, 463], "salud": 87, "municion": 14, "arma": 3, "modo": "explorar", "cerca": [[673, "ExplosiveBarrel"], [679, "ChaingunGuy"], [787, "ExplosiveBarrel"], [797, "HellKnight"], [841, "ShotgunGuy"], [877, "ExplosiveBarrel"]], "meta": "interruptor_1"}
+{"ev": "nav", "frame": 9013, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 9036, "que": ["meta", "pisar_0", "codigo", "171"]}
+{"ev": "nav", "frame": 9074, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 9093, "que": ["meta", "pisar_1", "codigo", "35"]}
+{"ev": "nav", "frame": 9112, "que": ["pisado", "1"]}
+{"ev": "nav", "frame": 9113, "que": ["meta", "pisar_0", "codigo", "75"]}
+{"ev": "nav", "frame": 9144, "que": ["meta", "interruptor_1", "codigo", "246"]}
+{"ev": "nav", "frame": 9155, "que": ["meta", "pisar_0", "codigo", "36"]}
+{"ev": "nav", "frame": 9177, "que": ["pisado", "0"]}
+{"ev": "nav", "frame": 9178, "que": ["meta", "interruptor_1", "codigo", "264"]}
+{"ev": "foto", "frame": 9200, "pos": [449, -639], "salud": 87, "municion": 14, "arma": 3, "modo": "explorar", "cerca": [[112, "ExplosiveBarrel"], [313, "ExplosiveBarrel"], [329, "ExplosiveBarrel"], [386, "ExplosiveBarrel"], [540, "ExplosiveBarrel"], [1348, "ChaingunGuy"]], "meta": "interruptor_1"}
+{"ev": "nav", "frame": 9200, "que": ["meta", "frontera", "codigo", "19"]}
+{"ev": "nav", "frame": 9255, "que": ["meta", "interruptor_1", "codigo", "266"]}
+{"ev": "nav", "frame": 9262, "que": ["meta", "frontera", "codigo", "75"]}
+{"ev": "nav", "frame": 9302, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 9347, "que": ["meta", "interruptor_1", "codigo", "185"]}
+{"ev": "nav", "frame": 9376, "que": ["meta", "frontera", "codigo", "21"]}
+{"ev": "foto", "frame": 9400, "pos": [280, 819], "salud": 93, "municion": 14, "arma": 3, "modo": "explorar", "cerca": [[404, "ChaingunGuy"], [587, "ExplosiveBarrel"], [750, "Zombieman"], [754, "ExplosiveBarrel"], [834, "ExplosiveBarrel"], [847, "DoomImp"]], "meta": "frontera"}
+{"ev": "nav", "frame": 9417, "que": ["meta", "interruptor_1", "codigo", "168"]}
+{"ev": "nav", "frame": 9432, "que": ["meta", "frontera", "codigo", "12"]}
+{"ev": "nav", "frame": 9464, "que": ["meta", "interruptor_1", "codigo", "133"]}
+{"ev": "nav", "frame": 9475, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 9496, "que": ["espera_aplastador", "22"]}
+{"ev": "nav", "frame": 9497, "que": ["meta", "frontera", "codigo", "47"]}
+{"ev": "nav", "frame": 9538, "que": ["meta", "interruptor_1", "codigo", "153"]}
+{"ev": "nav", "frame": 9557, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 9570, "que": ["meta", "frontera", "codigo", "39"]}
+{"ev": "nav", "frame": 9579, "que": ["meta", "interruptor_1", "codigo", "123"]}
+{"ev": "nav", "frame": 9590, "que": ["meta", "frontera", "codigo", "39"]}
+{"ev": "foto", "frame": 9600, "pos": [785, 1187], "salud": 93, "municion": 14, "arma": 3, "modo": "explorar", "cerca": [[584, "Zombieman"], [637, "Demon"], [751, "ExplosiveBarrel"], [757, "ShotgunGuy"], [769, "ShotgunGuy"], [805, "ChaingunGuy"]], "meta": "frontera"}
+{"ev": "nav", "frame": 9700, "que": ["meta", "interruptor_1", "codigo", "164"]}
+{"ev": "nav", "frame": 9727, "que": ["puerta", "29"]}
+{"ev": "nav", "frame": 9753, "que": ["espera_aplastador", "22"]}
+{"ev": "nav", "frame": 9756, "que": ["aplastador", "22"]}
+{"ev": "nav", "frame": 9757, "que": ["meta", "frontera", "codigo", "21"]}
+{"ev": "foto", "frame": 9800, "pos": [495, 1730], "salud": 100, "municion": 12, "arma": 3, "modo": "atacar", "cerca": [[258, "Spectre"], [299, "Demon"], [309, "ChaingunGuy"], [314, "ExplosiveBarrel"], [327, "Spectre"], [357, "Demon"]], "meta": "frontera"}
+{"ev": "nav", "frame": 9816, "que": ["espera_aplastador", "22"]}
+{"ev": "nav", "frame": 9820, "que": ["meta", "interruptor_1", "codigo", "87"]}
+{"ev": "nav", "frame": 9825, "que": ["espera_aplastador", "82"]}
+{"ev": "nav", "frame": 9829, "que": ["espera_aplastador", "82"]}
+{"ev": "combate", "frame": 9894, "que": ["kitear", "2"], "salud": 100}
+{"ev": "combate", "frame": 9895, "que": ["kitear", "2"], "salud": 100}
+{"ev": "nav", "frame": 9938, "que": ["meta", "municion_-280_1528", "codigo", "28"]}
+{"ev": "nav", "frame": 9975, "que": ["elevador", "69", "bajar", "elevador_5"]}
+{"ev": "nav", "frame": 9984, "que": ["meta", "interruptor_5", "codigo", "5"]}
+{"ev": "nav", "frame": 9987, "que": ["interruptor", "5"]}
+{"ev": "nav", "frame": 9996, "que": ["meta", "interruptor_1", "codigo", "12"]}
+{"ev": "foto", "frame": 10000, "pos": [121, 1488], "salud": 100, "municion": 124, "arma": 4, "modo": "explorar", "cerca": [[104, "ExplosiveBarrel"], [172, "DoomImp"], [175, "ExplosiveBarrel"], [278, "DoomImp"], [460, "ShotgunGuy"], [505, "ExplosiveBarrel"]], "meta": "interruptor_1"}
+{"ev": "nav", "frame": 10002, "que": ["elevador", "69", "bajar", "elevador_5"]}
+{"ev": "nav", "frame": 10005, "que": ["elevador", "69", "bajar", "elevador_5"]}
+{"ev": "nav", "frame": 10009, "que": ["interruptor", "5"]}
+{"ev": "nav", "frame": 10018, "que": ["meta", "interruptor_1", "codigo", "12"]}
+{"ev": "nav", "frame": 10064, "que": ["meta", "municion_-280_1528", "codigo", "26"]}
+{"ev": "nav", "frame": 10076, "que": ["meta", "municion_-361_1534", "codigo", "6"]}
+{"ev": "nav", "frame": 10080, "que": ["provision_alcanzada", "municion_-361_1534"]}
+{"ev": "nav", "frame": 10081, "que": ["meta", "municion_-280_1528", "codigo", "7"]}
+{"ev": "nav", "frame": 10087, "que": ["provision_alcanzada", "municion_-280_1528"]}
+{"ev": "nav", "frame": 10088, "que": ["meta", "municion_-476_1596", "codigo", "14"]}
+{"ev": "nav", "frame": 10098, "que": ["provision_alcanzada", "municion_-476_1596"]}
+{"ev": "nav", "frame": 10099, "que": ["meta", "municion_-84_1368", "codigo", "33"]}
+{"ev": "nav", "frame": 10121, "que": ["puerta", "104"]}
+{"ev": "nav", "frame": 10192, "que": ["meta", "interruptor_10", "codigo", "31"]}
+{"ev": "foto", "frame": 10200, "pos": [-462, 1413], "salud": 98, "municion": 97, "arma": 4, "modo": "explorar", "cerca": [[377, "ExplosiveBarrel"], [505, "ExplosiveBarrel"], [693, "ExplosiveBarrel"], [695, "ExplosiveBarrel"], [773, "Zombieman"], [825, "DoomImp"]], "meta": "interruptor_10"}
+{"ev": "nav", "frame": 10229, "que": ["atorado", "(101, 160)", "interruptor_10"]}
+{"ev": "nav", "frame": 10234, "que": ["meta", "interruptor_10", "codigo", "29"]}
+{"ev": "nav", "frame": 10235, "que": ["puerta", "104"]}
+{"ev": "nav", "frame": 10249, "que": ["interruptor", "10"]}
+{"ev": "nav", "frame": 10258, "que": ["meta", "arma_288_1576", "codigo", "57"]}
+{"ev": "nav", "frame": 10272, "que": ["elevador", "69", "llamar", "elevador_1"]}
+{"ev": "nav", "frame": 10275, "que": ["interruptor", "1"]}
+{"ev": "nav", "frame": 10284, "que": ["meta", "pisar_3", "codigo", "56"]}
+{"ev": "nav", "frame": 10330, "que": ["puerta", "104"]}
+{"ev": "nav", "frame": 10354, "que": ["llave_recogida", "['azul']"]}
+{"ev": "nav", "frame": 10386, "que": ["atorado", "(77, 137)", "interruptor_3"]}
+{"ev": "nav", "frame": 10391, "que": ["meta", "interruptor_3", "codigo", "174"]}
+{"ev": "foto", "frame": 10400, "pos": [-938, 1137], "salud": 98, "municion": 97, "arma": 4, "modo": "atacar", "cerca": [[101, "DoomImpBall"], [144, "ExplosiveBarrel"], [244, "DoomImp"], [374, "ShotgunGuy"], [389, "DoomImp"], [419, "LostSoul"]], "meta": "interruptor_3"}
+{"ev": "nav", "frame": 10507, "que": ["puerta", "9"]}
+{"ev": "nav", "frame": 10536, "que": ["interruptor", "3"]}
+{"ev": "foto", "frame": 10600, "pos": [838, 591], "salud": 59, "municion": 114, "arma": 4, "modo": "atacar", "cerca": [[247, "HellKnight"], [758, "ShotgunGuy"], [788, "ExplosiveBarrel"], [823, "ShotgunGuy"], [861, "ShotgunGuy"], [908, "ShotgunGuy"]], "meta": null}
+{"ev": "nav", "frame": 10664, "que": ["meta", "interruptor_4", "codigo", "52"]}
+{"ev": "nav", "frame": 10682, "que": ["meta", "salud_1984_944", "codigo", "53"]}
+{"ev": "nav", "frame": 10696, "que": ["meta", "salud_1984_336", "codigo", "56"]}
+{"ev": "nav", "frame": 10703, "que": ["meta", "salud_1984_944", "codigo", "50"]}
+{"ev": "nav", "frame": 10713, "que": ["meta", "salud_1984_336", "codigo", "50"]}
+{"ev": "nav", "frame": 10723, "que": ["meta", "salud_1984_944", "codigo", "49"]}
+{"ev": "nav", "frame": 10730, "que": ["meta", "salud_1984_336", "codigo", "49"]}
+{"ev": "nav", "frame": 10739, "que": ["meta", "salud_1984_944", "codigo", "49"]}
+{"ev": "nav", "frame": 10753, "que": ["espera_aplastador", "62"]}
+{"ev": "nav", "frame": 10769, "que": ["meta", "municion_1376_736", "codigo", "9"]}
+{"ev": "foto", "frame": 10800, "pos": [1291, 636], "salud": 37, "municion": 2, "arma": 3, "modo": "atacar", "cerca": [[293, "ShotgunGuy"], [594, "ShotgunGuy"], [617, "ShotgunGuy"], [644, "ShotgunGuy"], [683, "ShotgunGuy"], [714, "ShotgunGuy"]], "meta": "municion_1376_736"}
+{"ev": "combate", "frame": 10817, "que": ["voltear", "ShotgunGuy", "7"], "salud": 26}
+{"ev": "combate", "frame": 10817, "que": ["curarse"], "salud": 26}
+{"ev": "combate", "frame": 10827, "que": ["curarse"], "salud": 26}
+{"ev": "nav", "frame": 10827, "que": ["espera_aplastador", "62"]}
+{"ev": "combate", "frame": 10846, "que": ["retirada"], "salud": 26}
+{"ev": "combate", "frame": 10849, "que": ["curarse"], "salud": 26}
+{"ev": "nav", "frame": 10857, "que": ["provision_alcanzada", "salud_1984_336"]}
+{"ev": "nav", "frame": 10858, "que": ["meta", "salud_1984_944", "codigo", "43"]}
+{"ev": "combate", "frame": 10860, "que": ["voltear", "ShotgunGuy", "164"], "salud": 40}
+{"ev": "nav", "frame": 10929, "que": ["meta", "interruptor_6", "codigo", "8"]}
+{"ev": "nav", "frame": 10934, "que": ["interruptor", "6"]}
+{"ev": "nav", "frame": 10943, "que": ["meta", "salud_1984_1288", "codigo", "41"]}
+{"ev": "combate", "frame": 10950, "que": ["kitear", "3"], "salud": 46}
+{"ev": "combate", "frame": 10951, "que": ["kitear", "3"], "salud": 46}
+{"ev": "combate", "frame": 10952, "que": ["kitear", "2"], "salud": 46}
+{"ev": "combate", "frame": 10957, "que": ["kitear", "2"], "salud": 46}
+{"ev": "combate", "frame": 10958, "que": ["kitear", "2"], "salud": 46}
+{"ev": "combate", "frame": 10959, "que": ["kitear", "3"], "salud": 46}
+{"ev": "combate", "frame": 10960, "que": ["kitear", "3"], "salud": 46}
+{"ev": "combate", "frame": 10961, "que": ["kitear", "3"], "salud": 46}
+{"ev": "combate", "frame": 10962, "que": ["kitear", "3"], "salud": 46}
+{"ev": "combate", "frame": 10963, "que": ["kitear", "2"], "salud": 46}
+{"ev": "combate", "frame": 10969, "que": ["kitear", "2"], "salud": 46}
+{"ev": "combate", "frame": 10970, "que": ["kitear", "3"], "salud": 46}
+{"ev": "combate", "frame": 10971, "que": ["kitear", "3"], "salud": 46}
+{"ev": "combate", "frame": 10972, "que": ["kitear", "3"], "salud": 46}
+{"ev": "combate", "frame": 10973, "que": ["kitear", "2"], "salud": 46}
+{"ev": "combate", "frame": 10974, "que": ["kitear", "2"], "salud": 46}
+{"ev": "combate", "frame": 10975, "que": ["kitear", "3"], "salud": 46}
+{"ev": "combate", "frame": 10976, "que": ["kitear", "3"], "salud": 46}
+{"ev": "combate", "frame": 10977, "que": ["kitear", "3"], "salud": 46}
+{"ev": "combate", "frame": 10978, "que": ["kitear", "2"], "salud": 46}
+{"ev": "combate", "frame": 10979, "que": ["kitear", "2"], "salud": 46}
+{"ev": "combate", "frame": 10980, "que": ["kitear", "2"], "salud": 36}
+{"ev": "combate", "frame": 10981, "que": ["kitear", "3"], "salud": 36}
+{"ev": "combate", "frame": 10982, "que": ["kitear", "3"], "salud": 36}
+{"ev": "combate", "frame": 10983, "que": ["kitear", "3"], "salud": 36}
+{"ev": "combate", "frame": 10984, "que": ["kitear", "3"], "salud": 36}
+{"ev": "combate", "frame": 10985, "que": ["kitear", "3"], "salud": 36}
+{"ev": "combate", "frame": 10986, "que": ["kitear", "3"], "salud": 36}
+{"ev": "combate", "frame": 10987, "que": ["kitear", "3"], "salud": 36}
+{"ev": "combate", "frame": 10988, "que": ["kitear", "3"], "salud": 36}
+{"ev": "combate", "frame": 10989, "que": ["kitear", "2"], "salud": 36}
+{"ev": "combate", "frame": 10990, "que": ["kitear", "2"], "salud": 36}
+{"ev": "combate", "frame": 10991, "que": ["retirada"], "salud": 10}
+{"ev": "combate", "frame": 10995, "que": ["kitear", "2"], "salud": 4}
+{"ev": "combate", "frame": 10996, "que": ["retirada"], "salud": 4}
+{"ev": "combate", "frame": 10999, "que": ["kitear", "2"], "salud": 4}
+{"ev": "foto", "frame": 11000, "pos": [1955, 579], "salud": 4, "municion": 26, "arma": 3, "modo": "kitear", "cerca": [[65, "Demon"], [78, "Demon"], [110, "Demon"], [128, "Demon"], [137, "Demon"], [199, "Demon"]], "meta": "salud_1984_1288"}
+{"ev": "combate", "frame": 11000, "que": ["kitear", "2"], "salud": 4}
+{"ev": "combate", "frame": 11001, "que": ["kitear", "2"], "salud": 4}
+{"ev": "combate", "frame": 11002, "que": ["kitear", "3"], "salud": 4}
+{"ev": "combate", "frame": 11003, "que": ["kitear", "3"], "salud": 4}
+{"ev": "combate", "frame": 11004, "que": ["kitear", "4"], "salud": 4}
+{"ev": "combate", "frame": 11005, "que": ["kitear", "2"], "salud": 4}
+{"ev": "combate", "frame": 11006, "que": ["kitear", "4"], "salud": 4}
+{"ev": "combate", "frame": 11007, "que": ["kitear", "3"], "salud": 4}
+{"ev": "combate", "frame": 11008, "que": ["kitear", "3"], "salud": 4}
+{"ev": "combate", "frame": 11009, "que": ["kitear", "3"], "salud": 4}
+{"ev": "muerte", "frame": 11010, "pos": [1857, 680], "salud": 4, "municion": 24, "arma": 3, "modo": "kitear", "cerca": [[49, "Demon"], [70, "Demon"], [79, "Demon"], [99, "LostSoul"], [136, "LostSoul"], [162, "Demon"]]}
+{"ev": "combate", "frame": 11068, "que": ["retirada"], "salud": 24}
+{"ev": "combate", "frame": 11071, "que": ["retirada"], "salud": 24}
+{"ev": "combate", "frame": 11085, "que": ["retirada"], "salud": 24}
+{"ev": "combate", "frame": 11098, "que": ["retirada"], "salud": 24}
+{"ev": "combate", "frame": 11107, "que": ["retirada"], "salud": 24}
+{"ev": "combate", "frame": 11114, "que": ["retirada"], "salud": 24}
+{"ev": "nav", "frame": 11133, "que": ["meta", "salud_640_96", "codigo", "33"]}
+{"ev": "combate", "frame": 11134, "que": ["retirada"], "salud": 24}
+{"ev": "combate", "frame": 11168, "que": ["curarse"], "salud": 24}
+{"ev": "combate", "frame": 11174, "que": ["curarse"], "salud": 24}
+{"ev": "combate", "frame": 11186, "que": ["curarse"], "salud": 24}
+{"ev": "foto", "frame": 11200, "pos": [676, 71], "salud": 34, "municion": 3, "arma": 3, "modo": "explorar", "cerca": [[226, "ExplosiveBarrel"], [274, "ExplosiveBarrel"], [332, "DoomImp"], [374, "DoomImp"], [377, "Demon"], [418, "ExplosiveBarrel"]], "meta": "salud_640_96"}
+{"ev": "nav", "frame": 11201, "que": ["provision_alcanzada", "salud_640_96"]}
+{"ev": "nav", "frame": 11202, "que": ["meta", "municion_408_201", "codigo", "15"]}
+{"ev": "nav", "frame": 11208, "que": ["provision_alcanzada", "municion_408_201"]}
+{"ev": "nav", "frame": 11209, "que": ["provision_alcanzada", "municion_324_160"]}
+{"ev": "nav", "frame": 11210, "que": ["meta", "municion_160_328", "codigo", "10"]}
+{"ev": "nav", "frame": 11263, "que": ["meta", "arma_640_-160", "codigo", "34"]}
+{"ev": "nav", "frame": 11273, "que": ["puerta", "15"]}
+{"ev": "combate", "frame": 11314, "que": ["voltear", "DoomImp", "-23"], "salud": 29}
+{"ev": "combate", "frame": 11314, "que": ["curarse"], "salud": 29}
+{"ev": "nav", "frame": 11320, "que": ["meta", "salud_96_640", "curarse", "38"]}
+{"ev": "nav", "frame": 11350, "que": ["provision_alcanzada", "salud_96_640"]}
+{"ev": "nav", "frame": 11351, "que": ["meta", "salud_640_1184", "codigo", "39"]}
+{"ev": "nav", "frame": 11375, "que": ["provision_alcanzada", "salud_640_1184"]}
+{"ev": "nav", "frame": 11376, "que": ["meta", "salud_1184_640", "codigo", "39"]}
+{"ev": "foto", "frame": 11400, "pos": [504, 1258], "salud": 49, "municion": 26, "arma": 2, "modo": "atacar", "cerca": [[154, "ChaingunGuy"], [376, "Zombieman"], [404, "Zombieman"], [475, "ShotgunGuy"], [499, "ExplosiveBarrel"], [503, "ShotgunGuy"]], "meta": "salud_1184_640"}
+{"ev": "nav", "frame": 11448, "que": ["provision_alcanzada", "salud_1184_640"]}
+{"ev": "nav", "frame": 11449, "que": ["meta", "arma_640_-160", "codigo", "50"]}
+{"ev": "nav", "frame": 11469, "que": ["puerta", "15"]}
+{"ev": "nav", "frame": 11491, "que": ["provision_alcanzada", "arma_640_-160"]}
+{"ev": "nav", "frame": 11492, "que": ["meta", "pisar_0", "codigo", "55"]}
+{"ev": "nav", "frame": 11506, "que": ["meta", "municion_618_-578", "codigo", "4"]}
+{"ev": "nav", "frame": 11511, "que": ["provision_alcanzada", "municion_618_-578"]}
+{"ev": "nav", "frame": 11512, "que": ["meta", "municion_544_-528", "codigo", "6"]}
+{"ev": "nav", "frame": 11514, "que": ["meta", "municion_736_-528", "codigo", "5"]}
+{"ev": "nav", "frame": 11519, "que": ["provision_alcanzada", "municion_736_-528"]}
+{"ev": "nav", "frame": 11520, "que": ["meta", "pisar_1", "codigo", "33"]}
+{"ev": "nav", "frame": 11539, "que": ["meta", "municion_544_-528", "codigo", "19"]}
+{"ev": "foto", "frame": 11600, "pos": [559, -560], "salud": 45, "municion": 6, "arma": 3, "modo": "explorar", "cerca": [[189, "DoomImp"], [242, "ExplosiveBarrel"], [244, "ExplosiveBarrel"], [279, "DoomImp"], [321, "DoomImp"], [334, "Zombieman"]], "meta": "municion_544_-528"}
+{"ev": "nav", "frame": 11612, "que": ["atorado", "(158, 35)", "municion_544_-528"]}
+{"ev": "nav", "frame": 11617, "que": ["meta", "municion_396_-597", "codigo", "10"]}
+{"ev": "nav", "frame": 11623, "que": ["provision_alcanzada", "municion_396_-597"]}
+{"ev": "nav", "frame": 11624, "que": ["meta", "municion_933_-468", "codigo", "42"]}
+{"ev": "nav", "frame": 11647, "que": ["provision_alcanzada", "municion_933_-468"]}
+{"ev": "nav", "frame": 11648, "que": ["meta", "pisar_1", "codigo", "12"]}
+{"ev": "nav", "frame": 11656, "que": ["pisado", "1"]}
+{"ev": "nav", "frame": 11657, "que": ["meta", "pisar_0", "codigo", "74"]}
+{"ev": "combate", "frame": 11763, "que": ["retirada"], "salud": 29}
+{"ev": "combate", "frame": 11767, "que": ["retirada"], "salud": 29}
+{"ev": "combate", "frame": 11769, "que": ["retirada"], "salud": 29}
+{"ev": "foto", "frame": 11800, "pos": [277, -64], "salud": 28, "municion": 37, "arma": 2, "modo": "atacar", "cerca": [[26, "DoomImpBall"], [130, "DoomImp"], [158, "DoomImp"], [212, "Zombieman"], [225, "Zombieman"], [261, "ShotgunGuy"]], "meta": "pisar_0"}
+{"ev": "combate", "frame": 11800, "que": ["retirada"], "salud": 28}
+{"ev": "nav", "frame": 11823, "que": ["pisado", "0"]}
+{"ev": "nav", "frame": 11824, "que": ["meta", "frontera", "codigo", "8"]}
+{"ev": "combate", "frame": 11917, "que": ["retirada"], "salud": 28}
+{"ev": "combate", "frame": 11963, "que": ["retirada"], "salud": 25}
+{"ev": "resultado", "mapa": "MAP04", "semilla": 3, "modo": "codigo", "pregunta": null, "celdas": 246, "kills": 282, "muertes": 6, "terminado": null, "jev": {"llamadas": 0, "dudas_tactica": 0, "dudas_meta": 0, "errores": 0, "ms": 0}, "haiku": {"llamadas": 0, "seg": 0.0, "fallos": 0, "sonnet": 0}, "seg_reales": 978}

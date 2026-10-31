@@ -1,0 +1,316 @@
+{"ev": "foto", "frame": 0, "pos": [640, -576], "salud": 100, "municion": 50, "arma": 2, "modo": "explorar", "cerca": [[322, "DoomImp"], [380, "DoomImp"], [410, "DoomImp"], [490, "Zombieman"], [506, "Zombieman"], [506, "Zombieman"]], "meta": null}
+{"ev": "nav", "frame": 131, "que": ["meta", "arma_864_-864", "codigo", "35"]}
+{"ev": "nav", "frame": 169, "que": ["meta", "municion_813_-821", "codigo", "5"]}
+{"ev": "foto", "frame": 200, "pos": [933, -778], "salud": 97, "municion": 4, "arma": 3, "modo": "atacar", "cerca": [[278, "DoomImp"], [306, "DoomImp"], [483, "DoomImp"], [498, "DoomImp"], [561, "Zombieman"], [562, "DoomImp"]], "meta": "municion_813_-821"}
+{"ev": "nav", "frame": 209, "que": ["provision_alcanzada", "municion_813_-821"]}
+{"ev": "nav", "frame": 210, "que": ["meta", "municion_800_-936", "codigo", "9"]}
+{"ev": "nav", "frame": 217, "que": ["meta", "municion_827_-1120", "codigo", "4"]}
+{"ev": "nav", "frame": 229, "que": ["meta", "municion_800_-936", "codigo", "25"]}
+{"ev": "nav", "frame": 279, "que": ["meta", "llave_azul", "codigo", "154"]}
+{"ev": "nav", "frame": 319, "que": ["meta", "arma_352_-864", "codigo", "75"]}
+{"ev": "combate", "frame": 370, "que": ["voltear", "DoomImp", "112"], "salud": 82}
+{"ev": "foto", "frame": 400, "pos": [23, -985], "salud": 82, "municion": 33, "arma": 2, "modo": "explorar", "cerca": [[362, "Zombieman"], [445, "DoomImp"], [464, "DoomImp"], [481, "DoomImp"], [671, "Demon"], [771, "Zombieman"]], "meta": "arma_352_-864"}
+{"ev": "nav", "frame": 433, "que": ["meta", "municion_-240_-816", "codigo", "7"]}
+{"ev": "nav", "frame": 443, "que": ["provision_alcanzada", "municion_-240_-816"]}
+{"ev": "nav", "frame": 444, "que": ["meta", "municion_-144_-608", "codigo", "16"]}
+{"ev": "nav", "frame": 462, "que": ["provision_alcanzada", "municion_-144_-608"]}
+{"ev": "nav", "frame": 463, "que": ["meta", "arma_352_-864", "codigo", "35"]}
+{"ev": "nav", "frame": 479, "que": ["provision_alcanzada", "arma_352_-864"]}
+{"ev": "nav", "frame": 480, "que": ["meta", "llave_azul", "codigo", "129"]}
+{"ev": "nav", "frame": 515, "que": ["puerta", "162"]}
+{"ev": "foto", "frame": 600, "pos": [-943, -753], "salud": 82, "municion": 25, "arma": 3, "modo": "atacar", "cerca": [[53, "Demon"], [571, "DoomImp"], [605, "DoomImp"], [893, "DoomImp"], [1141, "Demon"], [1425, "DoomImp"]], "meta": "llave_azul"}
+{"ev": "nav", "frame": 612, "que": ["meta", "salud_-688_48", "codigo", "61"]}
+{"ev": "nav", "frame": 649, "que": ["elevador", "165", "llamar"]}
+{"ev": "nav", "frame": 657, "que": ["elevador", "165", "esperar"]}
+{"ev": "nav", "frame": 677, "que": ["atorado", "(16, 90)", "salud_-688_48"]}
+{"ev": "nav", "frame": 682, "que": ["elevador", "165", "esperar"]}
+{"ev": "nav", "frame": 683, "que": ["elevador", "165", "esperar"]}
+{"ev": "nav", "frame": 684, "que": ["elevador", "165", "esperar"]}
+{"ev": "nav", "frame": 685, "que": ["elevador", "165", "esperar"]}
+{"ev": "nav", "frame": 714, "que": ["llave_recogida", "['azul']"]}
+{"ev": "nav", "frame": 720, "que": ["provision_alcanzada", "salud_-688_48"]}
+{"ev": "nav", "frame": 721, "que": ["meta", "interruptor_5", "codigo", "29"]}
+{"ev": "nav", "frame": 782, "que": ["puerta", "162"]}
+{"ev": "foto", "frame": 800, "pos": [-846, -784], "salud": 61, "municion": 11, "arma": 3, "modo": "explorar", "cerca": [[1065, "Demon"], [1332, "DoomImp"], [1500, "DoomImp"], [1594, "Demon"], [1630, "ShotgunGuy"], [1631, "Demon"]], "meta": "interruptor_5"}
+{"ev": "nav", "frame": 818, "que": ["atorado", "(15, 62)", "interruptor_5"]}
+{"ev": "nav", "frame": 823, "que": ["meta", "interruptor_5", "codigo", "28"]}
+{"ev": "nav", "frame": 833, "que": ["interruptor", "5"]}
+{"ev": "nav", "frame": 842, "que": ["meta", "interruptor_1", "codigo", "161"]}
+{"ev": "nav", "frame": 844, "que": ["elevador", "165", "esperar"]}
+{"ev": "nav", "frame": 845, "que": ["elevador", "165", "esperar"]}
+{"ev": "nav", "frame": 846, "que": ["elevador", "165", "esperar"]}
+{"ev": "nav", "frame": 866, "que": ["atorado", "(16, 90)", "interruptor_1"]}
+{"ev": "nav", "frame": 871, "que": ["elevador", "165", "esperar"]}
+{"ev": "nav", "frame": 872, "que": ["elevador", "165", "esperar"]}
+{"ev": "nav", "frame": 873, "que": ["elevador", "165", "esperar"]}
+{"ev": "nav", "frame": 924, "que": ["meta", "salud_192_128", "codigo", "44"]}
+{"ev": "nav", "frame": 975, "que": ["provision_alcanzada", "salud_192_128"]}
+{"ev": "nav", "frame": 976, "que": ["meta", "interruptor_1", "codigo", "29"]}
+{"ev": "nav", "frame": 993, "que": ["puerta", "65"]}
+{"ev": "foto", "frame": 1000, "pos": [334, 230], "salud": 100, "municion": 9, "arma": 3, "modo": "atacar", "cerca": [[455, "ShotgunGuy"], [593, "Demon"], [696, "Demon"], [777, "Demon"], [814, "Zombieman"], [865, "Demon"]], "meta": "interruptor_1"}
+{"ev": "nav", "frame": 1011, "que": ["interruptor", "1"]}
+{"ev": "nav", "frame": 1020, "que": ["meta", "interruptor_3", "codigo", "142"]}
+{"ev": "nav", "frame": 1059, "que": ["meta", "municion_632_-173", "codigo", "8"]}
+{"ev": "nav", "frame": 1064, "que": ["provision_alcanzada", "municion_632_-173"]}
+{"ev": "nav", "frame": 1065, "que": ["meta", "municion_672_72", "codigo", "15"]}
+{"ev": "nav", "frame": 1075, "que": ["provision_alcanzada", "municion_672_72"]}
+{"ev": "nav", "frame": 1076, "que": ["meta", "interruptor_3", "codigo", "114"]}
+{"ev": "nav", "frame": 1142, "que": ["meta", "municion_733_-902", "codigo", "14"]}
+{"ev": "nav", "frame": 1155, "que": ["meta", "municion_1120_-1056", "codigo", "16"]}
+{"ev": "nav", "frame": 1167, "que": ["provision_alcanzada", "municion_1120_-1056"]}
+{"ev": "nav", "frame": 1168, "que": ["meta", "municion_1248_-832", "codigo", "16"]}
+{"ev": "nav", "frame": 1178, "que": ["provision_alcanzada", "municion_1248_-832"]}
+{"ev": "nav", "frame": 1179, "que": ["meta", "interruptor_3", "codigo", "37"]}
+{"ev": "foto", "frame": 1200, "pos": [1755, -820], "salud": 100, "municion": 5, "arma": 3, "modo": "atacar", "cerca": [[254, "Demon"], [305, "Demon"], [322, "DoomImp"], [322, "DoomImp"], [378, "Demon"], [521, "Demon"]], "meta": "interruptor_3"}
+{"ev": "combate", "frame": 1230, "que": ["kitear", "2"], "salud": 100}
+{"ev": "combate", "frame": 1231, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1232, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1233, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1234, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1235, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1236, "que": ["kitear", "2"], "salud": 100}
+{"ev": "combate", "frame": 1237, "que": ["kitear", "2"], "salud": 100}
+{"ev": "combate", "frame": 1238, "que": ["kitear", "2"], "salud": 100}
+{"ev": "combate", "frame": 1241, "que": ["kitear", "2"], "salud": 100}
+{"ev": "combate", "frame": 1242, "que": ["kitear", "2"], "salud": 100}
+{"ev": "combate", "frame": 1243, "que": ["kitear", "2"], "salud": 100}
+{"ev": "combate", "frame": 1244, "que": ["kitear", "2"], "salud": 100}
+{"ev": "combate", "frame": 1245, "que": ["kitear", "2"], "salud": 100}
+{"ev": "combate", "frame": 1246, "que": ["kitear", "2"], "salud": 100}
+{"ev": "combate", "frame": 1247, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1248, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1249, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1250, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1251, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1252, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1253, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1254, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1257, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1258, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1259, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1260, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1261, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1262, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1263, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1264, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1265, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1266, "que": ["kitear", "2"], "salud": 100}
+{"ev": "combate", "frame": 1267, "que": ["kitear", "2"], "salud": 100}
+{"ev": "combate", "frame": 1268, "que": ["kitear", "3"], "salud": 100}
+{"ev": "combate", "frame": 1269, "que": ["kitear", "3"], "salud": 101}
+{"ev": "combate", "frame": 1270, "que": ["kitear", "3"], "salud": 101}
+{"ev": "combate", "frame": 1271, "que": ["kitear", "2"], "salud": 101}
+{"ev": "combate", "frame": 1272, "que": ["kitear", "2"], "salud": 101}
+{"ev": "combate", "frame": 1273, "que": ["kitear", "2"], "salud": 101}
+{"ev": "combate", "frame": 1274, "que": ["kitear", "2"], "salud": 101}
+{"ev": "combate", "frame": 1275, "que": ["kitear", "2"], "salud": 101}
+{"ev": "combate", "frame": 1276, "que": ["kitear", "2"], "salud": 101}
+{"ev": "combate", "frame": 1277, "que": ["kitear", "2"], "salud": 101}
+{"ev": "combate", "frame": 1278, "que": ["kitear", "2"], "salud": 101}
+{"ev": "combate", "frame": 1279, "que": ["kitear", "2"], "salud": 101}
+{"ev": "combate", "frame": 1280, "que": ["kitear", "2"], "salud": 101}
+{"ev": "combate", "frame": 1281, "que": ["kitear", "2"], "salud": 101}
+{"ev": "combate", "frame": 1282, "que": ["kitear", "2"], "salud": 101}
+{"ev": "combate", "frame": 1283, "que": ["kitear", "2"], "salud": 101}
+{"ev": "combate", "frame": 1284, "que": ["kitear", "2"], "salud": 101}
+{"ev": "combate", "frame": 1285, "que": ["kitear", "2"], "salud": 101}
+{"ev": "combate", "frame": 1286, "que": ["kitear", "2"], "salud": 103}
+{"ev": "combate", "frame": 1287, "que": ["kitear", "2"], "salud": 103}
+{"ev": "combate", "frame": 1301, "que": ["kitear", "2"], "salud": 103}
+{"ev": "combate", "frame": 1302, "que": ["kitear", "3"], "salud": 103}
+{"ev": "combate", "frame": 1303, "que": ["kitear", "2"], "salud": 103}
+{"ev": "combate", "frame": 1304, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1309, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1310, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1311, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1312, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1313, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1314, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1319, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1320, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1321, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1322, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1323, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1324, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1326, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1327, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1328, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1329, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1330, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1331, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1332, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1333, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1334, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1335, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1336, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1337, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1338, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1339, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1340, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1341, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1342, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1343, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1344, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1345, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1346, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1359, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1360, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1361, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1362, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1363, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1364, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1366, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1367, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1368, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1369, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1370, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1371, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1372, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1373, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1374, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1375, "que": ["kitear", "3"], "salud": 104}
+{"ev": "combate", "frame": 1376, "que": ["kitear", "2"], "salud": 104}
+{"ev": "foto", "frame": 1400, "pos": [1767, -797], "salud": 104, "municion": 66, "arma": 2, "modo": "atacar", "cerca": [[175, "Demon"], [261, "Demon"], [367, "Demon"], [501, "Demon"], [526, "Demon"], [682, "DoomImp"]], "meta": "interruptor_3"}
+{"ev": "combate", "frame": 1401, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1402, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1403, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1404, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1405, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1406, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1407, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1408, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1417, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1418, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1419, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1420, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1421, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1422, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1423, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1424, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1425, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1426, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1437, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1438, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1439, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1440, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1441, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1442, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1443, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1444, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1445, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1446, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1447, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1449, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1450, "que": ["kitear", "2"], "salud": 104}
+{"ev": "nav", "frame": 1484, "que": ["puerta", "137"]}
+{"ev": "nav", "frame": 1495, "que": ["interruptor", "3"]}
+{"ev": "nav", "frame": 1504, "que": ["meta", "llave_roja", "codigo", "118"]}
+{"ev": "combate", "frame": 1549, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1550, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1551, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1552, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1553, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1554, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1555, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1556, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1557, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1558, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1559, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1560, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1565, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1566, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1573, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1574, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1576, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1577, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1578, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1579, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1580, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1581, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1582, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1583, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1584, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1585, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1586, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1587, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1588, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1589, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1590, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1591, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1592, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1593, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1594, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1597, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1598, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1599, "que": ["kitear", "2"], "salud": 104}
+{"ev": "foto", "frame": 1600, "pos": [1297, -528], "salud": 104, "municion": 37, "arma": 2, "modo": "kitear", "cerca": [[141, "Demon"], [144, "DoomImp"], [208, "Demon"], [316, "Zombieman"], [398, "ShotgunGuy"], [532, "Zombieman"]], "meta": "llave_roja"}
+{"ev": "combate", "frame": 1600, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1601, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1602, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1603, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1604, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1605, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1606, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1630, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1631, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1632, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1633, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1634, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1635, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1636, "que": ["kitear", "2"], "salud": 104}
+{"ev": "combate", "frame": 1637, "que": ["kitear", "2"], "salud": 104}
+{"ev": "nav", "frame": 1792, "que": ["elevador", "159", "llamar"]}
+{"ev": "nav", "frame": 1798, "que": ["elevador", "159", "esperar"]}
+{"ev": "nav", "frame": 1799, "que": ["elevador", "159", "esperar"]}
+{"ev": "foto", "frame": 1800, "pos": [1277, -144], "salud": 70, "municion": 10, "arma": 2, "modo": "explorar", "cerca": [[180, "Zombieman"], [186, "ShotgunGuy"], [207, "Zombieman"], [831, "ShotgunGuy"], [1179, "Demon"], [1672, "Demon"]], "meta": "llave_roja"}
+{"ev": "nav", "frame": 1824, "que": ["atorado", "(146, 102)", "llave_roja"]}
+{"ev": "nav", "frame": 1829, "que": ["meta", "llave_roja", "codigo", "56"]}
+{"ev": "nav", "frame": 1906, "que": ["meta", "municion_1191_34", "codigo", "26"]}
+{"ev": "nav", "frame": 1920, "que": ["provision_alcanzada", "municion_1191_34"]}
+{"ev": "nav", "frame": 1921, "que": ["meta", "llave_roja", "codigo", "37"]}
+{"ev": "nav", "frame": 1946, "que": ["puerta", "156"]}
+{"ev": "nav", "frame": 1958, "que": ["llave_recogida", "['roja']"]}
+{"ev": "nav", "frame": 1959, "que": ["meta", "interruptor_2", "codigo", "58"]}
+{"ev": "nav", "frame": 1990, "que": ["atorado", "(115, 112)", "interruptor_2"]}
+{"ev": "nav", "frame": 1995, "que": ["meta", "interruptor_2", "codigo", "55"]}
+{"ev": "foto", "frame": 2000, "pos": [869, -51], "salud": 43, "municion": 13, "arma": 2, "modo": "explorar", "cerca": [[544, "ShotgunGuy"], [803, "Demon"], [1282, "Demon"], [1372, "Demon"], [1466, "Demon"]], "meta": "interruptor_2"}
+{"ev": "nav", "frame": 2019, "que": ["puerta", "67"]}
+{"ev": "nav", "frame": 2047, "que": ["interruptor", "2"]}
+{"ev": "nav", "frame": 2056, "que": ["meta", "llave_amarilla", "codigo", "114"]}
+{"ev": "nav", "frame": 2075, "que": ["meta", "salud_-304_408", "codigo", "66"]}
+{"ev": "nav", "frame": 2087, "que": ["puerta", "65"]}
+{"ev": "nav", "frame": 2102, "que": ["meta", "municion_-236_-43", "codigo", "27"]}
+{"ev": "nav", "frame": 2117, "que": ["provision_alcanzada", "municion_-236_-43"]}
+{"ev": "nav", "frame": 2118, "que": ["meta", "municion_-293_-84", "codigo", "5"]}
+{"ev": "nav", "frame": 2125, "que": ["provision_alcanzada", "municion_-293_-84"]}
+{"ev": "nav", "frame": 2126, "que": ["meta", "municion_-304_-176", "codigo", "6"]}
+{"ev": "nav", "frame": 2133, "que": ["provision_alcanzada", "municion_-304_-176"]}
+{"ev": "nav", "frame": 2134, "que": ["meta", "salud_-304_408", "codigo", "36"]}
+{"ev": "nav", "frame": 2137, "que": ["meta", "municion_-208_408", "codigo", "38"]}
+{"ev": "nav", "frame": 2149, "que": ["provision_alcanzada", "municion_-208_408"]}
+{"ev": "nav", "frame": 2150, "que": ["meta", "salud_-304_408", "codigo", "32"]}
+{"ev": "combate", "frame": 2153, "que": ["kitear", "2"], "salud": 46}
+{"ev": "combate", "frame": 2154, "que": ["kitear", "2"], "salud": 46}
+{"ev": "combate", "frame": 2155, "que": ["kitear", "2"], "salud": 46}
+{"ev": "combate", "frame": 2167, "que": ["kitear", "2"], "salud": 46}
+{"ev": "combate", "frame": 2168, "que": ["kitear", "2"], "salud": 46}
+{"ev": "combate", "frame": 2169, "que": ["kitear", "2"], "salud": 46}
+{"ev": "foto", "frame": 2200, "pos": [-158, 824], "salud": 46, "municion": 42, "arma": 3, "modo": "explorar", "cerca": [[1175, "Demon"]], "meta": "salud_-304_408"}
+{"ev": "nav", "frame": 2217, "que": ["atorado", "(57, 163)", "salud_-304_408"]}
+{"ev": "nav", "frame": 2222, "que": ["meta", "llave_amarilla", "codigo", "20"]}
+{"ev": "nav", "frame": 2237, "que": ["llave_recogida", "['amarilla']"]}
+{"ev": "nav", "frame": 2272, "que": ["atorado", "(57, 163)", "salud_-304_408"]}
+{"ev": "nav", "frame": 2277, "que": ["meta", "salida", "codigo", "195"]}
+{"ev": "nav", "frame": 2297, "que": ["teletransporte", "(48, 169)"]}
+{"ev": "nav", "frame": 2298, "que": ["teletransporte", "(48, 169)"]}
+{"ev": "nav", "frame": 2299, "que": ["teletransporte", "(48, 169)"]}
+{"ev": "nav", "frame": 2300, "que": ["teletransporte", "(48, 169)"]}
+{"ev": "nav", "frame": 2301, "que": ["teletransporte", "(48, 169)"]}
+{"ev": "nav", "frame": 2302, "que": ["teletransporte", "(48, 169)"]}
+{"ev": "nav", "frame": 2303, "que": ["teletransportado", "(52, 136)"]}
+{"ev": "nav", "frame": 2388, "que": ["atorado", "(99, 64)", "salida"]}
+{"ev": "nav", "frame": 2393, "que": ["meta", "salida", "codigo", "40"]}
+{"ev": "foto", "frame": 2400, "pos": [321, -594], "salud": 46, "municion": 42, "arma": 3, "modo": "explorar", "cerca": [[344, "Demon"]], "meta": "salida"}
+{"ev": "nav", "frame": 2415, "que": ["puerta", "45"]}
+{"ev": "nav", "frame": 2429, "que": ["salida", "0"]}
+{"ev": "resultado", "mapa": "MAP02", "semilla": 19, "modo": "codigo", "pregunta": null, "celdas": 194, "kills": 43, "muertes": 0, "terminado": 2430, "jev": {"llamadas": 0, "dudas_tactica": 0, "dudas_meta": 0, "errores": 0, "ms": 0}, "haiku": {"llamadas": 0, "seg": 0.0, "fallos": 0, "sonnet": 0}, "seg_reales": 202}

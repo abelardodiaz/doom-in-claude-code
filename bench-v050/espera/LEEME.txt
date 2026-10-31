@@ -1,0 +1,23 @@
+Espera aleatoria al reaparecer: cada vida (tambien la primera) arranca con 1-35 tics sin hacer
+nada, Random(semilla * 100 + muertes). Sin ella, en las 24 semillas de MAP04 publicadas con la
+0.6.0 (horda/solo-kitear y semillas-nuevas), 8 terminaban en el frame 3227 exacto y 3 mas entre
+3232 y 3258: casi la misma partida repetida. Todas las carpetas de aqui usan la espera.
+
+Semillas: MAP01 1-6, 25-36 (3000 frames); MAP02 13-36; MAP03 7-18, 25-36; MAP04 1-12, 25-60
+(12000 frames). Solo codigo, correr siempre.
+
+v060:   el bridge de la 0.6.0 con la espera. Es la base honesta: MAP04 30/48.
+nuevo:  + pozos de acido + barriles solo al atorarse.
+recta:  nuevo + no apuntar a traves de escalones altos + caminar en las cornisas.
+recta2: recta + barrotes + llamar al elevador desde la celda de al lado.
+final:  nuevo + recta + barrotes + elevador, sin cornisas (empeoraban MAP02: 20/24, 57 muertes).
+final2: final con la recta mirando solo muros y escalones, no la holgura junto a la pared
+        (MAP03 s27 se pasaba de largo frente a un pasillo de una celda). Es el codigo publicado.
+
+         MAP01   MAP02          MAP03          MAP04
+v060     17/18   23/24, 18 m    24/24, 12 m    30/48, 130 m
+nuevo    17/18   23/24, 18 m    24/24,  0 m    36/48, 168 m
+recta    18/18   18/24, 34 m    23/24,  1 m    35/48, 167 m
+recta2   18/18   20/24, 57 m    24/24,  1 m    33/48, 182 m
+final    18/18   24/24, 15 m    23/24,  0 m    39/48, 129 m
+final2   18/18   24/24, 29 m    24/24,  2 m    41/48, 136 m
