@@ -50,6 +50,15 @@ ENCARAR = _TACTICAS           # yendo a cubrirse o a curarse, moverse sin darle 
 # empato a "siempre" en MAP02 pero perdio en MAP03 (7/12 contra 12/12) y MAP04 (2/12 contra 3/12)
 CORRER = os.environ.get("DOOM_CORRER", "siempre")  # "no", "siempre" o "selectivo"
 PELIGRO_CERCA = 800  # monstruo a menos de esto (aunque no se vea): correr
+ACOSO = 250          # monstruo a menos de esto: no detenerse a esperar junto a un aplastador
+# ir por la meta cercana en vez de pelear: apagado. Con el, MAP03 cayo de 12/12 a 7/12 (33 muertes
+# avanzando entre Zombiemen, que disparan); en MAP04 no aportaba nada sobre kitear (11/12 en ambos)
+AVANZAR_CERCA = os.environ.get("DOOM_AVANZAR", "0") == "1"
+META_CERCA = 25      # celdas de ruta (~400 unidades) para considerar la meta "a la mano"
+BLOQUEO = 120        # avanzando, un monstruo a menos de esto se despeja a tiros antes de seguir
+KITEAR = os.environ.get("DOOM_KITEAR", "1") == "1"  # ante una horda de mordedores, retroceder disparando
+MORDEDORES = {"Demon", "Spectre"}  # solo atacan cuerpo a cuerpo
+HORDA_DIST = 250     # mordedores a menos de esto cuentan para la horda
 
 # Indices de botones
 B = ["MOVE_FORWARD", "MOVE_BACKWARD", "TURN_LEFT", "TURN_RIGHT",
@@ -395,6 +404,24 @@ class Cerebro:
             self.cesion -= 1
             if modo in ("recoger", "retirada"):
                 modo = "explorar"
+        # la meta a la mano (interruptor, salida, llave): ir por ella en vez de pelear, aunque la salud
+        # este baja. MAP04: tras el interruptor 6 el 2 estaba a 238 unidades y la salida justo despues;
+        # se quedaba peleando de lado a lado con la horda de Demons y murio ahi 18 de 39 veces
+        nav = self.navegador
+        # horda de los que solo muerden (Demons): retroceder disparando, que lleguen de uno en uno.
+        # Corriendo hacia atras el jugador es mas rapido que ellos. Va antes que avanzar a la meta:
+        # entre 5 Demons no se llega ni a 53 unidades del interruptor 2 (MAP04)
+        mordedores = [l for l in enemigos if l.object_name in MORDEDORES
+                      and math.hypot(l.object_position_x - x, l.object_position_y - y) < HORDA_DIST]
+        if KITEAR and orden == "explorar" and len(mordedores) >= 2:
+            if modo != "kitear":
+                self.evento = self.evento or ("kitear", len(mordedores))
+            modo = "kitear"
+        elif AVANZAR_CERCA and orden == "explorar" and nav and nav.meta and modo in ("atacar", "retirada", "curarse") \
+                and nav.meta["tipo"] in ("interruptor", "salida", "llave") and 0 < len(nav.camino) <= META_CERCA:
+            if modo != "avanzar":
+                self.evento = self.evento or ("avanzar_meta", nav.meta["id"], len(nav.camino))
+            modo = "avanzar"
         self.modo = modo
 
         if self.giro_forzado > 0:
@@ -478,6 +505,25 @@ class Cerebro:
                 a = apuntar(b, [])
                 return (a or accion("ATTACK")), atorado
 
+        if modo == "kitear":
+            obj = min(enemigos, key=lambda l: math.hypot(l.object_position_x - x, l.object_position_y - y))
+            cx = obj.x + obj.width / 2
+            grados = math.degrees(math.atan((cx - ancho / 2) / (ancho / 2)))
+            # hacia atras si el mapa deja espacio (64 y 128 unidades); si no, de lado hacia mas espacio
+            paso = "MOVE_BACKWARD"
+            if self.navegador:
+                m = self.navegador.mapa
+                a = math.radians(vars_[6] + 180)
+                for d in (64, 128):
+                    if not m.transitable(*m.celda(x + math.cos(a) * d, y + math.sin(a) * d)):
+                        paso = "MOVE_LEFT" if izq > der else "MOVE_RIGHT"
+                        break
+            arma = elegir_arma(obj, x, y, vars_)
+            extra = [arma] if arma else []
+            if abs(grados) < 8:
+                return accion(paso, "ATTACK", *extra, giro=-grados), atorado
+            return accion(paso, *extra, giro=-grados), atorado
+
         if modo == "retirada":
             if enemigos:
                 obj = max(enemigos, key=lambda l: l.width * l.height)
@@ -497,6 +543,8 @@ class Cerebro:
         # explorar / avanzar / curarse: con mapa, el navegador decide; sin mapa, reflejos a ciegas
         if self.navegador:
             self.navegador.forzar = "salud" if modo == "curarse" else None
+            self.navegador.acosado = any(o.name in MONSTRUOS and math.hypot(o.position_x - x, o.position_y - y)
+                                         < ACOSO for o in st.objects)
             a = self.navegador.decidir(x, y, vars_[6], st.sectors, accion, st.objects,
                                        salud=vars_[0], municion=vars_[2],
                                        armas={k for k, val in zip((3, 4, 5, 6, 7), vars_[7:12]) if val > 0},
@@ -525,6 +573,14 @@ class Cerebro:
                 if abs(grados) < 8:
                     pasos.append("ATTACK")
                 return accion(*pasos, giro=-grados), atorado
+            # avanzando hacia la meta, un monstruo encima bloquea el paso: girar hacia el y disparar
+            # hasta despejar. MAP04: a 92 del interruptor 2 empujaba a un Demon pegado sin dispararle
+            if modo == "avanzar" and enemigos:
+                pegado = min(enemigos, key=lambda l: math.hypot(l.object_position_x - x, l.object_position_y - y))
+                if math.hypot(pegado.object_position_x - x, pegado.object_position_y - y) < BLOQUEO:
+                    cx = pegado.x + pegado.width / 2
+                    grados = math.degrees(math.atan((cx - ancho / 2) / (ancho / 2)))
+                    return (accion("ATTACK", giro=-grados) if abs(grados) < 10 else accion(giro=-grados)), atorado
             # avanzar (y cubrirse) ignoran a los enemigos, pero si uno queda justo enfrente se le
             # dispara al pasar
             if modo in ("avanzar", "cubrirse") and enemigos:
