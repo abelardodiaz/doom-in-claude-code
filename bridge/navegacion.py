@@ -58,6 +58,7 @@ PISAR -= APLASTADORES
 APLASTA_ALTO = 64      # hueco bajo el que el techo ya pega (el jugador mide 56)
 APLASTA_BAJANDO = 100  # si va bajando, ya no se entra con este hueco o menos
 APLASTA_COSTO = 3      # costo extra por celda bajo un aplastador al planear rutas
+APLASTA_MARGEN = 64    # unidades extra alrededor del aplastador para frenar a tiempo (inercia corriendo)
 DESTINO_TELEPORT = 14  # tipo de cosa que marca a donde llega un teletransporte
 
 # abastecimiento: nombres de objetos de ViZDoom por necesidad
@@ -198,6 +199,15 @@ class Mapa:
                 for dx, dy in disco:
                     if 0 <= j + dy < self.H and 0 <= i + dx < self.W:
                         self.zona_aplastador[j + dy, i + dx] = s
+        # zona con margen, para decidir si esperar: corriendo, la inercia mete al bot ~50 unidades mas
+        # alla de donde frena (MAP04: iba por municion a 24 del 22 y quedo dentro con el techo bajando)
+        disco_margen = hacer_disco(RADIO + APLASTA_MARGEN)
+        self.zona_margen = np.full((self.H, self.W), -1, dtype=np.int32)
+        for s in self.sector_aplastador:
+            for j, i in zip(*np.nonzero(self.sector == s)):
+                for dx, dy in disco_margen:
+                    if 0 <= j + dy < self.H and 0 <= i + dx < self.W:
+                        self.zona_margen[j + dy, i + dx] = s
         # llaves tiradas en el mapa (se omiten las que solo salen en multijugador)
         self.llaves_mapa = [(LLAVES[t.type][0], LLAVES[t.type][1], t.x, t.y)
                             for t in m.things if t.type in LLAVES and not (t.flags & 16)]
@@ -371,14 +381,19 @@ class Mapa:
                 self.piso[s.id] = s.floor_height
                 self.techo[s.id] = s.ceiling_height
 
-    def aplasta(self, i, j):
-        """La celda esta bajo (o junto a) un aplastador que pega o que ya viene bajando."""
+    def aplasta(self, i, j, margen=False):
+        """La celda esta bajo (o junto a) un aplastador que pega o que ya viene bajando. Con margen,
+        tambien a unas APLASTA_MARGEN unidades mas (para frenar a tiempo corriendo)."""
         if not (0 <= i < self.W and 0 <= j < self.H):
             return False
-        s = self.zona_aplastador[j, i]
+        s = (self.zona_margen if margen else self.zona_aplastador)[j, i]
         if s < 0:
             return False
         hueco = self.techo[s] - self.piso[s]
+        if margen and self.zona_aplastador[j, i] < 0:
+            # en el margen solo importa un techo que viene bajando: uno abajo y quieto no alcanza a
+            # quien pasa por fuera (MAP04: el 82 cerrado dejaba al bot esperando para siempre)
+            return s in self.baja and hueco <= APLASTA_BAJANDO
         return hueco < APLASTA_ALTO or (s in self.baja and hueco <= APLASTA_BAJANDO)
 
     def puerta_cerrada(self, s):
@@ -549,6 +564,7 @@ class Navegador:
         self.forzar = None        # "salud": ir por un botiquin antes que cualquier otra meta
         self.huyendo = False      # saliendo de debajo de un aplastador
         self.espera_apl = -9      # ultimo paso esperando a que un aplastador suba
+        self.acosado = False      # monstruos encima (lo fija el cerebro): no frenar por el margen
 
     def huir_aplastador(self, x, y, sectores, angulo, accion):
         """Debajo de un aplastador que pega o baja: salir a la celda segura mas cercana, sin girar
@@ -995,10 +1011,12 @@ class Navegador:
         # aplastador en los proximos pasos: esperar afuera. Huir ya debajo llega tarde: con el techo
         # bajo 56 Doom no deja moverse a ningun punto que aun toque el sector (MAP04 s1: entro 10
         # unidades por la orilla del 82 con el techo bajando y se quedo trabado de 35 a 0)
+        # el margen (frenar a tiempo por la inercia) no aplica con monstruos encima: detenerse ahi con
+        # Demons detras lo mataba (MAP04: 16 muertes junto al 62 huyendo a curarse)
         for c in self.camino[:5]:
-            if m.aplasta(*c):
+            if m.aplasta(*c) or (not self.acosado and m.aplasta(*c, margen=True)):
                 if self.paso - self.espera_apl > 1:  # un evento por espera, no uno por paso
-                    self.evento = ("espera_aplastador", int(m.zona_aplastador[c[1], c[0]]))
+                    self.evento = ("espera_aplastador", int(m.zona_margen[c[1], c[0]]))
                 self.espera_apl = self.paso
                 self.ultimo_avance = (self.paso, (x, y))  # esperar no es atorarse
                 return accion()
@@ -1030,7 +1048,15 @@ class Navegador:
                 self.descartados[self.meta["id"]] = self.paso + 600
                 self.evento = ("provision_alcanzada", self.meta["id"])
                 self.meta, self.camino = None, []
-                return accion("MOVE_FORWARD")  # un paso encima del objeto; replantea el siguiente frame
+                # un paso encima del objeto; replantea el siguiente frame. Salvo que ese paso caiga
+                # bajo un aplastador: corriendo avanza ~40 unidades y la municion de (628,1627) esta a
+                # 24 del 22 de MAP04; el paso lo metia con el techo bajando (22 de 52 muertes)
+                a = math.radians(angulo)
+                for d in (16, 32, 48):
+                    i, j = m.celda(x + math.cos(a) * d, y + math.sin(a) * d)
+                    if 0 <= i < m.W and 0 <= j < m.H and m.zona_aplastador[j, i] >= 0:
+                        return accion()
+                return accion("MOVE_FORWARD")
 
         # disparador al pisar: al llegar a la linea se da por activado y se sigue de frente para cruzarla
         if self.meta and self.meta["tipo"] == "pisar" and len(self.camino) <= 2:
