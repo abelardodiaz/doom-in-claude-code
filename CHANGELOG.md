@@ -5,6 +5,47 @@ How this went from a forum joke to a playable mod, one step at a time.
 The challenge: someone in a forum listed the AI fads (personal finance apps, reverse engineering,
 TV launchers) and asked what was missing. "Running Doom in Claude." Challenge accepted.
 
+## [Unreleased]
+
+### The 0.6.0 MAP04 number was optimistic
+0.6.0 published MAP04 23 of 24. Of those 24 seeds, 8 finished on frame 3227 exactly and 3 more
+between 3232 and 3258: the seed changes the monsters, but the bot is deterministic and starts
+moving on the same tic, so many seeds still played almost the same game. Every life (the first one
+too) now starts with 1-35 idle tics, `Random(seed * 100 + deaths)` in the benchmark and random in
+the live bridge. Measured that way, on 48 seeds, **the 0.6.0 code finishes MAP04 30 of 48**.
+
+### Navigation
+- **Acid pits.** Damage floors (types 4, 5, 7, 11, 16) cost more to cross, and the ones you cannot
+  climb out of are not walkable at all. Near the edge of a pit the bot walks instead of running and
+  aims one cell ahead, not three: three cut the corner over the ledge. MAP03 deaths: 12 -> 2.
+- **Barrels.** The planner did not know about them and the bot kept pushing one in its way. Now a
+  barrel it gets stuck on (within 48 units) becomes an obstacle and the route goes around it. Only
+  those: the others stay out of the map, so they do not close narrow corridors.
+- **No aiming through high steps.** The bot aims up to 3 route cells ahead; if the straight line
+  crosses a step too high to climb, it aims closer. MAP01 seed 3 pushed the 48-unit pillar of the
+  exit switch for 2400 frames. Only walls and steps count: also counting the margin kept next to
+  walls made it aim straight past a one-cell corridor and overshoot it, back and forth for 10000
+  frames (MAP03 seed 27).
+- **Bars.** A gap between two door posts (16 units, the player is 32) now belongs to the door. The
+  route went through the gap, never touched the door and nobody pressed USE: MAP02's yellow bars
+  in front of the exit.
+- **Calling a lift from the cell next to it**, when the cell before it was already dropped from the
+  route. MAP02 seeds 14 and 24 slid along lift 165 for 9000 frames without pressing USE.
+- Tried and dropped: walking along every ledge. It made MAP02 worse (20/24, 57 deaths), with the
+  deaths in a room far from any ledge.
+
+### Measured (code alone, idle start, MAP01 3000 frames, the rest 12000)
+| | 0.6.0 | Now |
+| --- | --- | --- |
+| MAP01, 18 seeds | 17/18 | **18/18** |
+| MAP02, 24 seeds | 23/24, 18 deaths | **24/24**, 29 deaths |
+| MAP03, 24 seeds | 24/24, 12 deaths, 3344 frames | 24/24, **2 deaths, 2296 frames** |
+| MAP04, 48 seeds | 30/48, 130 deaths | **41/48**, 136 deaths |
+
+Every variant on the way is in `bench-v050/espera/` (`LEEME.txt` has the table); `final2` is this code.
+MAP04 games split apart over a 1-unit difference and then go their own way, so a change of 2-3
+seeds out of 48 is noise.
+
 ## [0.6.0] - 2026-10-30 - Code alone finishes MAP01 to MAP04: real seeds, crushers, lifts, and running
 
 ### The seeds were not seeds
