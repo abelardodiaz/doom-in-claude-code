@@ -12,7 +12,9 @@ recta:  nuevo + no apuntar a traves de escalones altos + caminar en las cornisas
 recta2: recta + barrotes + llamar al elevador desde la celda de al lado.
 final:  nuevo + recta + barrotes + elevador, sin cornisas (empeoraban MAP02: 20/24, 57 muertes).
 final2: final con la recta mirando solo muros y escalones, no la holgura junto a la pared
-        (MAP03 s27 se pasaba de largo frente a un pasillo de una celda). Es el codigo publicado.
+        (MAP03 s27 se pasaba de largo frente a un pasillo de una celda).
+final3: final2 + salir de una zona que la holgura marca como pared (MAP04 s4) + olvidar las
+        lineas de pisar al quedarse sin metas (MAP04 s49). Es el codigo publicado.
 
          MAP01   MAP02          MAP03          MAP04
 v060     17/18   23/24, 18 m    24/24, 12 m    30/48, 130 m
@@ -21,3 +23,4 @@ recta    18/18   18/24, 34 m    23/24,  1 m    35/48, 167 m
 recta2   18/18   20/24, 57 m    24/24,  1 m    33/48, 182 m
 final    18/18   24/24, 15 m    23/24,  0 m    39/48, 129 m
 final2   18/18   24/24, 29 m    24/24,  2 m    41/48, 136 m
+final3   18/18   24/24, 29 m    24/24,  2 m    45/48, 139 m
