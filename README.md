@@ -29,11 +29,11 @@ Code alone, a different random game per seed and per life (main branch, after 0.
 | MAP01 | 18 of 18 | the first level: doors and the exit |
 | MAP02 | 24 of 24 | blue key -> switches -> red key -> switches -> yellow key -> teleporter -> exit |
 | MAP03 | 24 of 24 | three keys, a lift that lowers when stepped on, acid pits, a walk-over exit |
-| MAP04 | 41 of 48 | three crushers, a lift moved by a separate switch, a pack of Demons |
+| MAP04 | 45 of 48 | three crushers, a lift moved by a separate switch, a pack of Demons |
+| MAP05 | partially explored | |
 
 0.6.0 published MAP04 23 of 24, but many of those seeds played almost the same game; measured the
 same way as above, 0.6.0 finishes 30 of 48 (see the changelog).
-| MAP05 | partially explored | |
 
 Every step is measured and written up in the [changelog](CHANGELOG.md), with the raw data in the repo.
 What comes next is in the [roadmap](ROADMAP.md).

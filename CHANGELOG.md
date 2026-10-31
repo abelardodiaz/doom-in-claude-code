@@ -31,6 +31,14 @@ the live bridge. Measured that way, on 48 seeds, **the 0.6.0 code finishes MAP04
   in front of the exit.
 - **Calling a lift from the cell next to it**, when the cell before it was already dropped from the
   route. MAP02 seeds 14 and 24 slid along lift 165 for 9000 frames without pressing USE.
+- **Out of a cell marked as wall.** The planner keeps a margin next to walls. In MAP04 seed 4 the
+  bot walked through door 19 into corridor 17, 32 units wide between a wall and crusher 62, where
+  every cell was margin even with the fine margin: no start cell, no goals, 7000 frames still.
+  Now it first walks out through cells without walls or high steps to the nearest walkable one.
+- **Forgetting walk-over lines.** A line counts as walked over when the bot passes within 24 units
+  of its middle, crossed or not. In MAP04 seed 49 line 3 was "walked", the blue room stayed shut
+  and the bot spent 2000 frames with no goals. When it runs out of goals it now forgets them, as
+  it already did with switches pressed 3 times without effect.
 - Tried and dropped: walking along every ledge. It made MAP02 worse (20/24, 57 deaths), with the
   deaths in a room far from any ledge.
 
@@ -40,11 +48,13 @@ the live bridge. Measured that way, on 48 seeds, **the 0.6.0 code finishes MAP04
 | MAP01, 18 seeds | 17/18 | **18/18** |
 | MAP02, 24 seeds | 23/24, 18 deaths | **24/24**, 29 deaths |
 | MAP03, 24 seeds | 24/24, 12 deaths, 3344 frames | 24/24, **2 deaths, 2296 frames** |
-| MAP04, 48 seeds | 30/48, 130 deaths | **41/48**, 136 deaths |
+| MAP04, 48 seeds | 30/48, 130 deaths | **45/48**, 139 deaths |
 
-Every variant on the way is in `bench-v050/espera/` (`LEEME.txt` has the table); `final2` is this code.
+Every variant on the way is in `bench-v050/espera/` (`LEEME.txt` has the table); `final3` is this
+code, `final2` the same without the last two fixes (MAP04 41/48, MAP01-03 identical frame by frame).
 MAP04 games split apart over a 1-unit difference and then go their own way, so a change of 2-3
-seeds out of 48 is noise.
+seeds out of 48 is noise. Of the 4 seeds the last two fixes gained, 4 and 49 are the cases above;
+7 and 48 used to die their way to the 12000-frame limit and may be luck. None was lost.
 
 ## [0.6.0] - 2026-10-30 - Code alone finishes MAP01 to MAP04: real seeds, crushers, lifts, and running
 
