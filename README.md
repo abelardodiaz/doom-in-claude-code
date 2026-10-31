@@ -22,13 +22,15 @@ The game is [ViZDoom](https://github.com/Farama-Foundation/ViZDoom) with
 
 ## Where it stands
 
-| Map | Code alone |
-| --- | --- |
-| MAP01 | finished |
-| MAP02 | finished, 0 deaths: blue key -> switches -> red key -> switches -> yellow key -> teleporter -> exit |
-| MAP03 | gets all three keys and most switches; deaths cost it the time to reach the exit |
-| MAP04 | red key every time; an ambush right after it ends most runs. Without monsters it finishes |
-| MAP05 | partially explored |
+Code alone, a different random game per seed and per life (0.6.0):
+
+| Map | Finished | What it takes |
+| --- | --- | --- |
+| MAP01 | 18 of 18 | the first level: doors and the exit |
+| MAP02 | 24 of 24 | blue key -> switches -> red key -> switches -> yellow key -> teleporter -> exit |
+| MAP03 | 24 of 24 | three keys, a lift that lowers when stepped on, an acid floor, a walk-over exit |
+| MAP04 | 23 of 24 | three crushers, a lift moved by a separate switch, a pack of Demons |
+| MAP05 | partially explored | |
 
 Every step is measured and written up in the [changelog](CHANGELOG.md), with the raw data in the repo.
 What comes next is in the [roadmap](ROADMAP.md).

@@ -25,13 +25,15 @@ archivos originales de Doom.
 
 ## Cómo va
 
-| Mapa | Solo código |
-| --- | --- |
-| MAP01 | terminado |
-| MAP02 | terminado, 0 muertes: llave azul -> interruptores -> llave roja -> interruptores -> llave amarilla -> teletransporte -> salida |
-| MAP03 | junta las tres llaves y casi todos los interruptores; las muertes le quitan el tiempo para llegar a la salida |
-| MAP04 | siempre llega a la llave roja; una emboscada justo después acaba casi todas las partidas. Sin monstruos lo termina |
-| MAP05 | explorado en parte |
+Solo código, con un juego aleatorio distinto por semilla y por vida (0.6.0):
+
+| Mapa | Terminado | Qué pide |
+| --- | --- | --- |
+| MAP01 | 18 de 18 | el primer nivel: puertas y la salida |
+| MAP02 | 24 de 24 | llave azul -> interruptores -> llave roja -> interruptores -> llave amarilla -> teletransporte -> salida |
+| MAP03 | 24 de 24 | tres llaves, un elevador que baja al pisarlo, un piso de ácido, una salida que se cruza caminando |
+| MAP04 | 23 de 24 | tres aplastadores, un elevador que mueve un interruptor aparte, una manada de Demons |
+| MAP05 | explorado en parte | |
 
 Cada paso se mide y queda en el [changelog](CHANGELOG.md) (en inglés), con los datos crudos en el
 repo. Lo que sigue está en el [roadmap](ROADMAP.md).

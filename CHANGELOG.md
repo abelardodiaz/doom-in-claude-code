@@ -5,7 +5,7 @@ How this went from a forum joke to a playable mod, one step at a time.
 The challenge: someone in a forum listed the AI fads (personal finance apps, reverse engineering,
 TV launchers) and asked what was missing. "Running Doom in Claude." Challenge accepted.
 
-## [Unreleased] - seeds that really vary, crushers, and a route bug that cost half the time
+## [0.6.0] - 2026-10-30 - Code alone finishes MAP01 to MAP04: real seeds, crushers, lifts, and running
 
 ### The seeds were not seeds
 ViZDoom ignores `set_seed()` after `init()`. Up to 0.5.0 every benchmark seed played the same game:
@@ -204,8 +204,24 @@ MAP01 is identical. Raw results in `bench-v050/horda/`.
 
 **All four maps are now finished by code alone**: MAP01 6/6, MAP02 12/12, MAP03 12/12, MAP04 11/12.
 
-### MAP04: what is left
-One seed of 12 still fails.
+### Checked on seeds it never saw
+Every fix above was tuned watching the same seeds. Before calling it done, 12 new seeds per map
+(25-36), same code, larger frame caps (MAP01 3000, the rest 12000):
+
+| Code alone | Seeds used while tuning | **New seeds 25-36** | Together |
+| --- | --- | --- | --- |
+| MAP01 | 6/6, 0 deaths | **12/12, 438 frames, 0 deaths** | 18/18 |
+| MAP02 | 12/12, 3 deaths | **12/12, 2705, 3** | 24/24 |
+| MAP03 | 12/12, 8 deaths | **12/12, 3080, 4** | 24/24 |
+| MAP04 | 11/12, 7 deaths | **12/12, 4430, 13** | 23/24 |
+
+Raw results in `bench-v050/semillas-nuevas/`.
+
+### What is left
+- MAP04: one seed of 24 still fails.
+- MAP03: most of its deaths are on the acid floor while exploring.
+- MAP05 and later: not measured yet.
+- Jev has not been measured again against this code; the 0.5.0 columns were taken on the old one.
 
 ## [0.5.0] - 2026-10-25 - Jev measured against code alone, and code won the fight
 

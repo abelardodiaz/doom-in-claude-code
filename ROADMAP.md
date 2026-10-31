@@ -5,8 +5,8 @@ Every step gets measured with `bridge/bench_reparto.py` and written up in the [c
 
 ## Now
 
-1. ~~MAP02 with code only~~ **done in 0.4.0.** MAP03's puzzle solved in 0.4.1 (all keys, dies
-   near the exit); MAP05 partly. Next: staying alive (see 3).
+1. ~~MAP02 with code only~~ **done in 0.4.0.** ~~MAP03 and MAP04~~ **done in 0.6.0** (24/24 and
+   23/24 over 24 seeds). Next: MAP05 onwards, and the last MAP04 seed.
 2. **Re-run the columns on the new navigator:** code / + Jev (question v1 and v2) / + Jev + Haiku /
    + Jev + Haiku with Sonnet escalation (start of map, key or switch, death, ~60 s without progress).
    More seeds per column so the Jev numbers mean something.
